@@ -5,7 +5,7 @@ from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 BASE_MODEL = "Qwen/Qwen3-1.7B-Base"
-ADAPTER_DIR = "outputs/sft_lora"
+ADAPTER_DIR = "outputs/sft_lora_run5"
 DATA_PATH = "data/processed/sft_dataset_anonymized.csv"
 QUALITATIVE_OUTPUT = "outputs/sft_qualitative_examples.csv"
 N_QUALITATIVE_EXAMPLES = 10
