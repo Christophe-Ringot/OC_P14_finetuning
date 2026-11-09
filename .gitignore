@@ -14,3 +14,6 @@ __pycache__/
 Users/
 mlflow/
 mlruns/
+
+# Dossier de publication Hugging Face (dataset publie sur le Hub, pas dans git)
+hf_dataset/
