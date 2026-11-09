@@ -1,0 +1,4 @@
+,mode_retenu,f1_validation_calibre,f1_validation_brut
+2_modele_base,brut,0.12225705329153606,0.2108108108108108
+3_sft_medical,calibre,0.1414141414141414,0.1103030303030303
+4_sft_medical_triage,calibre,0.1885885885885886,0.14035087719298245

@@ -1,6 +1,12 @@
 .venv/
 data/
-outputs/
+# Sorties : poids, checkpoints et predictions ignores ; rapports et metriques versionnes
+outputs/**
+!outputs/**/
+!outputs/**/*.md
+outputs/**/README.md
+!outputs/triage_eval/**/comparaison_triage*.csv
+!outputs/triage_eval/**/mode_decision*.csv
 __pycache__/
 *.pyc
 Users/
