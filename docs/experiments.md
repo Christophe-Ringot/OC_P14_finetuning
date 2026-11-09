@@ -516,3 +516,131 @@ suite (DPO), sur la base de ses resultats et du fait que 3 tentatives
 independantes et controlees pour l'ameliorer ont toutes echoue - ce n'est
 pas un resultat accidentel mais le meilleur point trouve dans l'espace de
 configurations explore.
+
+## Audit des donnees et re-entrainement triage - 2026-11-07 / 2026-11-08
+
+**Contexte** : la revue des premiers resultats de triage (4 experiences :
+baseline naive, modele de base, SFT medical, SFT medical + triage) a releve
+un rappel P1 de 100 % suspect, un sur-triage de 36 %, des difficultes sur P2
+et P3 et un jeu de test de 384 questions issues de seulement 82 groupes. Plan
+suivi : (1) audit des fuites, (2) verification de la methode d'evaluation,
+re-entrainement, (3) analyse des erreurs, (4) documentation. Resultats de
+reference : `docs/comparaison_triage.md`.
+
+### Etape 1 - Audit des partitions (`scripts/audit_splits.py`)
+
+| Controle | Resultat |
+|---|---|
+| Doublons exacts entre splits (cas, groupe, prompt, contexte) | aucun |
+| Questions identiques entre splits | 22, toutes generiques ("Que faites-vous ?") |
+| Indices de label dans les prompts | 0 / 6 747 |
+| Quasi-doublons test / train (TF-IDF caracteres, cosinus >= 0,5) | 5 cas, 11 questions (max 0,66) |
+| Quasi-doublons validation / train | 4 cas (max 0,88 : meme cas de tuberculose reecrit) |
+| Baseline "plus proche voisin" (niveau du cas train le plus similaire) | 42,2 % par question, sous les 63,8 % du SFT |
+
+**Lecture** : pas de fuite capable d'expliquer les resultats, mais le
+regroupement par prefixe de 100 caracteres laisse passer des reformulations
+d'un meme cas (phrases reordonnees, ages ou formulations modifies).
+
+### Etape 2 - Methode d'evaluation (`scripts/analyze_triage.py`)
+
+`scripts/evaluate_sft.py` a ete modifie pour sauvegarder les log-probabilites
+brutes et le prior (`scores.csv`), ce qui permet d'analyser sans GPU.
+
+| Controle (SFT triage, ancien test) | Resultat |
+|---|---|
+| Exclusion des 5 cas suspects | 63,8 -> 64,1 % : impact negligeable |
+| Evaluation par cas (vote) | 64,4 % : proche du score par question |
+| Coherence intra-cas | 83,6 % des cas recoivent un seul niveau |
+| IC 95 % (bootstrap sur les groupes) | 63,8 [52,8 ; 75,0] |
+| **Sans calibration contextuelle** | **69,3 % accuracy, F1 69,0, rappel P1 70,9, P3 57,8** |
+
+**Decouverte principale** : la calibration (score - score sur prompt vide)
+etait la cause du sur-triage. Pour le SFT triage, un prompt vide evoque
+"differee" (log-prob P3 -2,1 contre P1 -7,8) : retrancher ce prior penalise
+P3 et pousse vers P1. Cette calibration se justifie pour un modele qui n'a
+jamais vu les libelles, pas pour un modele entraine a les produire.
+
+### Corrections appliquees
+
+- `scripts/build_sft_datasets.py` : ajout d'un regroupement par similarite
+  (TF-IDF n-grammes de caracteres 3-5, cosinus >= 0,5, union-find avec les
+  familles et prefixes). 392 paires fusionnees ; seuil choisi par relecture
+  (vers 0,45 apparaissent des cas sans rapport). Apres regeneration : aucun
+  cas de validation/test a plus de 0,49 du train.
+- `scripts/evaluate_sft.py` : scoring de la validation et du test ; pour
+  chaque modele, choix entre scores bruts et calibres sur le F1 macro de
+  validation, puis application au test (`mode_decision.csv`).
+- Sauvegardes : anciens datasets `data/processed/avant_audit/`, anciens
+  adaptateurs `outputs/avant_audit/`, anciens resultats
+  `outputs/triage_eval/avant_audit/`, ancien audit `outputs/audit/*_avant.*`.
+
+### Re-entrainement des deux SFT
+
+Configuration inchangee (LoRA r=16, alpha=32, q/k/v/o_proj, lr 2e-4,
+3 epochs, batch effectif 8, max_length 1024), seuls les splits changent.
+5 345 exemples d'entrainement, 150 de validation pour la loss.
+
+| | sft_medical | sft_medical_triage |
+|---|---|---|
+| Duree | 6,8 h | 6,8 h |
+| Meilleure eval_loss (step 1300, epoch ~1,9) | 1.5317 | 1.3844 |
+| eval_loss finale (step 2007) | 1.5459 | 1.3958 |
+
+Meme profil pour les deux : minimum vers l'epoch 1,9 puis legere remontee,
+`load_best_model_at_end` retient le step 1300.
+
+### Resultats apres audit (par question, en %)
+
+| experience | mode | val. accuracy | val. F1 | test accuracy | test F1 | test sous-triage | test sur-triage |
+|---|---|---|---|---|---|---|---|
+| baseline naive | - | 34.4 | 17.0 | 40.8 | 19.3 | 0.0 | 59.2 |
+| modele de base | brut | 31.0 | 20.5 | 27.8 | 17.7 | 64.2 | 8.0 |
+| SFT medical | calibre | 29.5 | 24.1 | 32.2 | 25.7 | 38.2 | 29.5 |
+| **SFT medical + triage** | brut | **62.6** | **62.9** | **78.8** | **78.7** | 7.0 | 14.2 |
+
+IC 95 % test du SFT triage : accuracy [68,2 ; 87,4]. Sous-triage en
+validation : 16,2 %.
+
+### Etape 3 - Analyse des erreurs (`scripts/error_analysis.py`)
+
+- Le modele ordonne les niveaux (AUC 0,86 P1/P2, 0,92 P2/P3) : il ne
+  privilegie pas systematiquement les niveaux critiques.
+- P2 concentre les erreurs (40 % des cas P2 mal classes).
+- Sous-triage : surtout des cas dont la gravite est biologique (cas
+  "Pharmacy" : leucemie aigue, rhabdomyolyse, insuffisance renale severe) et
+  une torsion testiculaire predite P2.
+- Sur-triage : cardiopathies neonatales "sans detresse" (P2) dont les
+  versions aggravees sont P1 dans le train.
+- Annotations coherentes entre cas quasi identiques hors famille (0 %
+  de desaccord a similarite >= 0,8).
+- Ajustement des seuils appris en validation : ne se transfere pas au test,
+  abandonne.
+- Predictions incoherentes au sein d'un cas : 47 % d'erreur contre 15 %.
+
+### Conclusion
+
+L'apport des exemples de triage est confirme sur des splits audites et avec
+une regle de decision choisie sans regarder le test : +46 points d'accuracy
+sur le SFT medical en test, +33 en validation. Le chiffre a retenir est une
+fourchette (62,6 % en validation, 78,8 % en test) plutot qu'un point unique.
+Le rappel P1 de 100 % precedent etait un artefact de calibration. Limites
+inchangees : annotations LLM non validees cliniquement, petits jeux
+d'evaluation, corpus domine par deux specialites.
+
+### Pistes pour les prochaines experimentations
+
+1. **Un exemple de triage par cas** plutot qu'un prefixe repete sur chaque
+   question : le niveau est porte par le cas, et un cas a 12 questions pese
+   aujourd'hui 12 fois plus qu'un cas a une question.
+2. **Signal d'incertitude** : evaluer une regle "a revoir par un humain"
+   (niveaux incoherents entre questions, ou probabilite maximale faible) en
+   mesurant le compromis couverture / erreurs, en particulier sur le
+   sous-triage.
+3. **Cas a gravite biologique** : verifier si le sous-triage vient de valeurs
+   de laboratoire mal lues, ou de l'exclusion a l'entrainement des exemples
+   de plus de 1 024 tokens (cas longs, riches en tableaux biologiques).
+4. **Validation clinique d'un echantillon** d'annotations, en priorite sur
+   les cas P2 et les cas mal classes.
+5. Reprise du DPO une fois ces points traites, avec des paires de preference
+   coherentes avec les objectifs de triage (penaliser le sous-triage).

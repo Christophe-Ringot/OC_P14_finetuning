@@ -1,6 +1,7 @@
 from pathlib import Path
 import numpy as np
 import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 CORPUS_PATH = Path("data") / "interim" / "corpus_annotated.csv"
 POOL_PATH = Path("data") / "annotation" / "pool_priorite.csv"
@@ -12,6 +13,11 @@ RANDOM_STATE = 42
 SPLIT_RATIOS = {"train": 0.8, "validation": 0.1, "test": 0.1}
 # Longueur du debut de texte commun qui rattache deux variantes d'un meme cas.
 SHARED_PREFIX_LENGTH = 100
+# Similarite cosinus (TF-IDF n-grammes de caracteres) au-dela de laquelle deux
+# cas sont consideres comme des reformulations d'un meme scenario. Seuil choisi
+# par relecture des paires (scripts/audit_splits.py) : vers 0.45 apparaissent
+# des cas sans rapport, a 0.5 il s'agit surtout du meme scenario reformule.
+SIMILARITY_THRESHOLD = 0.5
 OUTPUT_COLUMNS = ["id", "split", "source", "langue", "groupe", "priorite", "prompt", "reponse"]
 
 
@@ -21,8 +27,18 @@ def build_prompt(row) -> str:
     return f"### Question :\n{row.instruction}\n\n### Réponse :\n"
 
 
+def similar_pairs(pool: pd.DataFrame) -> list:
+    """Paires de cas dont les textes sont des reformulations probables l'un de l'autre."""
+    vectorizer = TfidfVectorizer(analyzer="char_wb", ngram_range=(3, 5), min_df=2, sublinear_tf=True)
+    matrix = vectorizer.fit_transform(pool["contexte_patient"].fillna(""))
+    similarity = (matrix @ matrix.T).toarray()
+    rows, columns = np.where(np.triu(similarity >= SIMILARITY_THRESHOLD, k=1))
+    cases = pool["case_id"].to_numpy()
+    return list(zip(cases[rows], cases[columns]))
+
+
 def case_groups(pool: pd.DataFrame) -> dict:
-    """Union-find : relie deux cas de meme famille ou de meme debut de texte."""
+    """Union-find : relie deux cas de meme famille, de meme debut de texte ou de texte tres similaire."""
     parent = {case: case for case in pool["case_id"]}
 
     def find(case):
@@ -36,6 +52,10 @@ def case_groups(pool: pd.DataFrame) -> dict:
             first, *others = members[1].tolist()
             for other in others:
                 parent[find(other)] = find(first)
+    pairs = similar_pairs(pool)
+    for first, other in pairs:
+        parent[find(other)] = find(first)
+    print(f"{len(pairs)} paires de cas similaires (cosinus >= {SIMILARITY_THRESHOLD}) fusionnees")
     return {case: "groupe_" + find(case) for case in pool["case_id"]}
 
 

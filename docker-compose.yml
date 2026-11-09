@@ -1,0 +1,68 @@
+# Suivi MLflow + entrainement SFT sur GPU.
+#
+#   docker compose --profile train up -d --build   # tout : MLflow + 2 SFT + evaluation
+#   docker compose logs -f train                   # suivre l'entrainement
+#   docker compose up -d mlflow                    # MLflow seul (entrainement lance depuis le venv)
+#   docker compose --profile train run --rm train --quick   # test rapide (200 exemples)
+#
+# Interface MLflow : http://localhost:5000
+
+name: triage-finetuning
+
+services:
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.18.0
+    command:
+      - mlflow
+      - server
+      - --host=0.0.0.0
+      - --port=5000
+      - --backend-store-uri=sqlite:////mlflow/mlflow.db
+      - --artifacts-destination=/mlflow/artifacts
+      - --serve-artifacts
+      # Noms d'hote acceptes : navigateur sur la machine et conteneur d'entrainement.
+      - --allowed-hosts=localhost,localhost:5000,127.0.0.1,127.0.0.1:5000,mlflow,mlflow:5000
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlflow:/mlflow   # base des runs et artefacts, conservee entre les redemarrages
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    restart: unless-stopped
+
+  train:
+    profiles: ["train"]
+    build:
+      context: .
+      dockerfile: docker/train.Dockerfile
+    image: triage-finetuning-train
+    depends_on:
+      mlflow:
+        condition: service_healthy
+    environment:
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+      MLFLOW_EXPERIMENT_NAME: triage-sft
+      PYTHONIOENCODING: utf-8
+    # Arguments de scripts/train_sft.py (--quick, --only ..., --no-eval) apres
+    # `docker compose --profile train run --rm train`.
+    entrypoint: ["python", "-m", "scripts.train_sft"]
+    command: []
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./scripts:/app/scripts     # code a jour sans reconstruire l'image
+      - ./schemas:/app/schemas
+      - ./.git:/app/.git:ro        # commit courant enregistre dans MLflow
+      - ${HF_CACHE_DIR:-~/.cache/huggingface}:/root/.cache/huggingface   # modele deja telecharge
+    shm_size: 2gb
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

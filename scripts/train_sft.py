@@ -9,6 +9,7 @@ from datasets import Dataset
 from peft import LoraConfig
 from transformers import AutoTokenizer
 from trl import SFTConfig, SFTTrainer
+from scripts import tracking
 
 MODEL_NAME = "Qwen/Qwen3-1.7B-Base"
 OUTPUT_ROOT = Path("outputs")
@@ -49,7 +50,27 @@ def load_examples(path: Path, ids: list) -> Dataset:
     return Dataset.from_dict({"prompt": frame["prompt"].tolist(), "completion": frame["reponse"].tolist()})
 
 
-def train(experiment: str, train_ids: list, val_ids: list, quick: bool) -> None:
+def train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked: bool) -> str | None:
+    """Entraine une experience ; renvoie l'id du run MLflow (None si suivi desactive)."""
+    run_name = experiment + ("_quick" if quick else "")
+    data_path = SFT_EXPERIMENTS[experiment]["data"]
+    tags = {"experience": experiment, "mode": "quick" if quick else "complet", "git_commit": tracking.git_commit()}
+    with tracking.start_run(tracked, run_name=run_name, tags=tags) as run:
+        if run is not None:
+            import mlflow
+
+            mlflow.log_params({
+                "dataset": Path(data_path).as_posix(),
+                "dataset_md5": tracking.file_md5(data_path),
+                "n_train": len(train_ids),
+                "n_validation": len(val_ids),
+                "max_length": MAX_LENGTH,
+            })
+        _train(experiment, train_ids, val_ids, quick, tracked, run_name)
+        return run.info.run_id if run is not None else None
+
+
+def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked: bool, run_name: str) -> None:
     has_gpu = torch.cuda.is_available()
     output_dir = adapter_dir(experiment, quick)
     data_path = SFT_EXPERIMENTS[experiment]["data"]
@@ -83,7 +104,10 @@ def train(experiment: str, train_ids: list, val_ids: list, quick: bool) -> None:
         max_length=MAX_LENGTH,
         completion_only_loss=True,
         seed=RANDOM_STATE,
-        report_to="none",
+        # La callback MLflow de transformers journalise les hyperparametres et
+        # les courbes train/eval dans le run ouvert par train().
+        report_to="mlflow" if tracked else "none",
+        run_name=run_name,
         model_init_kwargs={"dtype": "bfloat16" if has_gpu else "float32"},
     )
 
@@ -118,6 +142,22 @@ def train(experiment: str, train_ids: list, val_ids: list, quick: bool) -> None:
             default=str,
         )
 
+    if tracked:
+        import mlflow
+
+        mlflow.log_params({f"lora_{k}": v for k, v in {
+            "r": lora_config.r, "alpha": lora_config.lora_alpha, "dropout": lora_config.lora_dropout,
+            "target_modules": ",".join(sorted(lora_config.target_modules)),
+        }.items()})
+        best_checkpoint = trainer.state.best_model_checkpoint
+        if best_checkpoint is not None:
+            mlflow.log_metrics({"best_eval_loss": trainer.state.best_metric,
+                                "best_step": int(best_checkpoint.rsplit("-", 1)[1])})
+        mlflow.log_artifact(str(output_dir / "training_summary.json"))
+        # Adaptateur final (meilleur checkpoint), sans les checkpoints intermediaires.
+        for name in ["adapter_config.json", "adapter_model.safetensors"]:
+            mlflow.log_artifact(str(output_dir / name), artifact_path="adapter")
+
     # Libere le GPU avant l'entrainement ou l'evaluation suivante.
     del trainer
     gc.collect()
@@ -130,17 +170,20 @@ def main() -> None:
     parser.add_argument("--quick", action="store_true", help="test rapide sur 200 exemples")
     parser.add_argument("--only", choices=list(SFT_EXPERIMENTS), help="n'entrainer qu'une experience")
     parser.add_argument("--no-eval", action="store_true", help="ne pas lancer la comparaison a la fin")
+    parser.add_argument("--no-mlflow", action="store_true", help="ne pas suivre les runs dans MLflow")
     args = parser.parse_args()
+    tracked = tracking.setup(not args.no_mlflow)
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     train_ids, val_ids = select_examples(tokenizer, args.quick)
+    run_ids = {}
     for experiment in [args.only] if args.only else SFT_EXPERIMENTS:
-        train(experiment, train_ids, val_ids, args.quick)
+        run_ids[experiment] = train(experiment, train_ids, val_ids, args.quick, tracked)
 
     if not args.no_eval:
         from scripts import evaluate_sft
 
-        evaluate_sft.run(quick=args.quick)
+        evaluate_sft.run(quick=args.quick, tracked=tracked, run_ids=run_ids)
 
 
 if __name__ == "__main__":

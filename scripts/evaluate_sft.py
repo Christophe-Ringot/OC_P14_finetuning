@@ -6,6 +6,7 @@ import torch
 from peft import PeftModel
 from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from scripts import tracking
 from scripts.train_sft import MODEL_NAME, SFT_EXPERIMENTS, adapter_dir
 
 TEST_PATH = SFT_EXPERIMENTS["4_sft_medical_triage"]["data"]
@@ -18,6 +19,7 @@ SHORT = {"urgence_maximale": "P1", "urgence_moderee": "P2", "differee": "P3"}
 PRIORITY_PREFIX = "[Niveau de priorité estimé :"
 # Meme gabarit que les prompts du test, sans cas ni question.
 NEUTRAL_PROMPT = "### Cas clinique :\n\n\n### Question :\n\n\n### Réponse :\n"
+MODES = ["calibre", "brut"]
 
 
 def load_model(adapter: Path | None):
@@ -47,27 +49,47 @@ def label_logprobs(model, tokenizer, prompt: str) -> dict:
     return scores
 
 
-def predict_with_model(test: pd.DataFrame, adapter: Path | None) -> list:
-    """Niveau le plus probable apres calibration contextuelle (Zhao et al., 2021).
+def score_with_model(splits: dict, adapter: Path | None) -> dict:
+    """Log-probabilites brutes de chaque niveau et prior sur prompt vide, par split.
 
-    Les libelles different en longueur et en frequence : sans correction, un
-    modele qui ne les a jamais vus choisit d'apres leur forme et non d'apres le
-    cas. On retranche donc a chaque score celui obtenu sur un prompt vide : seul
-    reste ce que le cas clinique ajoute a la probabilite de chaque niveau.
+    Le prior sert a la calibration contextuelle (Zhao et al., 2021) : un modele
+    qui n'a jamais vu les libelles choisit d'apres leur forme et non d'apres le
+    cas, on retranche donc le score obtenu sans cas clinique. Pour un modele
+    entraine sur les libelles, ce prior n'est plus neutre (un cas vide evoque
+    "differee") : le choix calibre / brut est donc fait sur la validation.
     """
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = load_model(adapter)
     prior = label_logprobs(model, tokenizer, NEUTRAL_PROMPT)
-    predictions = []
-    for i, prompt in enumerate(test["prompt"], start=1):
-        scores = label_logprobs(model, tokenizer, prompt)
-        calibrated = {label: scores[label] - prior[label] for label in LABELS}
-        predictions.append(max(calibrated, key=calibrated.get))
-        if i % 50 == 0:
-            print(f"  {i}/{len(test)}")
+    results = {}
+    for name, frame in splits.items():
+        raw = []
+        for i, prompt in enumerate(frame["prompt"], start=1):
+            raw.append(label_logprobs(model, tokenizer, prompt))
+            if i % 50 == 0:
+                print(f"  {name} {i}/{len(frame)}")
+        scores = pd.DataFrame(raw).rename(columns=lambda label: f"raw_{SHORT[label]}")
+        for label in LABELS:
+            scores[f"prior_{SHORT[label]}"] = prior[label]
+        results[name] = scores.assign(id=frame["id"].to_numpy())
     del model
     free_gpu_memory()
-    return predictions
+    return results
+
+
+def decide(scores: pd.DataFrame, mode: str) -> pd.Series:
+    """Niveau retenu : argmax des scores bruts ou calibres (brut - prior)."""
+    values = pd.DataFrame({
+        label: scores[f"raw_{SHORT[label]}"] - (scores[f"prior_{SHORT[label]}"] if mode == "calibre" else 0)
+        for label in LABELS
+    })
+    return values.idxmax(axis=1)
+
+
+def choose_mode(validation: pd.DataFrame, scores: pd.DataFrame) -> tuple[str, dict]:
+    """Mode de decision qui maximise le F1 macro sur la validation (le test n'est pas regarde)."""
+    f1 = {mode: triage_metrics(validation["priorite"], decide(scores, mode))["f1_macro"] for mode in MODES}
+    return max(f1, key=f1.get), f1
 
 
 def free_gpu_memory() -> None:
@@ -107,7 +129,8 @@ def confusion_table(y_true: pd.Series, y_pred: pd.Series) -> str:
     return header + "\n".join(rows)
 
 
-def write_report(test: pd.DataFrame, results: pd.DataFrame, path: Path) -> None:
+def write_report(test: pd.DataFrame, results: pd.DataFrame, decisions: pd.DataFrame, path: Path,
+                 validation: pd.DataFrame | None = None) -> None:
     percent = results.astype(float) * 100
     main_columns = ["accuracy", "f1_macro", "rappel_P1", "sous_triage", "sur_triage", "erreurs_1_niveau", "erreurs_2_niveaux", "P1_predit_P3"]
     class_columns = [c for c in results.columns if c not in main_columns]
@@ -121,10 +144,22 @@ def write_report(test: pd.DataFrame, results: pd.DataFrame, path: Path) -> None:
         "Valeurs en %. Sous-triage / sur-triage : niveau predit moins / plus urgent que l'annotation, "
         "rapporte a tous les exemples. P1_predit_P3 : part des P1 classes P3.",
         "",
+        "## Regle de decision par modele",
+        "",
+        "Pour chaque modele, le niveau predit est l'argmax des log-probabilites, soit brutes, soit calibrees "
+        "(moins le score sur prompt vide). Le mode est choisi sur la validation (F1 macro), puis applique au test.",
+        "",
+        "| experience | mode retenu | " + " | ".join(f"F1 validation {m}" for m in MODES) + " |\n|---|---|"
+        + "---|" * len(MODES) + "\n"
+        + "\n".join(f"| {name} | {row['mode_retenu']} | " + " | ".join(f"{row[f'f1_validation_{m}'] * 100:.1f}" for m in MODES) + " |"
+                    for name, row in decisions.iterrows()),
+        "",
         "## Metriques principales",
         "",
         markdown_table(percent[main_columns]),
         "",
+        *(["Meme tableau sur la validation (regle de decision choisie sur ce jeu), a citer avec le test :", "",
+           markdown_table(validation.astype(float)[main_columns] * 100), ""] if validation is not None else []),
         "## Precision, rappel et F1 par classe",
         "",
         markdown_table(percent[class_columns]),
@@ -144,41 +179,106 @@ def write_report(test: pd.DataFrame, results: pd.DataFrame, path: Path) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def run(quick: bool = False) -> None:
-    test = pd.read_csv(TEST_PATH)
-    test = test[(test["split"] == "test") & test["priorite"].notna()].reset_index(drop=True)
+def load_split(split: str, quick: bool) -> pd.DataFrame:
+    frame = pd.read_csv(TEST_PATH)
+    frame = frame[(frame["split"] == split) & frame["priorite"].notna()].reset_index(drop=True)
     if quick:
-        test = test.sample(min(QUICK_TEST_EXAMPLES, len(test)), random_state=42).reset_index(drop=True)
+        frame = frame.sample(min(QUICK_TEST_EXAMPLES, len(frame)), random_state=42).reset_index(drop=True)
+    return frame
+
+
+def log_to_mlflow(quick: bool, results: dict, decisions: pd.DataFrame, run_ids: dict, files: list) -> None:
+    """Metriques dans le run d'entrainement de chaque modele, et un run d'evaluation qui regroupe tout."""
+    import mlflow
+
+    suffix = "_quick" if quick else ""
+    flat = lambda split, metrics: {f"{split}_{name}": float(value) for name, value in metrics.items()}
+    for experiment, run_id in (run_ids or {}).items():
+        if run_id is None or experiment not in results["test"].index:
+            continue
+        with tracking.start_run(True, run_id=run_id):
+            for split, frame in results.items():
+                mlflow.log_metrics(flat(split, frame.loc[experiment]))
+            mlflow.log_param("mode_decision", decisions.loc[experiment, "mode_retenu"])
+
+    tags = {"type": "evaluation", "mode": "quick" if quick else "complet", "git_commit": tracking.git_commit()}
+    with tracking.start_run(True, run_name=f"evaluation_triage{suffix}", tags=tags):
+        mlflow.log_params({
+            "dataset": Path(TEST_PATH).as_posix(), "dataset_md5": tracking.file_md5(TEST_PATH),
+            **{f"mode_{e}": m for e, m in decisions["mode_retenu"].items()},
+            **{f"run_id_{e}": r for e, r in (run_ids or {}).items() if r},
+        })
+        for split, frame in results.items():
+            for experiment, metrics in frame.iterrows():
+                mlflow.log_metrics({f"{experiment}.{name}": float(v) for name, v in flat(split, metrics).items()})
+        for path in files:
+            mlflow.log_artifact(str(path))
+
+
+def run(quick: bool = False, tracked: bool = False, run_ids: dict | None = None) -> None:
+    splits = {"validation": load_split("validation", quick), "test": load_split("test", quick)}
+    test = splits["test"]
     suffix = "_quick" if quick else ""
 
     test["1_baseline_naive"] = LABELS[0]
-    print(f"Evaluation de 2_modele_base sur {len(test)} exemples")
-    test["2_modele_base"] = predict_with_model(test, adapter=None)
+    splits["validation"]["1_baseline_naive"] = LABELS[0]
+    models = {"2_modele_base": None}
     for experiment in SFT_EXPERIMENTS:
         adapter = adapter_dir(experiment, quick)
         if not (adapter / "adapter_config.json").exists():
             print(f"{experiment} ignoree : adaptateur absent ({adapter})")
             continue
-        print(f"Evaluation de {experiment}")
-        test[experiment] = predict_with_model(test, adapter)
+        models[experiment] = adapter
+
+    all_scores = {name: [] for name in splits}
+    decisions = {}
+    for experiment, adapter in models.items():
+        print(f"Evaluation de {experiment} ({len(splits['validation'])} validation, {len(test)} test)")
+        scores = score_with_model(splits, adapter)
+        mode, f1 = choose_mode(splits["validation"], scores["validation"])
+        decisions[experiment] = {"mode_retenu": mode, **{f"f1_validation_{m}": v for m, v in f1.items()}}
+        print(f"  mode retenu sur la validation : {mode} " + ", ".join(f"{m}={v:.3f}" for m, v in f1.items()))
+        for name in splits:
+            splits[name][experiment] = decide(scores[name], mode).to_numpy()
+            all_scores[name].append(scores[name].assign(experience=experiment))
 
     experiments = [c for c in test.columns if c[0].isdigit()]
-    results = pd.DataFrame({e: triage_metrics(test["priorite"], test[e]) for e in experiments}).T
+    results = {name: pd.DataFrame({e: triage_metrics(frame["priorite"], frame[e]) for e in experiments}).T
+               for name, frame in splits.items()}
+    decisions = pd.DataFrame(decisions).T
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    test[["id", "groupe", "priorite", *experiments]].to_csv(OUTPUT_DIR / f"predictions{suffix}.csv", index=False)
-    results.to_csv(OUTPUT_DIR / f"comparaison_triage{suffix}.csv")
-    report = OUTPUT_DIR / f"comparaison_triage{suffix}.md"
-    write_report(test, results, report)
+    files = {
+        "predictions": OUTPUT_DIR / f"predictions{suffix}.csv",
+        "scores": OUTPUT_DIR / f"scores{suffix}.csv",
+        "scores_validation": OUTPUT_DIR / f"scores_validation{suffix}.csv",
+        "decisions": OUTPUT_DIR / f"mode_decision{suffix}.csv",
+        "results": OUTPUT_DIR / f"comparaison_triage{suffix}.csv",
+        "results_validation": OUTPUT_DIR / f"comparaison_triage_validation{suffix}.csv",
+        "report": OUTPUT_DIR / f"comparaison_triage{suffix}.md",
+    }
+    test[["id", "groupe", "priorite", *experiments]].to_csv(files["predictions"], index=False)
+    pd.concat(all_scores["test"]).to_csv(files["scores"], index=False)
+    pd.concat(all_scores["validation"]).to_csv(files["scores_validation"], index=False)
+    decisions.to_csv(files["decisions"])
+    results["test"].to_csv(files["results"])
+    results["validation"].to_csv(files["results_validation"])
+    write_report(test, results["test"], decisions, files["report"], validation=results["validation"])
+    if tracked:
+        log_to_mlflow(quick, results, decisions, run_ids, list(files.values()))
 
-    print((results[["accuracy", "f1_macro", "rappel_P1", "sous_triage", "sur_triage"]] * 100).round(1).to_string())
-    print(f"\nRapport -> {report}")
+    summary = ["accuracy", "f1_macro", "rappel_P1", "sous_triage", "sur_triage"]
+    for name in ["validation", "test"]:
+        print(f"\n{name} :\n" + (results[name][summary] * 100).round(1).to_string())
+    print(f"\nRapport -> {files['report']}")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--quick", action="store_true", help="evalue les adaptateurs _quick sur 30 exemples")
-    run(quick=parser.parse_args().quick)
+    parser.add_argument("--no-mlflow", action="store_true", help="ne pas journaliser l'evaluation dans MLflow")
+    args = parser.parse_args()
+    run(quick=args.quick, tracked=tracking.setup(not args.no_mlflow))
 
 
 if __name__ == "__main__":
