@@ -1,0 +1,110 @@
+case_id,priorite,n_questions,n_niveaux_predits,p_P1,p_P2,p_P3,prediction,ecart,longueur,specialite,signal_gravite,parent_case_id,justification,version_derivee
+case_011ade3992,urgence_moderee,1,1,0.8261186538262671,0.16273850961679254,0.011142836556940325,urgence_maximale,-1,689,Pediatric Cardiology,True,case_06f6d8f711,coarctation néonatale sans détresse,True
+case_0159c85d42,differee,9,1,1.761048404337172e-06,0.002036316030209945,0.9979619229213856,differee,0,709,Genetics,False,,conseil génétique,False
+case_02808e3643,urgence_maximale,1,1,0.9764474114663853,0.022978892312478655,0.000573696221136004,urgence_maximale,0,639,Pediatric Cardiology,True,case_7b85238054,"atrésie pulmonaire néonatale, SaO2 85 %",True
+case_05e915687a,urgence_maximale,4,1,0.16581874340340705,0.8266962787304584,0.007484977866134604,urgence_moderee,1,761,Pharmacy,True,,"insuffisance rénale sévère, PA 200/110",False
+case_06f6d8f711,urgence_moderee,1,1,0.4131257556192616,0.46823327208360555,0.11864097229713272,urgence_moderee,0,369,Pediatric Cardiology,True,,coarctation néonatale sans détresse,False
+case_091799e27e,urgence_moderee,3,1,0.06716215825029648,0.9256881725763781,0.007149669173325385,urgence_moderee,0,123,Pediatric Cardiology,True,,cyanose chez enfant avec CIV large,False
+case_0e34b64b97,urgence_maximale,3,1,0.9968141357420283,0.00312457562233138,6.12886356404548e-05,urgence_maximale,0,146,Pediatric Cardiology,True,,"nouveau-né, cyanose réfractaire",False
+case_0e41a55bed,urgence_maximale,2,1,0.9959220289738436,0.00383249738179596,0.00024547364436035166,urgence_maximale,0,673,Pediatric Cardiology,True,case_4e96c12db0,"nouveau-né, cyanose devenue profonde",True
+case_1124400cac,urgence_maximale,1,1,0.9953352555894864,0.004610965396151741,5.3779014361804844e-05,urgence_maximale,0,375,Pediatric Cardiology,True,case_405937a719,"nouveau-né, cyanose réfractaire",True
+case_11717d29d0,differee,1,1,0.001201022968655852,0.07433542059697132,0.924463556434373,differee,0,282,Pediatric Cardiology,False,,"tube valvé dysfonctionnel, suivi",False
+case_1307b5c231,urgence_maximale,3,1,0.96949915977018,0.027501974118339784,0.002998866111480342,urgence_maximale,0,292,Pediatric Cardiology,True,case_937626ea16,"atrésie pulmonaire néonatale, SaO2 85 %",True
+case_13945e7bed,urgence_moderee,5,2,3.149010981913973e-05,0.37094962885976307,0.6290188810304178,differee,1,688,Pharmacy,False,,fièvre et hépatomégalie douloureuse,False
+case_13d9a116b1,urgence_maximale,2,1,0.999622928487738,0.000375049590429582,2.0219218323835798e-06,urgence_maximale,0,277,Pediatric Cardiology,False,,"nouveau-né cyanosé à 80 %, hypoplasie VG",False
+case_146b6a6a0c,differee,1,1,0.31690508317974214,0.6715256185839733,0.011569298236284598,urgence_moderee,-1,141,Pediatric Cardiology,False,,"souffle, consultation",False
+case_1683f6dda9,differee,1,1,0.00035075326474338366,0.07575548517496787,0.9238937615602887,differee,0,831,Gynecology and Obstetrics,False,case_9dc266c7cb,infection à Chlamydia au début de grossesse,True
+case_16b1d192a9,urgence_moderee,6,1,0.10771012261368608,0.8902147797179217,0.0020750976683920615,urgence_moderee,0,721,Pharmacy,False,,hématurie sous AVK,False
+case_20a2816769,differee,2,2,0.014568987003631583,0.5549553738484254,0.43047563914794296,urgence_moderee,-1,346,Pediatric Cardiology,False,,"asymptomatique, épreuve d'effort de suivi",False
+case_216a877133,urgence_moderee,7,1,0.8056969027486817,0.1940466664486385,0.0002564308026797585,urgence_maximale,-1,1313,Pulmonology,True,,"suspicion d'embolie pulmonaire, FC 118, hémodynamique stable",False
+case_2381667078,urgence_maximale,1,1,0.9999393885956912,5.835036463830823e-05,2.26103967057324e-06,urgence_maximale,0,516,Pediatric Cardiology,True,,"nourrisson en choc, hypoglycémie, TV",False
+case_23cdf0132a,differee,4,1,2.8412743207642534e-07,0.0022444353564579347,0.9977552805161101,differee,0,446,Pharmacy,False,,"bilan de santé, examen normal",False
+case_269290207d,urgence_maximale,1,1,0.9899573084311353,0.009709902935941102,0.000332788632923788,urgence_maximale,0,193,Pediatric Cardiology,False,,atrésie pulmonaire néonatale ducto-dépendante,False
+case_26dcd4ee8a,urgence_moderee,1,1,0.37710186216207586,0.6218663204274302,0.0010318174104939027,urgence_moderee,0,1689,Intensive Care,True,,"purpura thrombopénique, plaquettes 35 G/L",False
+case_27447db1d8,urgence_moderee,8,1,0.019366986009793224,0.7537750332151241,0.22685798077508273,urgence_moderee,0,2353,Psychiatry,False,,dénutrition sévère sur maladie de Crohn,False
+case_2a5ba71468,urgence_moderee,6,2,0.4480863400735064,0.5493146173312632,0.0025990425952305083,urgence_moderee,0,674,Emergency Medicine,True,,somnolence anormale chez sujet âgé,False
+case_2db54866af,urgence_maximale,5,1,0.9604748665077139,0.03937784510246256,0.00014728838982356655,urgence_maximale,0,1503,Intensive Care,True,,"pneumonie grave : SpO2 60 %, PA 90/50",False
+case_2ed00050bc,urgence_maximale,2,1,0.9492030048818345,0.04935367495371206,0.0014433201644534533,urgence_maximale,0,636,Pediatric Cardiology,True,case_a8d57f9e53,"atrésie pulmonaire néonatale, cyanose réfractaire",True
+case_2f761faae8,urgence_moderee,4,2,0.22814196813396223,0.6146399138176469,0.15721811804839078,urgence_moderee,0,562,Rheumatology,False,,purpura et polyarthralgies fébriles,False
+case_30daf5027d,urgence_moderee,9,2,0.6747007797988512,0.2715431593708455,0.05375606083030329,urgence_maximale,-1,540,Forensic Medicine and Toxicology,False,,"accident de la route, blessés à évaluer",False
+case_36716c7b84,urgence_moderee,4,1,0.9965304946139961,0.003453607755749527,1.5897630254448007e-05,urgence_maximale,-1,487,Pediatric Cardiology,True,,"nouveau-né cyanosé, cardiopathie à opérer",False
+case_3b0b25f671,urgence_moderee,7,2,0.6344192082841619,0.36515400712050006,0.0004267845953380392,urgence_maximale,-1,1316,Pulmonology,True,,"suspicion d'embolie pulmonaire, hémodynamique stable",False
+case_3c2ad635da,urgence_maximale,2,1,0.9454633316903547,0.05371815386329263,0.0008185144463527037,urgence_maximale,0,1383,Pharmacy,False,,intoxication au méthanol avec troubles visuels,False
+case_3d37b2c300,differee,7,2,0.0024769502889445305,0.14955076591064406,0.8479722838004115,differee,0,461,Immunology,True,,"syndrome sec, consultation",False
+case_405937a719,urgence_maximale,2,1,0.9979444852536489,0.002042813852380973,1.2700893970039185e-05,urgence_maximale,0,195,Pediatric Cardiology,True,case_0e34b64b97,"nouveau-né, cyanose réfractaire",True
+case_40e1171709,urgence_moderee,6,1,0.0004365076768107099,0.6818547814211859,0.3177087109020034,urgence_moderee,0,1049,Hematology,False,,"anémie hémolytique, Hb 6,5 g/dL",False
+case_44d354520f,urgence_maximale,5,1,0.9982963044675912,0.0010824627200114738,0.000621232812397241,urgence_maximale,0,780,Pharmacy,True,,"intoxication au CO, coma, détresse respiratoire",False
+case_4613fd2c4a,urgence_maximale,1,1,0.9947334495356358,0.005223487444107402,4.306302025666153e-05,urgence_maximale,0,372,Pediatric Cardiology,False,case_269290207d,atrésie pulmonaire néonatale ducto-dépendante,True
+case_4aa899ce9b,urgence_maximale,2,1,0.9727140087887818,0.027272705006485272,1.3286204732820938e-05,urgence_maximale,0,234,Pediatric Cardiology,True,,nourrisson admis pour convulsions,False
+case_4abe6cf5a5,urgence_maximale,9,1,0.9995231826715768,0.00045547643208352127,2.134089633965799e-05,urgence_maximale,0,416,Hepato-Gastroenterology,True,,"choc : PA 60/40, Glasgow 3",False
+case_4dc45af44d,differee,3,1,0.04703119372012466,0.9016375586774631,0.0513312476024122,urgence_moderee,-1,350,Pediatric Cardiology,True,,"cyanose d'effort, suivi",False
+case_4e96c12db0,urgence_maximale,2,1,0.9982744412477509,0.001714527867895792,1.1030884353293523e-05,urgence_maximale,0,563,Pediatric Cardiology,True,case_bcc9952643,"nouveau-né, cyanose devenue profonde",True
+case_4ea8c7112c,urgence_moderee,1,1,0.09763853279366427,0.30086661887723143,0.6014948483291043,differee,1,799,Pediatric Cardiology,True,case_011ade3992,coarctation néonatale sans détresse,True
+case_56342cb34f,urgence_moderee,7,1,0.15383858925026989,0.845289537596466,0.0008718731532641929,urgence_moderee,0,906,Nephro-Urology,True,,colique néphrétique hyperalgique,False
+case_5bc646ff1d,differee,6,2,0.00016564852265727684,0.2796667132373017,0.7201676382400409,differee,0,1118,Pharmacy,False,,analyse d'interactions médicamenteuses,False
+case_5e873f820c,urgence_maximale,2,1,0.9992034017313609,0.0007961701287353554,4.2813990376664405e-07,urgence_maximale,0,210,Pediatric Cardiology,True,case_f77dd92158,"nouveau-né ventilé, cyanose réfractaire",True
+case_69154b8d7d,urgence_maximale,3,1,0.8686927065343758,0.131039671077555,0.0002676223880692057,urgence_maximale,0,308,Emergency Medicine,True,,chute avec confusion chez patiente probablement anticoagulée,False
+case_6c986c7a0f,urgence_maximale,2,1,0.9560429488284568,0.042103212787594,0.0018538383839492838,urgence_maximale,0,102,Pediatric Cardiology,False,,atrésie pulmonaire néonatale ducto-dépendante,False
+case_70e95dcea5,urgence_maximale,1,1,0.9179969508065826,0.07537764072490294,0.006625408468514498,urgence_maximale,0,314,Pediatric Cardiology,True,case_f547c486c6,"nouveau-né, SaO2 70 % sous PGE1",True
+case_71dc0d5d8f,urgence_moderee,6,1,0.03180186605956922,0.921704778128949,0.046493355811481736,urgence_moderee,0,1157,Orthopedics,True,,fracture du col fémoral,False
+case_7325212ce3,urgence_maximale,10,2,0.5410400615121276,0.4560536852027611,0.002906253285111348,urgence_maximale,0,1556,Neurology,True,,"hémiplégie gauche au réveil sous AVK, AVC",False
+case_74a22241f7,urgence_maximale,4,1,0.8795225448259352,0.0773845435771981,0.043092911596866755,urgence_maximale,0,212,Pediatric Cardiology,False,,atrésie pulmonaire néonatale ducto-dépendante,False
+case_77885328ce,urgence_maximale,3,1,0.9548880209862644,0.0447861883368931,0.00032579067684253483,urgence_maximale,0,906,Pediatric Cardiology,True,case_f6368dd3ca,"nouveau-né, cyanose néonatale immédiate",True
+case_7b85238054,urgence_maximale,2,1,0.9813906651404345,0.017867103103913762,0.0007422317556518734,urgence_maximale,0,508,Pediatric Cardiology,True,case_1307b5c231,"atrésie pulmonaire néonatale, SaO2 85 %",True
+case_7bfc7b4f31,urgence_moderee,7,1,0.0666461804303411,0.8846900288601699,0.04866379070948897,urgence_moderee,0,405,Gynecology and Obstetrics,True,,douleurs pelviennes aiguës,False
+case_7cb8e388fc,urgence_moderee,1,1,0.25750914950900183,0.709311058214099,0.03317979227689906,urgence_moderee,0,93,Pediatric Cardiology,False,,nouveau-né essoufflé avec souffle,False
+case_82baaf1873,urgence_maximale,1,1,0.6908450594606478,0.28804200118427964,0.021112939355072517,urgence_maximale,0,525,Pediatric Cardiology,True,case_1124400cac,"nouveau-né, cyanose réfractaire",True
+case_85b084e49a,differee,10,1,2.1514755385974937e-06,0.011610764357510987,0.9883870841669504,differee,0,1168,Pharmacy,False,,"cirrhose découverte, bilan",False
+case_860c91139a,differee,6,2,0.053431734476697905,0.13555753791345512,0.811010727609847,differee,0,398,Pharmacy,False,,analyse de traitement chronique,False
+case_919696c67b,differee,4,1,9.971127438525496e-07,0.0051849088675583336,0.9948140940196979,differee,0,1062,Orthopedics,True,,expertise de séquelles,False
+case_937626ea16,urgence_maximale,1,1,0.905054599457946,0.08421860367872462,0.01072679686332947,urgence_maximale,0,133,Pediatric Cardiology,True,,"atrésie pulmonaire néonatale, SaO2 85 %",False
+case_96b8676c9f,urgence_maximale,1,1,0.9996606704914678,0.0003355801004524205,3.749408079619878e-06,urgence_maximale,0,414,Pediatric Cardiology,True,case_5e873f820c,"nouveau-né ventilé, HTAP isosystémique",True
+case_984e34607e,urgence_moderee,5,1,7.693690836155212e-05,0.6734901606302148,0.3264329024614236,urgence_moderee,0,738,Pharmacy,False,,mononucléose fébrile,False
+case_9897586b41,differee,2,1,2.484334721034123e-06,0.021943326006412245,0.9780541896588668,differee,0,839,Gynecology and Obstetrics,False,case_fdc37e9809,"masse annexielle opérée, résultat histologique",True
+case_99f7efb81e,urgence_moderee,1,1,0.3399103033539633,0.6353316602873742,0.024758036358662455,urgence_moderee,0,291,Pediatric Cardiology,False,,BAV du 2e degré néonatal,False
+case_9a35a99611,urgence_moderee,1,1,0.4319929748047608,0.5552785123482247,0.012728512847014506,urgence_moderee,0,287,Pediatric Cardiology,True,case_091799e27e,HTAP suprasystémique sur CIV,True
+case_9cee0b48c0,differee,4,1,0.0033920092582104284,0.9533517061474787,0.04325628459431084,urgence_moderee,-1,262,Otorhinolaryngology (ENT),False,,sinusite chronique,False
+case_9dc266c7cb,differee,3,1,0.00017377489844858814,0.1970845009567693,0.8027417241447821,differee,0,696,Gynecology and Obstetrics,False,case_fb84f9da9c,infection à Chlamydia au début de grossesse,True
+case_9f22584523,urgence_moderee,5,2,0.6741655682128774,0.31873834310038685,0.007096088686735636,urgence_maximale,-1,1485,Pharmacy,True,,infection urinaire nosocomiale avec bactériémie,False
+case_9f7aba23a7,urgence_maximale,6,1,0.0010373616059808693,0.9390394639648293,0.05992317442918984,urgence_moderee,1,816,Pharmacy,False,,"leucémie aiguë, plaquettes 30 G/L, syndrome hémorragique",False
+case_a1d043b5b3,urgence_moderee,4,1,0.0051069058079533805,0.8109777792073067,0.18391531498473995,urgence_moderee,0,559,Pharmacy,False,,"douleurs osseuses et lacunes, suspicion myélome",False
+case_a58977f2e7,urgence_maximale,9,1,0.9993381699091066,0.0005554616917098731,0.000106368399183389,urgence_maximale,0,765,Forensic Medicine and Toxicology,True,,"intoxication volontaire, Glasgow 7, intubée",False
+case_a8d57f9e53,urgence_maximale,1,1,0.9889563744880273,0.010990766723089485,5.2858788883217e-05,urgence_maximale,0,509,Pediatric Cardiology,True,case_c74469ac15,"atrésie pulmonaire néonatale, cyanose réfractaire",True
+case_ac4197df28,differee,7,1,4.384382071743213e-06,0.08830922416928898,0.9116863914486393,differee,0,890,Nephro-Urology,False,,"masse testiculaire, bilan",False
+case_accf37a33c,urgence_maximale,8,1,0.9975935138491574,0.0022303871004225413,0.00017609905042007535,urgence_maximale,0,409,Emergency Medicine,True,,"coma traumatique ventilé, hémodynamique instable",False
+case_ae6103d9fa,urgence_maximale,1,1,0.9986710827258222,0.0013256239332028945,3.2933409748760896e-06,urgence_maximale,0,218,Pediatric Cardiology,True,,"nouveau-né, cyanose réfractaire, polypnée",False
+case_b7389773e7,urgence_maximale,1,1,0.9927122667309779,0.007124311322883589,0.00016342194613840823,urgence_maximale,0,614,Pediatric Cardiology,True,case_4613fd2c4a,atrésie pulmonaire néonatale ducto-dépendante,True
+case_bb499d7f2f,differee,9,1,2.2313924025351424e-05,0.2463657289224848,0.7536119571534898,differee,0,770,Pharmacy,False,,cystite simple,False
+case_bbcd6d751a,urgence_maximale,4,1,0.13797441783163175,0.8529192597821729,0.009106322386195352,urgence_moderee,1,1223,Pharmacy,True,,rhabdomyolyse avec insuffisance rénale aiguë,False
+case_bcc9952643,urgence_moderee,1,1,0.9913965525777899,0.007575457816041142,0.0010279896061689336,urgence_maximale,-1,422,Pediatric Cardiology,True,,nouveau-né cyanosé sans détresse,False
+case_be3099e3d4,differee,7,2,0.43505277289743344,0.5599969585092792,0.004950268593287272,urgence_moderee,-1,616,Pharmacy,True,,prise en charge post-opératoire de la douleur,False
+case_c74469ac15,urgence_maximale,2,1,0.9874786824456203,0.0123411587924315,0.00018015876194807536,urgence_maximale,0,435,Pediatric Cardiology,True,case_d920a6fe5a,"atrésie pulmonaire néonatale, cyanose réfractaire",True
+case_c97507722f,urgence_maximale,5,1,0.9922481219244833,0.00633446890587506,0.001417409169641642,urgence_maximale,0,1277,Pharmacy,True,,"épiglottite avec détresse respiratoire, intubée",False
+case_cb376201da,urgence_maximale,6,1,0.901840416293399,0.09767646452092017,0.0004831191856808171,urgence_maximale,0,721,Pharmacy,True,,méthémoglobinémie à 48 % après ingestion d'aniline,False
+case_ccb46e8ba8,urgence_maximale,1,1,0.9986705120082336,0.0013268285180703802,2.6594736958162387e-06,urgence_maximale,0,331,Pediatric Cardiology,True,,"nouveau-né, cyanose néonatale immédiate",False
+case_cd4b68d789,differee,8,1,5.690395116792963e-05,0.14319619616263862,0.8567468998861935,differee,0,273,Pharmacy,False,,giardiase en crèche,False
+case_cdcb103797,urgence_moderee,5,2,0.41335543866961616,0.5844847689910531,0.0021597923393307404,urgence_moderee,0,535,Pharmacy,False,,"nourrisson déshydraté, diarrhée fébrile",False
+case_ce74b56f55,urgence_maximale,2,1,0.9957513782356942,0.004247263028542839,1.3587357629175914e-06,urgence_maximale,0,133,Pediatric Cardiology,True,,"atrésie pulmonaire néonatale, cyanose réfractaire",False
+case_d05b10f99d,differee,1,1,0.00025605775501021404,0.013991670432268127,0.9857522718127216,differee,0,421,Pediatric Cardiology,False,,grossesse sur QT long stable sous traitement,False
+case_d29cff18f9,urgence_maximale,7,1,0.991795235765159,0.007388857668504516,0.0008159065663363701,urgence_maximale,0,1010,Pharmacy,True,,méningo-encéphalite à Listeria,False
+case_d3042f91aa,urgence_maximale,4,1,0.9287276808758397,0.0697791309676706,0.0014931881564897288,urgence_maximale,0,2425,Psychiatry,True,,état maniaque délirant avec agitation,False
+case_d920a6fe5a,urgence_maximale,2,1,0.9969873336266757,0.0029687057656182323,4.3960607706077225e-05,urgence_maximale,0,205,Pediatric Cardiology,True,case_ce74b56f55,"atrésie pulmonaire néonatale, cyanose réfractaire",True
+case_db8d0b0603,urgence_maximale,1,1,0.9998197595259126,0.00018022318871105554,1.728537632608955e-08,urgence_maximale,0,583,Pediatric Cardiology,True,case_13d9a116b1,"nouveau-né en détresse respiratoire sévère, OAP",True
+case_e403e84688,differee,5,1,0.0003484582357736523,0.2790852857534491,0.7205662560107772,differee,0,983,Pulmonology,False,,"pleurésie, bilan étiologique",False
+case_e40981689b,urgence_moderee,3,2,0.5389256091241629,0.45782247574245544,0.003251915133381691,urgence_maximale,-1,493,Pharmacy,True,,"hématome après chute, TCA allongé chez enfant",False
+case_e4a192ea71,urgence_maximale,5,1,0.17127501996168754,0.8247437646578859,0.00398121538042648,urgence_moderee,1,533,Nephro-Urology,True,,"douleur scrotale brutale, torsion testiculaire suspecte",False
+case_e51bdd6e35,urgence_maximale,1,1,0.7536263097250624,0.24476512696198555,0.001608563312952101,urgence_maximale,0,649,Pediatric Cardiology,True,case_82baaf1873,"nouveau-né, cyanose réfractaire",True
+case_e703071cde,urgence_moderee,5,1,0.018366645944710457,0.9418367526909819,0.03979660136430759,urgence_moderee,0,672,Infectious Diseases,True,,"fièvre et céphalées, syndrome méningé à éliminer",False
+case_e964c9ea6a,urgence_moderee,1,1,8.277173549937151e-05,0.013929015937752738,0.9859882123267478,differee,1,250,Pediatric Cardiology,False,case_ec567a5766,CIA symptomatique à l'effort,True
+case_ec567a5766,differee,2,1,4.993127515549467e-05,0.006812346868223974,0.9931377218566206,differee,0,76,Pediatric Cardiology,False,,"CIA, consultation",False
+case_ee8589ff82,urgence_maximale,8,1,0.9185052654609388,0.07900730537794011,0.0024874291611211,urgence_maximale,0,597,Pharmacy,True,,"méningite : céphalée brutale fébrile, raideur de nuque",False
+case_f547c486c6,urgence_maximale,2,1,0.9910706647007494,0.007803228795488823,0.0011261065037617983,urgence_maximale,0,184,Pediatric Cardiology,False,case_6c986c7a0f,atrésie pulmonaire néonatale ducto-dépendante,True
+case_f5d38db0d0,urgence_moderee,3,1,0.9968560155469494,0.003112441914793425,3.1542538257104954e-05,urgence_maximale,-1,850,Pediatric Cardiology,True,case_36716c7b84,"nouveau-né cyanosé, cardiopathie à opérer",True
+case_f6368dd3ca,urgence_maximale,1,1,0.9947715865109227,0.005223764923683764,4.648565393516517e-06,urgence_maximale,0,545,Pediatric Cardiology,True,case_ccb46e8ba8,"nouveau-né, cyanose néonatale immédiate",True
+case_f77dd92158,urgence_maximale,2,1,0.9996534656465914,0.00033823515674388674,8.299196664575175e-06,urgence_maximale,0,166,Pediatric Cardiology,False,,"nouveau-né ventilé, cyanose réfractaire",False
+case_f98e34d527,differee,5,1,9.201593392101481e-06,0.003135166316903674,0.9968556320897044,differee,0,509,Public Health,False,,question de santé publique,False
+case_fa3a392426,urgence_maximale,1,1,0.9982955779227024,0.0017014996809023178,2.9223963952778593e-06,urgence_maximale,0,319,Pediatric Cardiology,True,,"nouveau-né, cyanose réfractaire",False
+case_fad028d0f3,differee,1,1,3.0722813432416736e-05,0.006638153628823289,0.9933311235577442,differee,0,227,Pediatric Cardiology,False,,fermeture programmée de CIA,False
+case_fb84f9da9c,differee,2,1,4.929114360300667e-06,0.03330291493735041,0.9666921559482893,differee,0,630,Gynecology and Obstetrics,False,,infection à Chlamydia au début de grossesse,False
+case_fc9aecab6c,urgence_maximale,5,2,0.7283764862717318,0.2686857630431586,0.002937750685109551,urgence_maximale,0,1126,Pharmacy,False,,leucémie aiguë avec syndrome hémorragique,False
+case_fdc37e9809,differee,3,1,1.6042245477865784e-05,0.09426150956666231,0.9057224481878597,differee,0,658,Gynecology and Obstetrics,False,,"masse annexielle, bilan",False

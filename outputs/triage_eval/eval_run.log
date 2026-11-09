@@ -1,0 +1,34 @@
+Evaluation de 2_modele_base sur 384 exemples
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:   4%|▎         | 11/310 [00:00<00:02, 108.64it/s]Loading weights:   7%|▋         | 22/310 [00:00<00:03, 88.01it/s] Loading weights:  11%|█         | 34/310 [00:00<00:02, 94.75it/s]Loading weights:  14%|█▍        | 44/310 [00:00<00:02, 94.90it/s]Loading weights:  18%|█▊        | 56/310 [00:00<00:02, 102.26it/s]Loading weights:  22%|██▏       | 67/310 [00:00<00:02, 104.61it/s]Loading weights:  25%|██▌       | 78/310 [00:00<00:02, 104.62it/s]Loading weights:  29%|██▊       | 89/310 [00:00<00:02, 102.43it/s]Loading weights:  32%|███▏      | 100/310 [00:01<00:02, 95.79it/s]Loading weights:  35%|███▌      | 110/310 [00:01<00:02, 95.39it/s]Loading weights:  39%|███▊      | 120/310 [00:01<00:02, 91.15it/s]Loading weights:  42%|████▏     | 130/310 [00:01<00:01, 90.46it/s]Loading weights:  45%|████▌     | 141/310 [00:01<00:01, 91.32it/s]Loading weights:  50%|████▉     | 154/310 [00:01<00:01, 91.53it/s]Loading weights:  54%|█████▍    | 167/310 [00:01<00:01, 98.86it/s]Loading weights:  57%|█████▋    | 177/310 [00:01<00:01, 98.75it/s]Loading weights:  60%|██████    | 187/310 [00:01<00:01, 92.60it/s]Loading weights:  64%|██████▍   | 198/310 [00:02<00:01, 94.95it/s]Loading weights:  68%|██████▊   | 210/310 [00:02<00:01, 97.12it/s]Loading weights:  71%|███████▏  | 221/310 [00:02<00:00, 98.49it/s]Loading weights:  75%|███████▍  | 232/310 [00:02<00:00, 99.26it/s]Loading weights:  78%|███████▊  | 242/310 [00:02<00:00, 95.38it/s]Loading weights:  82%|████████▏ | 253/310 [00:02<00:00, 95.69it/s]Loading weights:  85%|████████▌ | 265/310 [00:02<00:00, 98.67it/s]Loading weights:  89%|████████▉ | 276/310 [00:02<00:00, 97.01it/s]Loading weights:  93%|█████████▎| 287/310 [00:02<00:00, 94.00it/s]Loading weights:  96%|█████████▌| 297/310 [00:03<00:00, 90.46it/s]Loading weights: 100%|██████████| 310/310 [00:03<00:00, 98.81it/s]
+  50/384
+  100/384
+  150/384
+  200/384
+  250/384
+  300/384
+  350/384
+Evaluation de 3_sft_medical sur 384 exemples
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:   2%|▏         | 5/310 [00:00<00:06, 45.85it/s]Loading weights:   5%|▍         | 15/310 [00:00<00:04, 72.50it/s]Loading weights:  11%|█         | 34/310 [00:00<00:02, 117.26it/s]Loading weights:  16%|█▌        | 50/310 [00:00<00:01, 132.56it/s]Loading weights:  21%|██▏       | 66/310 [00:00<00:01, 128.52it/s]Loading weights:  28%|██▊       | 86/310 [00:00<00:01, 143.82it/s]Loading weights:  33%|███▎      | 101/310 [00:00<00:01, 140.84it/s]Loading weights:  38%|███▊      | 118/310 [00:00<00:01, 143.95it/s]Loading weights:  43%|████▎     | 133/310 [00:01<00:01, 142.05it/s]Loading weights:  48%|████▊     | 148/310 [00:01<00:01, 144.16it/s]Loading weights:  53%|█████▎    | 163/310 [00:01<00:01, 133.50it/s]Loading weights:  58%|█████▊    | 181/310 [00:01<00:00, 146.23it/s]Loading weights:  64%|██████▍   | 198/310 [00:01<00:00, 151.95it/s]Loading weights:  69%|██████▉   | 214/310 [00:01<00:00, 149.74it/s]Loading weights:  74%|███████▍  | 230/310 [00:01<00:00, 141.89it/s]Loading weights:  80%|███████▉  | 247/310 [00:01<00:00, 145.00it/s]Loading weights:  85%|████████▌ | 264/310 [00:01<00:00, 149.42it/s]Loading weights:  91%|█████████ | 281/310 [00:02<00:00, 142.36it/s]Loading weights:  96%|█████████▋| 299/310 [00:02<00:00, 152.25it/s]Loading weights: 100%|██████████| 310/310 [00:02<00:00, 143.95it/s]
+  50/384
+  100/384
+  150/384
+  200/384
+  250/384
+  300/384
+  350/384
+Evaluation de 4_sft_medical_triage sur 384 exemples
+Loading weights:   0%|          | 0/310 [00:00<?, ?it/s]Loading weights:   1%|          | 2/310 [00:00<00:17, 17.99it/s]Loading weights:   6%|▌         | 18/310 [00:00<00:03, 78.00it/s]Loading weights:  10%|█         | 32/310 [00:00<00:02, 98.69it/s]Loading weights:  15%|█▍        | 46/310 [00:00<00:02, 110.27it/s]Loading weights:  19%|█▉        | 60/310 [00:00<00:02, 119.51it/s]Loading weights:  24%|██▍       | 74/310 [00:00<00:02, 111.51it/s]Loading weights:  28%|██▊       | 86/310 [00:00<00:02, 108.57it/s]Loading weights:  34%|███▎      | 104/310 [00:00<00:01, 126.30it/s]Loading weights:  39%|███▊      | 120/310 [00:01<00:01, 127.62it/s]Loading weights:  43%|████▎     | 134/310 [00:01<00:01, 130.94it/s]Loading weights:  48%|████▊     | 149/310 [00:01<00:01, 127.89it/s]Loading weights:  53%|█████▎    | 165/310 [00:01<00:01, 130.40it/s]Loading weights:  58%|█████▊    | 181/310 [00:01<00:00, 134.52it/s]Loading weights:  63%|██████▎   | 195/310 [00:01<00:00, 128.83it/s]Loading weights:  68%|██████▊   | 212/310 [00:01<00:00, 139.17it/s]Loading weights:  73%|███████▎  | 227/310 [00:01<00:00, 141.02it/s]Loading weights:  78%|███████▊  | 242/310 [00:01<00:00, 129.42it/s]Loading weights:  85%|████████▍ | 262/310 [00:02<00:00, 143.39it/s]Loading weights:  89%|████████▉ | 277/310 [00:02<00:00, 138.64it/s]Loading weights:  95%|█████████▍| 293/310 [00:02<00:00, 143.25it/s]Loading weights: 100%|██████████| 310/310 [00:02<00:00, 129.52it/s]
+  50/384
+  100/384
+  150/384
+  200/384
+  250/384
+  300/384
+  350/384
+                      accuracy  f1_macro  rappel_P1  sous_triage  sur_triage
+1_baseline_naive          38.5      18.5      100.0          0.0        61.5
+2_modele_base             28.9      23.9        0.0         64.3         6.8
+3_sft_medical             31.0      24.7       58.1         32.8        36.2
+4_sft_medical_triage      63.8      55.0      100.0          0.0        36.2
+
+Rapport -> outputs\triage_eval\comparaison_triage.md

@@ -5,8 +5,10 @@ outputs/**
 !outputs/**/
 !outputs/**/*.md
 outputs/**/README.md
-!outputs/triage_eval/**/comparaison_triage*.csv
-!outputs/triage_eval/**/mode_decision*.csv
+!outputs/triage_eval/**
+!outputs/sft_mcqa_eval.csv
+!outputs/sft_qualitative_examples.csv
+!outputs/safety_flags.csv
 __pycache__/
 *.pyc
 Users/

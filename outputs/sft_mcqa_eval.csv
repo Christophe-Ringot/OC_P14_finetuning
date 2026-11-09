@@ -1,0 +1,481 @@
+source_dataset,task_type,instruction,reference,generated,reference_letters,predicted_letters,exact_match,precision,recall,f1
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, une seule est inexacte, laquelle? En chromatographie en phase gazeuse, comparativement aux colonnes remplies, les colonnes capillaires :
+A) Présentent une plus faible perméabilité
+B) Offrent un plus grand nombre de plateaux théoriques
+C) Permettent de meilleures séparations
+D) Nécessitent des injecteurs différents
+E) Ne nécessite pas des détecteurs différents
+Quelle est la bonne reponse ?",La reponse correcte est A) Présentent une plus faible perméabilité.,La reponse correcte est D) Nécessitent des injecteurs différents.,A,D,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes concernant la chromatographie sur colonne, une seule est fausse, laquelle? On augmente la résolution de deux solutés:
+A) En augmentant la longueur de la colonne
+B) En augmentant le diamètre des particules
+C) En changeant la nature de la phase mobile
+D) En modifiant la vitesse de la phase mobile
+E) En augmentant le facteur de sélectivité
+Quelle est la bonne reponse ?",La reponse correcte est B) En augmentant le diamètre des particules.,La reponse correcte est D) En modifiant la vitesse de la phase mobile.,B,D,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Quelle est la proposition fausse concernant les unités utilisées dans le domaine de la physique nucléaire?
+A) 1 eV= 1,6.10-19 J
+B) L'unité de masse atomique est égale au douzième de la masse d'un atome de 12C
+C) La masse d'un électron équivaut en énergie à 0,511 MeV
+D) 1 Bq = 1 S-1
+E) L'activité d'un radioélément s'exprime en curie (Ci) dans le système international
+Quelle est la bonne reponse ?",La reponse correcte est E) L'activité d'un radioélément s'exprime en curie (Ci) dans le système international.,La reponse correcte est E) L'activité d'un radioélément s'exprime en curie (Ci) dans le système international.,E,E,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes concernant les modifications des constantes cinétiques lors de l'inhibition non compétitive d'une enzyme, indiquer la réponse exacte.
+A) Km et Vm diminuent
+B) Km diminue et Vm reste inchangé
+C) Km reste inchangé et Vm diminue
+D) Km augmente et Vm diminue
+E) Km augmente et Vm reste inchangé
+Quelle est la bonne reponse ?",La reponse correcte est C) Km reste inchangé et Vm diminue.,La reponse correcte est C) Km reste inchangé et Vm diminue.,C,C,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, une seule est fausse. Laquelle? En spectrophotométrie UV-visible, l'absorption:
+A) Dépend de la longueur d'onde
+B) Dépend de l'épaisseur de la cuve
+C) Dépend de la concentration de la solution
+D) Dépend du coefficient d'absorption molaire du composé dosé
+E) Est égale au rapport I/I0
+Quelle est la bonne reponse ?",La reponse correcte est E) Est égale au rapport I/I0.,La reponse correcte est B) Dépend de l'épaisseur de la cuve.,E,B,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Lors de l'examen direct du LCR, la découverte de diplocoques à Gram négatif doit faire évoquer le germe suivant. Donner la réponse exacte.
+A) Streptococcus pneumoniae
+B) Escherichia coli
+C) Neisseria meningitidis
+D) Cryptococcus neoformans
+E) Haemophilus influenzae
+Quelle est la bonne reponse ?",La reponse correcte est C) Neisseria meningitidis.,La reponse correcte est C) Neisseria meningitidis.,C,C,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propriétés pharmacologiques suivantes concernant les benzodiazépines, une seule n'est pas exacte. Laquelle?
+A) Anxiolytiques
+B) Myorelaxantes
+C) Stimulantes respiratoires
+D) Anticonvulsivantes
+E) Hypnotiques
+Quelle est la bonne reponse ?",La reponse correcte est C) Stimulantes respiratoires.,La reponse correcte est C) Stimulantes respiratoires.,C,C,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, indiquer la proposition exacte. Les moutardes à l'azote sont:
+A) Des antimétabolites
+B) Non toxiques sur les cellules hématopoïétiques
+C) Des poisons du fuseau
+D) Des alkylants
+E) Des intercalants
+Quelle est la bonne reponse ?",La reponse correcte est D) Des alkylants.,La reponse correcte est D) Des alkylants.,D,D,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Concernant la glycolyse, quelle est la proposition fausse?
+A) Elle permet la transformation d'une molécule glucose en 2 molécules de pyruvate
+B) Elle ne fonctionne dans les cellules qu'en anaérobiose
+C) C'est la principale source d'énergie dans les cellules musculaires
+D) Toutes les enzymes de la glycolyse sont localisées dans le cytoplasme cellulaire
+E) La glycolyse fournit 2 molécules d'ATP par molécule de glucose transformée
+Quelle est la bonne reponse ?",La reponse correcte est B) Elle ne fonctionne dans les cellules qu'en anaérobiose.,La reponse correcte est B) Elle ne fonctionne dans les cellules qu'en anaérobiose.,B,B,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes concernant la sécrétion d'acide gastrique, une seule est exacte. Laquelle?
+A) Elle est produite par les cellules principales des glandes fundiques
+B) Elle fait intervenir une anhydrase carbonique
+C) Elle est freinée par la gastrine
+D) Elle fait intervenir une pompe sodium/proton ATPase
+E) Elle est contrôlée par les plexus nerveux intrinsèques
+Quelle est la bonne reponse ?",La reponse correcte est B) Elle fait intervenir une anhydrase carbonique.,La reponse correcte est D) Elle fait intervenir une pompe sodium/proton ATPase.,B,D,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, indiquer celle qui est vraie. Le complexe QRS de l'électrocardiogramme correspond à :
+A) La contraction des oreillettes
+B) La dépolarisation des oreillettes
+C) La contraction des ventricules
+D) La dépolarisation des ventricules
+E) La repolarisation des ventricules
+Quelle est la bonne reponse ?",La reponse correcte est D) La dépolarisation des ventricules.,La reponse correcte est D) La dépolarisation des ventricules.,D,D,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les antidotes suivants, un seul n'est pas utilisé dans l'intoxication par le plomb, indiquer lequel?
+A) Acide dithiosuccinique
+B) Dimercaprol
+C) EDTA dicolbatique
+D) Sel disodique monocalcique de l'EDTA
+E) Pénicillamine
+Quelle est la bonne reponse ?",La reponse correcte est C) EDTA dicolbatique.,La reponse correcte est A) Acide dithiosuccinique.,C,A,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, indiquer celle qui est exacte. Les métabolites glucuronoconjugués des médicaments ont, par rapport à leurs formes non conjuguées:
+A) Un plus grand volume de distribution
+B) Une plus grande clairance rénale
+C) Une plus forte fixation aux protéines plasmatiques
+D) En général, des effets pharmacodynamiques plus intenses
+E) Sont plus lipophiles
+Quelle est la bonne reponse ?",La reponse correcte est B) Une plus grande clairance rénale.,La reponse correcte est B) Une plus grande clairance rénale.,B,B,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, une seule est exacte. Laquelle? Les lymphocytes T exprimant un récepteur gamma delta:
+A) Expriment nécessairement la molécule CD3
+B) Représentent une sous population de lymphocytes auxiliaires
+C) Coexpriment toujours CD4 et CD8
+D) Sont localisés principalement dans les ganglions lymphatiques
+E) Sont incapables de sécréter des cytokines
+Quelle est la bonne reponse ?",La reponse correcte est A) Expriment nécessairement la molécule CD3.,La reponse correcte est A) Expriment nécessairement la molécule CD3.,A,A,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : L'activité d'une source radioactive qui est le siège d'une désintégration par seconde est de :
+A) 1 curie
+B) 1 joule
+C) 1 becquerel
+D) 1 rad
+E) 1 gray
+Quelle est la bonne reponse ?",La reponse correcte est C) 1 becquerel.,La reponse correcte est C) 1 becquerel.,C,C,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Quelle est la proposition exacte? Les benzodiazépines potentialisent la transmission gabaergique :
+A) En tant que ligand agoniste au niveau des récepteurs GABAb de l'acide gamma-aminobutyrique
+B) En tant que ligand agoniste au niveau des récepteurs GABAa de l'acide gamma-aminobutyrique
+C) Par effet agoniste allostérique vis-à-vis des récepteurs GABAb
+D) Par effet agoniste allostérique vis-à-vis des récepteurs GABAa
+E) En tant qu'antagoniste des récepteurs GABAb
+Quelle est la bonne reponse ?",La reponse correcte est D) Par effet agoniste allostérique vis-à-vis des récepteurs GABAa.,La reponse correcte est D) Par effet agoniste allostérique vis-à-vis des récepteurs GABAa.,D,D,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Lequel de ces produits ne doit jamais être associé à la Méfloquine (LARIAM®)
+A) Valproate (DEPAKINE®)
+B) Carbamazépine (TEGRETOL®)
+C) Ethosuximide (ZARONTIN®)
+D) Phénytoïne (DI-HYDAN®)
+E) Phénobarbital (GARDENAL®)
+Quelle est la bonne reponse ?",La reponse correcte est A) Valproate (DEPAKINE®).,La reponse correcte est C) Ethosuximide (ZARONTIN®).,A,C,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Concernant l'insuffisance rénale aiguë fonctionnelle, indiquer la proposition inexacte:
+A) S'accompagne d'une oligurie
+B) L'urée plasmatique augmente proportionnellement plus que la créatininémie
+C) Le sodium urinaire est supérieur à 20 mmol/L
+D) Le rapport des concentrations de l'urée urinaire à l'urée plasmatique est supérieur à 10
+E) Est souvent secondaire à une déshydratation
+Quelle est la bonne reponse ?",La reponse correcte est C) Le sodium urinaire est supérieur à 20 mmol/L.,La reponse correcte est D) Le rapport des concentrations de l'urée urinaire à l'urée plasmatique est supérieur à 10.,C,D,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes concernant l'anguillullose, une seule est fausse, laquelle?
+A) Elle persiste pendant de nombreuses années chez l'être humain
+B) Elle se contracte par des larves rhabditoïdes
+C) Elle est dûe à Strongyloides stercoralis
+D) Elle est accompagnée d'une hyperéosinophilie sanguine fluctuante
+E) Elle se traite par l'ivermectine (STROMECTOL®)
+Quelle est la bonne reponse ?",La reponse correcte est B) Elle se contracte par des larves rhabditoïdes.,La reponse correcte est A) Elle persiste pendant de nombreuses années chez l'être humain.,B,A,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Indiquer quel est le mode de contamination de l'homme par Fasciola hepatica :
+A) Ingestion d'un mollusque contaminé
+B) Ingestion d'oeuf dans de l'eau de boisson
+C) Pénétration de larve par voie transcutanée
+D) Ingestion d'un végétal supportant les formes enkystées
+E) Piqûre d'un insecte hématophage
+Quelle est la bonne reponse ?",La reponse correcte est D) Ingestion d'un végétal supportant les formes enkystées.,La reponse correcte est D) Ingestion d'un végétal supportant les formes enkystées.,D,D,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, donner celle qui est exacte. La prévention primaire a pour but:
+A) La diminution de l'incidence des maladies
+B) La réduction de la durée des maladies
+C) La réinsertion des malades
+D) Le dépistage précoce des maladies
+E) La prévention des récidives
+Quelle est la bonne reponse ?",La reponse correcte est A) La diminution de l'incidence des maladies.,La reponse correcte est A) La diminution de l'incidence des maladies.,A,A,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, indiquer celle qui est exacte. Le pH d'une solution de phénobarbital sodique, sel monosodique de l'acide 5-éthyl, 5-phénylbarbiturique (pK1= 7,4 et pK2 = 12,2), de concentration = 0,1 MIL est de:
+A) 4,2
+B) 6,1
+C) 7
+D) 9,8
+E) 12,6
+Quelle est la bonne reponse ?","La reponse correcte est D) 9,8.","La reponse correcte est B) 6,1.",D,B,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Parmi les causes de décès des femmes adultes vivant en France, quelle est la cause la plus fréquente?
+A) Maladies cardiovasculaires
+B) Morts violentes
+C) Tumeurs
+D) Maladies respiratoires
+E) Maladies digestives
+Quelle est la bonne reponse ?",La reponse correcte est A) Maladies cardiovasculaires.,La reponse correcte est A) Maladies cardiovasculaires.,A,A,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, une seule est fausse. Laquelle? Le plomb:
+A) A l'état de poussières est bien absorbé par voie pulmonaire
+B) Dans le sang existe en majorité lié aux protéines
+C) Passe à travers le placenta
+D) Est un inhibiteur de la delta ala déshydratase nécessaire à la synthèse de l'hème
+E) Quand il est absorbé dans l'organisme, le plomb est éliminé essentiellement par voie rénale
+Quelle est la bonne reponse ?",La reponse correcte est B) Dans le sang existe en majorité lié aux protéines.,La reponse correcte est D) Est un inhibiteur de la delta ala déshydratase nécessaire à la synthèse de l'hème.,B,D,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Parmi les médicaments indiqués ci-dessous, quel est celui qui n'entre pas dans la classe des antimalariques?
+A) Chloroquine
+B) Méfloquine
+C) Métronidazole
+D) Quinine
+E) Association sulfamide-pyriméthamine
+Quelle est la bonne reponse ?",La reponse correcte est C) Métronidazole.,La reponse correcte est C) Métronidazole.,C,C,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi ces molécules, une seule n'est pas utilisée comme anti-épileptique. Laquelle?
+A) Estazolam
+B) Clonazepam
+C) Clobazam
+D) Diazepam
+E) Ethosuximide
+Quelle est la bonne reponse ?",La reponse correcte est A) Estazolam.,La reponse correcte est A) Estazolam.,A,A,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les produits suivants, indiquer celui qui peut être classé comme substance psychodysleptique:
+A) Amphétamine
+B) Cannabis
+C) Cocaïne
+D) Crack
+E) Opium
+Quelle est la bonne reponse ?",La reponse correcte est B) Cannabis.,La reponse correcte est C) Cocaïne.,B,C,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Parmi les bactéries suivantes, une seule n'est pas responsable de diarrhées. Laquelle?
+A) Escherichia Coli
+B) Streptococcus agalactiae
+C) Clostridium perfringens
+D) Salmonella typhimurium
+E) Shigella sonnei
+Quelle est la bonne reponse ?",La reponse correcte est B) Streptococcus agalactiae.,La reponse correcte est C) Clostridium perfringens.,B,C,False,0.0,0.0,0.0
+frenchmedmcqa,qcm,"Question : Dans une anémie par carence martiale dont la cause a été identifiée (ulcère gastrique ) et traitée chirurgicalement, pendant combien de temps le traitement martial doit-il être poursuivi?
+A) Jusqu'à la crise réticulocytaire
+B) Jusqu'au retour à la normale de la concentration en hémoglobine
+C) Jusqu'au retour à la normale de la valeur de la CCMH
+D) Toute la vie
+E) Jusqu'à la correction de l'anémie et la restauration des réserves en fer évaluées par la ferritinémie
+Quelle est la bonne reponse ?",La reponse correcte est E) Jusqu'à la correction de l'anémie et la restauration des réserves en fer évaluées par la ferritinémie.,La reponse correcte est E) Jusqu'à la correction de l'anémie et la restauration des réserves en fer évaluées par la ferritinémie.,E,E,True,1.0,1.0,1.0
+frenchmedmcqa,qcm,"Question : Parmi les propositions suivantes, une seule est exacte. Indiquer laquelle ? Un dosage par photométrie de flamme par émission:
+A) Met en oeuvre la mesure de l'intensité lumineuse d'un rayonnement polychromatique
+B) Nécessite une lampe à cathode creuse
+C) Nécessite l'ionisation des atomes dans la flamme
+D) Est applicable à la détermination du fer sérique
+E) Est applicable au suivi thérapeutique d'un traitement par le lithium
+Quelle est la bonne reponse ?",La reponse correcte est E) Est applicable au suivi thérapeutique d'un traitement par le lithium.,La reponse correcte est C) Nécessite l'ionisation des atomes dans la flamme.,E,C,False,0.0,0.0,0.0
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Le risque de trisomie 21 à la naissance peut être situé à :
+A) 1/2500 pour une femme de moins de 30 ans
+B) 1/100 pour une femme de 30 à 34 ans
+C) 1/20 pour une femme de 35 à 39 ans
+D) 1/10 pour une femme de 40 ans
+E) 1/50 pour une femme de plus de 45 ans
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) 1/2500 pour une femme de moins de 30 ans ; E) 1/50 pour une femme de plus de 45 ans.,Les reponses correctes sont : A) 1/2500 pour une femme de moins de 30 ans ; B) 1/100 pour une femme de 30 à 34 ans ; C) 1/20 pour une femme de 35 à 39 ans ; D) 1/10 pour une femme de 40 ans.,AE,ABCD,False,0.25,0.5,0.3333333333333333
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Le traitement de l'impétigo:
+A) Impose une éviction scolaire
+B) Doit faire rechercher un contage
+C) Utilise des topiques pour faire tomber les croutes
+D) Peut faire appel à l'antibiothérapie devant des lésions multiples
+E) Fait appel aux anti-inflammatoires non stéroidiens en cas d'oedème important
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Impose une éviction scolaire ; B) Doit faire rechercher un contage ; C) Utilise des topiques pour faire tomber les croutes ; D) Peut faire appel à l'antibiothérapie devant des lésions multiples.,Les reponses correctes sont : A) Impose une éviction scolaire ; B) Doit faire rechercher un contage ; C) Utilise des topiques pour faire tomber les croutes ; D) Peut faire appel à l'antibiothérapie devant des lésions multiples.,ABCD,ABCD,True,1.0,1.0,1.0
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Le traitement par corticostéroïdes provoque le ou les effets suivants :
+A) Une fuite rénale de sodium
+B) Une rétention de potassium
+C) Une amyotrophie
+D) Une hyperglycémie
+E) Une hypercalcémie
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : C) Une amyotrophie ; D) Une hyperglycémie.,Les reponses correctes sont : B) Une rétention de potassium ; D) Une hyperglycémie.,CD,BD,False,0.5,0.5,0.5
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Parmi les signes biologiques suivants, quels sont ceux qui s'observent au cours du rachitisme carentiel du nourrisson?
+A) Normocalcémie
+B) Hypocalcémie
+C) Hyperphosphorémie
+D) Diminution des phosphatases alcalines
+E) Hypercalciurie
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Normocalcémie ; B) Hypocalcémie.,Les reponses correctes sont : B) Hypocalcémie ; D) Diminution des phosphatases alcalines ; E) Hypercalciurie.,AB,BDE,False,0.3333333333333333,0.5,0.4
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Quelles sont parmi les propositions suivantes relatives à l'immunisation sanguine materno-foetale, les propositions exactes?
+A) Une détermination du groupe sanguin, du phénotype rhésus complet et du groupe Kell est obligatoire chez toute femme en début de grossesse
+B) Une incompatibilité Kell est aussi grave que l'incompatibilité rhésus
+C) L'immunisation par grossesse est la cause la plus fréquente des incompatibilités groupe Kell
+D) Les incompatibilités A, B, O peuvent être responsables de mort fÏtale in utero
+E) Une exsanguino-transfusion est systématique en cas d'incompatibilité de groupe A, B, O
+Quelle(s) proposition(s) est/sont correcte(s) ?","Les reponses correctes sont : A) Une détermination du groupe sanguin, du phénotype rhésus complet et du groupe Kell est obligatoire chez toute femme en début de grossesse ; B) Une incompatibilité Kell est aussi grave que l'incompatibilité rhésus.","Les reponses correctes sont : A) Une détermination du groupe sanguin, du phénotype rhésus complet et du groupe Kell est obligatoire chez toute femme en début de grossesse ; B) Une incompatibilité Kell est aussi grave que l'incompatibilité rhésus ; C) L'immunisation par grossesse est la cause la plus fréquente des incompatibilités groupe Kell ; D) Les incompatibilités A, B, O peuvent être responsables de mort fÏtale in utero.",AB,ABCD,False,0.5,1.0,0.6666666666666666
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Le diagnostic de tumeur du corpuscule carotidien repose sur la constatation de :
+A) Tumeur battante, expansive et soufflante
+B) Tumeur soufflante avec thrill palpatoire
+C) Tumeur ferme battante et non expansive
+D) Ecartement de la fourche carotidienne à l'artériographie
+E) Dilatation du bulbe carotidien à l'artériographie
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : C) Tumeur ferme battante et non expansive ; D) Ecartement de la fourche carotidienne à l'artériographie.,"Les reponses correctes sont : A) Tumeur battante, expansive et soufflante ; C) Tumeur ferme battante et non expansive ; D) Ecartement de la fourche carotidienne à l'artériographie.",CD,ACD,False,0.6666666666666666,1.0,0.8
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Une insuffisance surrénale aigue peut être:
+A) Secondaire à un accident des anticoagulants
+B) Un mode de révélation d'une maladie d'Addison
+C) D'origine hypothalamo-hypophysaire
+D) Secondaire à l'arrêt brutal d'un traitement corticoide prolongé et à forte dose
+E) Secondaire à un traitement diurétique donné dans une maladie d'Addison
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Secondaire à un accident des anticoagulants ; B) Un mode de révélation d'une maladie d'Addison ; C) D'origine hypothalamo-hypophysaire ; D) Secondaire à l'arrêt brutal d'un traitement corticoide prolongé et à forte dose ; E) Secondaire à un traitement diurétique donné dans une maladie d'Addison.,Les reponses correctes sont : A) Secondaire à un accident des anticoagulants ; B) Un mode de révélation d'une maladie d'Addison ; C) D'origine hypothalamo-hypophysaire ; D) Secondaire à l'arrêt brutal d'un traitement corticoide prolongé et à forte dose.,ABCDE,ABCD,False,1.0,0.8,0.888888888888889
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : L'enquête """"Framingham"""" suit depuis plus de trente ans plusieurs milliers d'hommes et de femmes adultes en surveillant différents facteurs de risque cardio-vasculaire et en enregistrant l'apparition de différentes pathologies cardiaques ou vasculaires. Cette enquête peut être caractérisée comme :
+A) Prospective
+B) Cas-témoins
+C) De cohorte
+D) Transversale
+E) D'intervention
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Prospective ; C) De cohorte.,Les reponses correctes sont : A) Prospective ; C) De cohorte.,AC,AC,True,1.0,1.0,1.0
+mediqal,clinical_case_qcm,"Cas clinique : Une jeune fille de 17 ans est amenée en consultation par sa mère sur les conseils du médecin traitant. Elle est très maigre et a perdu 16 kg en un an. Elle a progressivement réduit son alimentation alléguant des douleurs d'estomac, quand on la force à manger, elle vomit presque régulièrement. Par ailleurs, le comportement de cette jeune fille s'est progressivement modifié : en famille elle se montre tyrannique, en particulier elle contrôle de façon étroite l'alimentation des autres membres de la famille et ne fréquente pratiquement plus ses camarades de classe. Ses résultats scolaires restent excellents. Cette jeune fille ne se plaint de rien, affirmant au contraire qu'à part ses douleurs d'estomac elle ne s'est jamais mieux portée. L'examen clinique est négatif. Le transit gastroduodénal ne montre rien d'anormal. A l'interrogatoire on note une aménorrhée depuis 10 mois
+
+Question : On peut rencontrer des conduites de restriction alimentaire au cours de :
+A) Anorexie mentale
+B) Délire de persécution
+C) Dépression névrotique
+D) Hernie hiatale
+E) Névrose obsessionnelle
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Anorexie mentale ; B) Délire de persécution ; C) Dépression névrotique.,Les reponses correctes sont : A) Anorexie mentale ; C) Dépression névrotique.,ABC,AC,False,1.0,0.6666666666666666,0.8
+mediqal,clinical_case_qcm,"Cas clinique : Une femme de 72 ans, est hospitalisée depuis 15 jours dans un service de convalescence au décours d'un accident de voiture survenu 3 mois plus tôt. Son mari à été tué sur le coup ; elle à présenté une fracture bimalléolaire de la jambe gauche.Son ralentissement complique beaucoup la rééducation. De plus, elle pleure beaucoup et se reproche de ne plus être bonne à rien. Elle se plaint de cauchemars, se réveille et appelle son mari qu'elle croit, alors, encore vivant. La patiente est traitée depuis 5 ans pour une maladie de Parkinson par Sinemet®. Son traitement actuel comprend, en outre 1 mg de Rohypnol®; et elle dit trembler davantage.Après la consultation, un traitement par Tofranil® à faible dose (20 mg/j) est instauré. Au bout de 3 jours, la patiente présente une agitation nocturne avec propos incohérents. Dans la journée, elle est désorientée, opposante, elle refuse de s'alimenter et se sent persécutée par l'entourage. Elle présente des fausses reconnaissances. Il n'existe pas de signes neurologiques de localisation
+
+Question : Devant le tableau clinique ayant suscité la consultation du début, quel(s) est(sont) le(s) diagnostic(s) à évoquer ?
+A) Aggravation brutale de la maladie de parkinson
+B) Etat crépusculaire hystérique
+C) Syndrome dépressif
+D) Maladie de Pick
+E) Névrose obsessionnelle
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Aggravation brutale de la maladie de parkinson ; C) Syndrome dépressif.,Les reponses correctes sont : A) Aggravation brutale de la maladie de parkinson ; C) Syndrome dépressif.,AC,AC,True,1.0,1.0,1.0
+mediqal,clinical_case_qcm,"Cas clinique : Monsieur K., 69 ans, consulte pour une anémie et des troubles de la marche. Ses troubles, à type d'asthénie et de dyspnée d'effort ont commencé il y a six mois. Depuis 15 jours, le patient est gêné pour marcher et s'est donc inquiété. Il est pâle. L'état général est assez bien conservé; le patient est subictérique. Il n'y a pas de purpura et on ne palpe ni foie, ni rate, ni adénopathie. La langue est dépapillée. L'hémogramme montre les résultats suivants :G.R. 1 500 G/l G.B. 4.5 T/l (4 500/mm3)H b 7 g/dl dont :P.N. :5 %, L : 52%,M : 3%, Plaquettes : 110 000mm3H t 21 % V G M 140 Micron-cube C G M N 33.3 %L'examen neurologique montre une diminution des réflexes rotuliens et achilléens, une perte du sens de la position des orteils des deux côtés. Le diagnostic final est celui d'anémie de Biermer compliquée d'un syndrome neuro-anémique
+
+Question : Parmi les anomalies biologiques suivantes observées avant tout traitement, indiquez celle(s) qui sont expliquées par ce diagnostic :
+A) Hyperuricémie (600 mmol/l)
+B) Réticulocytose 30 000/mm3
+C) Bilirubine non conjuguée 30 micromol/l
+D) Hypersegmentation des polynucléaires neutrophiles
+E) Augmentation des transaminases (1,5 fois la normale)
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Hyperuricémie (600 mmol/l) ; B) Réticulocytose 30 000/mm3 ; C) Bilirubine non conjuguée 30 micromol/l ; D) Hypersegmentation des polynucléaires neutrophiles.,"Les reponses correctes sont : B) Réticulocytose 30 000/mm3 ; D) Hypersegmentation des polynucléaires neutrophiles ; E) Augmentation des transaminases (1,5 fois la normale).",ABCD,BDE,False,0.6666666666666666,0.5,0.5714285714285715
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Parmi les substances suivantes, quel est ou quels sont le ou les principaux médiateurs de l'hypersensibilité immédiate?
+A) Noradrénaline
+B) Prostaglandine PGE2
+C) Histamine
+D) Sérotonine
+E) IL4
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : B) Prostaglandine PGE2 ; C) Histamine ; D) Sérotonine.,Les reponses correctes sont : C) Histamine ; D) Sérotonine.,BCD,CD,False,1.0,0.6666666666666666,0.8
+mediqal,clinical_case_qcm,"Cas clinique : Un homme de 64 ans (1,69 m, 65 kgs) souffre depuis un an de douleurs constrictives d'insuffisance coronarienne, et depuis 3 mois environ d'une dyspnée stade III. A l'examen, le rythme est irrégulier, la PA est à 180/100 mm Hg. Il n'existe pas de souffle à l'auscultation cardiaque. L'E.C.G. de repos montre une fibrillation auriculaire (F.A.), avec rythme ventriculaire à 95 cycles/mn, un bloc de branche gauche complet ; l'échocardiographie retrouve une dilatation des cavités gauches, une hypokinésie globale (fraction d'éjection évaluée à 30 %), et l'absence de valvulopathie. Le bilan biologique retrouve une glycémie à jeun à 6 mmoI/I, un cholestérol à 8 mmol/l, des triglycérides à 1,5 mmol/l, une natrémie à 135 mmoles/l, une kaliémie à 4 mmoles/l, une créatininémie à 100 micromoles/l. Le diagnostic retenu est celui d'une myocardiopathie ischémique
+
+Question : Si on considère le problème thérapeutique de l'angor, quel(s) est(sont) parmi ces 5 médicaments anti-angineux, celui(ceux) qui est(sont) contre-indiqué(s) en principe chez ce patient ?
+A) Propranolol (Avlocardyl®)
+B) Amiodarone (Cordarone®)
+C) Isosorbide dinitrate (Risordan®)
+D) Vérapamil (Isoptine®)
+E) Nifédipine (Adalate®)
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Propranolol (Avlocardyl®) ; D) Vérapamil (Isoptine®).,Les reponses correctes sont : B) Amiodarone (Cordarone®) ; D) Vérapamil (Isoptine®) ; E) Nifédipine (Adalate®).,AD,BDE,False,0.3333333333333333,0.5,0.4
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Parmi les propositions suivantes concernant l'éruption dentaire, il est exact que :
+A) Lors de l'éruption dentaire l'apex est ouvert
+B) C'est l'éruption de la dent définitive qui entraîne la chute de la dent lactéale sus-jacente
+C) La canine définitive apparait chronologiquement après l'éruption de la première pré-molaire définitive
+D) La première molaire définitive apparait à l'âge de 6 ans
+E) La première molaire définitive est la première des dents définitives à apparaître
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : C) La canine définitive apparait chronologiquement après l'éruption de la première pré-molaire définitive ; D) La première molaire définitive apparait à l'âge de 6 ans ; E) La première molaire définitive est la première des dents définitives à apparaître.,Les reponses correctes sont : A) Lors de l'éruption dentaire l'apex est ouvert ; B) C'est l'éruption de la dent définitive qui entraîne la chute de la dent lactéale sus-jacente ; C) La canine définitive apparait chronologiquement après l'éruption de la première pré-molaire définitive ; E) La première molaire définitive est la première des dents définitives à apparaître.,CDE,ABCE,False,0.5,0.6666666666666666,0.5714285714285715
+mediqal,clinical_case_qcm,"Cas clinique : Une femme, traitée pour hypertension artérielle depuis plusieurs années, débute une grossesse
+
+Question : Le certificat préalable à cette I V.G. pour motif thérapeutique doit être signé par :
+A) Un médecin assermenté
+B) Un Président du tribunal de Grande Instance
+C) Un médecin exerçant son activité en milieu hospitalier public ou privé
+D) Un médecin expert près de la cour d'Appel
+E) Le directeur de l'hôpital
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : C) Un médecin exerçant son activité en milieu hospitalier public ou privé ; D) Un médecin expert près de la cour d'Appel.,Les reponses correctes sont : A) Un médecin assermenté ; C) Un médecin exerçant son activité en milieu hospitalier public ou privé.,CD,AC,False,0.5,0.5,0.5
+mediqal,clinical_case_qcm,"Cas clinique : Un patient présente brutalement une diplopie disparaissant à l'occlusion alternée d'un des deux yeux
+
+Question : Quel(s) type(s) de diplopie peu(ven)t être mis en évidence ?
+A) Monoculaire
+B) Croisée
+C) Homonyme
+D) Verticale
+E) Aucune des propositions précédentes
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : B) Croisée ; C) Homonyme ; D) Verticale.,Les reponses correctes sont : A) Monoculaire ; B) Croisée ; C) Homonyme ; D) Verticale.,BCD,ABCD,False,0.75,1.0,0.8571428571428571
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Parmi les affections suivantes, indiquez celle(s) qui peu(ven)t entraîner une ischémie aiguë d'un membre inférieur :
+A) Maladie mitrale
+B) Insuffisance tricuspidienne
+C) Anévrysme aortique
+D) Phlébite iliaque
+E) Endocardite bactérienne
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Maladie mitrale ; C) Anévrysme aortique ; D) Phlébite iliaque ; E) Endocardite bactérienne.,Les reponses correctes sont : C) Anévrysme aortique ; E) Endocardite bactérienne.,ACDE,CE,False,1.0,0.5,0.6666666666666666
+mediqal,clinical_case_qcm,"Cas clinique : Un homme de 52 ans, éthylique chronique, consulte pour une diarrhée survenue il y a quelques mois dans les suites d'une intervention pour un adénocarcinome lieberkühnien du côlon qui a enlevé le côlon droit et 20 cm d'iléon. Il s'agissait d'un cancer au stade C de Dukes. Il n'y a pas de douleurs et les selles sont au nombre de 4 à 6/j, il n'avait pas de diarrhée auparavant ni aucune douleur abdominale. L'examen physique est normal ainsi que la rectoscopie qui découvre des selles jaunes, pâteuses. Le temps d'apparition du carmin dans les selles est de 6 heures. La NFS indique 130 g d'Hb/l et un volume érythrocytaire de 110 µ3
+
+Question : Dans le cas de ce patient, la diarrhée résulte probablement de :
+A) Une récidive du cancer sur l'anastomose
+B) Les conséquences de la perte de la fonction de la valvule de Bauhin
+C) Métastases hépatiques
+D) La nature carcinoïdienne de la tumeur colique initiale
+E) Un cancer rectal associé entrainant des faux-besoins
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Une récidive du cancer sur l'anastomose ; B) Les conséquences de la perte de la fonction de la valvule de Bauhin.,Les reponses correctes sont : A) Une récidive du cancer sur l'anastomose ; B) Les conséquences de la perte de la fonction de la valvule de Bauhin ; C) Métastases hépatiques.,AB,ABC,False,0.6666666666666666,1.0,0.8
+mediqal,clinical_case_qcm,"Cas clinique : Monsieur K., 69 ans, consulte pour une anémie et des troubles de la marche. Ses troubles, à type d'asthénie et de dyspnée d'effort ont commencé il y a six mois. Depuis 15 jours, le patient est gêné pour marcher et s'est donc inquiété. Il est pâle. L'état général est assez bien conservé ; le patient est sub-ictérique. Il n'y a pas de purpura et on ne palpe ni foie, ni rate, ni adénopathie. La langue est dépapillée.L'hémogramme montre les résultats suivants : GR 1.500 g/l GB. 4.5 T/l (4.500/mm3)Hb 7 g/dl dont : PN. 75 %HT 21 % L 32 %VGM 140 micron3 M 3 %Plaquettes 110.000/mm3L'examen neurologique montre une diminution des réflexes rotuliens et achilléens, une perte du sens de la position des orteils des deux cotés.Le diagnostic final est celui d'anémie de Biermer compliquée d'un syndrome neuro-anémique
+
+Question : Parmi les anomalies biologiques suivantes obtenues avant tout traitement, après des prescriptions complémentaires, indiquez celle(s) qui vous semble(nt) compatible(s) avec ce diagnostic ?
+A) Taux élevé des LDH plasmatiques
+B) Réticulocytose 30.000/mm3
+C) Bilirubine non conjuguée 30 µmol/l
+D) Hypersegmentation des polynucléaires neutrophiles
+E) Taux bas de thiamine dans le sang
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Taux élevé des LDH plasmatiques ; B) Réticulocytose 30.000/mm3 ; C) Bilirubine non conjuguée 30 µmol/l ; D) Hypersegmentation des polynucléaires neutrophiles.,Les reponses correctes sont : B) Réticulocytose 30.000/mm3 ; D) Hypersegmentation des polynucléaires neutrophiles ; E) Taux bas de thiamine dans le sang.,ABCD,BDE,False,0.6666666666666666,0.5,0.5714285714285715
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Dans les comas dépassés :
+A) Il n'y a plus de respiration spontanée
+B) Il y a un arrêt circulatoire à l'angiographie carotidienne
+C) Il n'y a plus de réflexe cornéen
+D) On observe une hypertonie de décérébration
+E) L'E.E.G. est toujours plat
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Il n'y a plus de respiration spontanée ; B) Il y a un arrêt circulatoire à l'angiographie carotidienne ; C) Il n'y a plus de réflexe cornéen ; E) L'E.E.G. est toujours plat.,Les reponses correctes sont : A) Il n'y a plus de respiration spontanée ; C) Il n'y a plus de réflexe cornéen.,ABCE,AC,False,1.0,0.5,0.6666666666666666
+mediqal,clinical_case_qcm,"Cas clinique : Monsieur D... âgé de 68 ans, alors qu'il regarde la télévision, a brutalement l'impression de ne pas voir avec son oeil droit. Lorsqu'il ferme son oeil gauche, il ne voit rigoureusement rien. Cette cécité monoculaire dure environ 30 secondes puis la vision redevient normale. Le même phénomène se reproduit trois fois dans les 2 heures suivantes. Monsieur D... consulte dès le lendemain matin se plaignant d'un nouvel épisode survenu alors qu'il garait sa voiture
+
+Question : Chez ce patient vous allez :
+A) Prescrire en urgence une consultation ophtalmologique
+B) Prescrire en urgence un scanner
+C) Rechercher un souffle carotidien gauche
+D) Rechercher un souffle carotidien droit
+E) Prescrire un traitement anti-agrégant
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : C) Rechercher un souffle carotidien gauche ; D) Rechercher un souffle carotidien droit ; E) Prescrire un traitement anti-agrégant.,Les reponses correctes sont : A) Prescrire en urgence une consultation ophtalmologique ; C) Rechercher un souffle carotidien gauche ; D) Rechercher un souffle carotidien droit.,CDE,ACD,False,0.6666666666666666,0.6666666666666666,0.6666666666666666
+mediqal,clinical_case_qcm,"Cas clinique : Bernard, un garçon de 8 ans, est le 3ème enfant d'une famille de 5 enfants présente une protéinurie découverte il y a un an à l'occasion d'un examen scolaire (protéinurie +++ 0,8 g/l). On note un examen clinique normal, une TA à 11/7 cmHg, une croissance satisfaisante, mais un sujet longiligne avec une hyperlordose. Il existe un phimosis. Sang : urée 4 mmol/l, créatinine 60 micromoles/l, VS 6 mm/20 mm, protéines 65 g/l, ASLO 50 U/ml, GR 5 100.000/mm3, (Hb 13 g %, 6200 GB/mm, CH 50, normal, C3 = 109 mg %.(Nl : 130 à 180 mg %).Urines : volume de 24 heures 500 ml ; comptage de Malassez 10 GB/mm3 et 50 GR/mm3, uroculture avec 30 000 colibacilles/ml, protéinurie intermittente hautement sélective
+
+Question : Quels sont en général les 2 arguments en faveur d'une erreur de dosage de la protéinurie ?
+A) Nettoyage insuffisant des organes génito-urinaires externes chez la fille
+B) Recueil des urines dans un récipient sale
+C) Présence de 30 000 colibacilles/ml d'urine
+D) Présence d'un phimosis
+E) Présence de 50 GR/mm3
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Nettoyage insuffisant des organes génito-urinaires externes chez la fille ; D) Présence d'un phimosis.,Les reponses correctes sont : C) Présence de 30 000 colibacilles/ml d'urine ; E) Présence de 50 GR/mm3.,AD,CE,False,0.0,0.0,0.0
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Quel(s) résultat(s) biologique(s) va(vont) à l'encontre du diagnostic d'ostéoporose primitive ?
+A) Calcémie 98 mg/litre (2.45 mmol)
+B) Calciurie des 24 heures 50 mg (1,25 mmol)
+C) Phosphorémie 22 mg/l (0,70 mmol)
+D) Phosphaturie des 24 heures 650 mg (20 8 mmol)
+E) Hydroxyprolinurie des 24 heures 30 mg (230 mmol) (normale = 20 à 50 mg/24 heures)
+Quelle(s) proposition(s) est/sont correcte(s) ?","Les reponses correctes sont : B) Calciurie des 24 heures 50 mg (1,25 mmol) ; C) Phosphorémie 22 mg/l (0,70 mmol).","Les reponses correctes sont : A) Calcémie 98 mg/litre (2.45 mmol) ; C) Phosphorémie 22 mg/l (0,70 mmol) ; E) Hydroxyprolinurie des 24 heures 30 mg (230 mmol) (normale = 20 à 50 mg/24 heures).",BC,ACE,False,0.3333333333333333,0.5,0.4
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Comment allez-vous transporter idéalement un polytraumatisé qui a un traumatisme crânien avec coma et un volet thoracique gauche :
+A) En décubitus dorsal 1/2 assis
+B) En position latérale de sécurité gauche
+C) Avec alignement axial tête-cou-tronc
+D) En assistance respiratoire
+E) Tête basse, jambes surélevées et bandées pour lutter contre l'hypotension
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : C) Avec alignement axial tête-cou-tronc ; D) En assistance respiratoire.,Les reponses correctes sont : B) En position latérale de sécurité gauche ; C) Avec alignement axial tête-cou-tronc.,CD,BC,False,0.5,0.5,0.5
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Un syndrome néphrotique peut être associé avec :
+A) Amylose
+B) Diabète
+C) Lupus érythémateux disséminé
+D) Néphropathie interstitielle toxique au début
+E) Purpura rhumatoïde
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Amylose ; B) Diabète ; C) Lupus érythémateux disséminé ; D) Néphropathie interstitielle toxique au début ; E) Purpura rhumatoïde.,Les reponses correctes sont : B) Diabète ; C) Lupus érythémateux disséminé ; D) Néphropathie interstitielle toxique au début ; E) Purpura rhumatoïde.,ABCDE,BCDE,False,1.0,0.8,0.888888888888889
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Le syndrome de Pancoast-Tobias comporte une atteinte :
+A) Du plexus brachial
+B) Du nerf phrénique
+C) Du ganglion stellaire
+D) Des nerfs intercostaux
+E) Des premières cotes
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Du plexus brachial ; E) Des premières cotes.,Les reponses correctes sont : A) Du plexus brachial ; B) Du nerf phrénique ; C) Du ganglion stellaire.,AE,ABC,False,0.3333333333333333,0.5,0.4
+mediqal,clinical_case_qcm,"Cas clinique : Un homme de 30 ans sans antécédents est amené aux urgences par son entourage. L'examen montre un patient dans le coma avec des réactions non adaptées à la douleur, hypotonique, sans signe de localisation ; les réflexes ostéo-tendineux sont diminués, les cutanés plantaires sont indifférents. Les pupilles sont symétriques et réactives, elles mesurent 3 mm de diamètre. La respiration est de faible amplitude avec une fréquence à 18/mn, le pouls est à 80/mn, la pression artérielle à 6 cm Hg
+
+Question : Quels sont les premiers gestes que vous effectuez ?
+A) Ponction lombaire
+B) Gaz du sang
+C) Pose d'un abord veineux
+D) Intubation et ventilation assistée
+E) Lavage gastrique
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : B) Gaz du sang ; C) Pose d'un abord veineux ; D) Intubation et ventilation assistée ; E) Lavage gastrique.,Les reponses correctes sont : C) Pose d'un abord veineux ; D) Intubation et ventilation assistée.,BCDE,CD,False,1.0,0.5,0.6666666666666666
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Une occlusion fébrile peut être la forme révélatrice de :
+A) L'appendicite pelvienne
+B) L'appendicite méso-coeliaque
+C) L'appendicite rétro-caecale
+D) L'abcès appendiculaire
+E) La péritonite appendiculaire
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : B) L'appendicite méso-coeliaque ; E) La péritonite appendiculaire.,Les reponses correctes sont : A) L'appendicite pelvienne ; B) L'appendicite méso-coeliaque ; C) L'appendicite rétro-caecale ; D) L'abcès appendiculaire ; E) La péritonite appendiculaire.,BE,ABCDE,False,0.4,1.0,0.5714285714285715
+mediqal,clinical_case_qcm,"Cas clinique : nan
+
+Question : Un adénome prostatique peut se révéler par :
+A) Infection urinaire
+B) Dysurie
+C) Hématurie
+D) Rétention aiguë d'urine
+E) Incontinence
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Infection urinaire ; B) Dysurie ; C) Hématurie ; D) Rétention aiguë d'urine ; E) Incontinence.,Les reponses correctes sont : B) Dysurie ; C) Hématurie ; D) Rétention aiguë d'urine.,ABCDE,BCD,False,1.0,0.6,0.7499999999999999
+mediqal,clinical_case_qcm,"Cas clinique : Une femme de 30 ans, sans antécédents, présente une douleur brutale de la fosse iliaque droite et du flanc droit, avec nausées, une fébricule à 38°C, sans trouble mictionnel
+
+Question : Le diagnostic d'obstacle par un calcul de 5 mm de diamètre au niveau de l'uretère lombaire droit a été posé . Vous décidez de :
+A) Prescrire une antibiothérapie
+B) Instituer immédiatement une cure de diurèse
+C) Opérer d'urgence
+D) Monter une sonde urétérale par voie endoscopique
+E) Restriction hydrique
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Prescrire une antibiothérapie ; E) Restriction hydrique.,Les reponses correctes sont : C) Opérer d'urgence ; D) Monter une sonde urétérale par voie endoscopique.,AE,CD,False,0.0,0.0,0.0

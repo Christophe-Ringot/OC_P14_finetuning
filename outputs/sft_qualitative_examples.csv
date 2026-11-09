@@ -1,0 +1,71 @@
+source_dataset,instruction,reference,generated
+mediqal,"Cas clinique : Une fillette de 5 ans est adressée en septembre au retour des vacances annuelles passées au bord de la mer, pour une dermatose extensive évoluant depuis 5 semaines, ayant résisté à des traitements locaux associant corticoïdes et Nystatine® pommade. L'examen de cette fillette en bon état général, sans antécédents médico-chirurgicaux, révèle une dermatose polymorphe prédominante à la région faciale péri narinaire, s'étendant aux jambes, faites de médaillons érythémateux et squamo croûteux à extension centrifuge et d'autres plus récents bulleux et pustuleux, fugaces, évoluant vers le stade croûteux. Son petit frère de 3 ans aurait présenté à minima les mêmes phénomènes il y a 6 semaines, résolutifs sous simple traitement antiseptique local
+
+Question : Quel(s) traitement(s) proposer ?
+A) Griséofulvine per os
+B) Erythromycine per os
+C) Antisepsie locale
+D) Nystatine per os
+E) Corticoïdes locaux
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : B) Erythromycine per os ; C) Antisepsie locale.,Les reponses correctes sont : A) Griséofulvine per os ; C) Antisepsie locale.
+mediqal,"Cas clinique : nan
+
+Question : En présence d'une déminéralisation diffuse, quel(s) élément(s) oriente(nt) vers une maladie de Kahler ?
+A) Vitesse de sédimentation globulaire élevée
+B) Hypercalcémie
+C) Phosphorémie normale
+D) Protéinurie
+E) Hémoglobine = 15 g/dl
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Vitesse de sédimentation globulaire élevée ; B) Hypercalcémie ; D) Protéinurie.,Les reponses correctes sont : A) Vitesse de sédimentation globulaire élevée ; B) Hypercalcémie ; C) Phosphorémie normale.
+mediqal,"Cas clinique : nan
+
+Question : Parmi les signes suivants, indiquer celui (ceux) qui peut(vent) être révélateur(s) d'une ulcération aiguë non perforée du bulbe duodénal :
+A) Mélaena
+B) Syndrôme de type ulcéreux
+C) Douleurs sous-costales droites à irradiation scapulaire droite
+D) Syndrôme anémique
+E) Syndrôme occlusif
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Mélaena ; B) Syndrôme de type ulcéreux ; D) Syndrôme anémique.,Les reponses correctes sont : A) Mélaena ; B) Syndrôme de type ulcéreux ; D) Syndôme anémique.
+frenchmedmcqa,"Question : Parmi les bactéries suivantes, quelle est celle fréquemment responsable de cholécystite aiguë?
+A) Pseudomonas aeruginosa
+B) Escherichia Coli
+C) Shigella
+D) Neisseria meningitidis
+E) Vibrio cholerae
+Quelle est la bonne reponse ?",La reponse correcte est B) Escherichia Coli.,La reponse correcte est B) Escherichia Coli.
+mediqal,"Cas clinique : nan
+
+Question : Parmi les diagnostics suivants, quel(s) est (sont) celui (ceux) pouvant se rapporter à une métrorragie post-ménopausique ?
+A) Hyperplasie adénomateuse atypique
+B) Thécome ovarien
+C) Atrophie endométriale
+D) Adénocarcinome tubaire
+E) Prise d'OVESTlN (Estriol) pour sécheresse vaginale
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Hyperplasie adénomateuse atypique ; B) Thécome ovarien ; C) Atrophie endométriale ; D) Adénocarcinome tubaire ; E) Prise d'OVESTlN (Estriol) pour sécheresse vaginale.,Les reponses correctes sont : C) Atrophie endométriale ; D) Adénocarcinome tubaire.
+mediqal,"Cas clinique : nan
+
+Question : Quel(s) signe(s) parmi les suivants, caractérise(nt) une sinusite maxillaire ?
+A) Une rhinorrhée fétide bilatérale
+B) Une flore polymicrobienne
+C) Un sinus opaque à la radiographie
+D) Un foyer infectieux périapical sur la première molaire supérieure du coté de la sinusite
+E) Une évolution sur un mode chronique
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : B) Une flore polymicrobienne ; C) Un sinus opaque à la radiographie ; D) Un foyer infectieux périapical sur la première molaire supérieure du coté de la sinusite.,Les reponses correctes sont : A) Une rhinorrhée fétide bilatérale ; B) Une flore polymicrobienne ; C) Un sinus opaque à la radiographie ; E) Une évolution sur un mode chronique.
+medquad,What causes Wilson disease ?,"What causes Wilson disease? Wilson disease is caused by changes (mutations) in the ATP7B gene. This gene encodes a protein that plays an important role in the transport of copper from the liver to the rest of the body. It also helps remove excess copper from the body. Mutations in the ATP7B gene prevent this protein from working properly, which can lead to an accumulation of copper in the body. Because high levels of copper are toxic, this buildup can damage tissues and organs and cause the many signs and symptoms of Wilson disease.","What causes Wilson disease? Wilson disease is caused by mutations in the ATP7B gene. This gene provides instructions for making a protein that is involved in the transport of copper in the body. The ATP7B protein is found in the liver, brain, and kidneys. The protein is important for the proper storage and release of copper. Mutations in the ATP7B gene lead to a decrease in the amount of ATP7B protein produced. This decrease in the amount of ATP7B protein results in copper accumulation in the liver, brain, and kidneys. The buildup of copper in these organs causes the signs and symptoms of Wilson disease."
+mediqal,"Cas clinique : Une femme de 62 ans consulte pour les signes suivants apparus progressivement au cours des six derniers mois : asthénie, apathie, frilosité, crampes musculaires et prise de poids de 6 kg. Le visage est arrondi, la peau est froide, les aisselles sont sèches, le rythme cardiaque à 64/mn, il n'y a pas d'oedème malléolaire. La patiente, dont la voix est rauque et lente, vous apprend qu'elle a été traitée pendant 4 ans par isosorbide dinitrate (Risordan®) et par Cordarone® (amiodarone) pour une angine de poitrine, mais qu'elle n'a plus eu de crise depuis près d'un an et que ce traitement a été alors interrompu. Il n'existe pas de goitre. Au terme de cet examen, le diagnostic d'hypothyroïdie est hautement probable
+
+Question : Pour compléter votre information sur cette patiente. vous demandez :
+A) Une cholestérolémie
+B) Un ECG
+C) Une T4 libre plasmatique
+D) Une TSH plasmatique
+E) Une scintigraphie thyroïdienne
+Quelle(s) proposition(s) est/sont correcte(s) ?",Les reponses correctes sont : A) Une cholestérolémie ; B) Un ECG ; C) Une T4 libre plasmatique ; D) Une TSH plasmatique.,Les reponses correctes sont : C) Une T4 libre plasmatique ; D) Une TSH plasmatique.
+frenchmedmcqa,"Question : Parmi les définitions suivantes concernant la concentration minimale inhibitrice d'un antibiotique vis à vis d'une bactérie, une seule est exacte. Laquelle?
+A) Concentration d'antibiotique inhibant la croissance de 90% des bactéries de la même espèce
+B) Concentration d'antibiotique nécessaire pour tuer 99,9% des bactéries de la même espèce
+C) Plus faible concentration d'antibiotiques inhibant toute la croissance bactérienne visible à l'oeil nu
+D) Concentration d'antibiotique obtenue in vivo lors du traitement d'une infection due à cette bactérie
+E) Concentration d'antibiotique éliminée par voie urinaire lors du traitement d'une infection due à cette bactérie
+Quelle est la bonne reponse ?",La reponse correcte est C) Plus faible concentration d'antibiotiques inhibant toute la croissance bactérienne visible à l'oeil nu.,La reponse correcte est C) Plus faible concentration d'antibiotiques inhibant toute la croissance bactérienne visible à l'oeil nu.
+medquad,How many people are affected by branchiootorenal/branchiootic syndrome ?,"Researchers estimate that BOR/BO syndrome affects about 1 in 40,000 people.",Branchiootorenal/branchiootic syndrome is a rare condition. The exact prevalence of the condition is unknown.
