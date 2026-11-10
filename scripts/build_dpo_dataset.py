@@ -2,8 +2,19 @@ import json
 from pathlib import Path
 import pandas as pd
 from schemas.dpo_schema import dpo_schema
-from scripts.build_sft_dataset import proportional_targets
 from scripts.text_utils import clean_text
+
+
+def proportional_targets(sizes: dict, total: int) -> dict:
+    """Repartit `total` entre les cles de `sizes` au prorata de leur poids,
+    en ajustant le dernier bucket pour que la somme soit exacte."""
+    grand_total = sum(sizes.values())
+    targets = {k: round(v / grand_total * total) for k, v in sizes.items()}
+    drift = total - sum(targets.values())
+    last_key = list(sizes.keys())[-1]
+    targets[last_key] += drift
+    return targets
+
 
 RANDOM_STATE = 42
 TRAIN_SAMPLE_TARGET = 3000

@@ -571,9 +571,6 @@ jamais vu les libelles, pas pour un modele entraine a les produire.
 - `scripts/evaluate_sft.py` : scoring de la validation et du test ; pour
   chaque modele, choix entre scores bruts et calibres sur le F1 macro de
   validation, puis application au test (`mode_decision.csv`).
-- Sauvegardes : anciens datasets `data/processed/avant_audit/`, anciens
-  adaptateurs `outputs/avant_audit/`, anciens resultats
-  `outputs/triage_eval/avant_audit/`, ancien audit `outputs/audit/*_avant.*`.
 
 ### Re-entrainement des deux SFT
 
