@@ -41,6 +41,15 @@ Les scripts vérifient que le serveur répond avant de démarrer, pour éviter
 un entraînement de plusieurs heures sans suivi. `--no-mlflow` désactive le
 suivi (`train_sft.py`, `evaluate_sft.py`).
 
+## Données
+
+L'entraînement et les évaluations (`train_sft`, `evaluate_sft`, `error_analysis`,
+`evaluate_mcqa`) lisent le dataset publié sur Hugging Face :
+[christophe-ringot/p14-medical-triage-sft](https://huggingface.co/datasets/christophe-ringot/p14-medical-triage-sft),
+à une révision figée dans `scripts/hf_dataset.py`. Aucun fichier de `data/` n'est
+nécessaire pour entraîner ou évaluer ; l'expérience `3_sft_medical` utilise les
+mêmes lignes, sans le préfixe de priorité dans la réponse.
+
 ## Pipeline triage
 
 ```

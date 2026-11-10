@@ -1,27 +1,32 @@
+"""Evaluation QCM (FrenchMedMCQA) du modele SFT final, sur le test du dataset Hugging Face.
+
+Generation gloutonne a partir du prompt du dataset (meme gabarit qu'a
+l'entrainement), puis comparaison des lettres "(A)".."(E)" citees dans la
+premiere ligne de la reponse avec celles de la reference.
+
+    python -m scripts.evaluate_mcqa [--adapter outputs/sft_medical_triage]
+"""
+
+import argparse
 import re
+from pathlib import Path
 
 import pandas as pd
 import torch
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-BASE_MODEL = "Qwen/Qwen3-1.7B-Base"
-ADAPTER_DIR = "outputs/sft_lora_run5"
-DATA_PATH = "data/processed/sft_dataset_anonymized.csv"
-OUTPUT_PATH = "outputs/sft_mcqa_eval.csv"
+from scripts import hf_dataset
+from scripts.train_sft import MODEL_NAME, adapter_dir
 
-N_PER_SOURCE = 30
-MAX_NEW_TOKENS = 200 if torch.cuda.is_available() else 80
-
-LETTER_RE = re.compile(r"\b([A-E])\)")
-
-
-def build_prompt(instruction: str) -> str:
-    return f"### Instruction:\n{instruction}\n\n### Reponse:\n"
+OUTPUT_PATH = Path("outputs") / "sft_mcqa_eval.csv"
+MAX_NEW_TOKENS = 64
+LETTER_RE = re.compile(r"\(([A-E])\)")
 
 
 def extract_letters(text: str) -> set:
-    return set(LETTER_RE.findall(text or ""))
+    first_line = (text or "").strip().split("\n", 1)[0]
+    return set(LETTER_RE.findall(first_line))
 
 
 def prf1(pred: set, ref: set) -> tuple:
@@ -37,38 +42,36 @@ def prf1(pred: set, ref: set) -> tuple:
 
 
 def main() -> None:
-    df = pd.read_csv(DATA_PATH)
-    test_df = df[(df["split"] == "test") & (df["task_type"].isin(["qcm", "clinical_case_qcm"]))]
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--adapter", type=Path, default=adapter_dir("4_sft_medical_triage", quick=False))
+    args = parser.parse_args()
 
-    sample = pd.concat(
-        g.sample(min(N_PER_SOURCE, len(g)), random_state=42)
-        for _, g in test_df.groupby("source_dataset")
+    frame = hf_dataset.load_sft(with_priority=True)
+    sample = frame[(frame["split"] == "test") & (frame["type_question"] == "qcm")]
+
+    has_gpu = torch.cuda.is_available()
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    base_model = AutoModelForCausalLM.from_pretrained(
+        MODEL_NAME, dtype=torch.bfloat16 if has_gpu else torch.float32, device_map={"": 0} if has_gpu else None
     )
-
-    dtype = "bfloat16" if torch.cuda.is_available() else "float32"
-    device_map = "auto" if torch.cuda.is_available() else None
-    tokenizer = AutoTokenizer.from_pretrained(ADAPTER_DIR)
-    base_model = AutoModelForCausalLM.from_pretrained(BASE_MODEL, dtype=dtype, device_map=device_map)
-    model = PeftModel.from_pretrained(base_model, ADAPTER_DIR)
-    model.eval()
+    model = PeftModel.from_pretrained(base_model, str(args.adapter)).eval()
 
     rows = []
-    for _, row in sample.iterrows():
-        prompt = build_prompt(row["instruction"])
-        inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+    for i, row in enumerate(sample.itertuples(), start=1):
+        inputs = tokenizer(row.prompt, return_tensors="pt").to(model.device)
         with torch.no_grad():
-            generated = model.generate(**inputs, max_new_tokens=MAX_NEW_TOKENS, do_sample=False)
+            generated = model.generate(**inputs, max_new_tokens=MAX_NEW_TOKENS, do_sample=False,
+                                       pad_token_id=tokenizer.eos_token_id)
         generated_text = tokenizer.decode(generated[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
 
-        ref_letters = extract_letters(row["response"])
+        ref_letters = extract_letters(row.reponse)
         pred_letters = extract_letters(generated_text)
         precision, recall, f1 = prf1(pred_letters, ref_letters)
-
         rows.append({
-            "source_dataset": row["source_dataset"],
-            "task_type": row["task_type"],
-            "instruction": row["instruction"],
-            "reference": row["response"],
+            "id": row.id,
+            "source": row.source,
+            "prompt": row.prompt,
+            "reference": row.reponse,
             "generated": generated_text,
             "reference_letters": "".join(sorted(ref_letters)),
             "predicted_letters": "".join(sorted(pred_letters)),
@@ -77,17 +80,17 @@ def main() -> None:
             "recall": recall,
             "f1": f1,
         })
+        if i % 25 == 0:
+            print(f"  {i}/{len(sample)}")
 
-    report_df = pd.DataFrame(rows)
-    report_df.to_csv(OUTPUT_PATH, index=False)
-
-    print(f"N = {len(report_df)} exemples QCM evalues")
-    print(f"Exact match global : {report_df['exact_match'].mean():.3f}")
-    print(f"F1 moyen global     : {report_df['f1'].mean():.3f}")
-    print()
-    summary = report_df.groupby("source_dataset")[["exact_match", "precision", "recall", "f1"]].mean()
-    print(summary)
-    print(f"\nDetail ecrit dans {OUTPUT_PATH}")
+    report = pd.DataFrame(rows)
+    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    report.to_csv(OUTPUT_PATH, index=False)
+    print(f"Dataset : {hf_dataset.dataset_name()} - adaptateur : {args.adapter}")
+    print(f"N = {len(report)} QCM du test")
+    print(f"Exact match : {report['exact_match'].mean():.3f}")
+    print(f"F1 moyen    : {report['f1'].mean():.3f}")
+    print(f"Detail ecrit dans {OUTPUT_PATH}")
 
 
 if __name__ == "__main__":

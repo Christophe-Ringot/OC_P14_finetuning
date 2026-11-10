@@ -6,10 +6,9 @@ import torch
 from peft import PeftModel
 from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from scripts import tracking
+from scripts import hf_dataset, tracking
 from scripts.train_sft import MODEL_NAME, SFT_EXPERIMENTS, adapter_dir
 
-TEST_PATH = SFT_EXPERIMENTS["4_sft_medical_triage"]["data"]
 OUTPUT_DIR = Path("outputs") / "triage_eval"
 QUICK_TEST_EXAMPLES = 30
 
@@ -180,7 +179,7 @@ def write_report(test: pd.DataFrame, results: pd.DataFrame, decisions: pd.DataFr
 
 
 def load_split(split: str, quick: bool) -> pd.DataFrame:
-    frame = pd.read_csv(TEST_PATH)
+    frame = hf_dataset.load_sft(with_priority=True)
     frame = frame[(frame["split"] == split) & frame["priorite"].notna()].reset_index(drop=True)
     if quick:
         frame = frame.sample(min(QUICK_TEST_EXAMPLES, len(frame)), random_state=42).reset_index(drop=True)
@@ -204,7 +203,8 @@ def log_to_mlflow(quick: bool, results: dict, decisions: pd.DataFrame, run_ids: 
     tags = {"type": "evaluation", "mode": "quick" if quick else "complet", "git_commit": tracking.git_commit()}
     with tracking.start_run(True, run_name=f"evaluation_triage{suffix}", tags=tags):
         mlflow.log_params({
-            "dataset": Path(TEST_PATH).as_posix(), "dataset_md5": tracking.file_md5(TEST_PATH),
+            "dataset": hf_dataset.dataset_name(), "dataset_revision": hf_dataset.DATASET_REVISION,
+            "dataset_md5": hf_dataset.fingerprint(hf_dataset.load_sft()),
             **{f"mode_{e}": m for e, m in decisions["mode_retenu"].items()},
             **{f"run_id_{e}": r for e, r in (run_ids or {}).items() if r},
         })

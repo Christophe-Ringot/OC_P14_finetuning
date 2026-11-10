@@ -17,7 +17,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.metrics import confusion_matrix, roc_auc_score
-from scripts.evaluate_sft import LABELS, OUTPUT_DIR, SHORT, TEST_PATH, triage_metrics
+from scripts import hf_dataset
+from scripts.evaluate_sft import LABELS, OUTPUT_DIR, SHORT, triage_metrics
 
 CORPUS_PATH = Path("data") / "interim" / "corpus_annotated.csv"
 POOL_PATH = Path("data") / "annotation" / "pool_priorite.csv"
@@ -54,7 +55,7 @@ def softmax(frame: pd.DataFrame) -> pd.DataFrame:
 
 def load(experiment: str) -> tuple:
     mode = pd.read_csv(OUTPUT_DIR / "mode_decision.csv", index_col=0).loc[experiment, "mode_retenu"]
-    labels = pd.read_csv(TEST_PATH, usecols=["id", "split", "priorite"])
+    labels = hf_dataset.load_sft()[["id", "split", "priorite"]]
     corpus = pd.read_csv(CORPUS_PATH, usecols=["id", "case_id", "contexte_patient"])
     pool = pd.read_csv(POOL_PATH, usecols=["case_id", "specialite", "signal_gravite", "parent_case_id"])
     annotations = pd.read_csv(ANNOTATIONS_PATH, usecols=["case_id", "justification"])

@@ -3,19 +3,19 @@ import gc
 import json
 from pathlib import Path
 import numpy as np
-import pandas as pd
 import torch
 from datasets import Dataset
 from peft import LoraConfig
 from transformers import AutoTokenizer
 from trl import SFTConfig, SFTTrainer
-from scripts import tracking
+from scripts import hf_dataset, tracking
 
 MODEL_NAME = "Qwen/Qwen3-1.7B-Base"
 OUTPUT_ROOT = Path("outputs")
 SFT_EXPERIMENTS = {
-    "3_sft_medical": {"data": Path("data/processed/sft_sans_priorite.csv"), "output": "sft_medical"},
-    "4_sft_medical_triage": {"data": Path("data/processed/sft_avec_priorite.csv"), "output": "sft_medical_triage"},
+    # Donnees : dataset Hugging Face (scripts/hf_dataset.py), avec ou sans le prefixe de priorite.
+    "3_sft_medical": {"with_priority": False, "output": "sft_medical"},
+    "4_sft_medical_triage": {"with_priority": True, "output": "sft_medical_triage"},
 }
 
 RANDOM_STATE = 42
@@ -31,7 +31,7 @@ def adapter_dir(experiment: str, quick: bool) -> Path:
 def select_examples(tokenizer, quick: bool) -> tuple[list, list]:
     """Choisit les id d'entrainement et de validation, communs aux deux experiences.
     """
-    frame = pd.read_csv(SFT_EXPERIMENTS["4_sft_medical_triage"]["data"])
+    frame = hf_dataset.load_sft(with_priority=True)
     frame = frame[frame["split"].isin(["train", "validation"])]
     lengths = np.array([len(tokenizer(p + r + tokenizer.eos_token).input_ids) for p, r in zip(frame["prompt"], frame["reponse"])])
     print(f"Exemples ecartes car > {MAX_LENGTH} tokens : {(lengths > MAX_LENGTH).sum()} / {len(frame)}")
@@ -45,23 +45,24 @@ def select_examples(tokenizer, quick: bool) -> tuple[list, list]:
     return train["id"].tolist(), validation["id"].tolist()
 
 
-def load_examples(path: Path, ids: list) -> Dataset:
-    frame = pd.read_csv(path).set_index("id").loc[ids]
+def load_examples(with_priority: bool, ids: list) -> Dataset:
+    frame = hf_dataset.load_sft(with_priority).set_index("id").loc[ids]
     return Dataset.from_dict({"prompt": frame["prompt"].tolist(), "completion": frame["reponse"].tolist()})
 
 
 def train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked: bool) -> str | None:
     """Entraine une experience ; renvoie l'id du run MLflow (None si suivi desactive)."""
     run_name = experiment + ("_quick" if quick else "")
-    data_path = SFT_EXPERIMENTS[experiment]["data"]
+    with_priority = SFT_EXPERIMENTS[experiment]["with_priority"]
     tags = {"experience": experiment, "mode": "quick" if quick else "complet", "git_commit": tracking.git_commit()}
     with tracking.start_run(tracked, run_name=run_name, tags=tags) as run:
         if run is not None:
             import mlflow
 
             mlflow.log_params({
-                "dataset": Path(data_path).as_posix(),
-                "dataset_md5": tracking.file_md5(data_path),
+                "dataset": hf_dataset.dataset_name(with_priority),
+                "dataset_revision": hf_dataset.DATASET_REVISION,
+                "dataset_md5": hf_dataset.fingerprint(hf_dataset.load_sft(with_priority)),
                 "n_train": len(train_ids),
                 "n_validation": len(val_ids),
                 "max_length": MAX_LENGTH,
@@ -73,7 +74,7 @@ def train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked:
 def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked: bool, run_name: str) -> None:
     has_gpu = torch.cuda.is_available()
     output_dir = adapter_dir(experiment, quick)
-    data_path = SFT_EXPERIMENTS[experiment]["data"]
+    with_priority = SFT_EXPERIMENTS[experiment]["with_priority"]
     print(f"\n=== {experiment} : {len(train_ids)} exemples d'entrainement -> {output_dir} ===")
 
     lora_config = LoraConfig(
@@ -114,8 +115,8 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
     trainer = SFTTrainer(
         model=MODEL_NAME,
         args=sft_config,
-        train_dataset=load_examples(data_path, train_ids),
-        eval_dataset=load_examples(data_path, val_ids),
+        train_dataset=load_examples(with_priority, train_ids),
+        eval_dataset=load_examples(with_priority, val_ids),
         peft_config=lora_config,
     )
     trainer.train()
@@ -129,7 +130,7 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
             {
                 "experiment": experiment,
                 "model_name": MODEL_NAME,
-                "data_path": str(data_path),
+                "dataset": hf_dataset.dataset_name(with_priority),
                 "n_train": len(train_ids),
                 "n_validation": len(val_ids),
                 "lora_config": lora_config.to_dict(),
