@@ -23,7 +23,7 @@ spécialisé : constitution d'un dataset médical bilingue anonymisé, fine-tuni
 SFT LoRA d'un petit modèle open source, évaluation rigoureuse et suivi des
 expériences.
 
-> Projet 14 (projet final) de la formation **AI Engineer** d'OpenClassrooms.
+> Projet 14 de la formation **AI Engineer** d'OpenClassrooms.
 > Le scénario (Centre Hospitalier Saint-Aurélien) est pédagogique : **ce modèle
 > n'est pas un dispositif médical** et ne doit pas servir à trier de vrais patients.
 
@@ -45,10 +45,10 @@ Le Centre Hospitalier Saint-Aurélien (CHSA) fait face à des pics d'affluence
 aux urgences. Il veut évaluer en 4 semaines si un agent IA peut **assister le
 tri des patients** à l'accueil :
 
-| Niveau | Libellé | Exemple |
-|---|---|---|
-| **P1** | Urgence maximale | détresse respiratoire, SpO2 à 80 %, choc |
-| **P2** | Urgence modérée | douleur importante, constantes stables |
+| Niveau | Libellé                  | Exemple                                   |
+| ------ | ------------------------ | ----------------------------------------- |
+| **P1** | Urgence maximale         | détresse respiratoire, SpO2 à 80 %, choc  |
+| **P2** | Urgence modérée          | douleur importante, constantes stables    |
 | **P3** | Prise en charge différée | symptômes bénins, pas de signe de gravité |
 
 Contraintes du cahier des charges :
@@ -69,12 +69,12 @@ Prédiction du niveau par log-probabilité de chaque libellé, règle de décisi
 choisie sur la validation puis appliquée telle quelle au test. Les splits sont
 regroupés par cas clinique pour éviter toute fuite entre entraînement et test.
 
-| Expérience | Accuracy val. | Accuracy test | F1 macro test | Rappel P1 test | Sous-triage test |
-|---|---|---|---|---|---|
-| Baseline naïve (toujours P1) | 34,4 % | 40,8 % | 19,3 % | 100 % | 0,0 % |
-| Qwen3-1.7B de base | 31,0 % | 27,8 % | 17,7 % | 6,7 % | 64,2 % |
-| SFT médical (sans triage) | 29,5 % | 32,2 % | 25,7 % | 45,4 % | 38,2 % |
-| **SFT médical + triage** | **62,6 %** | **78,8 %** | **78,7 %** | **86,5 %** | **7,0 %** |
+| Expérience                   | Accuracy val. | Accuracy test | F1 macro test | Rappel P1 test | Sous-triage test |
+| ---------------------------- | ------------- | ------------- | ------------- | -------------- | ---------------- |
+| Baseline naïve (toujours P1) | 34,4 %        | 40,8 %        | 19,3 %        | 100 %          | 0,0 %            |
+| Qwen3-1.7B de base           | 31,0 %        | 27,8 %        | 17,7 %        | 6,7 %          | 64,2 %           |
+| SFT médical (sans triage)    | 29,5 %        | 32,2 %        | 25,7 %        | 45,4 %         | 38,2 %           |
+| **SFT médical + triage**     | **62,6 %**    | **78,8 %**    | **78,7 %**    | **86,5 %**     | **7,0 %**        |
 
 - Seul le modèle entraîné sur des exemples de triage dépasse nettement la
   baseline : **+46,5 points** d'accuracy face au SFT médical généraliste
@@ -123,11 +123,11 @@ flowchart LR
    confiance bootstrap, analyse des erreurs, QCM FrenchMedMCQA et contrôle des
    conseils dangereux.
 
-| Source | Langue | Licence | Usage |
-|---|---|---|---|
-| [MediQAl](https://huggingface.co/datasets/ANR-MALADES/MediQAl) (OEQ) | FR | CC BY 4.0 | cas cliniques, triage |
-| [FrenchMedMCQA](https://huggingface.co/datasets/qanastek/frenchmedmcqa) | FR | Apache 2.0 | QCM médicaux |
-| [MedQuAD](https://huggingface.co/datasets/keivalya/MedQuad-MedicalQnADataset) | EN | CC BY 4.0 | questions-réponses médicales |
+| Source                                                                        | Langue | Licence    | Usage                        |
+| ----------------------------------------------------------------------------- | ------ | ---------- | ---------------------------- |
+| [MediQAl](https://huggingface.co/datasets/ANR-MALADES/MediQAl) (OEQ)          | FR     | CC BY 4.0  | cas cliniques, triage        |
+| [FrenchMedMCQA](https://huggingface.co/datasets/qanastek/frenchmedmcqa)       | FR     | Apache 2.0 | QCM médicaux                 |
+| [MedQuAD](https://huggingface.co/datasets/keivalya/MedQuad-MedicalQnADataset) | EN     | CC BY 4.0  | questions-réponses médicales |
 
 ## Structure du projet
 
@@ -153,13 +153,13 @@ flowchart LR
 
 ### Prérequis
 
-| Outil | Version | Utilité |
-|---|---|---|
-| [Git](https://git-scm.com/) | récent | cloner le repo |
-| [Python](https://www.python.org/downloads/) | 3.11 | exécuter le code |
-| GPU NVIDIA + pilote récent | ≥ 6 Go de VRAM (testé sur RTX 2060) | entraînement et évaluation |
-| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | backend WSL2 sous Windows | serveur MLflow, entraînement conteneurisé |
-| Compte [Hugging Face](https://huggingface.co/join) | optionnel | seulement pour republier le dataset |
+| Outil                                                             | Version                             | Utilité                                   |
+| ----------------------------------------------------------------- | ----------------------------------- | ----------------------------------------- |
+| [Git](https://git-scm.com/)                                       | récent                              | cloner le repo                            |
+| [Python](https://www.python.org/downloads/)                       | 3.11                                | exécuter le code                          |
+| GPU NVIDIA + pilote récent                                        | ≥ 6 Go de VRAM (testé sur RTX 2060) | entraînement et évaluation                |
+| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | backend WSL2 sous Windows           | serveur MLflow, entraînement conteneurisé |
+| Compte [Hugging Face](https://huggingface.co/join)                | optionnel                           | seulement pour republier le dataset       |
 
 Sans GPU, le code tourne sur CPU, mais l'entraînement complet devient
 impraticable ; le mode `--quick` reste utilisable pour tester la chaîne.
@@ -324,13 +324,13 @@ Les scripts vérifient que le serveur MLflow répond avant de démarrer, pour
 
 ## Documentation
 
-| Document | Contenu |
-|---|---|
-| [`docs/comparaison_triage.md`](docs/comparaison_triage.md) | protocole et résultats de triage |
-| [`docs/experiments.md`](docs/experiments.md) | journal de toutes les expériences |
-| [`docs/triage_grid.md`](docs/triage_grid.md) | grille d'annotation P1/P2/P3 |
-| [`docs/evaluation_criteria.md`](docs/evaluation_criteria.md) | critères d'évaluation |
-| [`docs/rgpd_anonymisation.md`](docs/rgpd_anonymisation.md) | démarche d'anonymisation RGPD |
+| Document                                                     | Contenu                           |
+| ------------------------------------------------------------ | --------------------------------- |
+| [`docs/comparaison_triage.md`](docs/comparaison_triage.md)   | protocole et résultats de triage  |
+| [`docs/experiments.md`](docs/experiments.md)                 | journal de toutes les expériences |
+| [`docs/triage_grid.md`](docs/triage_grid.md)                 | grille d'annotation P1/P2/P3      |
+| [`docs/evaluation_criteria.md`](docs/evaluation_criteria.md) | critères d'évaluation             |
+| [`docs/rgpd_anonymisation.md`](docs/rgpd_anonymisation.md)   | démarche d'anonymisation RGPD     |
 
 ## Auteur
 
