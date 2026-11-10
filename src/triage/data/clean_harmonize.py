@@ -3,8 +3,8 @@ import re
 import string
 from pathlib import Path
 import pandas as pd
-from schemas.corpus_schema import corpus_schema
-from scripts.collect_sources import load_raw
+from triage.schemas.corpus import corpus_schema
+from triage.data.collect_sources import load_raw
 
 OUTPUT_PATH = Path("data") / "interim" / "corpus_clean.csv"
 RANDOM_STATE = 42

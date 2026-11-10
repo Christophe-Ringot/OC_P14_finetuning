@@ -4,7 +4,7 @@ Generation gloutonne a partir du prompt du dataset (meme gabarit qu'a
 l'entrainement), puis comparaison des lettres "(A)".."(E)" citees dans la
 premiere ligne de la reponse avec celles de la reference.
 
-    python -m scripts.evaluate_mcqa [--adapter outputs/sft_medical_triage]
+    python -m triage.evaluation.evaluate_mcqa [--adapter outputs/sft_medical_triage]
 """
 
 import argparse
@@ -16,8 +16,8 @@ import torch
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from scripts import hf_dataset
-from scripts.train_sft import MODEL_NAME, adapter_dir
+from triage.utils import hf_dataset
+from triage.training.train_sft import MODEL_NAME, adapter_dir
 
 OUTPUT_PATH = Path("outputs") / "sft_mcqa_eval.csv"
 MAX_NEW_TOKENS = 64

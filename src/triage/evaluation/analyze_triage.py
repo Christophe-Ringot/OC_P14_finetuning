@@ -1,6 +1,6 @@
 """Verification de la methode d'evaluation du triage (sans GPU).
 
-Repart des scores sauvegardes par scripts/evaluate_sft.py et mesure :
+Repart des scores sauvegardes par src/triage/evaluation/evaluate_sft.py et mesure :
 1. l'effet de la calibration contextuelle (avec / sans soustraction du prior) ;
 2. les metriques par cas clinique (vote majoritaire, moyenne des scores) ;
 3. la coherence des predictions entre questions d'un meme cas ;
@@ -14,7 +14,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.metrics import f1_score
-from scripts.evaluate_sft import LABELS, OUTPUT_DIR, SHORT, triage_metrics
+from triage.evaluation.evaluate_sft import LABELS, OUTPUT_DIR, SHORT, triage_metrics
 
 CORPUS_PATH = Path("data") / "interim" / "corpus_annotated.csv"
 NEAR_DUPLICATES_PATH = Path("outputs") / "audit" / "near_duplicates.csv"
@@ -139,7 +139,7 @@ def bootstrap(predictions: pd.DataFrame, experiments: list) -> list:
 
 def sensitivity(predictions: pd.DataFrame, experiments: list) -> list:
     if not NEAR_DUPLICATES_PATH.exists():
-        return ["## 5. Sensibilite aux quasi-doublons", "", f"`{NEAR_DUPLICATES_PATH}` absent : lancer scripts/audit_splits.py.", ""]
+        return ["## 5. Sensibilite aux quasi-doublons", "", f"`{NEAR_DUPLICATES_PATH}` absent : lancer src/triage/data/audit_splits.py.", ""]
     pairs = pd.read_csv(NEAR_DUPLICATES_PATH)
     suspects = set(pairs.loc[(pairs["split"] == "test") & (pairs["similarite"] >= SIMILARITY_THRESHOLD), "case_id"])
     kept = predictions[~predictions["case_id"].isin(suspects)]
@@ -161,7 +161,7 @@ def main() -> None:
     experiments = [c for c in predictions.columns if c[0].isdigit()]
 
     lines = ["# Verification de la methode d'evaluation du triage", "",
-             "Valeurs en %. Genere par `scripts/analyze_triage.py` a partir de "
+             "Valeurs en %. Genere par `src/triage/evaluation/analyze_triage.py` a partir de "
              f"`predictions{suffix}.csv` et `scores{suffix}.csv`.", ""]
     lines += calibration_effect(scores)
     decision_path = OUTPUT_DIR / f"mode_decision{suffix}.csv"

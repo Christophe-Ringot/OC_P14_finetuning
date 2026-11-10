@@ -1,5 +1,70 @@
 # OC_P14_finetuning : POC Agent IA de triage médical (CHSA)
 
+POC d'un agent qui aide au triage des patients aux urgences en 3 niveaux de
+priorité (P1 urgence maximale, P2 urgence modérée, P3 différée) : dataset
+médical bilingue anonymisé, fine-tuning SFT LoRA de `Qwen/Qwen3-1.7B-Base`,
+évaluation du triage, des QCM et de la sécurité des réponses, suivi MLflow.
+
+## Structure du projet
+
+```
+.
+├── src/triage/              # package Python
+│   ├── data/                # collecte, nettoyage, anonymisation, annotation,
+│   │                        # construction des datasets, audit des splits, export HF
+│   ├── schemas/             # schémas Pandera (corpus, DPO, dataset HF)
+│   ├── training/            # fine-tuning SFT LoRA
+│   ├── evaluation/          # triage, QCM, analyse des erreurs, sécurité
+│   └── utils/               # dataset Hugging Face, suivi MLflow, nettoyage de texte
+├── docs/                    # protocole, résultats, journal des expériences, RGPD
+├── outputs/                 # rapports et métriques versionnés (poids ignorés)
+├── docker/                  # image d'entraînement GPU et ses dépendances figées
+├── docker-compose.yml       # MLflow + entraînement
+└── pyproject.toml           # package et dépendances
+```
+
+`data/`, `mlflow/` et les poids des modèles ne sont pas versionnés.
+
+## Installation
+
+Python 3.11, depuis la racine du repo :
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -e .            # entraînement et évaluation
+pip install -e ".[data]"    # + construction du dataset (Presidio, spaCy)
+```
+
+Toutes les commandes se lancent depuis la racine (`data/` et `outputs/` sont
+des chemins relatifs).
+
+## Données
+
+L'entraînement et les évaluations lisent le dataset publié sur Hugging Face :
+[christophe-ringot/p14-medical-triage-sft](https://huggingface.co/datasets/christophe-ringot/p14-medical-triage-sft),
+à une révision figée dans `src/triage/utils/hf_dataset.py`. Aucun fichier de
+`data/` n'est nécessaire pour entraîner ou évaluer ; l'expérience
+`3_sft_medical` utilise les mêmes lignes, sans le préfixe de priorité dans la
+réponse.
+
+Le dataset se reconstruit avec `triage.data` (`collect_sources` →
+`clean_harmonize` → `anonymize` → `build_annotation_pool` → `annotate_priority`
+→ `build_sft_datasets` → `audit_splits` → `export_hf_dataset`).
+
+## Pipeline triage
+
+```powershell
+python -m triage.data.build_sft_datasets      # splits regroupés par cas (anti-fuite)
+python -m triage.data.audit_splits            # audit des fuites -> outputs/audit/
+python -m triage.training.train_sft           # 2 SFT puis évaluation -> outputs/triage_eval/
+python -m triage.evaluation.analyze_triage    # calibration, métriques par cas, bootstrap
+python -m triage.evaluation.error_analysis    # analyse des erreurs
+python -m triage.evaluation.evaluate_mcqa     # QCM FrenchMedMCQA du test
+```
+
+Résultats et protocole : `docs/comparaison_triage.md`. Journal : `docs/experiments.md`.
+
 ## Suivi des entraînements avec MLflow
 
 Tous les entraînements SFT et les évaluations de triage sont enregistrés dans
@@ -7,7 +72,7 @@ MLflow (expérience `triage-sft`) :
 
 - **run d'entraînement** (`3_sft_medical`, `4_sft_medical_triage`) : hyperparamètres,
   courbes de loss train/validation, métriques système (CPU, GPU, mémoire),
-  empreinte MD5 du dataset, commit git, adaptateur LoRA final, puis les
+  révision et empreinte du dataset, commit git, adaptateur LoRA final, puis les
   métriques de triage sur la validation (`validation_*`) et le test (`test_*`) ;
 - **run d'évaluation** (`evaluation_triage`) : métriques des 4 expériences,
   règle de décision retenue, rapports et prédictions en artefacts.
@@ -32,32 +97,10 @@ entraîne les deux SFT puis lance l'évaluation. L'entraînement complet prend e
 ### Lancer depuis le venv local
 
 ```powershell
-docker compose up -d mlflow          # serveur MLflow seul
-.venv\Scripts\Activate.ps1
-python -m scripts.train_sft          # MLFLOW_TRACKING_URI vaut http://localhost:5000 par défaut
+docker compose up -d mlflow                 # serveur MLflow seul
+python -m triage.training.train_sft         # MLFLOW_TRACKING_URI vaut http://localhost:5000 par défaut
 ```
 
 Les scripts vérifient que le serveur répond avant de démarrer, pour éviter
 un entraînement de plusieurs heures sans suivi. `--no-mlflow` désactive le
-suivi (`train_sft.py`, `evaluate_sft.py`).
-
-## Données
-
-L'entraînement et les évaluations (`train_sft`, `evaluate_sft`, `error_analysis`,
-`evaluate_mcqa`) lisent le dataset publié sur Hugging Face :
-[christophe-ringot/p14-medical-triage-sft](https://huggingface.co/datasets/christophe-ringot/p14-medical-triage-sft),
-à une révision figée dans `scripts/hf_dataset.py`. Aucun fichier de `data/` n'est
-nécessaire pour entraîner ou évaluer ; l'expérience `3_sft_medical` utilise les
-mêmes lignes, sans le préfixe de priorité dans la réponse.
-
-## Pipeline triage
-
-```
-python -m scripts.build_sft_datasets   # splits regroupés par cas (anti-fuite)
-python -m scripts.audit_splits         # audit des fuites -> outputs/audit/
-python -m scripts.train_sft            # 2 SFT puis évaluation -> outputs/triage_eval/
-python -m scripts.analyze_triage       # calibration, métriques par cas, bootstrap
-python -m scripts.error_analysis       # analyse des erreurs
-```
-
-Résultats et protocole : `docs/comparaison_triage.md`. Journal : `docs/experiments.md`.
+suivi (`train_sft`, `evaluate_sft`).

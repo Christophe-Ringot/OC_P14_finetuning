@@ -47,15 +47,14 @@ services:
       MLFLOW_TRACKING_URI: http://mlflow:5000
       MLFLOW_EXPERIMENT_NAME: triage-sft
       PYTHONIOENCODING: utf-8
-    # Arguments de scripts/train_sft.py (--quick, --only ..., --no-eval) apres
+    # Arguments de src/triage/training/train_sft.py (--quick, --only ..., --no-eval) apres
     # `docker compose --profile train run --rm train`.
-    entrypoint: ["python", "-m", "scripts.train_sft"]
+    entrypoint: ["python", "-m", "triage.training.train_sft"]
     command: []
     volumes:
       - ./data:/app/data
       - ./outputs:/app/outputs
-      - ./scripts:/app/scripts     # code a jour sans reconstruire l'image
-      - ./schemas:/app/schemas
+      - ./src:/app/src             # code a jour sans reconstruire l'image
       - ./.git:/app/.git:ro        # commit courant enregistre dans MLflow
       - ${HF_CACHE_DIR:-~/.cache/huggingface}:/root/.cache/huggingface   # modele deja telecharge
     shm_size: 2gb

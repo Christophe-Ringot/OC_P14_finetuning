@@ -8,12 +8,12 @@ from datasets import Dataset
 from peft import LoraConfig
 from transformers import AutoTokenizer
 from trl import SFTConfig, SFTTrainer
-from scripts import hf_dataset, tracking
+from triage.utils import hf_dataset, tracking
 
 MODEL_NAME = "Qwen/Qwen3-1.7B-Base"
 OUTPUT_ROOT = Path("outputs")
 SFT_EXPERIMENTS = {
-    # Donnees : dataset Hugging Face (scripts/hf_dataset.py), avec ou sans le prefixe de priorite.
+    # Donnees : dataset Hugging Face (src/triage/utils/hf_dataset.py), avec ou sans le prefixe de priorite.
     "3_sft_medical": {"with_priority": False, "output": "sft_medical"},
     "4_sft_medical_triage": {"with_priority": True, "output": "sft_medical_triage"},
 }
@@ -182,7 +182,7 @@ def main() -> None:
         run_ids[experiment] = train(experiment, train_ids, val_ids, args.quick, tracked)
 
     if not args.no_eval:
-        from scripts import evaluate_sft
+        from triage.evaluation import evaluate_sft
 
         evaluate_sft.run(quick=args.quick, tracked=tracked, run_ids=run_ids)
 

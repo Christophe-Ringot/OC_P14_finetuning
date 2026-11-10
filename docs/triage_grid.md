@@ -1,7 +1,7 @@
 # Grille d'annotation du signal de priorite
 
-Grille utilisee a l'etape 4 (`scripts/build_annotation_pool.py` puis
-`scripts/annotate_priority.py`) pour attribuer un niveau de priorite a chaque
+Grille utilisee a l'etape 4 (`src/triage/data/build_annotation_pool.py` puis
+`src/triage/data/annotate_priority.py`) pour attribuer un niveau de priorite a chaque
 cas clinique unique de MediQAl OEQ.
 
 Inspiree de l'echelle FRENCH (SFMU, tri 1 a 5) et du Manchester Triage

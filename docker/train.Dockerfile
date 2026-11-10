@@ -4,16 +4,16 @@ FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-runtime
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=utf-8 \
-    HF_HOME=/root/.cache/huggingface
+    HF_HOME=/root/.cache/huggingface \
+    PYTHONPATH=/app/src
 
 WORKDIR /app
 
-COPY requirements-train.txt .
+COPY docker/requirements-train.txt .
 RUN pip install --no-cache-dir -r requirements-train.txt
 
 # Le code est aussi monte en volume par docker-compose.yml : la copie sert a
 # lancer l'image seule, le volume a eviter une reconstruction a chaque modification.
-COPY scripts ./scripts
-COPY schemas ./schemas
+COPY src ./src
 
-ENTRYPOINT ["python", "-m", "scripts.train_sft"]
+ENTRYPOINT ["python", "-m", "triage.training.train_sft"]

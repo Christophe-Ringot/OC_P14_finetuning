@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "triage"
+version = "0.1.0"
+description = "POC d'agent IA de triage medical (CHSA) : dataset, fine-tuning SFT LoRA de Qwen3-1.7B et evaluation"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Christophe Ringot" }]
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "pyarrow>=15.0",
+    "pandera>=0.20",
+    "torch>=2.3",
+    "transformers>=4.44",
+    "peft>=0.12",
+    "trl>=0.9",
+    "accelerate>=0.33",
+    "datasets>=2.19",
+    "huggingface_hub>=0.23",
+    "scikit-learn>=1.4",
+    "mlflow>=3.18",
+]
+
+[project.optional-dependencies]
+# Construction du dataset (anonymisation). Modeles spacy a installer a part :
+#   python -m spacy download fr_core_news_md
+#   python -m spacy download en_core_web_md
+data = [
+    "presidio-analyzer>=2.2",
+    "presidio-anonymizer>=2.2",
+    "spacy>=3.7",
+    "pydantic>=2.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

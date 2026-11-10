@@ -10,7 +10,7 @@ Chaque run est documente avec ses hyperparametres, ses courbes de loss
 (debut octobre) avait produit des exemples qualitatifs
 (`outputs/sft_qualitative_examples.csv`) mais aucune trace des courbes de
 loss (`report_to="none"`, pas de log persiste) et le checkpoint avait ete
-supprime du disque. `scripts/train_sft.py` a ete modifie pour sauvegarder
+supprime du disque. `src/triage/training/train_sft.py` a ete modifie pour sauvegarder
 systematiquement le tokenizer, l'etat du trainer (`trainer_state.json`) et un
 resume JSON des hyperparametres + historique de loss
 (`outputs/sft_lora/training_summary.json`).
@@ -62,7 +62,7 @@ trainer).
   evaluation) plutot qu'un entrainement representatif de la performance
   finale visee.
 
-### Evaluation sur le jeu de test (`scripts/evaluate_sft.py`)
+### Evaluation sur le jeu de test (`src/triage/evaluation/evaluate_sft.py`)
 
 - **Test loss (moyenne, 50 exemples)** : 1.317 | **perplexite** : 3.73
 - Ce chiffre est **meilleur** que la derniere eval_loss de validation (1.380)
@@ -114,7 +114,7 @@ triage.
   seul jeu (LR=2e-4, r=16, 1 epoch) a ete teste.
 - Pas de matrice de confusion sur un niveau d'urgence : le dataset SFT actuel
   est generaliste (QCM/QA medical), sans label de triage. Cf. note dans
-  `scripts/evaluate_sft.py`.
+  `src/triage/evaluation/evaluate_sft.py`.
 
 ### Prochaines experimentations envisagees
 
@@ -131,7 +131,7 @@ Avant de lancer le DPO, verification des prerequis du projet (voir aussi
 
 - **Metrique quantitative QCM manquante** : la perplexite/accuracy token-level
   ne dit rien de la justesse des reponses QCM (coeur du dataset). Ajout de
-  `scripts/evaluate_mcqa.py` : parse les lettres A-E generees vs reference et
+  `src/triage/evaluation/evaluate_mcqa.py` : parse les lettres A-E generees vs reference et
   calcule exact-match + precision/recall/F1, par source_dataset. Resultats
   (60 exemples test, 30 par source, `outputs/sft_mcqa_eval.csv`) :
 
@@ -151,7 +151,7 @@ Avant de lancer le DPO, verification des prerequis du projet (voir aussi
   0.75 ; ecart mediqal/frenchmedmcqa 0.50 >> 0.15 attendu) : confirmation
   objective que ce run SFT (smoke test, 200 exemples) n'est pas pret a
   servir de politique de depart au DPO.
-- **Controle de securite absent** : ajout de `scripts/safety_check.py`
+- **Controle de securite absent** : ajout de `src/triage/evaluation/safety_check.py`
   (heuristique : nombres generes absents instruction+reference, formulations
   rassurantes a risque). Premiere passe sur les 10 exemples qualitatifs
   existants (`outputs/sft_qualitative_examples.csv`) : 2/10 signales, tous
@@ -181,7 +181,7 @@ representatif disponible.
 **Contexte** : GPU local active (RTX 2060, 6.4 Go VRAM - `torch` reinstalle
 en version CUDA, `torch.cuda.is_available()` passait a `False` jusqu'ici car
 le paquet installe etait la roue CPU-only). Run representatif lance par
-l'utilisateur avec `scripts/train_sft.py` mis a jour : tout le train set
+l'utilisateur avec `src/triage/training/train_sft.py` mis a jour : tout le train set
 (3366 exemples, vs 200 au Run 1), 3 epochs, `max_length=1024` (vs 256),
 `load_best_model_at_end` sur `eval_loss`. Sortie dans
 `outputs/sft_lora_run2` (Run 1 conserve pour comparaison).
@@ -196,7 +196,7 @@ l'utilisateur avec `scripts/train_sft.py` mis a jour : tout le train set
 | 1100 | 2.61 | 1.1471 | 0.7303 |
 | 1263 | 3.00 | 1.1457 | 0.7308 |
 
-**Test loss (moyenne, `scripts/evaluate_sft.py`, test set complet)** : 1.1555
+**Test loss (moyenne, `src/triage/evaluation/evaluate_sft.py`, test set complet)** : 1.1555
 | **perplexite** : 3.18 (vs 1.317 / 3.73 au Run 1). Coherent avec l'eval_loss
 (1.146) : toujours aucun signe de surapprentissage train/test.
 
@@ -208,7 +208,7 @@ pas de signe de surapprentissage (`load_best_model_at_end` n'a pas eu
 besoin d'arbitrer fortement) mais rajouter des epochs sur la meme
 configuration n'apporterait plus grand chose.
 
-### Evaluation quantitative QCM (`scripts/evaluate_mcqa.py`, N=60)
+### Evaluation quantitative QCM (`src/triage/evaluation/evaluate_mcqa.py`, N=60)
 
 | source_dataset | exact match | precision | recall | F1 |
 |---|---|---|---|---|
@@ -228,7 +228,7 @@ Le recall sur mediqal reste superieur a la precision (0.717 vs 0.663) :
 le modele continue a "sur-proposer" des options sur les QCM a reponses
 multiples, meme avec 17x plus de donnees d'entrainement.
 
-### Controle de securite (`scripts/safety_check.py`)
+### Controle de securite (`src/triage/evaluation/safety_check.py`)
 
 Sur les 10 exemples qualitatifs regeneres avec le nouveau modele :
 **0/10 signale** (vs 2/10 au Run 1). Les deux cas d'hallucination numerique
@@ -274,7 +274,7 @@ reconsiderer le passage au DPO :
 ## Run 3 (quick) - 2026-10-25 (GPU, sous-ensemble r=32 / lr=1e-4)
 
 **Contexte** : test rapide avant d'engager un run complet de 3h - mode
-sous-ensemble ajoute a `scripts/train_sft.py` (`MAX_TRAIN_EXAMPLES=900`,
+sous-ensemble ajoute a `src/triage/training/train_sft.py` (`MAX_TRAIN_EXAMPLES=900`,
 echantillonnage stratifie par `source_dataset`), avec `r=32` (vs 16),
 `lora_alpha=64` (ratio alpha/r conserve a 2x), `learning_rate=1e-4` (vs
 2e-4). Reste identique au Run 2 : 3 epochs, `max_length=1024`,
@@ -527,7 +527,7 @@ suivi : (1) audit des fuites, (2) verification de la methode d'evaluation,
 re-entrainement, (3) analyse des erreurs, (4) documentation. Resultats de
 reference : `docs/comparaison_triage.md`.
 
-### Etape 1 - Audit des partitions (`scripts/audit_splits.py`)
+### Etape 1 - Audit des partitions (`src/triage/data/audit_splits.py`)
 
 | Controle | Resultat |
 |---|---|
@@ -542,9 +542,9 @@ reference : `docs/comparaison_triage.md`.
 regroupement par prefixe de 100 caracteres laisse passer des reformulations
 d'un meme cas (phrases reordonnees, ages ou formulations modifies).
 
-### Etape 2 - Methode d'evaluation (`scripts/analyze_triage.py`)
+### Etape 2 - Methode d'evaluation (`src/triage/evaluation/analyze_triage.py`)
 
-`scripts/evaluate_sft.py` a ete modifie pour sauvegarder les log-probabilites
+`src/triage/evaluation/evaluate_sft.py` a ete modifie pour sauvegarder les log-probabilites
 brutes et le prior (`scores.csv`), ce qui permet d'analyser sans GPU.
 
 | Controle (SFT triage, ancien test) | Resultat |
@@ -563,12 +563,12 @@ jamais vu les libelles, pas pour un modele entraine a les produire.
 
 ### Corrections appliquees
 
-- `scripts/build_sft_datasets.py` : ajout d'un regroupement par similarite
+- `src/triage/data/build_sft_datasets.py` : ajout d'un regroupement par similarite
   (TF-IDF n-grammes de caracteres 3-5, cosinus >= 0,5, union-find avec les
   familles et prefixes). 392 paires fusionnees ; seuil choisi par relecture
   (vers 0,45 apparaissent des cas sans rapport). Apres regeneration : aucun
   cas de validation/test a plus de 0,49 du train.
-- `scripts/evaluate_sft.py` : scoring de la validation et du test ; pour
+- `src/triage/evaluation/evaluate_sft.py` : scoring de la validation et du test ; pour
   chaque modele, choix entre scores bruts et calibres sur le F1 macro de
   validation, puis application au test (`mode_decision.csv`).
 
@@ -599,7 +599,7 @@ Meme profil pour les deux : minimum vers l'epoch 1,9 puis legere remontee,
 IC 95 % test du SFT triage : accuracy [68,2 ; 87,4]. Sous-triage en
 validation : 16,2 %.
 
-### Etape 3 - Analyse des erreurs (`scripts/error_analysis.py`)
+### Etape 3 - Analyse des erreurs (`src/triage/evaluation/error_analysis.py`)
 
 - Le modele ordonne les niveaux (AUC 0,86 P1/P2, 0,92 P2/P3) : il ne
   privilegie pas systematiquement les niveaux critiques.

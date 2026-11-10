@@ -13,9 +13,9 @@ les metadonnees du cas clinique :
   extraits par LLM (Claude) cas par cas, sans relecture humaine.
 
 Sortie : `hf_dataset/data/{train,validation,test}.parquet`, valides avec
-`schemas/sft_hf_schema.py`.
+`src/triage/schemas/sft_hf.py`.
 
-    python -m scripts.export_hf_dataset
+    python -m triage.data.export_hf_dataset
 """
 
 import json
@@ -24,7 +24,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from schemas.sft_hf_schema import CONSTANTES, LICENCES, sft_hf_schema
+from triage.schemas.sft_hf import CONSTANTES, LICENCES, sft_hf_schema
 
 SFT_PATH = Path("data") / "processed" / "sft_avec_priorite.csv"
 CORPUS_PATH = Path("data") / "interim" / "corpus_annotated.csv"

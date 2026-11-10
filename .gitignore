@@ -1,5 +1,5 @@
 .venv/
-data/
+/data/
 # Sorties : poids, checkpoints et predictions ignores ; rapports et metriques versionnes
 outputs/**
 !outputs/**/
@@ -11,9 +11,10 @@ outputs/**/README.md
 !outputs/safety_flags.csv
 __pycache__/
 *.pyc
-Users/
-mlflow/
-mlruns/
+/Users/
+/mlflow/
+/mlruns/
 
 # Dossier de publication Hugging Face (dataset publie sur le Hub, pas dans git)
-hf_dataset/
+/hf_dataset/
+*.egg-info/

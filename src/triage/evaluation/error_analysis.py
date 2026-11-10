@@ -1,6 +1,6 @@
 """Analyse des erreurs de triage d'un modele (sans GPU).
 
-Repart des scores sauvegardes par scripts/evaluate_sft.py et produit :
+Repart des scores sauvegardes par src/triage/evaluation/evaluate_sft.py et produit :
 1. la matrice de confusion par cas clinique et le detail des types d'erreur ;
 2. le taux d'erreur selon les caracteristiques des cas (specialite, signal de
    gravite, longueur, nombre de questions, version d'une famille de cas) ;
@@ -17,8 +17,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.metrics import confusion_matrix, roc_auc_score
-from scripts import hf_dataset
-from scripts.evaluate_sft import LABELS, OUTPUT_DIR, SHORT, triage_metrics
+from triage.utils import hf_dataset
+from triage.evaluation.evaluate_sft import LABELS, OUTPUT_DIR, SHORT, triage_metrics
 
 CORPUS_PATH = Path("data") / "interim" / "corpus_annotated.csv"
 POOL_PATH = Path("data") / "annotation" / "pool_priorite.csv"

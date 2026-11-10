@@ -8,7 +8,7 @@ from presidio_analyzer import AnalyzerEngine
 from presidio_analyzer.nlp_engine import NlpEngineProvider
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.entities import OperatorConfig
-from schemas.corpus_schema import corpus_schema
+from triage.schemas.corpus import corpus_schema
 
 INPUT_PATH = Path("data") / "interim" / "corpus_clean.csv"
 OUTPUT_PATH = Path("data") / "interim" / "corpus_anonymized.csv"

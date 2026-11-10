@@ -6,8 +6,8 @@ import torch
 from peft import PeftModel
 from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from scripts import hf_dataset, tracking
-from scripts.train_sft import MODEL_NAME, SFT_EXPERIMENTS, adapter_dir
+from triage.utils import hf_dataset, tracking
+from triage.training.train_sft import MODEL_NAME, SFT_EXPERIMENTS, adapter_dir
 
 OUTPUT_DIR = Path("outputs") / "triage_eval"
 QUICK_TEST_EXAMPLES = 30

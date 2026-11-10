@@ -15,7 +15,7 @@ SPLIT_RATIOS = {"train": 0.8, "validation": 0.1, "test": 0.1}
 SHARED_PREFIX_LENGTH = 100
 # Similarite cosinus (TF-IDF n-grammes de caracteres) au-dela de laquelle deux
 # cas sont consideres comme des reformulations d'un meme scenario. Seuil choisi
-# par relecture des paires (scripts/audit_splits.py) : vers 0.45 apparaissent
+# par relecture des paires (src/triage/data/audit_splits.py) : vers 0.45 apparaissent
 # des cas sans rapport, a 0.5 il s'agit surtout du meme scenario reformule.
 SIMILARITY_THRESHOLD = 0.5
 OUTPUT_COLUMNS = ["id", "split", "source", "langue", "groupe", "priorite", "prompt", "reponse"]

@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 import pandas as pd
-from schemas.dpo_schema import dpo_schema
-from scripts.text_utils import clean_text
+from triage.schemas.dpo import dpo_schema
+from triage.utils.text_utils import clean_text
 
 
 def proportional_targets(sizes: dict, total: int) -> dict:

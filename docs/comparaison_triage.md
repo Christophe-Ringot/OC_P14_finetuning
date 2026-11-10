@@ -158,9 +158,9 @@ comparent qu'a la baseline naive de leur propre jeu.
 ## Reproduire
 
 ```
-python -m scripts.build_sft_datasets   # splits
-python -m scripts.audit_splits         # audit des fuites -> outputs/audit/
-python -m scripts.train_sft            # 2 SFT puis evaluation -> outputs/triage_eval/
-python -m scripts.analyze_triage       # calibration, par cas, bootstrap
-python -m scripts.error_analysis       # analyse des erreurs
+python -m triage.data.build_sft_datasets   # splits
+python -m triage.data.audit_splits         # audit des fuites -> outputs/audit/
+python -m triage.training.train_sft            # 2 SFT puis evaluation -> outputs/triage_eval/
+python -m triage.evaluation.analyze_triage       # calibration, par cas, bootstrap
+python -m triage.evaluation.error_analysis       # analyse des erreurs
 ```

@@ -17,10 +17,10 @@ cibelee ont toutes echoue a depasser le Run 2).
 
 | Metrique | Outil | Seuil initial (production) | Seuil revise (educatif, "acceptable") | Run 2 (retenu) |
 |---|---|---|---|---|
-| Perplexite test set | `scripts/evaluate_sft.py` | En baisse par rapport au run precedent | En baisse par rapport au smoke test initial (Run 1), sans ecart anormal train/test | 3.18 (vs 3.73 au Run 1) - **atteint** |
-| Exact match QCM global | `scripts/evaluate_mcqa.py` | >= 0.60 | >= 0.35 | 0.417 - **atteint** |
-| F1 moyen par lettre (QCM) | `scripts/evaluate_mcqa.py` | >= 0.75 | >= 0.55 | 0.632 - **atteint** |
-| Ecart exact match mediqal/frenchmedmcqa | `scripts/evaluate_mcqa.py` | < 0.15 | documente comme limite connue, pas bloquant | 0.367 - **non atteint, acte comme limite connue** |
+| Perplexite test set | `src/triage/evaluation/evaluate_sft.py` | En baisse par rapport au run precedent | En baisse par rapport au smoke test initial (Run 1), sans ecart anormal train/test | 3.18 (vs 3.73 au Run 1) - **atteint** |
+| Exact match QCM global | `src/triage/evaluation/evaluate_mcqa.py` | >= 0.60 | >= 0.35 | 0.417 - **atteint** |
+| F1 moyen par lettre (QCM) | `src/triage/evaluation/evaluate_mcqa.py` | >= 0.75 | >= 0.55 | 0.632 - **atteint** |
+| Ecart exact match mediqal/frenchmedmcqa | `src/triage/evaluation/evaluate_mcqa.py` | < 0.15 | documente comme limite connue, pas bloquant | 0.367 - **non atteint, acte comme limite connue** |
 
 **Justification du seuil revise** : >= 0.35 exact match / >= 0.55 F1
 representent une amelioration nette et reproductible par rapport au modele
@@ -37,7 +37,7 @@ explicitement comme limitation connue dans toute presentation du projet**.
 
 ## 2. Controle de securite (hallucinations, recommandations dangereuses)
 
-Outil : `scripts/safety_check.py` (heuristique de premier filtre) :
+Outil : `src/triage/evaluation/safety_check.py` (heuristique de premier filtre) :
 - signale les nombres presents dans la generation mais absents de
   l'instruction et de la reference (hallucination numerique potentielle) ;
 - signale une liste de formulations rassurantes a risque ("pas besoin de
@@ -75,5 +75,5 @@ passe.
 ## 4. Suivi / tracking
 
 Aucun outil de tracking (MLflow / W&B) n'est branche a ce stade
-(`report_to=[]` dans `scripts/train_sft.py`). Recommande avant la montee en
+(`report_to=[]` dans `src/triage/training/train_sft.py`). Recommande avant la montee en
 charge pour comparer les runs entre eux sans depouiller des JSON a la main.

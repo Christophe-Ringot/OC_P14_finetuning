@@ -1,6 +1,6 @@
 from pathlib import Path
 import pandas as pd
-from schemas.corpus_schema import PRIORITES, corpus_schema
+from triage.schemas.corpus import PRIORITES, corpus_schema
 
 CORPUS_PATH = Path("data") / "interim" / "corpus_anonymized.csv"
 POOL_PATH = Path("data") / "annotation" / "pool_priorite.csv"
