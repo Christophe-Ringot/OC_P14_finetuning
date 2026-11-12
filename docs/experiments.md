@@ -641,3 +641,93 @@ d'evaluation, corpus domine par deux specialites.
    les cas P2 et les cas mal classes.
 5. Reprise du DPO une fois ces points traites, avec des paires de preference
    coherentes avec les objectifs de triage (penaliser le sous-triage).
+
+## Suivi du mentorat : cout, MLflow, qualite des reponses, DPO - 2026-11-11 / 2026-11-12
+
+### Erreurs P1/P2/P3 et decision sensible au cout (`src/triage/evaluation/cost_sensitive.py`)
+
+Pas de nouvelle fonction de perte a l'entrainement : la regle de decision
+change a l'inference (argmin du cout attendu `p @ C`, temperature ajustee sur
+la validation). Matrice de reference : sous-triage d'un niveau = 4, P1 -> P3 =
+10, sur-triage = 1 ou 2. Un poids `alpha` sur le sous-triage trace le compromis
+sous-triage / sur-triage (`outputs/triage_eval/cout_sensible.md`).
+
+- Validation : sous-triage 16,2 % -> 1,0 %, cout moyen 0,86 -> 0,42.
+- Test (alpha = 1,25 choisi sur la validation) : sous-triage 7 % -> 2,2 %,
+  rappel P1 95 %, mais sur-triage 14 % -> 35 % et accuracy 78,8 % -> 62,5 % :
+  pas de gain de cout sur le test. La validation est plus difficile que le
+  test (une soixantaine de cas par split) : le alpha choisi y sur-corrige.
+- Point de fonctionnement propose : alpha = 0,5 (test : sous-triage 4,2 %,
+  rappel P1 90,2 %, accuracy 70,8 %). La matrice est un parametre metier a
+  valider avec les urgentistes, pas un hyperparametre.
+
+Raison du choix inference plutot que perte ponderee : reglable sans
+re-entrainer, et le compromis reste visible et ajustable par le metier.
+
+### MLflow (`docker compose up -d mlflow`, http://localhost:5000)
+
+Experience `triage-sft` : runs 1 a 4 reconstitues (`backfill_mlflow.py`,
+metriques identiques aux rapports), puis cout sensible, DPO et evaluations.
+Model Registry `triage-qwen3-lora` : une version par adaptateur, alias
+`production` sur `4_sft_medical_triage`.
+
+### Qualite des reponses apres SFT (`evaluate_responses.py`, `docs/evaluation_reponses.md`)
+
+Echantillon fixe du test (80 questions : 20 cas par niveau, 20 questions
+generales), decodage glouton. Le meme echantillon sert avant et apres DPO.
+
+### Paires DPO (`src/triage/data/build_dpo_triage.py`, `outputs/dpo/qualite_paires.md`)
+
+- `qualite` : chosen = reference, rejected = generation du modele SFT
+  (on-policy) avec le meme prefixe de niveau force. 880 paires (785 train, 95
+  validation) apres retrait de 20 generations vides et 1 trop proche.
+- `securite_triage` : meme reponse, prefixe d'un niveau moins urgent dans
+  rejected. 315 paires (P1 et P2).
+- Controles : 0 cas du test, prefixe identique dans chaque paire qualite,
+  similarite mediane 0,10, pas de biais de longueur net (32 vs 30 mots).
+  Relecture de 12 paires : 11 avec un chosen nettement meilleur, 1 reference
+  bruitee (repond a une autre question).
+
+### DPO v1 : qualite + securite_triage (`5_sft_triage_dpo`)
+
+beta 0,1, lr 2e-5, 1 epoque, max_length 768, adaptateur SFT continue, modele
+de reference = copie figee du SFT. Meilleur checkpoint : pas 75
+(eval qualite loss 0,347).
+
+Effondrement vers P1 : test accuracy 47,0 %, rappel P1 98,8 %, sur-triage
+52,5 %. Les paires asymetriques apprennent "plus urgent = mieux", sans contre-
+exemple. Abandonne.
+
+Incident : coupure du PC au pas 77, reprise par `resume_from_checkpoint`.
+Avec un PeftModel passe a DPOTrainer, la reprise restaure l'optimiseur mais pas
+les poids de l'adaptateur (marges retombees a 0). Option de reprise retiree ;
+l'adaptateur evalue est bien celui du pas 75 (verifie par md5).
+
+### DPO v2 : qualite seule (`6_sft_triage_dpo_qualite`)
+
+Memes hyperparametres, 785 paires qualite, 98 pas (environ 1 h 30).
+eval qualite loss 0,471 (pas 30) -> 0,341 (pas 90), accuracy des recompenses 0,97, marge 1,11.
+
+| modele | acc. test | F1 test | rappel P1 | sous-triage | sur-triage | acc. validation |
+|---|---|---|---|---|---|---|
+| 4 SFT + triage | 78,8 | 78,7 | 86,5 | 7,0 | 14,2 | 62,6 |
+| 5 DPO v1 | 47,0 | 32,1 | 98,8 | 0,5 | 52,5 | 45,1 |
+| 6 DPO v2 | 76,5 | 76,3 | 85,3 | 8,0 | 15,5 | 62,8 |
+
+| modele | ROUGE-L | F1 lexical | niveau ecrit correct | chiffre a relire | coupee | vide |
+|---|---|---|---|---|---|---|
+| 4 SFT + triage | 18,9 | 21,9 | 80,0 | 18,8 | 3,8 | 3,8 |
+| 5 DPO v1 | 19,2 | 22,7 | 40,0 | 25,0 | 3,8 | 1,2 |
+| 6 DPO v2 | 19,5 | 23,2 | 78,3 | 25,0 | 1,2 | 1,2 |
+
+### Conclusion
+
+La DPO qualite conserve le triage (ecart de 2 points en test, nul en
+validation, dans le bruit d'une soixantaine de cas) et ameliore legerement les
+reponses (moins de reponses vides ou coupees, ROUGE-L et F1 en hausse). En
+revanche, les chiffres a relire passent de 18,8 % a 25 % (a verifier a la
+main). Les
+gains automatiques restent faibles : le jugement en aveugle SFT vs DPO v2
+(`blind_judgment.py`, items prets dans `outputs/response_eval/`) et une
+relecture clinique sont necessaires pour conclure. Le sous-triage se traite
+par la regle de decision au cout, pas par la DPO.

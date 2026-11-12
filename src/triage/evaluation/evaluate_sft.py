@@ -1,5 +1,6 @@
 import argparse
 import gc
+import json
 from pathlib import Path
 import pandas as pd
 import torch
@@ -29,6 +30,10 @@ def load_model(adapter: Path | None):
         MODEL_NAME, dtype=torch.bfloat16 if has_gpu else torch.float32, device_map={"": 0} if has_gpu else None
     )
     if adapter is not None:
+        # Un adaptateur DPO s'applique sur le modele SFT fusionne (parent_adapter.json).
+        parent = Path(adapter) / "parent_adapter.json"
+        if parent.exists():
+            model = PeftModel.from_pretrained(model, json.loads(parent.read_text())["parent_adapter"]).merge_and_unload()
         model = PeftModel.from_pretrained(model, str(adapter))
     return model.eval()
 
@@ -136,7 +141,7 @@ def write_report(test: pd.DataFrame, results: pd.DataFrame, decisions: pd.DataFr
     distribution = test["priorite"].map(SHORT).value_counts().reindex(["P1", "P2", "P3"])
 
     lines = [
-        "# Comparaison du triage - 4 experiences",
+        f"# Comparaison du triage - {len(results)} experiences",
         "",
         f"Jeu de test : {len(test)} questions sur {test['groupe'].nunique()} groupes de cas cliniques "
         f"(P1 = {distribution['P1']}, P2 = {distribution['P2']}, P3 = {distribution['P3']}).",
@@ -215,7 +220,12 @@ def log_to_mlflow(quick: bool, results: dict, decisions: pd.DataFrame, run_ids: 
             mlflow.log_artifact(str(path))
 
 
-def run(quick: bool = False, tracked: bool = False, run_ids: dict | None = None) -> None:
+# Modeles alignes apres le SFT (adaptateur complet, evalue comme les SFT).
+DPO_EXPERIMENTS = {"5_sft_triage_dpo": "dpo_triage", "6_sft_triage_dpo_qualite": "dpo_triage_qualite"}
+
+
+def run(quick: bool = False, tracked: bool = False, run_ids: dict | None = None, only: list | None = None) -> None:
+    """Evalue tous les modeles, ou seulement `only` en reprenant les scores deja calcules des autres."""
     splits = {"validation": load_split("validation", quick), "test": load_split("test", quick)}
     test = splits["test"]
     suffix = "_quick" if quick else ""
@@ -223,21 +233,36 @@ def run(quick: bool = False, tracked: bool = False, run_ids: dict | None = None)
     test["1_baseline_naive"] = LABELS[0]
     splits["validation"]["1_baseline_naive"] = LABELS[0]
     models = {"2_modele_base": None}
-    for experiment in SFT_EXPERIMENTS:
-        adapter = adapter_dir(experiment, quick)
+    candidates = {e: adapter_dir(e, quick) for e in SFT_EXPERIMENTS}
+    candidates.update({e: Path("outputs") / (d + suffix) for e, d in DPO_EXPERIMENTS.items()})
+    for experiment, adapter in candidates.items():
         if not (adapter / "adapter_config.json").exists():
             print(f"{experiment} ignoree : adaptateur absent ({adapter})")
             continue
         models[experiment] = adapter
 
+    if only:
+        saved_scores = {"validation": pd.read_csv(OUTPUT_DIR / f"scores_validation{suffix}.csv"),
+                        "test": pd.read_csv(OUTPUT_DIR / f"scores{suffix}.csv")}
+        saved_modes = pd.read_csv(OUTPUT_DIR / f"mode_decision{suffix}.csv", index_col=0)
+
     all_scores = {name: [] for name in splits}
     decisions = {}
     for experiment, adapter in models.items():
-        print(f"Evaluation de {experiment} ({len(splits['validation'])} validation, {len(test)} test)")
-        scores = score_with_model(splits, adapter)
-        mode, f1 = choose_mode(splits["validation"], scores["validation"])
-        decisions[experiment] = {"mode_retenu": mode, **{f"f1_validation_{m}": v for m, v in f1.items()}}
-        print(f"  mode retenu sur la validation : {mode} " + ", ".join(f"{m}={v:.3f}" for m, v in f1.items()))
+        if only and experiment not in only and experiment in saved_modes.index:
+            scores = {}
+            for name in splits:
+                frame = saved_scores[name][saved_scores[name]["experience"] == experiment].drop(columns="experience")
+                scores[name] = frame.set_index("id").loc[splits[name]["id"]].reset_index()
+            decisions[experiment] = saved_modes.loc[experiment].to_dict()
+            mode = decisions[experiment]["mode_retenu"]
+            print(f"{experiment} : scores repris de l'evaluation precedente (mode {mode})")
+        else:
+            print(f"Evaluation de {experiment} ({len(splits['validation'])} validation, {len(test)} test)")
+            scores = score_with_model(splits, adapter)
+            mode, f1 = choose_mode(splits["validation"], scores["validation"])
+            decisions[experiment] = {"mode_retenu": mode, **{f"f1_validation_{m}": v for m, v in f1.items()}}
+            print(f"  mode retenu sur la validation : {mode} " + ", ".join(f"{m}={v:.3f}" for m, v in f1.items()))
         for name in splits:
             splits[name][experiment] = decide(scores[name], mode).to_numpy()
             all_scores[name].append(scores[name].assign(experience=experiment))
@@ -277,8 +302,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--quick", action="store_true", help="evalue les adaptateurs _quick sur 30 exemples")
     parser.add_argument("--no-mlflow", action="store_true", help="ne pas journaliser l'evaluation dans MLflow")
+    parser.add_argument("--only", nargs="+", help="n'evaluer que ces experiences (les autres : scores deja calcules)")
     args = parser.parse_args()
-    run(quick=args.quick, tracked=tracking.setup(not args.no_mlflow))
+    run(quick=args.quick, tracked=tracking.setup(not args.no_mlflow), only=args.only)
 
 
 if __name__ == "__main__":
