@@ -1,0 +1,1081 @@
+id,source,prompt,reference,generated,reference_letters,predicted_letters,exact_match,precision,recall,f1
+frenchmedmcqa_1ad84c411973058c42451bafa520994b5cd14af984ad63f2391b07c490f2e594,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant le sulfaméthoxazole, une seule est fausse. Laquelle?
+(A) Il inhibe la synthèse d'acide folique
+(B) Il est associé au triméthoprime dans le BACTRIM
+(C) Il est très peu métabolisé dans l'organisme
+(D) Il est contre-indiqué chez le nouveau-né
+(E) Il est contre-indiqué en association avec le méthotrexate
+
+### Réponse :
+",La réponse correcte est (C) : Il est très peu métabolisé dans l'organisme,La réponse correcte est (C) : Il est très peu métabolisé dans l'organisme,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_3b8a6a19fae91fdd8344be0de7f0951835efac89f289c307783f9694329340b6,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant la chromatographie d'exclusion-diffusion, indiquer celle qui est exacte ?
+(A) La phase stationnaire peut être constituée d'un gel de silice
+(B) Les ions de petite taille sont élués avec le volume mort
+(C) La capacité de gonflement d'un gel dépend de son degré de réticulation
+(D) L'utilisation d'un gel mou (Séphadex) permet de travailler à un débit de phase mobile élevé
+(E) Les aérogels gonflent au contact de la phase mobile
+
+### Réponse :
+",La réponse correcte est (C) : La capacité de gonflement d'un gel dépend de son degré de réticulation,La réponse correcte est (C) : La capacité de gonflement d'un gel dépend de son degré de réticulation,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_685217249f8527f468aa3e6a297806548eb9a60c5ef0b39f232fb8e2e0aac785,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes l'une est fausse, indiquer laquelle? Le paracétamol peut être éliminé sous la forme suivante:
+(A) Dérivé O-glucuronide
+(B) Dérivé O-sulfate
+(C) Acide mercapturique
+(D) Nitrate
+(E) Paracétamol inchangé
+
+### Réponse :
+",La réponse correcte est (D) : Nitrate,La réponse correcte est (D) : Nitrate,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_7ff9ef0bd762b4a44373c79a1cd94f01b46e18782872c3a0f7e56f835cc78c2b,frenchmedmcqa,"### Question :
+Parmi les coenzymes suivants, indiquer celui qui est nécessaire au fonctionnement des transaminases: ALAT (alanine aminotransféras) et ASAT (aspartate aminotransférase) :
+(A) Acide tétrahydrofolique
+(B) FAD
+(C) Thiamine pyrophosphate
+(D) Phosphate de pyridoxal
+(E) NAD
+
+### Réponse :
+",La réponse correcte est (D) : Phosphate de pyridoxal,La réponse correcte est (D) : Phosphate de pyridoxal,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_27c6960d5b7537bdb3ec9c49b43a14c84d07214755edf0023b61700ce35b7e96,frenchmedmcqa,"### Question :
+Parmi les unités de radioactivité suivantes, indiquer celle qui est utilisée pour exprimer l'équivalent de dose (H) :
+(A) Becquerel
+(B) Curie
+(C) Gray
+(D) Sievert
+(E) Rad
+
+### Réponse :
+",La réponse correcte est (D) : Sievert,La réponse correcte est (D) : Sievert,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_90790765526e1753e069ea31b819a220000d6f1bf32e4376e964a50057bd5d17,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, laquelle est exacte? La médullosurrénale:
+(A) N'est pas innervée
+(B) Est seulement innervée par des fibres cholinergiques
+(C) Est seulement innervée par des fibres adrénergiques
+(D) Est innervée par des fibres adrénergiques et cholinergiques
+(E) Est sous la dépendance de la corticosurrénale
+
+### Réponse :
+",La réponse correcte est (B) : Est seulement innervée par des fibres cholinergiques,La réponse correcte est (D) : Est innervée par des fibres adrénergiques et cholinergiques,B,D,False,0.0,0.0,0.0
+frenchmedmcqa_8ca5960b778e3d70404af005ab891cbd28c86297279b99a8d542343c5340f38a,frenchmedmcqa,"### Question :
+Parmi les antidotes suivants, un seul n'est pas utilisé dans l'intoxication par le plomb, indiquer lequel?
+(A) Acide dithiosuccinique
+(B) Dimercaprol
+(C) EDTA dicolbatique
+(D) Sel disodique monocalcique de l'EDTA
+(E) Pénicillamine
+
+### Réponse :
+",La réponse correcte est (C) : EDTA dicolbatique,La réponse correcte est (D) : Sel disodique monocalcique de l'EDTA,C,D,False,0.0,0.0,0.0
+frenchmedmcqa_c9ab288f1dc864c6eecacb311113da896e534a2962fab592bec53248256aa49a,frenchmedmcqa,"### Question :
+Parmi les familles d'antibiotiques suivantes, indiquer celle qui présente la diffusion intracellulaire la plus faible.
+(A) Rifamycines
+(B) Tétracyclines
+(C) Macrolides
+(D) Fluoroquinolones
+(E) Bêta - Lactamines
+
+### Réponse :
+",La réponse correcte est (E) : Bêta - Lactamines,La réponse correcte est (B) : Tétracyclines,E,B,False,0.0,0.0,0.0
+frenchmedmcqa_87047c5a29f02242efb044b9ae4823564f387f57789c0e056b86575ff658acd8,frenchmedmcqa,"### Question :
+Parmi les symptômes suivants l'un d'entre eux n'est pas observé au cours d'un syndrome de manque à l'héroïne. Lequel?
+(A) Anxiété
+(B) Myosis
+(C) Douleurs abdominales
+(D) Contractures musculaires
+(E) Nausées
+
+### Réponse :
+",La réponse correcte est (B) : Myosis,La réponse correcte est (D) : Contractures musculaires,B,D,False,0.0,0.0,0.0
+frenchmedmcqa_7544e043baf6db91f5988b5e845591574dd493a7a21b76662859c9265afeef14,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, laquelle est exacte? Le maintien du plateau de dépolarisation dans les cardiomyocytes extra-nodaux est dû :
+(A) à l'ouverture des canaux calciques transitoires
+(B) à l'activation de l'échangeur Na/Ca
+(C) au fonctionnement de la Ca-ATPase sarcoplasmique
+(D) à une ouverture de canaux sodiques dépendants du voltage
+(E) à l'ouverture de canaux à la ryanodine du réticulum sarcoplasmique
+
+### Réponse :
+",La réponse correcte est (B) : à l'activation de l'échangeur Na/Ca,La réponse correcte est (B) : à l'activation de l'échangeur Na/Ca,B,B,True,1.0,1.0,1.0
+frenchmedmcqa_8aa59e91d5034008fd0fc4ddcdf6ad7a542f1512c923432d1d00a2de0e08f365,frenchmedmcqa,"### Question :
+Parmi les propositions concernant la bile, une seule est fausse. Laquelle?
+(A) Elle est produite par le foie
+(B) Elle est libérée en fonction des besoins dans l'intestin
+(C) Elle se présente sous la forme d'un liquide incolore
+(D) Le volume de sa sécrétion varie de 300 à 700 mL/24h
+(E) Elle est stockée dans la vésicule biliaire
+
+### Réponse :
+",La réponse correcte est (C) : Elle se présente sous la forme d'un liquide incolore,La réponse correcte est (C) : Elle se présente sous la forme d'un liquide incolore,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_07e1b170713e4055fc840f2d397837d025c310fced1428f9ce369d614fe4c6bf,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant les infections par Clostridium perfringens, laquelle est fausse?
+(A) Elles peuvent être consécutives à une contamination alimentaire
+(B) L'isolement de la bactérie nécessite une atmosphère anaérobie
+(C) Les aminopénicillines peuvent être utilisées pour leur traitement
+(D) Il en existe une prophylaxie vaccinale efficace
+(E) Habituellement, elles ne sont pas d'origine nosocomiale
+
+### Réponse :
+",La réponse correcte est (D) : Il en existe une prophylaxie vaccinale efficace,La réponse correcte est (D) : Il en existe une prophylaxie vaccinale efficace,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_54d5e92772672ee3a7a3fe540188a11b24e0c6ad42ce427257f25ca72fa226d2,frenchmedmcqa,"### Question :
+Quelle est l'affirmation qui ne s'applique pas aux excipients d'un comprimé?
+(A) Comme diluant, on peut utiliser le lactose
+(B) Le stéarate de magnésium est un lubrifiant
+(C) Les amidons peuvent avoir des actions de liant ou être des agents de désagrégation
+(D) Le polyéthylène glycol (PEG) 400 est le plus utilisé en compression
+(E) Les dérivés méthacryliques sont mis en oeuvre pour l'enrobage
+
+### Réponse :
+",La réponse correcte est (D) : Le polyéthylène glycol (PEG) 400 est le plus utilisé en compression,La réponse correcte est (D) : Le polyéthylène glycol (PEG) 400 est le plus utilisé en compression,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_49215e2d40793d8c514cb8137ef47f6648f58576db39574dfc4a8a0bbb96ddf5,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes caractérisant l'acidocétose chez le sujet diabétique, une seule est fausse. Laquelle?
+(A) Déshydratation
+(B) Dyspnée
+(C) Abaissement du pH sanguin
+(D) Sueurs abondantes
+(E) Diminution de la pC02
+
+### Réponse :
+",La réponse correcte est (D) : Sueurs abondantes,La réponse correcte est (E) : Diminution de la pC02,D,E,False,0.0,0.0,0.0
+frenchmedmcqa_abde9ba7b39615e71e0b0897efb0f5b2923b78dad1dc7a8cddece77ca3206b63,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, laquelle est exacte? Le test biologique de choix pour faire un diagnostic spécifique d'hépatite A (VHA) est :
+(A) L'isolement du virus à partir d'un prélèvement de gorge
+(B) L'isolement du virus sur oeuf embryonné à partir des selles prélevées à la phase aigüe
+(C) Le dosage des transaminases
+(D) la mise en évidence d'anticorps anti-VHA de classe IgM à la phase aiguë
+(E) L'élévation du titre d'anticorps anti-HA dans deux sérums prélevés à 15 jours d'intervalle
+
+### Réponse :
+",La réponse correcte est (D) : la mise en évidence d'anticorps anti-VHA de classe IgM à la phase aiguë,La réponse correcte est (D) : la mise en évidence d'anticorps anti-VHA de classe IgM à la phase aiguë,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_35b29e7e9fba6ce4871d86375e797096d77928a74c79e5087b08a1e8fb0bbadd,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, laquelle est exacte ? Les hétérosides cardiotoniques exercent un effet inotrope positif:
+(A) Par une stimulation des récepteurs bêta-adrénergiques cardiaques
+(B) Par un effet parasympatholytique
+(C) Par une inhibition de la Na+/K+ ATPase et une modification secondaire des mouvements du calcium
+(D) Par une inhibition de l'entrée du calcium dans la cellule cardiaque
+(E) Par un effet vasodilatateur
+
+### Réponse :
+",La réponse correcte est (C) : Par une inhibition de la Na+/K+ ATPase et une modification secondaire des mouvements du calcium,La réponse correcte est (C) : Par une inhibition de la Na+/K+ ATPase et une modification secondaire des mouvements du calcium,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_0a99003f70f56a173c4c376563eca2b1fe0b3c7346c0529ae7638be82ddfb057,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, laquelle ne s'applique pas à l'amoxicilline ?
+(A) C'est une aminopénicilline
+(B) C'est l'antibiotique de choix dans les infections à Pseudomonas aeruginosa
+(C) Elle est active par voie orale
+(D) Elle peut provoquer des réactions allergiques
+(E) Elle peut être administrée chez l'enfant
+
+### Réponse :
+",La réponse correcte est (B) : C'est l'antibiotique de choix dans les infections à Pseudomonas aeruginosa,La réponse correcte est (B) : C'est l'antibiotique de choix dans les infections à Pseudomonas aeruginosa,B,B,True,1.0,1.0,1.0
+frenchmedmcqa_80e87b1c40ffe93f1e6dcbe34aded12e9fe3a685e34ae379c37f32859a43e948,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant l'angiotensine II, une seule est exacte. Laquelle?
+(A) Elle est essentiellement produite par l'appareil juxtaglomérulaire
+(B) C'est un décapeptide
+(C) Elle augmente l'excrétion urinaire du sodium
+(D) Elle stimule le centre hypothalamique de la soif
+(E) Elle inhibe la sécrétion d'aldostérone
+
+### Réponse :
+",La réponse correcte est (D) : Elle stimule le centre hypothalamique de la soif,La réponse correcte est (D) : Elle stimule le centre hypothalamique de la soif,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_86d27350b580194537e50dc67213ef0ac01a3cd71ee47db3a0959597845514dc,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant les titrations potentiométriques, une seule est exacte, laquelle?
+(A) La solution à doser est très diluée 10-4 à 10-6 M
+(B) Le courant est enregistré en fonction du potentiel appliqué
+(C) L'électrode de verre est l'électrode universelle
+(D) Les électrodes ioniques sont spécifiques
+(E) Le point équivalent est le point d'inflexion d'une sigmoïde
+
+### Réponse :
+",La réponse correcte est (E) : Le point équivalent est le point d'inflexion d'une sigmoïde,La réponse correcte est (D) : Les électrodes ioniques sont spécifiques,E,D,False,0.0,0.0,0.0
+frenchmedmcqa_dd06d48347427fe04fb080d04376b8f1c4e311221564494df7d169cc029377fd,frenchmedmcqa,"### Question :
+Parmi les affirmations suivantes, l'une d'entre elles est inexacte. Dans le cadre de leur métabolisme général, les acides aminés:
+(A) Servent avant tout a la biosynthèse des protéines de l'espèce
+(B) Représentent une source d'énergie lorsqu'ils sont en excès
+(C) Sont oxydés en C02 dans le cycle tricarboxylique de Krebs
+(D) Ne perturbent pas la biosynthèse des protéines lorsque l'un d'entre eux est absent
+(E) Peuvent être transformés en glucose par néoglucogénése
+
+### Réponse :
+",La réponse correcte est (D) : Ne perturbent pas la biosynthèse des protéines lorsque l'un d'entre eux est absent,La réponse correcte est (D) : Ne perturbent pas la biosynthèse des protéines lorsque l'un d'entre eux est absent,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_fc28bdc6427bf440db57a89257c5ce71e00e86c8530292b51743979351527903,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, concernant la pharmacocinétique des médicaments, une seule est exacte : laquelle ?
+(A) La biotransformation des médicaments à fort coefficient d'extraction hépatique est indépendante du débit sanguin hépatique
+(B) La clairance totale relie la concentration plasmatique à la vitesse d'élimination du médicament
+(C) Un médicament ayant une clairance égale à 250ml/min est strictement éliminé par filtration glomérulaire
+(D) le facteur de biodisponibilité (F) d'un médicament administré per os dépend uniquement de la résorption gastro-intestinale
+(E) Un important taux de fixation du médicament aux protéines circulantes (>90%) est toujours à l'origine d'interactions médicamenteuses
+
+### Réponse :
+",La réponse correcte est (B) : La clairance totale relie la concentration plasmatique à la vitesse d'élimination du médicament,La réponse correcte est (B) : La clairance totale relie la concentration plasmatique à la vitesse d'élimination du médicament,B,B,True,1.0,1.0,1.0
+frenchmedmcqa_daeeeedcc455bd66063c760a55ca77230f955645bd5434da72409e8cef9a9812,frenchmedmcqa,"### Question :
+Parmi les médicaments indiqués ci-dessous, quel est celui qui n'entre pas dans la classe des antimalariques?
+(A) Chloroquine
+(B) Méfloquine
+(C) Métronidazole
+(D) Quinine
+(E) Association sulfamide-pyriméthamine
+
+### Réponse :
+",La réponse correcte est (C) : Métronidazole,La réponse correcte est (C) : Métronidazole,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_48b3e0e3fd8855988c655899fe80f99ac1671f6265f58ba9a7dbe6727a514c69,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant Mycobacterium tuberculosis, laquelle est fausse?
+(A) C'est un bacille acido-alcoolo-résistant
+(B) C'est un hôte normal du tube digestif de l'homme
+(C) Il ne cultive pas sur gélose enrichie de sang
+(D) C'est un agent de méningite
+(E) Il existe une prophylaxie vaccinale des infections qu'il provoque
+
+### Réponse :
+",La réponse correcte est (B) : C'est un hôte normal du tube digestif de l'homme,La réponse correcte est (D) : C'est un agent de méningite,B,D,False,0.0,0.0,0.0
+frenchmedmcqa_775c30251ee952f9d7d09fd1b75d3d02f0222c18a736c6ea8189ef9c1c73b6d9,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, une seule est fausse. Laquelle? Le plomb:
+(A) A l'état de poussières est bien absorbé par voie pulmonaire
+(B) Dans le sang existe en majorité lié aux protéines
+(C) Passe à travers le placenta
+(D) Est un inhibiteur de la delta ala déshydratase nécessaire à la synthèse de l'hème
+(E) Quand il est absorbé dans l'organisme, le plomb est éliminé essentiellement par voie rénale
+
+### Réponse :
+",La réponse correcte est (B) : Dans le sang existe en majorité lié aux protéines,La réponse correcte est (D) : Est un inhibiteur de la delta ala déshydratase nécessaire à la synthèse de l'hème,B,D,False,0.0,0.0,0.0
+frenchmedmcqa_6918b1178fee0bbcf6a8ffd17936f0e088b11dbcc5ea24cbd0abc02a5708f034,frenchmedmcqa,"### Question :
+Parmi ces précautions d'emploi de la théophylline, laquelle est fausse?
+(A) Troubles du rythme cardiaque
+(B) Hypotension
+(C) Insuffisance hépatique
+(D) Ulcère gastrique
+(E) Terrain psychique précaire
+
+### Réponse :
+",La réponse correcte est (B) : Hypotension,La réponse correcte est (D) : Ulcère gastrique,B,D,False,0.0,0.0,0.0
+frenchmedmcqa_9720b25df921fee33e9138d9d04bda54452f6a2467f4370665433275dd260656,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, indiquer celle(s) qui est (sont) exacte(s). Le furosémide (LASILIX) :
+(A) Possède une structure cyclopentano-perhydro-phénanthrène
+(B) Est porteur d'une fonction sulfamide N-substituée
+(C) Est un diurétique d'épargne potassique
+(D) Agit principalement au niveau de la branche descendante de l'anse de Henlé
+(E) Est employé dans le traitement d'urgence de l'oedème aigu du poumon
+
+### Réponse :
+",La réponse correcte est (E) : Est employé dans le traitement d'urgence de l'oedème aigu du poumon,La réponse correcte est (D) : Agit principalement au niveau de la branche descendante de l'anse de Henlé,E,D,False,0.0,0.0,0.0
+frenchmedmcqa_b6740120781da28d8605a8e50fc1b4732b1d86296a7766edc993010747ae8a46,frenchmedmcqa,"### Question :
+Donner la ou les proposition(s) exacte(s). Un sujet du groupe AB présente :
+(A) Des anticorps naturels anti-A
+(B) Des anticorps naturels anti-B
+(C) Des anticorps naturels anti-H
+(D) Des anticorps naturels anti-A+B
+(E) Aucun anticorps naturel régulier
+
+### Réponse :
+",La réponse correcte est (E) : Aucun anticorps naturel régulier,La réponse correcte est (D) : Des anticorps naturels anti-A+B,E,D,False,0.0,0.0,0.0
+frenchmedmcqa_7c22bff86874a6ecfb75fa902073cf6eae0b70453ecdcc602689c59c851941c7,frenchmedmcqa,"### Question :
+La sécrétion de progestérone pendant les 2e et 3e trimestres de la grossesse reflète l'état fonctionnel:
+(A) Du placenta
+(B) Du corps jaune
+(C) Du foie foetal
+(D) De la surrénale foetale
+(E) De l'ovaire maternel
+
+### Réponse :
+",La réponse correcte est (A) : Du placenta,La réponse correcte est (A) : Du placenta,A,A,True,1.0,1.0,1.0
+frenchmedmcqa_d87fcbad33c054fd952c2ad5d48b0c8219bfe5e5db30316a0bc1fe1cd1b55e7a,frenchmedmcqa,"### Question :
+Le prurit anal est le symptôme majeur de:
+(A) L'anguillulose
+(B) L'ankylostomose
+(C) L'oxyurose
+(D) La bilharziose
+(E) Le teniasis
+
+### Réponse :
+",La réponse correcte est (C) : L'oxyurose,La réponse correcte est (C) : L'oxyurose,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_38c00541464e86e4f292a0aaa1c80609aedc6ded6b203aac08f50e7362d60955,frenchmedmcqa,"### Question :
+Dans l'organisme quel est le milieu où les cyclines ne diffusent pas?
+(A) Plèvre
+(B) Articulations
+(C) Poumons
+(D) LCR
+(E) Os
+
+### Réponse :
+",La réponse correcte est (D) : LCR,La réponse correcte est (B) : Articulations,D,B,False,0.0,0.0,0.0
+frenchmedmcqa_96bf4688c1a89ab559741511ac04aa1166035c72d36248cbd6d1c48245d6331c,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, indiquer celle qui exacte. L'indication habituelle du fluconazole (TRIFLUCAN®) est:
+(A) L'amibiase intestinale aiguë
+(B) Les helminthiases intestinales
+(C) Les teignes du cuir chevelu
+(D) Les infections à levures
+(E) Les infections profondes à Aspergillus
+
+### Réponse :
+",La réponse correcte est (D) : Les infections à levures,La réponse correcte est (D) : Les infections à levures,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_a4f4302a10b611254de8d30e7c77cf208331c6de2570f4dda45b04bd48139278,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant les antidotes et les antagonistes, une seule est fausse. Laquelle?
+(A) La vitamine B6 est utilisée lors de l'intoxication par l'isoniazide
+(B) Le bleu de méthylène réduit le fer ferrique de la méthémoglobine
+(C) L'atropine corrige les effets des parasympathomimétiques
+(D) Le méthylsulfate de pralidoxime est un réactiveur des cholinestérases
+(E) Les folates sont utilisés lors de l'intoxication par l'éthylène glycol
+
+### Réponse :
+",La réponse correcte est (E) : Les folates sont utilisés lors de l'intoxication par l'éthylène glycol,La réponse correcte est (D) : Le méthylsulfate de pralidoxime est un réactiveur des cholinestérases,E,D,False,0.0,0.0,0.0
+frenchmedmcqa_c359a0f25f6d65ba012ecb452c2beace62cb10946600e55d57eb1fc18f559a5b,frenchmedmcqa,"### Question :
+En France, parmi les vaccinations suivantes, quelle(s) est (sont) celle(s) qui correspond(ent) à un vaccin vivant atténué disponible en France ? (actualisé 2008)
+(A) Vaccination anti-tétanique
+(B) Vaccination anti-coquelucheuse
+(C) Vaccination anti-grippale
+(D) Vaccination anti-rubéolique
+(E) Vaccination anti-poliomyélitique
+
+### Réponse :
+",La réponse correcte est (D) : Vaccination anti-rubéolique,La réponse correcte est (D) : Vaccination anti-rubéolique,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_3489bf70d52a288fe1cd6988017b7deae12d1ae4c1cb2c5a73cc75c5c3468b0b,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant la loi de Beer-Lambert, indiquer la (les) proposition(s) exacte(s) :
+(A) Elle s'applique aux dosages polarimétriques
+(B) Elle s'applique aux dosages spectrophotométriques
+(C) Elle est valable quelle que soit la concentration de la solution
+(D) Ce n'est pas une loi additive
+(E) Elle n'est applicable qu'en lumière polychromatique
+
+### Réponse :
+",La réponse correcte est (B) : Elle s'applique aux dosages spectrophotométriques,La réponse correcte est (B) : Elle s'applique aux dosages spectrophotométriques,B,B,True,1.0,1.0,1.0
+frenchmedmcqa_337805b96b5f5ab87dce4d6b41fcd766da6af2f800154d2188e65f19fe2c4b02,frenchmedmcqa,"### Question :
+Un patient de 20 ans est traité par héparine de bas poids moléculaire pour une thrombose iliaque. Il présente un syndrome hémorragique majeur. Parmi les résultats suivants le(s)quel(s) permet(tent) d'affirmer la présence d'un surdosage?
+(A) Taux de complexe prothrombinique 35 %
+(B) INR = 4
+(C) Temps de céphaline activé à 45 s (pour un témoin à 30 s)
+(D) Activité anti Xa = 2,00 UI/mL
+(E) Un temps de saignement IVY incision à 12 minutes
+
+### Réponse :
+","La réponse correcte est (D) : Activité anti Xa = 2,00 UI/mL",La réponse correcte est (A) : Taux de complexe prothrombinique 35 %,D,A,False,0.0,0.0,0.0
+frenchmedmcqa_35a9cd62544b106000f68c144b68438b3ab9b4940fb50ef38758418a7676c840,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, quelle est celle qui est exacte ?
+(A) La stabilité d'un complexe de l'acide éthylène diamine tétracétique est indépendante du pH
+(B) Le potentiel d'une électrode à membrane sélective dépend linéairement de l'activité d'un ion donné
+(C) Un complexe est dit parfait si les ions sont masqués à leurs réactifs habituels
+(D) Une lame de zinc plongeant dans une solution de sel de zinc constitue une électrode de référence primaire
+(E) Dans une pile la cathode a un potentiel moins élevé que l'anode
+
+### Réponse :
+",La réponse correcte est (C) : Un complexe est dit parfait si les ions sont masqués à leurs réactifs habituels,La réponse correcte est (D) : Une lame de zinc plongeant dans une solution de sel de zinc constitue une électrode de référence primaire,C,D,False,0.0,0.0,0.0
+frenchmedmcqa_a5f801b7d816f3f3942a1aa7a64aef24e35e8c0f6a2ddc52623b2fb12875c38d,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant le génome nucléaire humain, laquelle est exacte ?
+(A) Les exons ne sont pas systématiquement codants
+(B) Le nombre total de nucléotides des ARNm est systématiquement un multiple de trois
+(C) Les microsatellites sont absents des gènes
+(D) Les introns commencent par le dinucléotide CG
+(E) La méthylation des promoteurs s'accompagne toujours d'une activation transcriptionnelle
+
+### Réponse :
+",La réponse correcte est (A) : Les exons ne sont pas systématiquement codants,La réponse correcte est (A) : Les exons ne sont pas systématiquement codants,A,A,True,1.0,1.0,1.0
+frenchmedmcqa_93ba7de8be34f70046db37fc5a67067bf381c0aad7142f1d9f91b3d8f03e2b33,frenchmedmcqa,"### Question :
+Laquelle de ces propositions concernant Trichomonas vaginalis est fausse ?
+(A) Il provoque une balanite chez l'homme
+(B) Il provoque une vaginite chez la femme
+(C) C'est un parasite cosmopolite
+(D) Il est disséminé sous forme de kyste
+(E) Il est sensible au métronidazole (FLAGYL®)
+
+### Réponse :
+",La réponse correcte est (D) : Il est disséminé sous forme de kyste,La réponse correcte est (D) : Il est disséminé sous forme de kyste,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_8335f198f05673fe342079fb84bce5487399bfcbba0bbd1af7fcefe8fc36fec8,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant les méthodes électrochimiques d'analyse quelle est celle qui est fausse ?
+(A) La mesure du pH est une méthode potentiométrique
+(B) En ampérométrie, la relation existant entre signal mesuré et concentration en soluté à doser est linéaire
+(C) En polarographie, on enregistre la variation de potentiel en fonction du courant
+(D) En polarographie, l'électrode de travail est une goutte de mercure
+(E) La technique d'analyse de l'eau dite de Karl Fisher est une technique bi-ampérométrique
+
+### Réponse :
+","La réponse correcte est (C) : En polarographie, on enregistre la variation de potentiel en fonction du courant","La réponse correcte est (D) : En polarographie, l'électrode de travail est une goutte de mercure",C,D,False,0.0,0.0,0.0
+frenchmedmcqa_8d63e6faecc3cd5cfeba253f8bedd4900b21a87aaf365248871aacb3a7bfd5e8,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, indiquer celle qui est exacte. Le site essentiel de production du calcitriol à partir de son précurseur est :
+(A) le foie
+(B) le rein
+(C) la peau
+(D) l'os
+(E) la thyroïde
+
+### Réponse :
+",La réponse correcte est (B) : le rein,La réponse correcte est (B) : le rein,B,B,True,1.0,1.0,1.0
+frenchmedmcqa_de870716afbca74f71651bc4c78cdc26fad006904be0952b1343211263c64aae,frenchmedmcqa,"### Question :
+Chez un diabétique atteint d'une néphropathie modérée, la metformine (GLUCOPHAGE®), biguanide normoglycémiant, a pour risque principal d'entraîner l'un des phénomènes suivants. Lequel est exact?
+(A) Une insuffisance rénale
+(B) Une acidose lactique
+(C) Une hypoglycémie
+(D) Un effet antabuse
+(E) Un purpura thrombopénique
+
+### Réponse :
+",La réponse correcte est (B) : Une acidose lactique,La réponse correcte est (B) : Une acidose lactique,B,B,True,1.0,1.0,1.0
+frenchmedmcqa_121756d1c5699004bc36deccda390d551e6da30284a689cb34538d03b331287d,frenchmedmcqa,"### Question :
+Quelle(s) molécule(s) utilise-t-on pour traiter une amibiase tissulaire ?
+(A) Le praziquantel
+(B) L'halofantrine
+(C) Le flubendazole
+(D) Le secnidazole
+(E) L'itraconazole
+
+### Réponse :
+",La réponse correcte est (D) : Le secnidazole,La réponse correcte est (D) : Le secnidazole,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_52324cf3739b85d7fad1fe0e5599c570c562aaa11256555d68b31ef386092d49,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant les glucocorticoïdes, une seule est fausse, laquelle ?
+(A) un fluor en position 9alpha augmente l'activité minéralocorticoïde
+(B) ils diminuent les symptômes cliniques et biologiques de l'inflammation
+(C) ils peuvent entraîner une ostéoporose
+(D) ils peuvent entraîner une hyperkaliémie
+(E) ils sont prescrits en association avec la famille des sétrons dans les chimiothérapies anticancéreuses
+
+### Réponse :
+",La réponse correcte est (D) : ils peuvent entraîner une hyperkaliémie,La réponse correcte est (B) : ils diminuent les symptômes cliniques et biologiques de l'inflammation,D,B,False,0.0,0.0,0.0
+frenchmedmcqa_406145656232590ab79ad3e1927ac05eed9022c7bcc21351528175262ad150fc,frenchmedmcqa,"### Question :
+Concernant la circulation sanguine, quelle(s) est(sont) la(les) proposition(s) exacte(s)
+(A) la veine cave supérieure s'abouche à l'oreillette droite
+(B) la veine cave inférieure s'abouche au ventricule droit
+(C) les veines pulmonaires remplissent le coeur d'un sang pauvre en oxygène
+(D) les artères coronaires irriguent le myocarde pendant la systole
+(E) l'artère pulmonaire est l'une des artères nourricières des tissus pulmonaires
+
+### Réponse :
+",La réponse correcte est (A) : la veine cave supérieure s'abouche à l'oreillette droite,La réponse correcte est (C) : les veines pulmonaires remplissent le coeur d'un sang pauvre en oxygène,A,C,False,0.0,0.0,0.0
+frenchmedmcqa_8d808996be73dd0d3164a617ce0ef3b11c21fc26d457c86ddd95c3d9ba737808,frenchmedmcqa,"### Question :
+Le diagnostic du diabète sucré est fait sur :
+(A) la mise en évidence d'une glycosurie
+(B) une glycémie à jeun confirmée supérieure ou égale à 7,0 mmol/L
+(C) une glycémie supérieure ou égale à 8,0 mmol/L après un repas
+(D) l'apparition de complications vasculaires
+(E) une hypertriglycéridémie isolée
+
+### Réponse :
+","La réponse correcte est (B) : une glycémie à jeun confirmée supérieure ou égale à 7,0 mmol/L","La réponse correcte est (B) : une glycémie à jeun confirmée supérieure ou égale à 7,0 mmol/L",B,B,True,1.0,1.0,1.0
+frenchmedmcqa_7347f57f026ff112c96106ca819518843fe77faa225158959d69608f697b5ee6,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant la corticotropine (ACTH), quelle est la proposition exacte ?
+(A) Sa concentration sanguine est augmentée dans le cas d'un adénome de la corticosurrénale
+(B) Sa concentration sanguine est augmentée dans le cas d'une maladie de Cushing
+(C) Sa concentration sanguine est diminuée dans le cas d'une maladie d'Addison
+(D) L'ACTH est physiologiquement sécrétée par la post-hypophyse
+(E) Sa concentration sanguine est constante au cours de la journée
+
+### Réponse :
+",La réponse correcte est (B) : Sa concentration sanguine est augmentée dans le cas d'une maladie de Cushing,La réponse correcte est (D) : L'ACTH est physiologiquement sécrétée par la post-hypophyse,B,D,False,0.0,0.0,0.0
+frenchmedmcqa_3602b66894378ca2e88d6b8832ef5493140075d6d30454060fff5cdd7fc217b8,frenchmedmcqa,"### Question :
+Parmi les antibiotiques suivants, lequel n'appartient pas à la famille des ß- lactamines ?
+(A) La pipéracilline
+(B) L'aztréonam
+(C) La josamycine
+(D) La ceftazidime
+(E) La ceftriaxone
+
+### Réponse :
+",La réponse correcte est (C) : La josamycine,La réponse correcte est (B) : L'aztréonam,C,B,False,0.0,0.0,0.0
+frenchmedmcqa_0c401167b1afb017d5ff731001498ffffc0dcfe686f39721dfd69dd20b1f34dc,frenchmedmcqa,"### Question :
+Parmi les virus suivants, quel(s) est(sont) celui(ceux) qui possède(nt) un génome à ADN ?
+(A) Les virus grippaux
+(B) Le virus de l'hépatite A
+(C) Le virus de l'hépatite C
+(D) Le cytomégalovirus
+(E) Les entérovirus
+
+### Réponse :
+",La réponse correcte est (D) : Le cytomégalovirus,La réponse correcte est (D) : Le cytomégalovirus,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_36a4f9665a54c362942bf2fa3b42e9c64a064c798910ca3f7a8f317066289d24,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes sur le mécanisme d'action toxique du monoxyde de carbone, laquelle est exacte ?
+(A) inhibition de la gamma aminolévulinate synthétase
+(B) fixation sur l'hémoglobine à la place de l'O2
+(C) inhibition de la ferrochélatase
+(D) inhibition de l'érythropoïétine
+(E) oxydation du fer divalent en fer trivalent
+
+### Réponse :
+",La réponse correcte est (B) : fixation sur l'hémoglobine à la place de l'O2,La réponse correcte est (B) : fixation sur l'hémoglobine à la place de l'O2,B,B,True,1.0,1.0,1.0
+frenchmedmcqa_1b5d249c71c61002b9133f39687743bd6853d34a3101a334ed79ec7423f4eef6,frenchmedmcqa,"### Question :
+Concernant le déficit en G6PD, quelle(s) proposition(s) est(sont) fausse(s) ?
+(A) Il se transmet selon un mode récessif lié au sexe
+(B) Certaines ethnies sont particulièrement touchées
+(C) Il peut être responsable d'une neutropénie lors de la prise de certains médicaments
+(D) Le diagnostic biologique est fondé sur le dosage de l'activité de la G6PD érythrocytaire
+(E) L'ingestion de certains aliments déclenche des accidents hémolytiques aigus
+
+### Réponse :
+",La réponse correcte est (C) : Il peut être responsable d'une neutropénie lors de la prise de certains médicaments,La réponse correcte est (A) : Il se transmet selon un mode récessif lié au sexe,C,A,False,0.0,0.0,0.0
+frenchmedmcqa_1a66bd6e76c7478b873687cdcfb66ce0fceadf6d275898f78c94dd08f2844bae,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, quelle est celle qui est inexacte : Pendant la grossesse, on observe :
+(A) Une augmentation du volume plasmatique
+(B) Une augmentation des hormones thyroïdiennes
+(C) Une élévation de la Vs (vitesse de sédimentation)
+(D) Une modification du bilan lipidique
+(E) Souvent une leucopénie
+
+### Réponse :
+",La réponse correcte est (E) : Souvent une leucopénie,La réponse correcte est (E) : Souvent une leucopénie,E,E,True,1.0,1.0,1.0
+frenchmedmcqa_fbe660e213b1b02899a26cfe345e76395bcae118ef9ea0468505675b0ebd408f,frenchmedmcqa,"### Question :
+Quel est le nom du métabolite réactif et toxique du paracétamol ?
+(A) Glutathion
+(B) N-hydroxyparacétamol
+(C) Acide mercapturique
+(D) Acide gentisique
+(E) N-acétylparabenzoquinone-imine
+
+### Réponse :
+",La réponse correcte est (E) : N-acétylparabenzoquinone-imine,La réponse correcte est (C) : Acide mercapturique,E,C,False,0.0,0.0,0.0
+frenchmedmcqa_ca1104179bcf39bb72796c7ac90514ca2ef878f1e69240144ff3777e31363a5c,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant le fer, indiquer celle qui est fausse.
+(A) Il est absorbé sous forme ferreuse ou sous forme d'hème
+(B) Il est absorbé en fonction des besoins
+(C) Il peut être éliminé sous forme de ferritine lors de la desquamation des entérocytes
+(D) Il est absorbé par simple diffusion
+(E) Il se fixe sur la transferrine du plasma
+
+### Réponse :
+",La réponse correcte est (D) : Il est absorbé par simple diffusion,La réponse correcte est (D) : Il est absorbé par simple diffusion,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_0c9fad7a3bfb5fc24f8ce183c4573ecf0a0a32e82dd588c9c37ac2ce23a29078,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant Pseudomonas aeruginosa, laquelle est fausse ?
+(A) C'est un germe aérobie strict
+(B) C'est un agent de surinfection chez les grands brûlés
+(C) C'est un germe pouvant produire des pigments
+(D) Il peut être responsable d'infections bronchiques au cours de la mucoviscidose
+(E) Il est sensible aux aminopénicillines
+
+### Réponse :
+",La réponse correcte est (E) : Il est sensible aux aminopénicillines,La réponse correcte est (E) : Il est sensible aux aminopénicillines,E,E,True,1.0,1.0,1.0
+frenchmedmcqa_f0df50ffc5e4afe140cd4f4585e595c70cf38497a8ec7ca9e5970597052e6a80,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant le diagnostic prénatal, laquelle est fausse ?
+(A) Le médecin doit recueillir un consentement
+(B) Le laboratoire qui réalise les analyses doit est agrée par l'agence de le biomédecine pour 5 ans
+(C) Le prélèvement de liquide amniotique est celui qui peut être réalisé le plus précocement
+(D) Il a recours non seulement aux examens de biologie médicale, mais aussi à l'imagerie et à la clinique
+(E) Pour une pathologie autosomique dominante (si un seul des 2 parents est porteur), le risque d'avoir un enfant est de 50%
+
+### Réponse :
+",La réponse correcte est (C) : Le prélèvement de liquide amniotique est celui qui peut être réalisé le plus précocement,La réponse correcte est (B) : Le laboratoire qui réalise les analyses doit est agrée par l'agence de le biomédecine pour 5 ans,C,B,False,0.0,0.0,0.0
+frenchmedmcqa_083fc62f9033408e827072b0c094554985ffd39cb2e4f48cf2eb2da682c8c179,frenchmedmcqa,"### Question :
+Quel signe clinique n'est jamais retrouvé lors d'une intoxication aigue à la cocaïne :
+(A) Tachycardie
+(B) Trismus
+(C) Hyperthermie
+(D) Myosis
+(E) Hallucinations
+
+### Réponse :
+",La réponse correcte est (D) : Myosis,La réponse correcte est (C) : Hyperthermie,D,C,False,0.0,0.0,0.0
+frenchmedmcqa_416252921b58b54b7f9747bec5b42c984272b18f2913e588e2965f0bfe6fe91d,frenchmedmcqa,"### Question :
+Après ingestion de viande bovine contaminée, au bout de combien de temps l'hôte définitif éliminera t'il des anneaux mûrs de Taenia saginata ?
+(A) Jamais
+(B) 8 jours
+(C) 15 jours
+(D) 1 mois
+(E) 3 mois
+
+### Réponse :
+",La réponse correcte est (E) : 3 mois,La réponse correcte est (C) : 15 jours,E,C,False,0.0,0.0,0.0
+frenchmedmcqa_d7f358918cf22765c7833e2d8d40ebb462acd3572f8e3479d61bde01829660e7,frenchmedmcqa,"### Question :
+Parmi les béta-bloquants suivants, lequel (lesquels) n'est (ne sont) pas cardiosélectif (s) :
+(A) Pindolol
+(B) Nébivolol
+(C) Aténolol
+(D) Céliprolol
+(E) Bisoprolol
+
+### Réponse :
+",La réponse correcte est (A) : Pindolol,La réponse correcte est (A) : Pindolol,A,A,True,1.0,1.0,1.0
+frenchmedmcqa_7b599f6e73771f79922d43a99b23bca67ad0a1a421f3e96ac6b28e6e13334644,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant les VLDL, laquelle est inexacte ?
+(A) Ils contiennent une apoprotéine B-100
+(B) Ils transportent les triglycérides endogènes
+(C) Ils transportent les triglycérides alimentaires
+(D) Ils sont dégradés par une lipoprotéine lipase (LPL)
+(E) Ils sont les précurseurs des LDL
+
+### Réponse :
+",La réponse correcte est (C) : Ils transportent les triglycérides alimentaires,La réponse correcte est (C) : Ils transportent les triglycérides alimentaires,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_bd42a4d64668b97ff16e613797bfaa882c92cd9aff93d58dec51febc0fc884e7,frenchmedmcqa,"### Question :
+Parmi les affirmations suivantes caractérisant l'ictère physiologique du nouveau-né, une seule est fausse. Laquelle ?
+(A) Il existe une immaturité hépatique transitoire
+(B) Il peut se rencontrer chez le prématuré
+(C) Il apparaît entre le deuxième et le troisième jour de vie
+(D) La bilirubine totale sérique est supérieure à 300 µmol/L
+(E) La gravité de cette pathologie est minime
+
+### Réponse :
+",La réponse correcte est (D) : La bilirubine totale sérique est supérieure à 300 µmol/L,La réponse correcte est (D) : La bilirubine totale sérique est supérieure à 300 µmol/L,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_4bf2bf082a1de8ddffe40c10399d8dbcfebe33ac872c9648531236b145970d2d,frenchmedmcqa,"### Question :
+Parmi ces propositions, laquelle n'est pas une indication des corticoïdes ?
+(A) Anémie hémolytique auto-immune
+(B) Hépatite chronique active
+(C) Asthme grave
+(D) Œdème de Quincke
+(E) Traitement des affections respiratoires récidivantes
+
+### Réponse :
+",La réponse correcte est (E) : Traitement des affections respiratoires récidivantes,La réponse correcte est (B) : Hépatite chronique active,E,B,False,0.0,0.0,0.0
+frenchmedmcqa_caffc82806aa7e59e932b278b0c03ba8b0a61da51e68ec8f6b690d91c1e04a8a,frenchmedmcqa,"### Question :
+Parmi ces propositions, laquelle n'est pas contre-indiquée avec le moclobémide?
+(A) Bupropion
+(B) Morphiniques
+(C) Milnacipran
+(D) Millepertuis
+(E) Tramadol
+
+### Réponse :
+",La réponse correcte est (B) : Morphiniques,La réponse correcte est (C) : Milnacipran,B,C,False,0.0,0.0,0.0
+frenchmedmcqa_58400148b8fd8d172040b4d1f7c325fedc22e88ba5abb06921cf656e01244eb9,frenchmedmcqa,"### Question :
+Un patient présentant un tableau de déshydratation intracellulaire et un syndrome polyuro-polydipsique subit un test de restriction hydrique à la suite duquel on ne constate pas de concentration des urines. L'injection de Minirin® ne change rien.
+(A) on a probablement un diabète insipide d'origine central
+(B) on a probablement un diabète insipide néphrogénique
+(C) on peut avoir comme cause une atteinte de la glande hypophyse
+(D) on a probablement une sécrétion inappropriée d'ADH
+(E) on a probablement une hypodipsie
+
+### Réponse :
+",La réponse correcte est (B) : on a probablement un diabète insipide néphrogénique,La réponse correcte est (A) : on a probablement un diabète insipide d'origine central,B,A,False,0.0,0.0,0.0
+frenchmedmcqa_bde39033c9927d39f7a95cd69158fa3e819e23f044b71927cc87b2fd10cca313,frenchmedmcqa,"### Question :
+Parmi ces propositions, laquelle n'est pas associée à l'insuffisance rénale chronique :
+(A) Augmentation de la créatininémie
+(B) Hyperuricémie
+(C) Hypercalcémie
+(D) Alcalose métabolique
+(E) Hypertension artérielle
+
+### Réponse :
+",La réponse correcte est (C) : Hypercalcémie,La réponse correcte est (C) : Hypercalcémie,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_11e7664bb2cc759f5ae9a8a56fbf7271e3bf1a47bb455c06a8b48e012675115f,frenchmedmcqa,"### Question :
+L'activation par la voie classique du complément débute par :
+(A) La production de la C1 estérase
+(B) L'activation du C1r
+(C) La fixation du C1q
+(D) Le clivage du C3
+(E) La fixation du facteur B
+
+### Réponse :
+",La réponse correcte est (C) : La fixation du C1q,La réponse correcte est (B) : L'activation du C1r,C,B,False,0.0,0.0,0.0
+frenchmedmcqa_46829bfa40ca4c664316e8573ac04f1005784c95f19e033b1cbfde51c07037dc,frenchmedmcqa,"### Question :
+Parmi ces propositions, laquelle de ces affirmations est fausse? Le candésartan
+(A) il est contre indiqué en cas de grossesse
+(B) il est une alternative aux IEC
+(C) il nécessite des précautions d'emploi en association avec le lithium
+(D) il est antagoniste des récepteurs AT1 de l'angiotensine II
+(E) Il nécessite une surveillance régulière de la créatininémie
+
+### Réponse :
+",La réponse correcte est (C) : il nécessite des précautions d'emploi en association avec le lithium,La réponse correcte est (A) : il est contre indiqué en cas de grossesse,C,A,False,0.0,0.0,0.0
+frenchmedmcqa_7e69d6239db8d00e278458ff607afc5e9fc894f5ba157b2627eea74f0613830d,frenchmedmcqa,"### Question :
+Concernant le paludisme, quelle est l'affirmation exacte parmi les suivantes ?
+(A) L'examen clinique est très contributif
+(B) Plasmodium malariae est responsable de la fièvre tierce bénigne
+(C) La goutte épaisse présente une sensibilité supérieure au frottis sanguin mais ne permet pas le diagnostic d'espèce
+(D) Des hypnozoïtes peuvent fréquemment être retrouvés dans le sang des patients infectés par Plasmodium falciparum
+(E) L'analyse du frottis sanguin se fait après coloration de Gram
+
+### Réponse :
+",La réponse correcte est (C) : La goutte épaisse présente une sensibilité supérieure au frottis sanguin mais ne permet pas le diagnostic d'espèce,La réponse correcte est (D) : Des hypnozoïtes peuvent fréquemment être retrouvés dans le sang des patients infectés par Plasmodium falciparum,C,D,False,0.0,0.0,0.0
+frenchmedmcqa_1102e17b559b590d47de6abdd9a3cf60282466805f6f9080ef1ab94c982330da,frenchmedmcqa,"### Question :
+Parmi ces propositions, laquelle de ces affirmations est fausse? Le coma hyperglycémique par acidose lactique :
+(A) Apparaît lentement
+(B) Est de mauvais pronostic
+(C) Peut être consécutif à la prise de metformine
+(D) Entraîne une déshydratation mixte
+(E) Produit une acidose
+
+### Réponse :
+",La réponse correcte est (A) : Apparaît lentement,La réponse correcte est (A) : Apparaît lentement,A,A,True,1.0,1.0,1.0
+frenchmedmcqa_3ff0528292bc9fe27177bdf7b8dc5d4537af9eeb379a8ef64d4bad4458ac6bd9,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, quelle est la réponse fausse ? L'oméprazole :
+(A) Est indiqué dans l'éradication d'Helicobacter pylori
+(B) Est fortement lié aux protéines plasmatiques
+(C) Ne doit pas être stoppé brutalement lorsqu'il est utilisé à forte dose
+(D) Son élimination est biliaire
+(E) Les effets indésirables sont assez rares
+
+### Réponse :
+",La réponse correcte est (D) : Son élimination est biliaire,La réponse correcte est (A) : Est indiqué dans l'éradication d'Helicobacter pylori,D,A,False,0.0,0.0,0.0
+frenchmedmcqa_a27700d9ed5ef18fd3fc938d8445d2a37aefe25daec62e2a03f62d0fdfa8f0fe,frenchmedmcqa,"### Question :
+Parmi les réponses suivantes à propos de la cholestase, laquelle est fausse :
+(A) Elle peut être extra hépatique
+(B) Elle provoque un ictère
+(C) L'électrophorèse des lipides permet de déceler la Lp(x)
+(D) On observe une augmentation des PAL
+(E) Elle provoque une diminution des sels biliaires
+
+### Réponse :
+",La réponse correcte est (E) : Elle provoque une diminution des sels biliaires,La réponse correcte est (E) : Elle provoque une diminution des sels biliaires,E,E,True,1.0,1.0,1.0
+frenchmedmcqa_b8c757b32a4dec8818aecbe732fc09073616288779d328d17c5079ca331dad73,frenchmedmcqa,"### Question :
+Concernant l'intoxication au méthanol, quelle est la proposition exacte :
+(A) Le méthanol est transformé en acide formique par l'ADH
+(B) La phase des signes cliniques apparaît en 2 à 4h
+(C) On observe souvent des troubles visuels
+(D) Le lavage gastrique peut s'effectuer même plusieurs heures après l'ingestion
+(E) La concentration toxique est supérieure à 1g/L
+
+### Réponse :
+",La réponse correcte est (C) : On observe souvent des troubles visuels,La réponse correcte est (C) : On observe souvent des troubles visuels,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_90a7d78c578f67ad8b40eecd09d68b36afdb5e9b796fc99c63aff4998185ccde,frenchmedmcqa,"### Question :
+Parmi les situations pathologiques suivantes, laquelle n'est pas une contre-indication absolue à l'emploi de l'aspirine ?
+(A) Ulcère gastro-intestinal en évolution
+(B) Lupus érythémateux disséminé
+(C) Insuffisance rénale
+(D) Broncho-pneumopathie chronique obstructive
+(E) Insuffisance hépatique
+
+### Réponse :
+",La réponse correcte est (D) : Broncho-pneumopathie chronique obstructive,La réponse correcte est (D) : Broncho-pneumopathie chronique obstructive,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_9ce95a8acab577e1c4e41da22e19bb99a01da718c542153ec0db8397ae6b613d,frenchmedmcqa,"### Question :
+Parmi ces propositions suivantes concernant le VIH, laquelle est exacte ?
+(A) C'est un virus à ADN
+(B) L'entrée du virus dans la cellule commence par la liaison de la gp41 au CD4 cellulaire
+(C) Selon le corécepteur utilisé (CCR5 ou CXCR4), on décrit des virus à tropisme cellulaire différent
+(D) L'homologie globale entre HIV1 et HIV2 est d'environ 90%
+(E) Dans les VIH1, le groupe O est le plus fréquent
+
+### Réponse :
+","La réponse correcte est (C) : Selon le corécepteur utilisé (CCR5 ou CXCR4), on décrit des virus à tropisme cellulaire différent","La réponse correcte est (C) : Selon le corécepteur utilisé (CCR5 ou CXCR4), on décrit des virus à tropisme cellulaire différent",C,C,True,1.0,1.0,1.0
+frenchmedmcqa_b6f9147d650feba7bdf7c477cb7c257423af4a4715c7e22dae9f8b7523f126af,frenchmedmcqa,"### Question :
+Quelle est la proposition inexacte. Concernant la spectrofluorimétrie moléculaire, l'intensité de fluorescence dépend de :
+(A) La longueur d'onde d'excitation
+(B) Le pH
+(C) La nature du solvant
+(D) La concentration de la solution
+(E) La charge de l'analyte
+
+### Réponse :
+",La réponse correcte est (E) : La charge de l'analyte,La réponse correcte est (E) : La charge de l'analyte,E,E,True,1.0,1.0,1.0
+frenchmedmcqa_0538c5ea7b1314ab684cc495f015fdf419636f60b3b2e74d6c29831e381fffc8,frenchmedmcqa,"### Question :
+Parmi les signes cliniques suivants, lequel est prépondérant pour le pronostic d'une intoxication ?
+(A) Bradypnée
+(B) Mydriase
+(C) Oligurie
+(D) Tachycardie
+(E) Somnolence
+
+### Réponse :
+",La réponse correcte est (D) : Tachycardie,La réponse correcte est (C) : Oligurie,D,C,False,0.0,0.0,0.0
+frenchmedmcqa_4efa1b67ab2bc45130e142b9ba9e4f1246823302d44c7f73201d5d1d4376be57,frenchmedmcqa,"### Question :
+Parmi les caractères suivants, lequel n'est pas retrouvé chez Streptococcus pneumoniae ?
+(A) Présence d'une capsule
+(B) Catalase négative
+(C) Survie en aérobiose et en anaérobiose
+(D) Production de toxine de Panton-Valentine
+(E) Hémolytique sur gélose au sang
+
+### Réponse :
+",La réponse correcte est (D) : Production de toxine de Panton-Valentine,La réponse correcte est (D) : Production de toxine de Panton-Valentine,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_0446a20c97752d3b55fa379446ec31e7c4a6830eb84614bef31f96733385712a,frenchmedmcqa,"### Question :
+A propos des syndromes myélodysplasiques, quelle est la proposition fausse ?
+(A) La fréquence de survenue est plus importante chez les personnes âgées que dans le reste de la population
+(B) On peut retrouver plus de 5% de blastes dans la moelle osseuse
+(C) Ce sont des pathologies d'évolution lente et peu symptomatiques
+(D) On observe des anomalies des trois lignées sanguines en même temps
+(E) Le myélome multiple n'est pas un syndrome myélodysplasique
+
+### Réponse :
+",La réponse correcte est (D) : On observe des anomalies des trois lignées sanguines en même temps,La réponse correcte est (E) : Le myélome multiple n'est pas un syndrome myélodysplasique,D,E,False,0.0,0.0,0.0
+frenchmedmcqa_07587d6740702ea878e3dca44b1ffe01f75aa5d2105018c72356171218d52628,frenchmedmcqa,"### Question :
+Quel est le principal neuro-transmetteur impliqué dans la maladie de Parkinson ?
+(A) Adrénaline
+(B) Acétylcholine
+(C) Dopamine
+(D) GABA
+(E) Sérotonine
+
+### Réponse :
+",La réponse correcte est (C) : Dopamine,La réponse correcte est (C) : Dopamine,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_53ab20e37a80a04a4a29b69c3ce6b912bbafac91ec3058b767c7dea8e5a4e2f4,frenchmedmcqa,"### Question :
+Parmi les réponses suivantes concernant l'infarctus du myocarde, quelle est celle qui est exacte ?
+(A) Il correspond à une nécrose non ischémique du myocarde
+(B) Il est réversible
+(C) Il montre une onde ST de nécrose à l'ECG
+(D) L'apparition peut être spontanée
+(E) Aucune de ces réponses n'est exacte
+
+### Réponse :
+",La réponse correcte est (C) : Il montre une onde ST de nécrose à l'ECG,La réponse correcte est (D) : L'apparition peut être spontanée,C,D,False,0.0,0.0,0.0
+frenchmedmcqa_3698ec63e743b140de57517db30b7001c9e11669dd34fd7eab4bd06f729f54a4,frenchmedmcqa,"### Question :
+Indiquer parmi les hormones suivantes, celle qui est sécrétée par les cellules A des ilots de Langerhans ?
+(A) Insuline
+(B) Sécrétine
+(C) Bombésine
+(D) Glucagon
+(E) Gastrine
+
+### Réponse :
+",La réponse correcte est (D) : Glucagon,La réponse correcte est (A) : Insuline,D,A,False,0.0,0.0,0.0
+frenchmedmcqa_9f84a01a6ca29ddb29729c4ed068e92758c22541fe05b1e24daf26d0d082c1bc,frenchmedmcqa,"### Question :
+Quelle surveillance est obligatoire lors d'un traitement par Clozapine?
+(A) Fonction hépatique
+(B) Fonction rénale
+(C) Absence de grossesse chez la femme
+(D) Glycémie
+(E) NFS
+
+### Réponse :
+",La réponse correcte est (E) : NFS,La réponse correcte est (A) : Fonction hépatique,E,A,False,0.0,0.0,0.0
+frenchmedmcqa_bf18fdb293e945f41b01a429b2ec79e79f0bc2bc0e6795e1685a16642eafa328,frenchmedmcqa,"### Question :
+Concernant la chromatographie, quelle est la réponse fausse ?
+(A) La chromatographie est une méthode séparative.
+(B) Le temps mort est le temps entre l'injection et l'instant correspondant sur le chromatogramme au maximum du pic du premier composant détecté.
+(C) En chromatographie phase liquide, le volume mort peut être exprimé par le produit du débit et du temps mort.
+(D) La sélectivité ne donne pas d'information sur la forme des pics.
+(E) Une analyse est quantitative si la résolution est supérieure ou égale à 1.5.
+
+### Réponse :
+",La réponse correcte est (B) : Le temps mort est le temps entre l'injection et l'instant correspondant sur le chromatogramme au maximum du pic du premier composant détecté.,La réponse correcte est (E) : Une analyse est quantitative si la résolution est supérieure ou égale à 1.5.,B,E,False,0.0,0.0,0.0
+frenchmedmcqa_8551e0cd45ba95f651ab629fc3db7bc5cfb82a7fa9b1b4a66dfe239f45221e98,frenchmedmcqa,"### Question :
+Quel antibiotique parmi les suivants n'est pas une céphalosporine de troisième génération :
+(A) Céfixime
+(B) Ceftriaxone
+(C) Cefazoline
+(D) Cefotaxime
+(E) Cefpodoxime
+
+### Réponse :
+",La réponse correcte est (C) : Cefazoline,La réponse correcte est (E) : Cefpodoxime,C,E,False,0.0,0.0,0.0
+frenchmedmcqa_6a0a5b7d76742bfa5c2dda56ad76a2cdef081e604fa77c5558a12f3381ce297a,frenchmedmcqa,"### Question :
+Quelles sont les affirmations exactes à propos de la maladie de Willebrand :
+(A) Les types 1 et 2 sont des déficits quantitatifs.
+(B) Il s'agit d'une anomalie constitutionnelle se répercutant seulement sur l'hémostase.
+(C) La desmopressine est le traitement de première intention dans les types 1 et 3.
+(D) Le facteur de Willebrand est synthétisé au niveau hépatique principalement.
+(E) Le type 2B peut être associé à une thrombopénie.
+
+### Réponse :
+",La réponse correcte est (E) : Le type 2B peut être associé à une thrombopénie.,La réponse correcte est (D) : Le facteur de Willebrand est synthétisé au niveau hépatique principalement.,E,D,False,0.0,0.0,0.0
+frenchmedmcqa_54c8ad68b15b63294bee85471d47e1291fc61a7b320deebf41e5c76fc0a73f08,frenchmedmcqa,"### Question :
+L'association aspirine-prasugrel est poursuivie pendant un an chez un patient ayant présenté un infarctus. Le patient doit être opéré en urgence pour une appendicite. Quelle est l'attitude à adopter ?
+(A) L'aspirine et le prasugrel doivent être poursuivis car ils sont indispensables dans le traitement préventif antithrombotique
+(B) Cette association peut être interrompue et remplacée par de l'héparine
+(C) L'aspirine doit être arrêtée et remplacée
+(D) Le prasugrel doit être arrêté définitivement sans être remplacé
+(E) Le prasugrel doit être arrêté alors que l'aspirine est poursuivie puis après l'intervention le prasugrel est repris
+
+### Réponse :
+",La réponse correcte est (E) : Le prasugrel doit être arrêté alors que l'aspirine est poursuivie puis après l'intervention le prasugrel est repris,La réponse correcte est (B) : Cette association peut être interrompue et remplacée par de l'héparine,E,B,False,0.0,0.0,0.0
+frenchmedmcqa_26491244f02622a9ff4d271425b309266fe652cb1cdb10f9e0c36ae13c2b60a1,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant l'aspirine, une seule est vraie. Laquelle ?
+(A) Elle se trouve dans l'estomac essentiellement sous forme ionisée
+(B) A dose massive, son élimination hépatique devient prépondérante
+(C) En cas de surdosage, on observe une augmentation de la production d'ATP
+(D) En cas de surdosage, elle provoque une hyperthermie
+(E) Elle n'est pas adsorbée par le charbon activé
+
+### Réponse :
+","La réponse correcte est (D) : En cas de surdosage, elle provoque une hyperthermie","La réponse correcte est (B) : A dose massive, son élimination hépatique devient prépondérante",D,B,False,0.0,0.0,0.0
+frenchmedmcqa_91a910b993126429ad01973b13925f4e7d717e9837975af6a05cc535a1daeb90,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, indiquer celle qui est exacte. Le test d'Ames permet d'évaluer, un effet :
+(A) Irritant
+(B) Corrosif
+(C) Sensibilisant
+(D) Tératogène
+(E) Mutagène
+
+### Réponse :
+",La réponse correcte est (E) : Mutagène,La réponse correcte est (E) : Mutagène,E,E,True,1.0,1.0,1.0
+frenchmedmcqa_9138e7479af4e5211f32c4d7c5b9269f2893d924f596c2775f91d82551a7b147,frenchmedmcqa,"### Question :
+Parmi les médicaments suivants, lequel est indiqué dans le traitement de la toxoplasmose chez la femme enceinte au cours du premier trimestre de la grossesse ?
+(A) Sulfadiazine
+(B) Pyriméthamine
+(C) Métronidazole
+(D) Spiramycine
+(E) Fluconazole
+
+### Réponse :
+",La réponse correcte est (D) : Spiramycine,La réponse correcte est (B) : Pyriméthamine,D,B,False,0.0,0.0,0.0
+frenchmedmcqa_dadd9df0b4c538503f97f78276b2bf48c452d203a20ed6a101b191c29504fc90,frenchmedmcqa,"### Question :
+Quelle est la proposition exacte ? En épidémiologie, lorsqu'on est en présence d'une variable liée à la fois à l'exposition (à un facteur de risque) et à la maladie étudiée, on parle :
+(A) D'un biais de sélection
+(B) D'un biais de classement
+(C) D'un facteur de confusion
+(D) D'une enquête exposés - non exposés
+(E) D'une fluctuation d'échantillonnage
+
+### Réponse :
+",La réponse correcte est (C) : D'un facteur de confusion,La réponse correcte est (C) : D'un facteur de confusion,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_d586027a0d955cb1b8a0f3eb63c9c7aeb58f6c0d17b3d6cc3cdb02cb2629724f,frenchmedmcqa,"### Question :
+Les résultats suivants : pH = 7,25 ; Sg - A - pCO2 = 58 mmHg ; Sg - A - HCO3 - = 26 mmol/L sont caractéristiques du trouble acidobasique suivant :
+(A) Acidose métabolique avec compensation respiratoire
+(B) Alcalose métabolique avec compensation respiratoire
+(C) Acidose respiratoire chronique avec compensation rénale
+(D) Alcalose respiratoire chronique avec compensation rénale
+(E) Acidose respiratoire aiguë non compensée
+
+### Réponse :
+",La réponse correcte est (E) : Acidose respiratoire aiguë non compensée,La réponse correcte est (A) : Acidose métabolique avec compensation respiratoire,E,A,False,0.0,0.0,0.0
+frenchmedmcqa_f8840535c02cc67ca20f7b51f92ca2645dde2810bdec8b9e6a4828aa9ca86f3c,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant un sujet hétérozygote pour une maladie transmise sur un mode dominant à pénétrance complète, indiquer celle qui est exacte :
+(A) Il est obligatoirement atteint de la maladie
+(B) Il a toujours un parent atteint
+(C) Il présente un génotype normal
+(D) Il présente un phénotype normal
+(E) Il transmet la maladie à tous ses enfants
+
+### Réponse :
+",La réponse correcte est (A) : Il est obligatoirement atteint de la maladie,La réponse correcte est (D) : Il présente un phénotype normal,A,D,False,0.0,0.0,0.0
+frenchmedmcqa_d0f974df4406bf2f933962bf0d0c0447a80d66719031e3b4a35c2ff3b3ccc594,frenchmedmcqa,"### Question :
+L'adrénaline stimule tous ces processus métaboliques sauf un. Lequel?
+(A) Glycolyse
+(B) Lipolyse
+(C) Néoglucogénèse
+(D) Glycogénolyse
+(E) Cétogénèse
+
+### Réponse :
+",La réponse correcte est (E) : Cétogénèse,La réponse correcte est (C) : Néoglucogénèse,E,C,False,0.0,0.0,0.0
+frenchmedmcqa_1f3b737b3ec97b278f300c898845e2356ccac519a84a2de909f45cdb5e79198d,frenchmedmcqa,"### Question :
+Parmi les méthodes électrochimiques suivantes, quelle est celle qui peut-être qualifiée de voltampérométrique ?
+(A) Ampérométrie
+(B) Polarographie
+(C) Conductimétrie
+(D) Potentiométrie à intensité nulle
+(E) Potentiométrie à intensité imposée
+
+### Réponse :
+",La réponse correcte est (B) : Polarographie,La réponse correcte est (A) : Ampérométrie,B,A,False,0.0,0.0,0.0
+frenchmedmcqa_7751960e61f58777325bbab2e60a54055e88be9665ed919b29fc2b6bcf6cc27a,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant la ciclosporine, une seule est fausse. Laquelle?
+(A) Elle inhibe la synthèse de l'interleukine-2
+(B) Elle est néphrotoxique
+(C) Elle est utilisée dans les formes sévères de polyarthrite rhumatoïde
+(D) Son association avec les inhibiteurs de l'HMG-CoA réductase nécessite des précautions d'emploi
+(E) Elle possède un métabolisme hépatique négligeable
+
+### Réponse :
+",La réponse correcte est (E) : Elle possède un métabolisme hépatique négligeable,La réponse correcte est (E) : Elle possède un métabolisme hépatique négligeable,E,E,True,1.0,1.0,1.0
+frenchmedmcqa_6821e68094b1a7cd4e3660642fc0b7d9dfa8606ec57a13b93e459e2d835e0152,frenchmedmcqa,"### Question :
+Parmi les affirmations suivantes, l'une d'entre elles est inexacte. Laquelle? Dans le cadre des réactions concernant le devenir de la fonction amine des acides aminés:
+(A) La transamination est l'une des plus fréquentes
+(B) Le transfert de groupement aminé s'effectue le plus souvent sur l'alpha-céto-glutarate
+(C) Les transaminases sont des enzymes exclusivement cytosoliques
+(D) l'activité transaminasique est réversible
+(E) l'augmentation du taux sérique des transaminases traduit une altération
+
+### Réponse :
+",La réponse correcte est (C) : Les transaminases sont des enzymes exclusivement cytosoliques,La réponse correcte est (C) : Les transaminases sont des enzymes exclusivement cytosoliques,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_b1f9f1de8c497ab6dc989227ebaa01dfa1b2643209bf6b16bc0fe08d6ab55214,frenchmedmcqa,"### Question :
+A propos de l'amphotéricine B (FUNGIZONE®), laquelle de ces propositions est fausse?
+(A) Administrée per os, sa résorption digestive est médiocre
+(B) Cet antifongique appartient à la classe des dérivés polyéniques
+(C) Son hépatotoxicité impose des précautions d'emploi au cours de son administration intra-veineuse
+(D) Son site d'action sur la cellule fongique est la membrane
+(E) Son spectre s'étend aux levures et aux Aspergillus
+
+### Réponse :
+",La réponse correcte est (C) : Son hépatotoxicité impose des précautions d'emploi au cours de son administration intra-veineuse,"La réponse correcte est (A) : Administrée per os, sa résorption digestive est médiocre",C,A,False,0.0,0.0,0.0
+frenchmedmcqa_ba127dc297feb9c2f8b1915635ac795f97bf93a92ab7262e5e38101ceea51b78,frenchmedmcqa,"### Question :
+Parmi les affirmations suivantes concernant Cryptococcus neoformans, une seule est fausse, laquelle?
+(A) Cette levure est encapsulée
+(B) Elle a un tropisme pour le système nerveux central
+(C) La contamination est d'origine endogène
+(D) La maladie survient le plus souvent dans un contexte d'immunodépression
+(E) Elle est habituellement sensible à l'amphotéricine B (FUNGIZONE)
+
+### Réponse :
+",La réponse correcte est (C) : La contamination est d'origine endogène,La réponse correcte est (C) : La contamination est d'origine endogène,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_1125ebfc90138b066ce7b116ec3daaddb2646c36ffa7d544641ff42c8a484479,frenchmedmcqa,"### Question :
+Parmi les affirmations suivantes caractérisant l'ictère physiologique du nouveau-né, une seule est fausse. Laquelle?
+(A) Il existe une immaturité hépatique transitoire
+(B) Peut se rencontrer chez le prématuré
+(C) L'ictère apparaît vers le 2ème ou 3ème jour
+(D) La bilirubine totale sérique est le plus souvent supérieure à 300 micromol/L
+(E) Maladie de gravite minime
+
+### Réponse :
+",La réponse correcte est (D) : La bilirubine totale sérique est le plus souvent supérieure à 300 micromol/L,La réponse correcte est (D) : La bilirubine totale sérique est le plus souvent supérieure à 300 micromol/L,D,D,True,1.0,1.0,1.0
+frenchmedmcqa_e63b02a359038b9ca6c8a0547ea076cbe90b457baa4332232697279db1a2124b,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, une seule est fausse. Laquelle? Dans la cytolyse hépatique, les activités plasmatiques des enzymes suivantes sont augmentées:
+(A) ALAT
+(B) ASAT
+(C) CK
+(D) LDH
+(E) OCT
+
+### Réponse :
+",La réponse correcte est (C) : CK,La réponse correcte est (C) : CK,C,C,True,1.0,1.0,1.0
+frenchmedmcqa_29b21fc980d660f3b33bfed6c59a269d6cb4c9512764eccd16718c813a77f823,frenchmedmcqa,"### Question :
+Sur quel prélèvement est habituellement effectué le diagnostic d'une giardiase
+(A) Crachats
+(B) Selles
+(C) Sang
+(D) Urine
+(E) Peau
+
+### Réponse :
+",La réponse correcte est (B) : Selles,La réponse correcte est (B) : Selles,B,B,True,1.0,1.0,1.0
+frenchmedmcqa_d7fc1d1b5eae76dd216883101221c3cb6e3faca85b76109d82f4e38cb3430cc1,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, une seule est fausse. Laquelle ? La norfloxacine (NOROXINE®)
+(A) Est une fluoroquinolone
+(B) Est réservée au traitement des infections génito-urinaires
+(C) Est indiquée dans l'urétrite gonococcique
+(D) Est contre-indiquée en dessous de 15 ans
+(E) Est un métabolite de l'ofloxacine
+
+### Réponse :
+",La réponse correcte est (E) : Est un métabolite de l'ofloxacine,La réponse correcte est (C) : Est indiquée dans l'urétrite gonococcique,E,C,False,0.0,0.0,0.0
+frenchmedmcqa_3b1f5193a0a9351cdfb367fe65952749a4f7ebcb2800414db5f66445c0c6a727,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant les comprimés, laquelle est exacte?
+(A) Les comprimés nus doivent être désagrégés en moins de 15 secondes
+(B) L'amidon de maïs est utilisé comme agent de désagrégation
+(C) Le pelliculage est un enrobage au sucre
+(D) L'enrobage par la carboxyméthylcellulose assure la gastrorésistance des comprimés
+(E) La granulation diminue les propriétés d'écoulement du mélange pour compression
+
+### Réponse :
+",La réponse correcte est (B) : L'amidon de maïs est utilisé comme agent de désagrégation,La réponse correcte est (D) : L'enrobage par la carboxyméthylcellulose assure la gastrorésistance des comprimés,B,D,False,0.0,0.0,0.0
+frenchmedmcqa_69530a7ef20cb903da390d971e98a3c5a34099fdc830f821e532043c6f28c864,frenchmedmcqa,"### Question :
+Au cours de la leucémie lymphoïde chronique, on rencontre fréquemment:
+(A) Des douleurs osseuses
+(B) Une lymphocytose uniquement sanguine
+(C) Une augmentation des polynucléaires basophiles
+(D) Une hypogammaglobulinémie
+(E) Une protéinurie de Bence Jones
+
+### Réponse :
+",La réponse correcte est (D) : Une hypogammaglobulinémie,La réponse correcte est (A) : Des douleurs osseuses,D,A,False,0.0,0.0,0.0
+frenchmedmcqa_be14b1eeb7a06aa36d8eb999dfe4ecef2eaaf6339867e8778ee2af9faaddd3f1,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant le potassium, une seule est exacte. Laquelle ? La part intra-cellulaire du potassium est de:
+(A) 98%
+(B) 50%
+(C) 10%
+(D) 40%
+(E) 20%
+
+### Réponse :
+",La réponse correcte est (A) : 98%,La réponse correcte est (A) : 98%,A,A,True,1.0,1.0,1.0
+frenchmedmcqa_c181935cd53290566a2f3ae86f29ea0c1413442c9fbacb77c3ec05d6b2eba015,frenchmedmcqa,"### Question :
+Parmi les affirmations suivantes concernant les anti-inflammatoires stéroïdiens, une seule est fausse. Laquelle?
+(A) Ils inhibent la synthèse des prostaglandines
+(B) Leur emploi ne favorise pas la survenue d'une tuberculose
+(C) Leur administration à forte dose pendant 24h, dans le traitement du choc anaphylactique, peut être arrêtée sans précaution particulière
+(D) Leur utilisation prolongée chez l'enfant retarde la croissance
+(E) Ils sont susceptibles de déclencher un diabète
+
+### Réponse :
+",La réponse correcte est (B) : Leur emploi ne favorise pas la survenue d'une tuberculose,"La réponse correcte est (C) : Leur administration à forte dose pendant 24h, dans le traitement du choc anaphylactique, peut être arrêtée sans précaution particulière",B,C,False,0.0,0.0,0.0
+frenchmedmcqa_9211e3d6e88c89650efaae4cdda979655b431dab230f473a23512e93ef7f1ef5,frenchmedmcqa,"### Question :
+Le traitement de la fasciolose fait appel à :
+(A) La déhydro-émétine
+(B) Au thiabendazole (MINTEZOL)
+(C) Au niridazole (AMBILHAR)
+(D) A la diéthylcarbamazine (NOTEZINE)
+(E) Au flubendazole (FLUVERMAL)
+
+### Réponse :
+",La réponse correcte est (A) : La déhydro-émétine,La réponse correcte est (B) : Au thiabendazole (MINTEZOL),A,B,False,0.0,0.0,0.0
+frenchmedmcqa_76d3acf326e0c2c4ca6c8c2c2f6f354b75cdb0206cc6ff4b32b206fb95cab092,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes concernant les agents responsables habituels des méningites primitives purulentes bactériennes du nouveau-né, quelle est celle qui est exacte?
+(A) Listeria monocytogenes
+(B) Chlamydia trachomatis
+(C) Mycobacterium tuberculosis
+(D) Streptococcus du groupe C
+(E) Staphylococcus aureus
+
+### Réponse :
+",La réponse correcte est (A) : Listeria monocytogenes,La réponse correcte est (D) : Streptococcus du groupe C,A,D,False,0.0,0.0,0.0
+frenchmedmcqa_47911646b7d53bb2440917501716bae5113e0d38688d409d9eacd017218a4726,frenchmedmcqa,"### Question :
+Parmi les propositions suivantes, donner la (les) réponse(s) exacte(s) : Trichomonas vaginalis :
+(A) Est un Apicomplexe
+(B) Se transmet par des kystes
+(C) Ne parasite que la femme
+(D) Est sensible au Métronidazole (FLAGYL®)
+(E) Ne se cultive pas in vitro
+
+### Réponse :
+",La réponse correcte est (D) : Est sensible au Métronidazole (FLAGYL®),La réponse correcte est (D) : Est sensible au Métronidazole (FLAGYL®),D,D,True,1.0,1.0,1.0

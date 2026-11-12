@@ -731,3 +731,17 @@ gains automatiques restent faibles : le jugement en aveugle SFT vs DPO v2
 (`blind_judgment.py`, items prets dans `outputs/response_eval/`) et une
 relecture clinique sont necessaires pour conclure. Le sous-triage se traite
 par la regle de decision au cout, pas par la DPO.
+
+### Jugement en aveugle et choix du modele final - 2026-11-12
+
+60 cas annotes de l'echantillon fixe, reponses du SFT et de la DPO v2 en ordre
+aleatoire, notees par un LLM (Claude) sur la grille de
+`docs/evaluation_reponses.md` (`outputs/response_eval/jugement_aveugle.md`) :
+SFT prefere 20 fois, DPO v2 8 fois, 32 egalites (test du signe p = 0,036) ;
+notes moyennes 3,00 contre 2,90. QCM FrenchMedMCQA (108 questions) : 50,0 %
+contre 49,1 %. Reponses signalees par `safety_check` : 15 contre 20 sur 80.
+
+La DPO v2 n'apporte rien de mesurable : **le modele livre est le SFT + triage**,
+avec la regle de decision au cout (alpha = 0,5, temperature 2,25). Les deux
+DPO restent documentees comme experiences. Detail et seuils :
+`docs/evaluation_criteria.md`.

@@ -1,10 +1,12 @@
+import argparse
 import re
-import sys
+from pathlib import Path
 
 import pandas as pd
 
-INPUT_PATH = sys.argv[1] if len(sys.argv) > 1 else "outputs/sft_qualitative_examples.csv"
-OUTPUT_PATH = "outputs/safety_flags.csv"
+# Par defaut : les reponses du modele final sur l'echantillon fixe du test (evaluate_responses).
+DEFAULT_INPUT = Path("outputs") / "response_eval" / "generations_6_sft_triage_dpo_qualite.csv"
+OUTPUT_DIR = Path("outputs") / "final_eval"
 
 NUMBER_RE = re.compile(r"\d+(?:[.,]\d+)?")
 
@@ -33,7 +35,12 @@ def dangerous_language(generated: str) -> list:
 
 
 def main() -> None:
-    df = pd.read_csv(INPUT_PATH)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input", nargs="?", type=Path, default=DEFAULT_INPUT)
+    args = parser.parse_args()
+    # Colonnes de evaluate_responses (prompt, reponse) ou de l'ancien format (instruction, reference).
+    df = pd.read_csv(args.input).rename(columns={"prompt": "instruction", "reponse": "reference", "source": "source_dataset"})
+    df["generated"] = df["generated"].fillna("")
 
     flags = []
     for _, row in df.iterrows():
@@ -53,16 +60,18 @@ def main() -> None:
             })
 
     flagged_df = pd.DataFrame(flags)
-    flagged_df.to_csv(OUTPUT_PATH, index=False)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    output_path = OUTPUT_DIR / f"safety_flags_{args.input.stem.removeprefix('generations_')}.csv"
+    flagged_df.to_csv(output_path, index=False)
 
-    print(f"{len(df)} exemples analyses depuis {INPUT_PATH}, {len(flagged_df)} signales pour revue humaine.")
+    print(f"{len(df)} exemples analyses depuis {args.input}, {len(flagged_df)} signales pour revue humaine.")
     print(
         "Rappel : ceci est une heuristique de premier filtre (chiffres absents de "
         "l'instruction/reference, formulations rassurantes a risque) - toute ligne "
         "signalee doit etre relue par un expert clinique, et l'absence de signalement "
         "ne garantit pas l'absence de risque medical."
     )
-    print(f"Detail ecrit dans {OUTPUT_PATH}")
+    print(f"Detail ecrit dans {output_path}")
 
 
 if __name__ == "__main__":

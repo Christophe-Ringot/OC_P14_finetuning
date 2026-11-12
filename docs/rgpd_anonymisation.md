@@ -1,90 +1,41 @@
-# Anonymisation RGPD du corpus SFT
+# Anonymisation RGPD du corpus
 
-Perimetre : dataset SFT (`data/processed/sft_dataset.csv`, 5001 paires). Le
-dataset DPO (UltraMedical-Preference) n'est pas encore traite, cf. section
-"Limites et suite".
+Perimetre : le corpus SFT publie sur Hugging Face (`christophe-ringot/p14-medical-triage-sft`, 6 747 paires) et tout ce qui en derive (paires DPO de triage, jeu d'evaluation clinique). Script : `src/triage/data/anonymize.py`, etape du pipeline entre le nettoyage (`clean_harmonize.py`) et l'annotation (`annotate_priority.py`).
 
-## Outillage
+## Risque de depart
 
-- `presidio-analyzer` + `presidio-anonymizer`
-- Moteurs linguistiques : `fr_core_news_md` (FR), `en_core_web_md` (EN), via
-  un `NlpEngineProvider` multilingue partage par les deux langues du corpus.
-- Script : `scripts/anonymize_sft.py`
+Les trois sources ne sont pas des dossiers patients :
 
-## Pourquoi le risque de depart est structurellement faible
+- **MediQAl** (4 969 lignes) et **FrenchMedMCQA** (1 077) : questions d'examen de medecine et de pharmacie. Les cas cliniques sont des vignettes pedagogiques, mais elles citent des patients ("Monsieur G.", "Marie, 6 ans") qu'il faut traiter comme s'ils etaient reels.
+- **MedQuAD** (701) : encyclopedie sante du NIH, sans donnee individuelle.
 
-Les 4 sources du corpus SFT ne sont pas des dossiers patients, mais des
-corpus publics deja depersonnalises par construction :
+Le risque est faible par construction ; il est controle plutot que suppose.
 
-- **FrenchMedMCQA** / **mediqal** : banques de questions d'examen de
-  pharmacie/medecine. Les "cas cliniques" sont des vignettes pedagogiques
-  fictives (patients denommes "Monsieur M." ou par un prenom d'emprunt), pas
-  des dossiers reels.
-- **MedQuAD** : encyclopedie sante publique (NIH), question/reponse sur des
-  maladies, sans donnee individuelle.
+## Methode
 
-Un vrai risque RGPD n'etait donc pas attendu a priori, mais un controle
-systematique a ete fait plutot que suppose.
+Appliquee aux colonnes `instruction`, `contexte_patient` et `reponse`. Chaque texte distinct est anonymise une seule fois (cache), pour qu'un cas repete sur plusieurs questions soit masque a l'identique.
 
-## Methodologie
-
-1. Scan complet des 5001 lignes (instruction + reponse) avec l'analyzer
-   Presidio multilingue, sur deux groupes de categories :
-   - **Categories structurees a faible taux de faux positifs** (regles
-     regex/checksum, peu sensibles au vocabulaire medical) :
-     `EMAIL_ADDRESS`, `PHONE_NUMBER`, `CREDIT_CARD`, `IBAN_CODE`, `US_SSN`,
-     `IP_ADDRESS`.
-   - **Categories dependantes du NER spaCy** : `PERSON`, `LOCATION`,
-     `ORGANIZATION`.
-2. Les deux groupes ont ete evalues separement avant toute decision de
-   masquage automatique.
-
-## Resultats du scan complet
-
-| Categorie | Detections (5001 lignes) | Nature |
+| Entite | Detection | Remplacement |
 |---|---|---|
-| EMAIL_ADDRESS / PHONE_NUMBER / CREDIT_CARD / IBAN_CODE / US_SSN / IP_ADDRESS | 20 | Toutes des coordonnees d'organismes publics (lignes d'ecoute NIH, adresse email institutionnelle `adear@nia.nih.gov`, standard NIH), issues de MedQuAD. Aucune donnee personnelle de patient. Quelques faux positifs (taux epidemiologiques du type `45/100 000`). |
-| PERSON | 5 733 | Quasi-totalite de faux positifs : eponymes de maladies (`Cushing`, `Waaler Rose`), noms de bacteries (`Campylobacter jejuni`, `Clostridium`), lettres de reponses QCM isolees. |
-| LOCATION | 17 209 | Quasi-totalite de faux positifs : noms de molecules (`Colchicine`, `Ciprofloxacine`), lettres de QCM isolees. |
-| ORGANIZATION | 7 547 | Quasi-totalite de faux positifs : acronymes medicaux (`IgA`, `IgG`, `CCMH`, `LLC`). |
+| Civilite + nom ("Monsieur G.", "Mme Le Bihan") | expression reguliere | `Monsieur X.` |
+| Prenom suivi d'un age ("Leonie, 69 ans") | expression reguliere, confirmee par spaCy `fr_core_news_md` (nom propre) | `X` |
+| Adresse e-mail | Presidio (`EMAIL_ADDRESS`) | `[COORDONNEES]` |
 
-Aucune mention de patient reel identifiable n'a ete trouvee dans l'echantillon
-complet.
+Ecartes apres essai sur le corpus complet :
 
-## Decision et justification
-
-- **Masquage systematique** des 6 categories structurees a risque reel
-  (remplacement par `<ENTITY_TYPE>`), y compris les coordonnees d'organismes
-  publics : une politique uniforme ("on masque tout ce qui ressemble a un
-  contact structure") est plus simple a auditer qu'une politique au cas par
-  cas, et evite un autre risque independant du RGPD : un modele fine-tune
-  qui "recite" un numero d'urgence memorise depuis le dataset d'entrainement
-  peut se tromper a l'inference (hallucination) ; ce type d'information doit
-  venir d'une source verifiee au moment de la reponse, pas de la
-  memorisation du corpus.
-- **Pas de masquage automatique** pour PERSON / LOCATION / ORGANIZATION : le
-  taux de faux positifs mesure (quasi 100%) signifie que masquer ces
-  categories detruirait le contenu medical correct (ex. remplacer
-  "Carbimazole" ou "maladie de Cushing" par `<PERSON>`) pour un gain de vie
-  privee nul, puisqu'aucune donnee patient reelle n'a ete trouvee dans ces
-  categories lors du scan complet.
+- **PERSON / LOCATION / ORGANIZATION de Presidio** : quasi 100 % de faux positifs sur un texte medical (eponymes comme "Cushing", molecules, acronymes biologiques). Les masquer detruirait le contenu sans gain de confidentialite.
+- **Telephone, IBAN, carte bancaire** : les seules detections etaient des taux epidemiologiques ("3/100 000") ou des numeros publics du NIH.
 
 ## Resultat
 
-- `data/processed/sft_dataset_anonymized.csv` : 5001 lignes, revalidees avec
-  le schema Pandera `sft_schema` apres masquage.
-- `outputs/anonymization_report.csv` : trace de chaque entite masquee
-  (id de ligne, champ, type d'entite, texte original) — auditabilite de la
-  transformation.
-- Pipeline deterministe et re-executable (`python -m scripts.anonymize_sft`).
+- 1 402 lignes sur 6 747 modifiees.
+- 588 civilites masquees (200 formes distinctes), 22 prenoms (13 distincts), 0 adresse e-mail.
+- Corpus revalide par le schema Pandera `corpus_schema` apres masquage.
+- Traces (non versionnees, car elles contiennent le texte masque) : `data/interim/anonymization_report.csv` (chaque forme masquee et son nombre d'occurrences) et `anonymization_sample.csv` (30 exemples avant / apres, pour relecture).
 
-## Limites et suite
+## Limites
 
-- Le dataset **DPO** (UltraMedical-Preference) n'a pas encore ete traite par
-  ce pipeline — reporte a une iteration ulterieure.
-- Cette conclusion ("risque structurellement faible") est propre aux 4
-  sources publiques utilisees ici. Si une phase ulterieure du projet integre
-  de vraies donnees hospitalieres (ex. journaux de triage du CHSA), le meme
-  pipeline Presidio devra etre reapplique avec une revue manuelle de
-  PERSON/LOCATION, car l'hypothese de depart (pas de patients reels) ne
-  tiendra plus.
+- Les dates, villes et etablissements cites dans les vignettes sont conserves : ils sont fictifs et utiles au raisonnement clinique ("revenu de Guadeloupe", "en janvier", "a Nice").
+- Un prenom sans age a cote n'est pas detecte. La relecture de l'echantillon n'en a pas montre, mais elle n'est pas exhaustive.
+- Le jeu DPO UltraMedical (anglais, 6 009 lignes) n'est pas passe dans ce pipeline : il n'est plus utilise, les paires DPO du projet sont construites sur le corpus deja anonymise (`build_dpo_triage.py`).
+- Avec de vraies donnees du CHSA (journaux de triage), ce pipeline ne suffirait pas : il faudrait des pseudonymes coherents, le masquage des dates et lieux reels, une analyse d'impact (AIPD) et une relecture manuelle avant tout entrainement.

@@ -1,0 +1,214 @@
+source_dataset,instruction,reference,generated,extra_numbers_in_generation,risky_phrases
+mediqal_oeq,"### Cas clinique :
+Yvan Y, est un jeune homme de 17 ans, admis 48 heures auparavant en service de réanimation polyvalente pour un coma profond aréactif. Ce coma est d'origine traumatique, secondaire à un accident de moto alors que le jeune homme roulant à grande vitesse sans casque, se serait encastré dans un pylône. Il est actuellement assisté par ventilation mécanique, il n'a plus de lyse et son hémodynamique est instable.
+
+### Question :
+Les parents vous demandent de leur remettre un certificat médical pour la compagnie d'assurance sur les causes du décès. Rédigez de façon simple, ce certificat.
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_maximale]
+
+""Je soussigné Docteur X, certifie que le décès de Monsieur X. Y résulte d'une cause accidentelle . Fait à NICE, le …. . Certificat remis en mains propres au père de l'intéressé , à sa demande . Signature "".","[Niveau de priorité estimé : urgence_maximale]
+
+Certificat
+Le défunt était hospitalisé depuis 2 jours avec une intoxication aiguë due au choc hypovolémique lié à l'hypotension artérielle systolique (HAS) qui s'est traduite par des troubles neurologiques.
+Il avait été opéré d'une fracture crânienne sous anesthésie générale. Le traitement chirurgical ne pouvait être poursuivi qu'en raison de l'état général insuffisant du patient.
+La complication majeure observée était la décompensation fonctionnelle liée aux troubles neurologiques dus à l'intoxication aiguë. La mort survient probablement suite à cette complication.",2,
+mediqal_oeq,"### Cas clinique :
+Monsieur X., 25 ans consulte aux urgences pour fièvre et céphalées. Il n'a pas d'antécédent notable. Il est étudiant à Paris. Il est venu à Nice dans sa famille avec son amie pour les vacances. Ils sont arrivés le matin par avion. En débarquant, il s'est senti fiévreux avec des céphalées qui n'ont pas cédé à la prise de paracétamol. Le médecin qu'ils ont vu en début d'après-midi a parlé de syndrome grippal et lui a remis une ordonnance de paracétamol et d'ibuprofène (Nuréflex®). Devant l'absence d'amélioration, il consulte aux urgences, à 22h50 où vous le prenez en charge. C'est votre première garde, depuis que vous avez été nommé(e) interne DES en santé publique.
+
+### Question :
+Vous considérez à juste titre l'indication d'une ponction lombaire. Vous avez lu récemment une étude sur la pertinence de signes ""classiques"" d'examen physique chez un patient suspect de méningite (Thomas KE, Hasbun R, Jekel J, Quagliarello VJ The diagnostic accuracy of Kernig's sign, Brudzinski's sign and nuchal rigidity in adults with suspected meningitis Clin Infect Dis 2002;35:46-52). Les résultats sont les suivants :
+
+Au vu de ces résultats, quel est le signe le plus pertinent pour l'indication de la ponction lombaire ? Justifiez.
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_moderee]
+
+Aucun n'est très performant . Le moins « mauvais » est la rigidité nucale : très sensible , modérément spécifique , et surtout intéressante pour éliminer le diagnostic en cas d'absence (VPN = 1,00)","[Niveau de priorité estimé : urgence_moderee]
+
+Signe le plus pertinent = Signe non présent chez moins de 1% du sujet
+Il faut donc rechercher ce signe avant toute autre recherche diagnostique
+
+Brûlure au lit ou brûlure au coussinet car ils ne sont présents chez moins de 1 % du sujet",1,
+mediqal_oeq,"### Cas clinique :
+Madame X., 88 ans, est adressée aux urgences par l'infirmière de sa maison de retraite pour une ""somnolence anormale"" le 21 décembre 2006 à 10h35. Elle est habituellement relativement valide, et prend ses repas avec aide dans le réfectoire de l'établissement. Elle a des antécédents de démence type Alzheimer, d'hypertension artérielle, d'anémie normocytaire et de maladie de l'oreillette. Son traitement habituel associe donépézil (Aricept®), amlodipine (Amlor®), spironolactone, furosémide (Aldalix®), acétylsalicylate de lysine (Kardégic 75®), amiodarone (Cordarone®), et lorazépam (Témesta®). Elle a bénéficié d'un pontage aorto coronarien il y a une vingtaine d'années.
+
+### Question :
+Vous confirmez cette anomalie. Votre examen clinique révèle en outre un score de Glasgow estimé à 12, sans signe de localisation ou méningé. Il existe une pâleur cutanéo muqueuse, donnant un aspect cireux aux téguments. Le visage est bouffi. Les sourcils sont à peine visibles. La pilosité axillaire est quasi absente. L'abdomen est météorisé et sensible dans son ensemble. Elle répond lentement aux stimuli verbaux d'un grognement rauque. L'auscultation pulmonaire révèle des râles bronchique humides diffus. L'auscultation cardiaque ne retrouve que la bradycardie. Quel est votre diagnostic ? Justifiez.
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_moderee]
+
+Coma myxoedémateux :
+altération de la conscience sans signe de localisation ou méningé
+hypothermie
+bradycardie
+pâleur cutanéo muqueuse
+visage bouffi
+dépilation
+dysphonie
+constipation probable (à vérifier auprès de la maison de retraite)
+prise d'amiodarone , survenue en hiver chez une femme âgée
+- rechercher une infiltration des masses musculaires , une prise de - poids récente (à vérifier auprès de la maison de retraite), des cheveux fins, secs, et cassants
+- rechercher une circonstance déclenchante , en particulier infectieuse, iatrogène (lorazépam ?), une exposition au froid (saison)","[Niveau de priorité estimé : urgence_moderee]
+
+- Syndrome neurologique
+- Score de Glasgow = 12
+- Bouffées respiratoires
+- Râles bronchiques
+- Insuffisance cardiaque congestive droite
+- Hypotension systolique >90 mm Hg
+- Pâle, metéorisé, sensibilité abdominale
+- Absence de signes locaux ou méningés
+- Antécédent d'insuffisance cardiaque gauche
+- Troubles du rythme sinus alvéolaire
+- Aucun autre facteur de risque cardiovasculaire n'est mentionné",90,
+mediqal_oeq,"### Cas clinique :
+Mme X., 68 ans, consulte son médecin pour asthénie et dyspnée survenue progressivement depuis 3 semaines. Son poids est stable et elle garde un bon appétit. Ses antécédents se résument à une HTA traitée par un IEC et une cholécystectomie en 1995. L'examen clinique objective un ictère conjonctival et une splénomégalie à l'inspiration profonde. L'hémogramme s'inscrit comme suit : Globules blancs à 8920/mm3 avec 7590 polynucléaires neutrophiles/mm3, 840 lymphocytes/mm3, hémoglobine à 6,5 g/dl, VGM à 100 fl, réticulocytes à 318000/mm3, et plaquettes à 359000/mm3La VS est à 120 mm à la première heure et la CRP à 21 mg/l.Le bilan hépatique montre des SGOT à 21 U/L (N = 10-35), des SGPT à 9 U/L (N = 5-40), des phosphatases alcalines à 79 U/L (N = 30-120), des ?GT à 55 U/L (N = 5-60), une bilirubine totale à 52 ?mol/l (N = 2-17) avec une bilirubine directe à 10 ?mol/l (N = 0-5) et des LDH à 753 U/L (N = 200-480).La ferritine est à 1200 ?g/l (N = 30-400 ?g/l). Le complément montre un C3 à 0,87 g/l (N = 0,80-1,60) et un C4 à 0,07 (N = 0,2-0,4)
+
+### Question :
+Comment définissez-vous l'anémie ? Justifiez. Quel examen sanguin biochimique très utile pour caractériser l'anémie manque-t-il ?
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_moderee]
+
+Il s'agit d'une anémie :
+macrocytaire
+régénérative
+de type hémolytique
+comme l'attestent
+le VGM élevé
+l'hyperréticulocytose
+l'élévation de la bilirubine indirecte
+et l'élévation des LDH.
+L'haptoglobine doit également être dosée
+(elle est effondrée dans les anémies hémolytiques)","[Niveau de priorité estimé : urgence_moderee]
+
+L'anémie est définie ici par le taux d'hémoglobine < 120 g/l.
+Le taux normal de globules rouges n'est pas donné car il varie selon les âges: N = 4,5 - 5,5 g/dl chez les adultes
+Il existe donc deux types d'anémies:
+* normochrome: Hb > 32 pg/g; VGM > 27 fI; nombre de globules rouges normal;
+* hypochrome: Hb < 32 pg/g; VGM < 27 fI; nombre de globules rouges diminué","27, 32, 4,5, 5,5",
+mediqal_oeq,"### Cas clinique :
+Madame X et Monsieur X. ont un premier enfant W qui présente une mucoviscidose, dont le diagnostic a été porté à 6 mois de vie sur les données positives de deux tests de la sueur réalisés devant l'association de signes respiratoires (toux chronique) et digestifs (diarrhée avec selles grasses) entraînant un retard de croissance.
+La recherche directe des principales mutations connues du gène responsable de la mucoviscidose chez l'enfant et les parents montre : une mutation F508del à l'état hétérozygote chez l'enfant, une mutation F508del à l'état hétérozygote chez le père ; pas de mutation décelable chez la mère.
+Les données génétiques, cliniques et moléculaires, ne remettent pas en cause la paternité.
+
+### Question :
+En cas de mutation identifiée chez Madame X., quel est le risque pour l'enfant à naître d'être homozygote ? Quels sont les modalités d'un éventuel diagnostic prénatal ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+En cas de découverte d'une mutation chez la mère, le risque pour l'enfant à naître est de ¼ et il peut bénéficier d'un diagnostic anténatal avec recherche directe de la mutation maternelle et de la mutation paternelle.","[Niveau de priorité estimé : differee]
+
+Le risque que l'enfant soit homozygote est de 1/2
+Un diagnostic prénatal par amniocentèse permettra de confirmer ou non cette hypothèse.","1, 2",
+mediqal_oeq,"### Cas clinique :
+Une jeune femme de 22 ans, d'origine italienne, se présente au cabinet du médecin pour subir un bilan de santé. L ‘examen clinique ne présente qu'une légère splénomégalie. L'hémogramme donne les résultats suivants.
+Sg hémoglobine : 115g/L
+Sg hématocrite : 0.41
+Sg érythrocytes : 6.3T/L
+Sg plaquettes : 250 G/L
+Sg leucocytes : 7G/L
+Formule leucocytaire :
+PN : 65%
+PE : 1%
+Lymphocytes : 30%
+Monocytes : 4%
+Numération des réticulocytes sur lame : 3%
+
+### Question :
+Commenter l'hémogramme après avoir calculé les constantes érythrocytaires. Que devrait montrer le frottis sanguin ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+Constantes érythrocytaires : VGM=65 fL; TCMH=18,5 pg; CCMH=28 %
+VGM, TCMH et CCMH sont diminués. I1 s'agit d'une anémie (hémoglobine diminuée) microcytaire, hypochrome avec augmentation du nombre d'érythrocytes (fausse polyglobulie) et un hématocrite normal. Les réticulocytes étant à 189 G/L, l'anémie est régénérative. Les leucocytes et les plaquettes sont en nombre normal. La formule leucocytaire est également normale. Le frottis sanguin devrait montre la présence d'hématies de petite taille (microcytose). pâles (hypochromie), quelques cellules cibles peuvent être également présentes.","[Niveau de priorité estimé : differee]
+
+Constantes érythrocytaires augmentées (Hb = 115 g/L ; Hct = 0,41) avec une anémie normochrome et modérée à la fois par augmentation de la taille des cellules (VGM = 98fL). La formule leucocytaire est normal mais il faut vérifier que les lymphocytes sont en majorité jeunes (environ 1/3).
+Le frottis sanguin doit permettre de confirmer cette anomalie liée aux lymphocytes: - présence de granules dans les cytoplasmes des lymphocytes; - absence de myélolyse ou de polycythie.","0,41, 98",
+mediqal_oeq,"### Cas clinique :
+Mme X., 35 ans, vient vous consulter pour des douleurs pelviennes latéralisées à droite, permanentes depuis trois mois. Elle n'a aucun antécédent gynécologique, médical ou chirurgical. Ses cycles sont réguliers de 28 jours, ses règles sont d'abondance normale, durent 5 jours et sont douloureuses au 3e jour surtout. À l'examen clinique : au TV : utérus rétroversé sensible, cul-de-sac vaginal gauche : RAS, cul-de-sac vaginal droit comblé par une masse de la taille d'une orange séparée de l'utérus par un sillon. Cette masse est de consistance pâteuse avec une zone plus dense. Les mouvements imprimés au col ne sont pas transmis à la masse et inversement. Après les résultats des examens paracliniques, la patiente est opérée d'emblée : une kystectomie est pratiquée. L'anatomopathologiste vous répond : tératome pluritissulaire mature.
+
+### Question :
+Quel geste particulier lors de l'opération doit être pratiqué ? Quel traitement conseillez-vous dans les trois mois suivant l'opération ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+Lors de la laparotomie il faut absolument contrôler l'ovaire controlatéral avant d'entreprendre tout geste sur l'ovaire pathologique. Mise sous pilule œstroprogestative normodosée en l'absence de contre indications pour « mettre l'ovaire au repos » et éviter une dystrophie ovarienne secondaire à l'opération.","[Niveau de priorité estimé : differee]
+
+Lorsque le terme du terrarium est atteint (environ 10 semaines), il faut effectuer une cure antibiotique en cours de grossesse.
+Le traitement recommandé pendant ces trois premières semaines après l'intervention est le bactéricide ciprofloxacine.",10,
+mediqal_oeq,"### Cas clinique :
+Monsieur X. est admis aux urgences pour douleurs abdominales sévères avec rectorragies. La coloscopie permet de découvrir une tumeur rectale avec sténose colique à 50 cm. Le bilan d'extension montre une volumineuse lésion siégeant sur le sigmoïde, sans métastases hépatiques. Le patient subit une colostomie, puis une résection de la tumeur colique. Le traitement post-opératoire de la douleur a été réalisé par l'installation pour 24 heures d'une perfusion IV continue sous la forme d'une analgésie contrôlée par le patient (PCA). Parallèlement, PERFALGAN a été administré à la dose de 4g/j.
+
+### Question :
+Le traitement morphinique en perfusion est remplacé au bout de 24 heures par un traitement oral de morphine à libération prolongée (SKENAN LP®). Sachant que la dose correspondant à la perfusion IV nécessaire pour soulager les douleurs de Monsieur X. était égale à 2,5 mg de morphine par heure, quelle pourrait être la posologie journalière orale de SKENAN LP® pour obtenir la même efficacité ? Selon quel rythme d'administration ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+La morphine par voie orale a une biodisponibilité de l'ordre de 30 %. Chez Monsieur X., la perfusion de morphine réalisée à une vitesse de 2,5 mg/heure correspondrait à une posologie journalière de 60 mg. Il conviendrait donc de donner une posologie orale de l'ordre de 60 mg/0,3 (soit 200 mg/j). Compte tenu de la durée d'action du SKENAN LP®, la posologie journalière sera donc 100 mg, 2 fois par jour (matin et soir).","[Niveau de priorité estimé : urgence_moderee]
+
+La posologie journalière sera donc égale à 10 g et aura lieu quotidiennement pendant 3 jours consécutifs.
+Il faut noter qu'il n'existe pas de données scientifiques qui justifient cette administration quotidienne.","10, 3",
+mediqal_oeq,"### Cas clinique :
+Dans une crèche, une puéricultrice remarque que plusieurs enfants dorment mal pendant la sieste et présentent des épisodes diarrhéiques. Le médecin prescrit des examens de selles. Seuls, les examens parasitologiques s'avèrent positifs et révèlent une épidémie de giardiase.
+
+### Question :
+Donner la conduite du traitement et les règles prophylactiques contre Enterobius vermicularis
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+- Renouveler le traitement 2 à 3 semaines plus tard - Traiter l'entourage
+- Désinfecter la literie
+- Couper et brosser régulièrement les ongles","[Niveau de priorité estimé : differee]
+
+- Traitement par antiparasitaire (méniscal ou albendazole)
+- Règles d'hygiène
+- Nettoyage régulier des surfaces à l'eau savonneuse
+- Lavage des vêtements au savon puis séchage en machine à 60°C
+- Laver soigneusement les mains après avoir touché le sol, les vêtements, etc.
+- Ne pas partager ni utiliser de couvertures avec un enfant infecté",60,
+medquad,"### Question :
+What is (are) Alport syndrome ?
+
+### Réponse :
+","Alport syndrome is a genetic condition characterized by kidney disease, hearing loss, and eye abnormalities. People with Alport syndrome experience progressive loss of kidney function. Almost all affected individuals have blood in their urine (hematuria), which indicates abnormal functioning of the kidneys. Many people with Alport syndrome also develop high levels of protein in their urine (proteinuria). The kidneys become less able to function as this condition progresses, resulting in end-stage renal disease (ESRD). People with Alport syndrome frequently develop sensorineural hearing loss, which is caused by abnormalities of the inner ear, during late childhood or early adolescence. Affected individuals may also have misshapen lenses in the eyes (anterior lenticonus) and abnormal coloration of the light-sensitive tissue at the back of the eye (retina). These eye abnormalities seldom lead to vision loss. Significant hearing loss, eye abnormalities, and progressive kidney disease are more common in males with Alport syndrome than in affected females.","Alport syndrome is a genetic disorder that affects the kidneys, ears and eyes. It causes progressive kidney disease in childhood or early adulthood; hearing loss usually begins before age 10 years; and vision problems may develop later in life. The signs of this condition vary widely from person to person but are often related to abnormalities in one or more genes involved in making proteins called type IV collagen molecules. These molecules help form parts of cells' membranes throughout the body including those found in blood vessels, skin, bones, tendons, ligaments, cartilage, and other tissues. Mutations in any of several different genes can lead to alport syndrome although most cases result from mutations in COL4A5 which encodes for alpha-5 chain subunit protein component IVA of type IV collagen molecule. Other forms have been linked with mutations in COL4A3/4 or COL6A2 among others depending on how many copies of each gene are affected by changes in their DNA sequence(s). Symptoms typically start between ages five and ten when people begin experiencing mild hearing impairment due mainly to damage within tiny tubes connecting inner ear structures known as cochleae where sound waves travel through fluid-filled chambers into receptors located at both ends allowing them to convert vibrations into electrical signals sent via auditory nerve fibers across brainstem regions responsible for processing sounds then transmitted further up along spinal cord pathways reaching areas controlling speech production muscles needed for speaking properly if left untreated until late teens or even twenties could become severely impaired requiring lifelong assistance with","10, 2, 3, 4, 5, 6",
+medquad,"### Question :
+What is (are) Familial atrial fibrillation ?
+
+### Réponse :
+","Familial atrial fibrillation is an inherited heart condition that disrupts the heart's rhythm. It is characterized by erratic electrical activity in the heart's upper chambers (the atria), causing an irregular response in the heart's lower chambers (the ventricles). This causes a fast and irregular heartbeat (arrhythmia). Signs and symptoms may include dizziness, chest pain, palpitations, shortness of breath, or fainting. Affected people also have an increased risk of stroke and sudden death. While complications may occur at any age, some affected people never have associated health problems. Familial atrial fibrillation may be caused by changes (mutations) in any of various genes, some of which have not been identified. It is most often inherited in an autosomal dominant manner, but autosomal recessive inheritance has been reported.","Familial atrial fibrillation occurs when the condition runs in families. It can be caused by mutations in genes that affect ion channels, which are proteins found on cell membranes and help control electrical signals within cells. Mutations in these genes may cause abnormal heart rhythms to develop earlier than usual or more often over time. The most common gene associated with familial atrial fibrillation is SCN5A. This gene provides instructions for making a protein called cardiac sodium channel alpha subunit 1, which plays an important role in regulating the flow of positively charged ions into muscle cells during action potentials. Action potentials are brief changes in voltage across the membrane of a neuron or other type of cell that allow them to communicate electrically with each other. When this process goes awry due to malfunctioning sodium channels, it leads to irregularities in how quickly and effectively the heart beats; specifically, too fast or erratic contractions known as arrhythmias occur instead of normal coordinated beating patterns characteristic of healthy hearts. Other genes linked to familial atrial fibrillation include KCNE3, CACNA2D5, KCNH2, ATP1B3, SCN4A, HERG, and SCN9A among others. These variants tend not only to increase susceptibility but also predispose individuals towards developing episodes characterized by rapid heartbeat accompanied by shortness of breath difficulty breathing chest pain dizziness fainting seizures coma etc.. In addition some researchers believe certain environmental factors such as stress anxiety depression obesity diabetes hypertension high blood","1, 2, 3, 4, 5, 9",
+medquad,"### Question :
+Who is at risk for Hypopharyngeal Cancer? ?
+
+### Réponse :
+",Use of tobacco products and heavy drinking can affect the risk of developing hypopharyngeal cancer. Anything that increases your risk of getting a disease is called a risk factor. Having a risk factor does not mean that you will get cancer; not having risk factors doesn't mean that you will not get cancer. Talk with your doctor if you think you may be at risk. Risk factors include the following: - Smoking tobacco. - Chewing tobacco. - Heavy alcohol use. - Eating a diet without enough nutrients. - Having Plummer-Vinson syndrome.,"Hypopharyngeal cancer can occur in anyone, but it's more common among people who smoke and/or drink alcohol. It also tends to affect men older than 50 years of age.
+
+People with a family history of hypopharyngeal cancer or other cancers that have been linked to human papillomavirus (HPV) are also considered high-risk individuals. People who've had HPV infection may be able to prevent the development of certain types of cancer by getting vaccinated against this virus. Talk to your doctor about whether you should get the vaccine if you're at higher risk for developing these kinds of cancers.",50,
+medquad,"### Question :
+How many people are affected by biotinidase deficiency ?
+
+### Réponse :
+","Profound or partial biotinidase deficiency occurs in approximately 1 in 60,000 newborns","Biotinidase deficiency is a rare disorder that affects about 1 in every 20,000 newborns. It occurs more frequently among individuals of Ashkenazi Jewish descent and less commonly among other ethnic groups. The prevalence may be higher than reported because the condition can go undiagnosed for years or even decades.","20,000",
+medquad,"### Question :
+What are the symptoms of Quebec platelet disorder ?
+
+### Réponse :
+","What are the signs and symptoms of Quebec platelet disorder? The Human Phenotype Ontology provides the following list of signs and symptoms for Quebec platelet disorder. If the information is available, the table below includes how often the symptom is seen in people with this condition. You can use the MedlinePlus Medical Dictionary to look up the definitions for these medical terms. Signs and Symptoms Approximate number of patients (when available) Autosomal dominant inheritance - Bruising susceptibility - Epistaxis - Impaired epinephrine-induced platelet aggregation - Joint hemorrhage - Menorrhagia - Thrombocytopenia - The Human Phenotype Ontology (HPO) has collected information on how often a sign or symptom occurs in a condition. Much of this information comes from Orphanet, a European rare disease database. The frequency of a sign or symptom is usually listed as a rough estimate of the percentage of patients who have that feature. The frequency may also be listed as a fraction. The first number of the fraction is how many people had the symptom, and the second number is the total number of people who were examined in one study. For example, a frequency of 25/25 means that in a study of 25 people all patients were found to have that symptom. Because these frequencies are based on a specific study, the fractions may be different if another group of patients are examined. Sometimes, no information on frequency is available. In these cases, the sign or symptom may be rare or common.","What are the signs and symptoms of Quebec platelet disorder? The Human Phenotype Ontology provides the following list of signs and symptoms for Quebec platelet disorder. If the information is available, the table below includes how often the symptom is seen in people with this condition. You can use the MedlinePlus Medical Dictionary to look up the definitions for these medical terms. Signs and Symptoms Approximate number of patients (when available) Abnormality of blood clotting 90% Autosomal recessive inheritance - Delayed growth - Hemophilia A - Hypoplastic spleen - Platelet dysfunction - Thrombocytopenia - When the Human Phenotype Ontology does not have information about a sign or symptom, MedlinePlus uses the Medical Dictionary to help spell out the term.",90,
+mediqal_oeq,"### Question :
+Quels sont les trois paliers thérapeutiques de la DE ?
+
+### Réponse :
+","En première intention : inhibiteurs de la phosphodiestérase 5.
+En deuxième intention : injections intracaverneuses de prostaglandine ou vacuum.
+En troisième intention : traitements chirurgicaux = implants péniens.
+Toujours en association avec les règles hygiéno-diététiques dont le sevrage tabagique et la lutte contre la iatrogénèse.","1- Traitement médical
+2- Chirurgie
+3- Radiothérapie","1, 2, 3",

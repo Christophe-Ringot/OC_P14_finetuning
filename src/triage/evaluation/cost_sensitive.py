@@ -28,6 +28,9 @@ COST = np.array([
     [1.0, 0.0, 4.0],   # P2 : sur-triage leger, sous-triage vers P3
     [2.0, 1.0, 0.0],   # P3 : sur-triage (encombrement des urgences)
 ])
+# Regle retenue pour le deploiement : alpha = 0.5, meilleur F1 macro et meilleure accuracy sur la validation,
+# sous-triage divise par 3 (16.2 % -> 4.9 %). Temperature ajustee sur la validation.
+DEPLOY_ALPHA = 0.5
 ALPHAS = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 3.0]
 TEMPERATURES = np.round(np.arange(0.5, 10.01, 0.25), 2)
 MAIN = ["accuracy", "f1_macro", "rappel_P1", "rappel_P2", "rappel_P3", "sous_triage", "sur_triage", "P1_predit_P3"]

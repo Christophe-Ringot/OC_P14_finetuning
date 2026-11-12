@@ -1,0 +1,298 @@
+source_dataset,instruction,reference,generated,extra_numbers_in_generation,risky_phrases
+mediqal_oeq,"### Cas clinique :
+Vous accueillez un nouveau-né pour une cyanose réfractaire isolée. En échographie, vous faites le diagnostic d'atrésie pulmonaire à septum intact. Le ventricule droit est décrit comme tripartite.
+
+### Question :
+Quel geste de cathétérisme interventionnel proposez-vous ?
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_maximale]
+
+Perforation-dilatation valvulaire pulmonaire","[Niveau de priorité estimé : urgence_maximale]
+
+intervention en 2 étapes
+1er pas dans l'ODV et OVD (ou VD)
+en cas de succès ou si la CIV n'est pas possible","1, 2",
+mediqal_oeq,"### Cas clinique :
+Un nouveau-né est admis pour une atrésie pulmonaire à septum interventriculaire intact. Le ventricule droit est bipartite sans chambre trabéculée mais la valve tricuspide a une taille correcte.
+
+### Question :
+Quelle est la condition indispensable pour autoriser une décompression du ventricule droit par cathétérisme interventionnel ou par la chirurgie ?
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_maximale]
+
+Absence de fistules coronaro-cardiaque avec circulation coronaire ventricule droit dépendante","[Niveau de priorité estimé : urgence_maximale]
+
+Vd non dilaté et VD/VD+VG<1,5","1,5",
+mediqal_oeq,"### Cas clinique :
+Un nouveau-né est admis pour une atrésie pulmonaire à septum interventriculaire intact. Le ventricule droit est bipartite sans chambre trabéculée mais la valve tricuspide a une taille correcte. Cette condition d'absence de fistules coronaro-cardiaque est remplie et une perforation-dilatation de la valve pulmonaire est faite. Malgré tout, vous ne pouvez arrêter les PGE1. Quelques mois plus tard, la cyanose s'est majorée et vous n'enregistrez dans l'artère pulmonaire qu'un flux systolique. Il persiste un shunt droite-gauche par un foramen ovale. Le ventricule droit a grandi en proportion du ventricule gauche.
+
+### Question :
+Que proposez-vous ?
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_maximale]
+
+Dérivation cavopulmonaire partielle +- fermeture de la communication interauriculaire","[Niveau de priorité estimé : urgence_maximale]
+
+Fermeture des 2 valves avec CIVD ou fermeture partielle (valve valvulaire)",2,
+mediqal_oeq,"### Cas clinique :
+Un homme de 65 ans est hospitalisé pour une exploration de douleurs osseuses diffuses survenant dans un contexte d'altération de l'état général depuis 6 mois. L'examen clinique est normal. Le bilan initial montre une anémie (Hb à 80g/L). Un nombre de leucocytes à 4,6 G/L avec formule normale, un nombre de thrombocytes de 150 G/L. la vitesse de sédimentation est à 100 mm à la première heure. La protidémie est à 110 g/L. Les radiographies du squelette révèlent de multiples images lacunaires crâniennes et iliaques et une déminéralisation diffuse du rachis.
+
+### Question :
+Quel diagnostic peut-être évoqué ? Sur quels éléments en particulier ?
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_moderee]
+
+Le diagnostic de myélome multiple (maladie de Kahler) est fortement suspecté. Les éléments permettant cette orientation diagnostique sont :
+- il s'agit d'un sujet de sexe masculin, adulte âgé (65 ans)
+- présence de douleurs osseuses avec anomalies radiographique de type lacunaire
+- altération de l'état général avec anémie
+- augmentation de !a VS et hyperprotidémie.","[Niveau de priorité estimé : urgence_moderee]
+
+Osteoporose
+- Anémie vraie
+- Radiographie montrant des images lacunaires et une déminéralisation générale du rachis.
+- VSS > 30 mm/h",30,
+mediqal_oeq,"### Cas clinique :
+Melle P… consulte aux urgences pour douleurs pelviennes évoluant depuis 3 jours. Elle a déjà été opérée de l'appendicite et n'a jamais été enceinte. Elle a 20 ans et utilise une pilule estroprogestative de 2ème génération depuis plusieurs années. Elle est en début de plaquette, il n'y a a priori pas d'oubli et le test de grossesse est négatif. Mlle X. fume 20 cigarettes par jour depuis l'âge de 17 ans.
+
+### Question :
+Ce frottis est en faveur de CIN de haut grade; comment confirmez-vous ce diagnostic ? Que faut-il faire alors ?
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_moderee]
+
+Par une colposcopie
+et des biopsies
+Une électroconisation à l'anse diathermique","[Niveau de priorité estimé : urgence_moderee]
+
+- Biopsie du col
+- ou biopsies des muqueuses vaginales (si la mélèze ne peut être évacuée)
+- si c'est un cancer à stade précoce , on fait un traitement local avec cytostatiques loco-vaginale pendant 6 mois
+
+ou bien on met au point un traitement global qui consiste à mettre les patients sous chimiothérapie locale + radiothérapie vaginale .",6,
+mediqal_oeq,"### Cas clinique :
+Madame X., 88 ans, est adressée aux urgences par l'infirmière de sa maison de retraite pour une ""somnolence anormale"" le 21 décembre 2006 à 10h35. Elle est habituellement relativement valide, et prend ses repas avec aide dans le réfectoire de l'établissement. Elle a des antécédents de démence type Alzheimer, d'hypertension artérielle, d'anémie normocytaire et de maladie de l'oreillette. Son traitement habituel associe donépézil (Aricept®), amlodipine (Amlor®), spironolactone, furosémide (Aldalix®), acétylsalicylate de lysine (Kardégic 75®), amiodarone (Cordarone®), et lorazépam (Témesta®). Elle a bénéficié d'un pontage aorto coronarien il y a une vingtaine d'années.
+
+### Question :
+Vous confirmez cette anomalie. Votre examen clinique révèle en outre un score de Glasgow estimé à 12, sans signe de localisation ou méningé. Il existe une pâleur cutanéo muqueuse, donnant un aspect cireux aux téguments. Le visage est bouffi. Les sourcils sont à peine visibles. La pilosité axillaire est quasi absente. L'abdomen est météorisé et sensible dans son ensemble. Elle répond lentement aux stimuli verbaux d'un grognement rauque. L'auscultation pulmonaire révèle des râles bronchique humides diffus. L'auscultation cardiaque ne retrouve que la bradycardie. Quel est votre diagnostic ? Justifiez.
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_moderee]
+
+Coma myxoedémateux :
+altération de la conscience sans signe de localisation ou méningé
+hypothermie
+bradycardie
+pâleur cutanéo muqueuse
+visage bouffi
+dépilation
+dysphonie
+constipation probable (à vérifier auprès de la maison de retraite)
+prise d'amiodarone , survenue en hiver chez une femme âgée
+- rechercher une infiltration des masses musculaires , une prise de - poids récente (à vérifier auprès de la maison de retraite), des cheveux fins, secs, et cassants
+- rechercher une circonstance déclenchante , en particulier infectieuse, iatrogène (lorazépam ?), une exposition au froid (saison)","[Niveau de priorité estimé : urgence_moderee]
+
+- Dépression respiratoire
+- dépression circulatoire
+- hypoglycémie
+- syndrome de choc septique probablement associé au syndrome de sepsis
+- hémorragies digestives probables
+- insuffisance hépatocellulaire possible
+- surcharge salivaire
+- hyperglycémie post opératoire
+- étiologie non confirmée mais favorisée par les facteurs suivants:
+- âge > 80 ans
+- présence d'une autre pathologie chronique
+- absence de cause infectieuse claire
+- état général grave: somnolence, apathie, bouffissure du visage, pâle, douleurs abdominales, troubles de conscience, hypo glycémie, cholestase, soudaineté de l'apparition des symptômes.
+- pas de signes de localisation ou méningé
+- pas de signe neurologique",80,
+mediqal_oeq,"### Cas clinique :
+les Une patiente de 26 ans vous est adressée pour douleurs articulaires touchant interphalangiennes proximales et distales, et les métacarpophalangiennes. Ces douleurs évoluent depuis un mois environ, sont accentuées la nuit, semblent s'amender dans la journée sans disparaître totalement. Elle présente depuis 4 jours un purpura pétéchial non infiltré des membres inférieurs remontant jusqu'au niveau des genoux, et rapporte une fébricule à 38°C, 38°5C depuis 15 jours. Cette patiente n'a pas d'antécédents particuliers hormis une appendicectomie. les poignets,
+
+### Question :
+Le traitement effectué a, de nouveau, permis d'améliorer la patiente, qui à nouveau reprend son travail. Vous êtes appelé par le service d'urgence de votre hôpital quelques temps plus tard: votre patiente. vient d'y être admise pour une ""faiblesse"" dans les jambes depuis une quinzaine de jours, ainsi qu'une récidive des douleurs articulaires initiales. Vous retrouvez à l'examen clinique un érythème du visage, prédominant en malaire, bilatéral, légèrement infiltré, non douloureux. La patiente vous signale avoir voulu bronzer, et l'érythème est apparu après deux séances d'UV. Elle est apyrétique. La pression musculaire ne réveille pas de douleur, mais il existe des réflexes très vifs et polycinétiques au niveau des membres inférieurs. Le signe de Babinski est positif de façon bilatérale. Il n'y a pas d'anomalie au niveau des membres supérieurs ou du tronc. Sur le plan neurologique, comment caractérisez‐vous le tableau ? Justifiez votre réponse. Quel(s) examen(s) demandez‐ vous pour établir le diagnostic étiologique de cette atteinte neurologique ?
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_moderee]
+
+La patiente présente un syndrome pyramidal des membres inférieurs avec déficit moteur, réflexes vifs et polycinétiques, Babinski bilatéral. Il s'agit d'une paraparésie, pouvant découler soit d'une compression médullaire, soit d'une atteinte médullaire propre. Il faut demander une IRM médullaire en urgence pour départager les deux hypothèses.","[Niveau de priorité estimé : urgence_moderee]
+
+Lésions périphériques
+Dégénérescence axonique (dégénérescence myélino‐axonique)
+Méningo‐encéphalite post‐infectieuse
+Examen clinique : hyperthermie , fièvre persistante > 39°C , hémorragies cutanées , tachycardie , hypotension artérielle , troubles respiratoires , déshydratation , anorexie , diabète insipide . Examen neurologique : syndrome méningo‐encéphalite classique avec signes de localisation : céphalées , crampes , tremblements , convulsions , ataxie , dysarthrie , trouble de la conscience , signes extrapyramidaux.
+Recherche d'un antécédent infectieux : recherche d'un antécédent infectieux : pneumocoque , streptococcus pyogenes , staphylococcus aureus , herpes simplex , virus rhumeux A/B/C , toxoplasmose , syphilis , tuberculose , hépatites virales B / C , chlamydien , brucellose , salmonellose , typhoïde , maladie de Lyme…",39,
+mediqal_oeq,"### Cas clinique :
+Mme X., 68 ans, consulte son médecin pour asthénie et dyspnée survenue progressivement depuis 3 semaines. Son poids est stable et elle garde un bon appétit. Ses antécédents se résument à une HTA traitée par un IEC et une cholécystectomie en 1995. L'examen clinique objective un ictère conjonctival et une splénomégalie à l'inspiration profonde. L'hémogramme s'inscrit comme suit : Globules blancs à 8920/mm3 avec 7590 polynucléaires neutrophiles/mm3, 840 lymphocytes/mm3, hémoglobine à 6,5 g/dl, VGM à 100 fl, réticulocytes à 318000/mm3, et plaquettes à 359000/mm3La VS est à 120 mm à la première heure et la CRP à 21 mg/l.Le bilan hépatique montre des SGOT à 21 U/L (N = 10-35), des SGPT à 9 U/L (N = 5-40), des phosphatases alcalines à 79 U/L (N = 30-120), des ?GT à 55 U/L (N = 5-60), une bilirubine totale à 52 ?mol/l (N = 2-17) avec une bilirubine directe à 10 ?mol/l (N = 0-5) et des LDH à 753 U/L (N = 200-480).La ferritine est à 1200 ?g/l (N = 30-400 ?g/l). Le complément montre un C3 à 0,87 g/l (N = 0,80-1,60) et un C4 à 0,07 (N = 0,2-0,4)
+
+### Question :
+Comment définissez-vous l'anémie ? Justifiez. Quel examen sanguin biochimique très utile pour caractériser l'anémie manque-t-il ?
+
+### Réponse :
+","[Niveau de priorité estimé : urgence_moderee]
+
+Il s'agit d'une anémie :
+macrocytaire
+régénérative
+de type hémolytique
+comme l'attestent
+le VGM élevé
+l'hyperréticulocytose
+l'élévation de la bilirubine indirecte
+et l'élévation des LDH.
+L'haptoglobine doit également être dosée
+(elle est effondrée dans les anémies hémolytiques)","[Niveau de priorité estimé : urgence_moderee]
+
+L'anémie est définitive car le taux d'hémoglobine < 120 g/l
+Le nombre de globules rouges n'est pas normal mais il ne suffit pas pour établir l'anémie.
+Il faut calculer le TCM qui est ici à 32 % (< 37%)
+On peut aussi utiliser les formes anémiques classées selon leur origine: normocytaire, macrocytaire ou microcytaire","32, 37",
+mediqal_oeq,"### Cas clinique :
+Marianne M., 33 ans, mariée et mère de deux enfants, consulte pour brûlures mictionnelles et pollakiurie depuis 48 h, sans fièvre. Un test de dépistage, au cabinet médical, révèle la présence d'une leucocyturie (++) et de nitrites dans ses urines. L'interrogatoire ne révèle aucun antécédent d'infection urinaire. Le médecin prescrit un examen cytobactériologique des urines (ECBU), avant l'instauration d'un traitement par AUGMENTIN® (amoxicilline associée à l'acide clavulanique) 3x500mg d'amoxicilline par 24 heures per os, pendant 7 jours.
+L'ECBU fournit les résultats suivants :
+Leucocytes : 220.106 /L (N : < 10. 106 /L)
+Hématies : 1. 106 /L (N : < 1. 106 /L)
+Cylindres : absents
+Cellules épithéliales : rares
+Coloration de gram : Nombreux bacilles à gram négatif.
+
+### Question :
+A quelle famille de bactéries le plus fréquemment impliquées dans les infections urinaires appartiennent à priori les bacilles gram négatif observés à l'examen direct ? Quelle est l'espèce la plus souvent rencontrée ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+Les bacilles à Gram négatif observés appartiennent vraisemblablement à la famille des Enterobacteriaceae (entérobactéries), qui représentent l'étiologie la plus fréquente des infections urinaires. L'espèce la plus fréquente est Escherichia coli.","[Niveau de priorité estimé : differee]
+
+Les bacilles gram négatifs sont principalement du genre E.coli qui représente environ 90 % des cas d'infections urinaires.",90,
+mediqal_oeq,"### Cas clinique :
+Madame X et Monsieur X. ont un premier enfant W qui présente une mucoviscidose, dont le diagnostic a été porté à 6 mois de vie sur les données positives de deux tests de la sueur réalisés devant l'association de signes respiratoires (toux chronique) et digestifs (diarrhée avec selles grasses) entraînant un retard de croissance.
+La recherche directe des principales mutations connues du gène responsable de la mucoviscidose chez l'enfant et les parents montre : une mutation F508del à l'état hétérozygote chez l'enfant, une mutation F508del à l'état hétérozygote chez le père ; pas de mutation décelable chez la mère.
+Les données génétiques, cliniques et moléculaires, ne remettent pas en cause la paternité.
+
+### Question :
+En cas de mutation identifiée chez Madame X., quel est le risque pour l'enfant à naître d'être homozygote ? Quels sont les modalités d'un éventuel diagnostic prénatal ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+En cas de découverte d'une mutation chez la mère, le risque pour l'enfant à naître est de ¼ et il peut bénéficier d'un diagnostic anténatal avec recherche directe de la mutation maternelle et de la mutation paternelle.","[Niveau de priorité estimé : differee]
+
+Le risque que l'enfant soit homozygote est de 1/2
+Diagnostic prénatal par amniocentèse ou CVS si il n'y a pas de contre-indication médicale.","1, 2",
+mediqal_oeq,"### Cas clinique :
+Un jeune homme de 18 ans a un tube valvulé de 18 mm de diamètre sténosant et fuyant après une correction d'atrésie pulmonaire avec communication interventriculaire. Les branches pulmonaires sont modérément hypoplasiques et la pression artérielle pulmonaire à 45/25 moyenne 30 mm Hg.
+
+### Question :
+Quel traitement pouvez-vous proposer ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+stent valvé percutané ou changement de tube valvulé chirurgical","[Niveau de priorité estimé : differee]
+
+C'est un cas où le débit est suffisant pour éviter l'hypoxémie, mais il faut faire attention au risque de rétrécissement du canal sous-ostéo (environ 6 mois). Il s'agit donc d'un élargissement par voie percutanée ou chirurgical.",6,
+mediqal_oeq,"### Cas clinique :
+Une jeune femme de 22 ans, d'origine italienne, se présente au cabinet du médecin pour subir un bilan de santé. L ‘examen clinique ne présente qu'une légère splénomégalie. L'hémogramme donne les résultats suivants.
+Sg hémoglobine : 115g/L
+Sg hématocrite : 0.41
+Sg érythrocytes : 6.3T/L
+Sg plaquettes : 250 G/L
+Sg leucocytes : 7G/L
+Formule leucocytaire :
+PN : 65%
+PE : 1%
+Lymphocytes : 30%
+Monocytes : 4%
+Numération des réticulocytes sur lame : 3%
+
+### Question :
+Commenter l'hémogramme après avoir calculé les constantes érythrocytaires. Que devrait montrer le frottis sanguin ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+Constantes érythrocytaires : VGM=65 fL; TCMH=18,5 pg; CCMH=28 %
+VGM, TCMH et CCMH sont diminués. I1 s'agit d'une anémie (hémoglobine diminuée) microcytaire, hypochrome avec augmentation du nombre d'érythrocytes (fausse polyglobulie) et un hématocrite normal. Les réticulocytes étant à 189 G/L, l'anémie est régénérative. Les leucocytes et les plaquettes sont en nombre normal. La formule leucocytaire est également normale. Le frottis sanguin devrait montre la présence d'hématies de petite taille (microcytose). pâles (hypochromie), quelques cellules cibles peuvent être également présentes.","[Niveau de priorité estimé : differee]
+
+Hb = 115 g / L ; Hct = 0.41 (normale) ; VGM = 89fL (normale)
+Leur valeur est normale et la formule leucocytaire n'est pas anormale . Le frottis sanguin doit permettre de constater une hyperleucocytose avec augmentation des lymphocytes à 30% , mais aussi une hyperréaction immunitaire par présence de cellules B et/ou T en grande quantité.",89,
+mediqal_oeq,"### Cas clinique :
+Monsieur X. est admis aux urgences pour douleurs abdominales sévères avec rectorragies. La coloscopie permet de découvrir une tumeur rectale avec sténose colique à 50 cm. Le bilan d'extension montre une volumineuse lésion siégeant sur le sigmoïde, sans métastases hépatiques. Le patient subit une colostomie, puis une résection de la tumeur colique. Le traitement post-opératoire de la douleur a été réalisé par l'installation pour 24 heures d'une perfusion IV continue sous la forme d'une analgésie contrôlée par le patient (PCA). Parallèlement, PERFALGAN a été administré à la dose de 4g/j.
+
+### Question :
+Le traitement morphinique en perfusion est remplacé au bout de 24 heures par un traitement oral de morphine à libération prolongée (SKENAN LP®). Sachant que la dose correspondant à la perfusion IV nécessaire pour soulager les douleurs de Monsieur X. était égale à 2,5 mg de morphine par heure, quelle pourrait être la posologie journalière orale de SKENAN LP® pour obtenir la même efficacité ? Selon quel rythme d'administration ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+La morphine par voie orale a une biodisponibilité de l'ordre de 30 %. Chez Monsieur X., la perfusion de morphine réalisée à une vitesse de 2,5 mg/heure correspondrait à une posologie journalière de 60 mg. Il conviendrait donc de donner une posologie orale de l'ordre de 60 mg/0,3 (soit 200 mg/j). Compte tenu de la durée d'action du SKENAN LP®, la posologie journalière sera donc 100 mg, 2 fois par jour (matin et soir).","[Niveau de priorité estimé : urgence_moderee]
+
+La posologie journalière sera donc égale à 16 g et doit être distribuée dans trois doses quotidiennes de 3 h chacune","16, 3",
+mediqal_oeq,"### Cas clinique :
+Responsable d'un service de moyen séjour vous êtes particulièrement impliqué dans la démarche d'assurance qualité de votre établissement.Vous venez de recevoir le rapport du service d'hygiène sur les infections nosocomiales recensées dans l'établissement, et vous vous apercevez que le taux d'infections urinaires nosocomiales dans votre service est particulièrement élevé par rapport aux autres services de l'hôpital. Vous décidez de réaliser un audit clinique sur la qualité de la pose des sondes urinaires.
+
+### Question :
+Quel(s) objectif(s) poursuivez-vous à travers cet audit ?
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+- Evaluer à travers de l'analyse de l'existant, les pratiques professionnelles.
+- Améliorer la qualité de prise en charge des patients.
+- Diminuer le taux d'incidence des infections nosocomiales urinaires.","[Niveau de priorité estimé : differee]
+
+- vérifier si les patients sont bien posés
+- s'il y a une infection nosocomiale en cas de non-pose ou de mauvaise pose (environ 10%)
+- permettre de mettre en place des actions correctives pour améliorer cette situation",10,
+mediqal_oeq,"### Cas clinique :
+Dans une crèche, une puéricultrice remarque que plusieurs enfants dorment mal pendant la sieste et présentent des épisodes diarrhéiques. Le médecin prescrit des examens de selles. Seuls, les examens parasitologiques s'avèrent positifs et révèlent une épidémie de giardiase.
+
+### Question :
+Donner la conduite du traitement et les règles prophylactiques contre Enterobius vermicularis
+
+### Réponse :
+","[Niveau de priorité estimé : differee]
+
+- Renouveler le traitement 2 à 3 semaines plus tard - Traiter l'entourage
+- Désinfecter la literie
+- Couper et brosser régulièrement les ongles","[Niveau de priorité estimé : differee]
+
+- Traitement par Praziquantel (40 mg/kg) 1 à 2 fois en 3 jours
+- Règles d'hygiène pour prévenir l'étiologie: lavage des mains avant de manger ou après avoir utilisé le WC; nettoyage régulier des surfaces où on se baigne, etc.
+- Nettoyage des vêtements avec un détergent anti-parasitaire","1, 40",
+medquad,"### Question :
+What are the symptoms of Eisenmenger syndrome ?
+
+### Réponse :
+","What are the signs and symptoms of Eisenmenger syndrome? Symptoms of Eisenmenger include shortness of breath, chest pain, feeling tired or dizzy, fainting, abnormal heart rhythm (arrhythmia), stroke, coughing up blood, swelling of joints from excess uric acid (gout) and, bluish lips, fingers, toes, and skin (cyanosis). Eisenmenger syndrome usually develops before a child reaches puberty but can also develop in young adulthood.","The signs and symptoms of Eisenmenger syndrome vary depending on how much blood is shunted from the right to left in the heart. The more severe the condition, the greater the risk for complications such as pulmonary hypertension (high pressure in the lungs) or sudden death. Signs and Symptoms - Pulmonary Hypertension: High blood pressure in the arteries that carry oxygen-poor blood from the heart to the lungs. This can cause shortness of breath, chest pain, dizziness, fainting, fatigue, swelling in the legs, and a bluish tint to the skin. - Heart Failure: When the heart cannot pump enough blood to meet the body's needs. This may result in fluid buildup in the abdomen, ankles, feet, and/or lungs; rapid weight gain due to excess water retention; difficulty breathing during activity or when lying down; and an irregular heartbeat. - Sudden Death: A person with Eisenmenger syndrome has a high chance of dying suddenly without warning. People who have had surgery to repair their hearts often die within 10 years after the procedure because they develop pulmonary hypertension. Other people with this disorder do not survive long if they experience another episode of low blood flow through the repaired valve. Treatment usually involves managing these conditions by controlling blood pressure, treating infections, using medications to improve lung function, and providing supplemental oxygen therapy at home. In some cases, patients need to be hospitalized several times per year.",10,
+medquad,"### Question :
+How many people are affected by biotinidase deficiency ?
+
+### Réponse :
+","Profound or partial biotinidase deficiency occurs in approximately 1 in 60,000 newborns","Biotinidase deficiency is a rare disorder. It affects about 1 in every 20,000 to 30,000 newborns worldwide. The prevalence of the condition varies among populations and geographic regions. Biotinidase deficiency occurs more frequently in certain parts of Africa than elsewhere. In some countries where it has been studied, such as Nigeria, up to one-third of infants with severe neurological symptoms have this condition. However, because these cases were not diagnosed early enough, they may be underreported. Researchers estimate that only about half of all individuals who carry mutations for biotinidase deficiency will ever develop signs or symptoms of the disease. This means that most carriers never experience any problems related to their mutation.","20,000, 30,000",
+medquad,"### Question :
+What are the symptoms of Quebec platelet disorder ?
+
+### Réponse :
+","What are the signs and symptoms of Quebec platelet disorder? The Human Phenotype Ontology provides the following list of signs and symptoms for Quebec platelet disorder. If the information is available, the table below includes how often the symptom is seen in people with this condition. You can use the MedlinePlus Medical Dictionary to look up the definitions for these medical terms. Signs and Symptoms Approximate number of patients (when available) Autosomal dominant inheritance - Bruising susceptibility - Epistaxis - Impaired epinephrine-induced platelet aggregation - Joint hemorrhage - Menorrhagia - Thrombocytopenia - The Human Phenotype Ontology (HPO) has collected information on how often a sign or symptom occurs in a condition. Much of this information comes from Orphanet, a European rare disease database. The frequency of a sign or symptom is usually listed as a rough estimate of the percentage of patients who have that feature. The frequency may also be listed as a fraction. The first number of the fraction is how many people had the symptom, and the second number is the total number of people who were examined in one study. For example, a frequency of 25/25 means that in a study of 25 people all patients were found to have that symptom. Because these frequencies are based on a specific study, the fractions may be different if another group of patients are examined. Sometimes, no information on frequency is available. In these cases, the sign or symptom may be rare or common.","What are the signs and symptoms of Quebec platelet disorder? The Human Phenotype Ontology provides the following list of signs and symptoms for Quebec platelet disorder. If the information is available, the table below includes how often the symptom is seen in people with this condition. You can use the MedlinePlus Medical Dictionary to look up the definitions for these medical terms. Signs and Symptoms Approximate number of patients (when available) Abnormality of blood clotting 90% Autosomal recessive inheritance - Delayed growth - Hemophilia A - Hypoplastic spleen - Platelet dysfunction - Thrombocytopenia - When the Human Phenotype Ontology does not have information about a sign or symptom, MedlinePlus uses the Medical Dictionary to help spell out the term.",90,
+mediqal_oeq,"### Question :
+Quels sont les trois paliers thérapeutiques de la DE ?
+
+### Réponse :
+","En première intention : inhibiteurs de la phosphodiestérase 5.
+En deuxième intention : injections intracaverneuses de prostaglandine ou vacuum.
+En troisième intention : traitements chirurgicaux = implants péniens.
+Toujours en association avec les règles hygiéno-diététiques dont le sevrage tabagique et la lutte contre la iatrogénèse.","1- L'immunothérapie
+2- La chirurgie
+3- Le traitement par le radiothérapie et l'hormonothérapie.","1, 2, 3",
+medquad,"### Question :
+What are the genetic changes related to Bowen-Conradi syndrome ?
+
+### Réponse :
+","Bowen-Conradi syndrome is caused by a mutation in the EMG1 gene. This gene provides instructions for making a protein that is involved in the production of cellular structures called ribosomes, which process the cell's genetic instructions to create new proteins. Ribosomes are assembled in a cell compartment called the nucleolus. The particular EMG1 gene mutation known to cause Bowen-Conradi syndrome is thought to make the protein unstable, resulting in a decrease in the amount of EMG1 protein that is available in the nucleolus. A shortage of this protein in the nucleolus would impair ribosome production, which may reduce cell growth and division (proliferation); however, it is unknown how EMG1 gene mutations lead to the particular signs and symptoms of Bowen-Conradi syndrome.","Mutations in the BBS1 gene cause most cases of Bowen-Conradi syndrome. The BBS1 gene provides instructions for making a protein that is part of an assembly complex called the COPII coat, which helps move proteins and other molecules within cells. Mutations in this gene result in reduced or absent production of the protein; however, it's unclear how these mutations lead to the signs and symptoms of Bowen-Conradi syndrome. In some people with this condition, researchers have found abnormalities in genes involved in the formation of cilia (tiny hair-like structures) on certain types of cells. These findings suggest that defects in cilia may contribute to the development of many of the features seen in individuals with Bowen-Conradi syndrome. Ciliopathies are disorders caused by problems with cilia function. A few different forms of ciliopathy can be associated with Bowen-Conradi syndrome. For example, patients who develop retinitis pigmentosa (a disorder characterized by progressive vision loss due to degeneration of light-sensitive tissue in the retina), hearing impairment, and/or intellectual disability often have mutations in one of several genes known as Bardet-Biedl Syndrome 2 (BBS2). Other affected individuals have mutations in another gene called SEC63A, which encodes a protein important for transporting lipids between membranes inside cells. Researchers believe that impaired lipid transport contributes to the characteristic eye and kidney abnormalities seen in some people with Bowen-Conradi syndrome.","2, 63",

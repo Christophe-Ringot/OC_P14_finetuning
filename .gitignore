@@ -18,3 +18,8 @@ __pycache__/
 # Dossier de publication Hugging Face (dataset publie sur le Hub, pas dans git)
 /hf_dataset/
 *.egg-info/
+/clinical_eval/
+!outputs/final_eval/**
+!outputs/annotation_review/**
+!outputs/response_eval/**
+/hf_model/

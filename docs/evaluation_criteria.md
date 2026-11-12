@@ -1,79 +1,80 @@
-# Criteres d'acceptation avant passage au DPO
+# Criteres d'evaluation et choix du modele final
 
-Ce document propose des seuils de reference pour decider, de maniere
-objective, si une version du modele SFT est suffisamment aboutie pour servir
-de politique de depart au DPO.
+Ce document fixe ce qui est mesure, avec quel outil, et ce qui a decide du modele livre. Le detail des runs est dans `docs/experiments.md`.
 
-**Contexte educatif (precise le 2026-10-26)** : ce projet est a but
-educatif - l'objectif n'est pas un score "excellent" mais un resultat
-"acceptable", la priorite etant la rigueur methodologique (comparaisons
-controlees, documentation, detection de biais) plutot que la performance
-brute. Les seuils ci-dessous ont ete revus a la baisse en consequence apres
-5 runs SFT documentes dans `docs/experiments.md` (aucun n'a atteint les
-seuils initiaux de 0.60/0.75, et 3 tentatives independantes d'amelioration
-cibelee ont toutes echoue a depasser le Run 2).
+Contexte : projet de formation (POC). La priorite est une methode rigoureuse (memes donnees, meme protocole pour chaque modele, regles choisies sur la validation, limites ecrites) plutot qu'un score maximal.
 
-## 1. Metriques quantitatives
+## 1. Triage (critere principal)
 
-| Metrique | Outil | Seuil initial (production) | Seuil revise (educatif, "acceptable") | Run 2 (retenu) |
-|---|---|---|---|---|
-| Perplexite test set | `src/triage/evaluation/evaluate_sft.py` | En baisse par rapport au run precedent | En baisse par rapport au smoke test initial (Run 1), sans ecart anormal train/test | 3.18 (vs 3.73 au Run 1) - **atteint** |
-| Exact match QCM global | `src/triage/evaluation/evaluate_mcqa.py` | >= 0.60 | >= 0.35 | 0.417 - **atteint** |
-| F1 moyen par lettre (QCM) | `src/triage/evaluation/evaluate_mcqa.py` | >= 0.75 | >= 0.55 | 0.632 - **atteint** |
-| Ecart exact match mediqal/frenchmedmcqa | `src/triage/evaluation/evaluate_mcqa.py` | < 0.15 | documente comme limite connue, pas bloquant | 0.367 - **non atteint, acte comme limite connue** |
+Outil : `src/triage/evaluation/evaluate_sft.py`. Jeu : 400 questions annotees du test (109 cas cliniques), publie a part : `christophe-ringot/p14-medical-triage-clinical-eval`. Score : log-probabilite de chaque niveau apres le prefixe `[Niveau de priorite estime :`, mode brut ou calibre choisi sur la validation.
 
-**Justification du seuil revise** : >= 0.35 exact match / >= 0.55 F1
-representent une amelioration nette et reproductible par rapport au modele
-de base non-finetune (jamais mesure explicitement ici, mais le Run 1 qui
-s'approche d'un comportement proche du modele de base donne 0.317/0.608) et
-par rapport a 3 tentatives d'amelioration qui ont toutes echoue a faire
-mieux que le Run 2 - ce qui indique qu'on est proche d'un optimum local
-raisonnable pour ce volume de donnees et cette taille de modele, pas d'un
-resultat sous-optimal facile a corriger. Le desequilibre
-mediqal/frenchmedmcqa reste un vrai defaut du modele (il repond moins bien
-sur les QCM a reponses multiples que sur les QCM mono-reponse) mais n'est
-pas traite comme bloquant dans un cadre educatif - **a documenter
-explicitement comme limitation connue dans toute presentation du projet**.
+| Metrique | Pourquoi | Modele final (test / validation) |
+|---|---|---|
+| Accuracy, F1 macro | Performance globale, classes equilibrees | 78,8 / 62,6 ; 78,7 / 62,9 |
+| Rappel P1 | Ne pas rater une urgence vitale | 86,5 / 72,4 |
+| Sous-triage | Erreur la plus grave (patient sous-estime) | 7,0 / 16,2 |
+| Sur-triage | Cout pour le service (engorgement) | 14,2 / 21,3 |
+| P1 predit P3 | Erreur inacceptable | 0 / 0 |
 
-## 2. Controle de securite (hallucinations, recommandations dangereuses)
+Les deux jeux sont petits (une soixantaine de cas chacun) et la validation est plus difficile que le test : le resultat se cite comme une fourchette.
 
-Outil : `src/triage/evaluation/safety_check.py` (heuristique de premier filtre) :
-- signale les nombres presents dans la generation mais absents de
-  l'instruction et de la reference (hallucination numerique potentielle) ;
-- signale une liste de formulations rassurantes a risque ("pas besoin de
-  consulter", "vous pouvez arreter le traitement", etc.).
+### Regle de decision au cout
 
-**Limite explicite** : ceci est un filtre heuristique, pas une validation
-clinique. Un passage sans signalement ne garantit pas l'absence de risque
-medical, et un signalement n'est pas forcement une erreur reelle (ex. un
-fait medical correct peut etre absent de la reference textuelle, comme
-observe sur l'exemple "chromosome 13" du run actuel).
+Outil : `src/triage/evaluation/cost_sensitive.py`. Au lieu du niveau le plus probable, le modele choisit le niveau de cout attendu minimal (matrice : sous-triage d'un niveau = 4, P1 -> P3 = 10, sur-triage = 1 ou 2), avec un poids alpha sur le sous-triage.
 
-**Seuil propose avant DPO** : 0 signalement de recommandation dangereuse
-non revu par un expert clinique sur un echantillon representatif (>= 100
-exemples, en priorite sur `mediqal`/`frenchmedmcqa` qui portent les
-decisions therapeutiques). Toute ligne signalee doit etre relue manuellement
-et actee (vrai risque / faux positif) avant de considerer le controle comme
-passe.
+Regle retenue : **alpha = 0,5, temperature 2,25**, choisis sur la validation (meilleurs F1 et accuracy). Effet : sous-triage 16,2 % -> 4,9 % en validation, 7,0 % -> 4,2 % en test, rappel P1 90 %, au prix d'un sur-triage plus eleve (25 % en test) et d'une accuracy de 70,8 % en test. La matrice de cout est un choix metier a valider par les urgentistes du CHSA. Fichier livre avec le modele : `decision_rule.json`.
 
-## 3. Limites connues actees pour cette iteration
+## 2. Qualite des reponses
 
-- **Dataset DPO en anglais (UltraMedical) vs SFT en francais** : decision
-  prise de garder le dataset DPO tel quel pour cette iteration (pas de
-  source de preference francaise disponible actuellement). A documenter
-  comme limite connue du modele resultant, et a revisiter si l'objectif
-  final exige un alignement coherent en francais.
-- **Environnement GPU** : resolu le 2026-10-25 (torch reinstalle en version
-  CUDA, RTX 2060 6 Go detectee et validee sur 5 runs complets). N'est plus
-  un point bloquant.
-- **Echantillon de controle de securite trop petit** : toujours base sur les
-  10 exemples qualitatifs (`outputs/sft_qualitative_examples.csv`), loin du
-  seuil de >= 100 exemples propose en section 2. Dans un cadre educatif,
-  recommande mais non bloquant avant DPO - a mentionner comme limite
-  connue.
+Outils : `evaluate_responses.py` (metriques automatiques, 80 questions fixes du test) et `blind_judgment.py` (jugement en aveugle, grille dans `docs/evaluation_reponses.md`).
 
-## 4. Suivi / tracking
+| Metrique | SFT + triage | SFT + DPO v2 |
+|---|---|---|
+| ROUGE-L / F1 lexical | 18,9 / 21,9 | 19,5 / 23,2 |
+| Niveau ecrit correct (generation libre) | 80,0 | 78,3 |
+| Chiffres absents du cas et de la reference | 18,8 | 25,0 |
+| Formulations rassurantes a risque | 0 | 0 |
+| Jugement en aveugle : note moyenne sur 5 | 3,00 | 2,90 |
+| Jugement en aveugle : prefere (60 cas, 32 egalites) | 20 | 8 |
 
-Aucun outil de tracking (MLflow / W&B) n'est branche a ce stade
-(`report_to=[]` dans `src/triage/training/train_sft.py`). Recommande avant la montee en
-charge pour comparer les runs entre eux sans depouiller des JSON a la main.
+Le jugement en aveugle prefere le SFT (test du signe sur les 28 cas departages : p = 0,036). Les deux modeles restent faibles en pertinence (1,6 a 1,7 sur 5) : un modele de 1,7 milliard de parametres ne repond pas juste aux questions d'examen specialisees. La reponse sert d'explication au niveau de priorite, pas de conseil medical.
+
+Limites du jugement : un seul juge (Claude, LLM), sans clinicien ; le juge voyait le niveau annote dans la reference.
+
+## 3. Connaissances medicales (QCM)
+
+Outil : `evaluate_mcqa.py`, 108 QCM FrenchMedMCQA du test, generation gloutonne. Sorties : `outputs/final_eval/mcqa_<adaptateur>.csv`.
+
+| Modele | Exact match | F1 par lettre |
+|---|---|---|
+| SFT + triage | 50,0 | 50,0 |
+| SFT + DPO v2 | 49,1 | 49,1 |
+
+Pour 5 reponses possibles, le hasard donne environ 20 %. La DPO ne degrade pas les connaissances (ecart d'une question sur 108). Les anciens chiffres (0,417 au Run 2) portaient sur un autre echantillon (60 QCM, ancien dataset) et ne sont pas comparables.
+
+## 4. Securite des reponses
+
+Outil : `safety_check.py`, filtre heuristique : chiffres absents du cas et de la reference, formulations rassurantes a risque. Applique aux 80 reponses de l'echantillon fixe. Sorties : `outputs/final_eval/safety_flags_<modele>.csv`.
+
+| Modele | Reponses signalees (sur 80) | dont formulation rassurante a risque |
+|---|---|---|
+| SFT + triage | 15 | 0 |
+| SFT + DPO v2 | 20 | 0 |
+
+Tous les signalements sont des chiffres absents du cas et de la reference : a relire, pas forcement faux (un chiffre peut etre calcule a partir du cas ou etre une norme biologique juste).
+
+Le jugement en aveugle a releve des erreurs dangereuses communes aux deux modeles, que le filtre ne voit pas : refus de prostaglandines dans des cardiopathies ducto-dependantes, poursuite des anticoagulants avant une chirurgie, doses de morphine en grammes. Elles justifient que la reponse ne soit jamais montree comme une prescription et qu'un humain valide toute decision.
+
+## 5. Choix du modele final
+
+**Modele livre : SFT + triage (`4_sft_medical_triage`, checkpoint 1300) avec la regle de decision au cout.**
+
+- La DPO v1 (paires qualite + securite) a casse le triage (tout en P1, accuracy 47 %).
+- La DPO v2 (paires qualite) conserve le triage, mais le jugement en aveugle prefere les reponses du SFT et elle produit plus de chiffres non sources : rien ne justifie de l'ajouter.
+- Le sous-triage se traite par la regle de decision, reglable par le metier sans re-entrainer.
+
+## 6. Ce qui manque avant un usage reel
+
+- Validation clinique des annotations : 50 cas a relire (`outputs/annotation_review/relecture_annotations.csv`, priorite aux cas mal classes et aux P2), accord mesure par `python -m triage.data.build_clinical_eval summarize`.
+- Un jeu d'evaluation plus grand, issu de vrais dossiers d'urgence, et non de cas d'examen.
+- Une relecture medicale des reponses et de la matrice de cout.

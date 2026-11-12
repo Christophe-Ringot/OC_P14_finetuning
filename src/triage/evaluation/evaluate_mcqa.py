@@ -4,7 +4,9 @@ Generation gloutonne a partir du prompt du dataset (meme gabarit qu'a
 l'entrainement), puis comparaison des lettres "(A)".."(E)" citees dans la
 premiere ligne de la reponse avec celles de la reference.
 
-    python -m triage.evaluation.evaluate_mcqa [--adapter outputs/sft_medical_triage]
+    python -m triage.evaluation.evaluate_mcqa [--adapter outputs/dpo_triage_qualite]
+
+Sortie : outputs/final_eval/mcqa_<adaptateur>.csv
 """
 
 import argparse
@@ -19,7 +21,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from triage.utils import hf_dataset
 from triage.training.train_sft import MODEL_NAME, adapter_dir
 
-OUTPUT_PATH = Path("outputs") / "sft_mcqa_eval.csv"
+OUTPUT_DIR = Path("outputs") / "final_eval"
 MAX_NEW_TOKENS = 64
 LETTER_RE = re.compile(r"\(([A-E])\)")
 
@@ -84,13 +86,14 @@ def main() -> None:
             print(f"  {i}/{len(sample)}")
 
     report = pd.DataFrame(rows)
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    report.to_csv(OUTPUT_PATH, index=False)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    output_path = OUTPUT_DIR / f"mcqa_{args.adapter.name}.csv"
+    report.to_csv(output_path, index=False)
     print(f"Dataset : {hf_dataset.dataset_name()} - adaptateur : {args.adapter}")
     print(f"N = {len(report)} QCM du test")
     print(f"Exact match : {report['exact_match'].mean():.3f}")
     print(f"F1 moyen    : {report['f1'].mean():.3f}")
-    print(f"Detail ecrit dans {OUTPUT_PATH}")
+    print(f"Detail ecrit dans {output_path}")
 
 
 if __name__ == "__main__":

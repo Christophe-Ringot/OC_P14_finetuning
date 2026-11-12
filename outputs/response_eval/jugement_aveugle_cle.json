@@ -1,0 +1,302 @@
+{
+ "0": {
+  "id": "mediqal_oeq_114",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "1": {
+  "id": "mediqal_oeq_4757",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "2": {
+  "id": "mediqal_oeq_1902",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "3": {
+  "id": "mediqal_oeq_1481",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "4": {
+  "id": "mediqal_oeq_825",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "5": {
+  "id": "mediqal_oeq_1246",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "6": {
+  "id": "mediqal_oeq_1213",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "7": {
+  "id": "mediqal_oeq_1502",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "8": {
+  "id": "mediqal_oeq_1214",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "9": {
+  "id": "mediqal_oeq_3814",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "10": {
+  "id": "mediqal_oeq_1918",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "11": {
+  "id": "mediqal_oeq_699",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "12": {
+  "id": "mediqal_oeq_1483",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "13": {
+  "id": "mediqal_oeq_1324",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "14": {
+  "id": "mediqal_oeq_701",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "15": {
+  "id": "mediqal_oeq_1482",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "16": {
+  "id": "mediqal_oeq_1737",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "17": {
+  "id": "mediqal_oeq_1322",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "18": {
+  "id": "mediqal_oeq_1326",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "19": {
+  "id": "mediqal_oeq_1004",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "20": {
+  "id": "mediqal_oeq_3772",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "21": {
+  "id": "mediqal_oeq_4316",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "22": {
+  "id": "mediqal_oeq_2410",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "23": {
+  "id": "mediqal_oeq_3225",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "24": {
+  "id": "mediqal_oeq_3751",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "25": {
+  "id": "mediqal_oeq_4207",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "26": {
+  "id": "mediqal_oeq_907",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "27": {
+  "id": "mediqal_oeq_1211",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "28": {
+  "id": "mediqal_oeq_4887",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "29": {
+  "id": "mediqal_oeq_540",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "30": {
+  "id": "mediqal_oeq_2538",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "31": {
+  "id": "mediqal_oeq_4270",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "32": {
+  "id": "mediqal_oeq_3252",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "33": {
+  "id": "mediqal_oeq_3585",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "34": {
+  "id": "mediqal_oeq_1233",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "35": {
+  "id": "mediqal_oeq_1788",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "36": {
+  "id": "mediqal_oeq_539",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "37": {
+  "id": "mediqal_oeq_920",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "38": {
+  "id": "mediqal_oeq_1855",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "39": {
+  "id": "mediqal_oeq_1692",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "40": {
+  "id": "mediqal_oeq_4439",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "41": {
+  "id": "mediqal_oeq_2658",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "42": {
+  "id": "mediqal_oeq_3049",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "43": {
+  "id": "mediqal_oeq_4901",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "44": {
+  "id": "mediqal_oeq_2972",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "45": {
+  "id": "mediqal_oeq_2468",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "46": {
+  "id": "mediqal_oeq_3991",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "47": {
+  "id": "mediqal_oeq_1366",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "48": {
+  "id": "mediqal_oeq_1090",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "49": {
+  "id": "mediqal_oeq_2604",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "50": {
+  "id": "mediqal_oeq_389",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "51": {
+  "id": "mediqal_oeq_4978",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "52": {
+  "id": "mediqal_oeq_3433",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "53": {
+  "id": "mediqal_oeq_4905",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "54": {
+  "id": "mediqal_oeq_559",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "55": {
+  "id": "mediqal_oeq_905",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "56": {
+  "id": "mediqal_oeq_4565",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "57": {
+  "id": "mediqal_oeq_3390",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ },
+ "58": {
+  "id": "mediqal_oeq_2265",
+  "A": "6_sft_triage_dpo_qualite",
+  "B": "4_sft_medical_triage"
+ },
+ "59": {
+  "id": "mediqal_oeq_4975",
+  "A": "4_sft_medical_triage",
+  "B": "6_sft_triage_dpo_qualite"
+ }
+}

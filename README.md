@@ -84,8 +84,21 @@ regroupés par cas clinique pour éviter toute fuite entre entraînement et test
   attendue sur de nouveaux cas se situe **entre 62,6 % et 78,8 %**, les deux
   chiffres sont donnés ensemble.
 
+- **Règle de décision au coût** (sous-triage pénalisé, réglage choisi sur la
+  validation) : sous-triage ramené à 4,2 % et rappel P1 à 90,2 % sur le test,
+  au prix de plus de sur-triage (accuracy 70,8 %).
+- **DPO testée puis écartée** : avec des paires de sécurité, le modèle classe
+  tout en P1 ; avec des paires de qualité seules, le triage tient, mais un
+  jugement en aveugle des réponses préfère le SFT (20 contre 8, 32 égalités).
+
+Modèle livré (adaptateur LoRA, règle de décision, fiche) :
+[christophe-ringot/p14-triage-qwen3-1.7b-lora](https://huggingface.co/christophe-ringot/p14-triage-qwen3-1.7b-lora).
+Jeu d'évaluation clinique (109 cas, 400 questions) :
+[christophe-ringot/p14-medical-triage-clinical-eval](https://huggingface.co/datasets/christophe-ringot/p14-medical-triage-clinical-eval).
+
 Protocole complet, matrices de confusion et tests de robustesse :
-[`docs/comparaison_triage.md`](docs/comparaison_triage.md).
+[`docs/comparaison_triage.md`](docs/comparaison_triage.md) ; choix du modèle
+final : [`docs/evaluation_criteria.md`](docs/evaluation_criteria.md).
 
 ## Démarche
 
@@ -316,7 +329,9 @@ Les scripts vérifient que le serveur MLflow répond avant de démarrer, pour
 
 - [x] Dataset SFT anonymisé, annoté et publié sur Hugging Face
 - [x] SFT LoRA, suivi MLflow, évaluation comparative du triage
-- [ ] Alignement DPO ciblé sur le sous-triage
+- [x] Règle de décision au coût, DPO testée (deux variantes) et comparée sous le même protocole
+- [x] Modèle final et jeu d'évaluation clinique publiés sur Hugging Face
+- [ ] Relecture clinique de 50 annotations
 - [ ] API FastAPI + vLLM en Docker (authentification, logs de chaque décision)
 - [ ] Déploiement de l'endpoint de démonstration sur un cloud GPU
 - [ ] CI/CD GitHub Actions (tests, build de l'image, déploiement des versions du modèle)
@@ -329,7 +344,8 @@ Les scripts vérifient que le serveur MLflow répond avant de démarrer, pour
 | [`docs/comparaison_triage.md`](docs/comparaison_triage.md)   | protocole et résultats de triage  |
 | [`docs/experiments.md`](docs/experiments.md)                 | journal de toutes les expériences |
 | [`docs/triage_grid.md`](docs/triage_grid.md)                 | grille d'annotation P1/P2/P3      |
-| [`docs/evaluation_criteria.md`](docs/evaluation_criteria.md) | critères d'évaluation             |
+| [`docs/evaluation_criteria.md`](docs/evaluation_criteria.md) | critères d'évaluation, modèle final |
+| [`docs/evaluation_reponses.md`](docs/evaluation_reponses.md) | qualité des réponses, jugement en aveugle |
 | [`docs/rgpd_anonymisation.md`](docs/rgpd_anonymisation.md)   | démarche d'anonymisation RGPD     |
 
 ## Auteur
