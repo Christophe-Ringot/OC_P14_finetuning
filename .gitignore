@@ -23,3 +23,5 @@ __pycache__/
 !outputs/annotation_review/**
 !outputs/response_eval/**
 /hf_model/
+/.env
+/logs/

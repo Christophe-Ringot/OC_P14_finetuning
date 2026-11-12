@@ -150,9 +150,11 @@ flowchart LR
 │   ├── data/                   # collecte, nettoyage, anonymisation, annotation,
 │   │                           # construction des datasets, audit, export Hugging Face
 │   ├── schemas/                # schémas Pandera (corpus, dataset HF, DPO)
-│   ├── training/               # fine-tuning SFT LoRA
-│   ├── evaluation/             # triage, QCM, analyse des erreurs, sécurité
+│   ├── training/               # fine-tuning SFT LoRA, DPO
+│   ├── evaluation/             # triage, QCM, réponses, coût, sécurité
+│   ├── api/                    # API FastAPI de triage et règle de décision
 │   └── utils/                  # chargement du dataset HF, suivi MLflow, texte
+├── tests/                      # tests de l'API (sans GPU)
 ├── docs/                       # protocole, résultats, journal des expériences, RGPD
 ├── outputs/                    # rapports et métriques versionnés (poids exclus)
 ├── docker/                     # image d'entraînement GPU et dépendances figées
@@ -269,6 +271,18 @@ python -m triage.evaluation.evaluate_mcqa     # QCM FrenchMedMCQA du test
 Options utiles de `train_sft` : `--only 4_sft_medical_triage` (une seule
 expérience), `--no-eval`, `--no-mlflow`.
 
+### API de triage en local
+
+```bash
+pip install -e ".[api,dev]"
+pytest                                   # tests de l'API, sans GPU
+export TRIAGE_API_KEY=une-cle-aleatoire  # PowerShell : $env:TRIAGE_API_KEY="..."
+python -m triage.api                     # http://127.0.0.1:8000/docs
+```
+
+Niveau décidé par les log-probabilités et la règle de coût, explication
+générée, chaque appel journalisé : [`docs/api.md`](docs/api.md).
+
 ### Tout lancer avec Docker
 
 ```bash
@@ -332,7 +346,8 @@ Les scripts vérifient que le serveur MLflow répond avant de démarrer, pour
 - [x] Règle de décision au coût, DPO testée (deux variantes) et comparée sous le même protocole
 - [x] Modèle final et jeu d'évaluation clinique publiés sur Hugging Face
 - [ ] Relecture clinique de 50 annotations
-- [ ] API FastAPI + vLLM en Docker (authentification, logs de chaque décision)
+- [x] API FastAPI locale (clé d'API, logs de chaque décision, tests) : [`docs/api.md`](docs/api.md)
+- [ ] Service par vLLM en Docker
 - [ ] Déploiement de l'endpoint de démonstration sur un cloud GPU
 - [ ] CI/CD GitHub Actions (tests, build de l'image, déploiement des versions du modèle)
 - [ ] Rapport technique : méthode, métriques, check-list go/no-go, monitoring
@@ -346,6 +361,7 @@ Les scripts vérifient que le serveur MLflow répond avant de démarrer, pour
 | [`docs/triage_grid.md`](docs/triage_grid.md)                 | grille d'annotation P1/P2/P3      |
 | [`docs/evaluation_criteria.md`](docs/evaluation_criteria.md) | critères d'évaluation, modèle final |
 | [`docs/evaluation_reponses.md`](docs/evaluation_reponses.md) | qualité des réponses, jugement en aveugle |
+| [`docs/api.md`](docs/api.md) | API de triage : lancement, endpoints, essais |
 | [`docs/rgpd_anonymisation.md`](docs/rgpd_anonymisation.md)   | démarche d'anonymisation RGPD     |
 
 ## Auteur

@@ -35,6 +35,22 @@ data = [
     "spacy>=3.7",
     "pydantic>=2.6",
 ]
+# API de triage (python -m triage.api)
+api = [
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "pydantic>=2.6",
+]
+dev = [
+    "pytest>=8.0",
+    "httpx>=0.27",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"triage.api" = ["decision_rule.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

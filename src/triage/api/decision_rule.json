@@ -1,0 +1,11 @@
+{
+  "labels": ["urgence_maximale", "urgence_moderee", "differee"],
+  "scoring": "log-probability of ' <label>]' after the prefix '[Niveau de priorité estimé :', raw (no calibration by empty prompt)",
+  "temperature": 2.25,
+  "cost_matrix": [[0, 4, 10], [1, 0, 4], [2, 1, 0]],
+  "cost_matrix_rows": "annotated level (P1, P2, P3); columns = predicted level",
+  "alpha": 0.5,
+  "alpha_applies_to": "under-triage cells (upper triangle) of the cost matrix",
+  "decision": "argmin over predicted levels of softmax(logp / temperature) @ cost_alpha",
+  "chosen_on": "validation split (best macro F1 and accuracy among alpha in 0.25..3)"
+}
