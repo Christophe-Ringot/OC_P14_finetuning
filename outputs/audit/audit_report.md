@@ -66,7 +66,7 @@ Questions par groupe :
 
 Nombre de valeurs distinctes presentes dans plus d'un split.
 
-| index | valeurs_partagees | train/test | train/validation | validation/test |
+|  | valeurs_partagees | train/test | train/validation | validation/test |
 |---|---|---|---|---|
 | case_id | 0 | 0 | 0 | 0 |
 | groupe | 0 | 0 | 0 | 0 |
@@ -96,7 +96,7 @@ Questions de cas cliniques identiques dans plusieurs splits : 17
 
 Similarite max au train : mediane 0.317, p90 0.436, max 0.490
 
-| index | >= 0.5 | >= 0.7 | >= 0.8 | >= 0.9 |
+|  | >= 0.5 | >= 0.7 | >= 0.8 | >= 0.9 |
 |---|---|---|---|---|
 | nb_cas | 0 | 0 | 0 | 0 |
 
@@ -105,7 +105,7 @@ Similarite max au train : mediane 0.317, p90 0.436, max 0.490
 
 Similarite max au train : mediane 0.306, p90 0.405, max 0.477
 
-| index | >= 0.5 | >= 0.7 | >= 0.8 | >= 0.9 |
+|  | >= 0.5 | >= 0.7 | >= 0.8 | >= 0.9 |
 |---|---|---|---|---|
 | nb_cas | 0 | 0 | 0 | 0 |
 

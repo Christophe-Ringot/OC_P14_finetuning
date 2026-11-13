@@ -1,6 +1,8 @@
 import json
+
 import pytest
 from fastapi.testclient import TestClient
+
 from triage.api.config import Settings, load_decision_rule
 from triage.api.main import create_app
 from triage.api.model import Decision, PromptTooLong, decide
@@ -60,8 +62,16 @@ def test_auth_required(client, headers):
     assert client.post("/triage", json={"cas_clinique": CASE}, headers=headers).status_code == 401
 
 
-@pytest.mark.parametrize("payload", [{}, {"cas_clinique": ""}, {"cas_clinique": "court"}, {"cas_clinique": "x" * 7000},
-                                     {"cas_clinique": CASE, "question": ""}])
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {},
+        {"cas_clinique": ""},
+        {"cas_clinique": "court"},
+        {"cas_clinique": "x" * 7000},
+        {"cas_clinique": CASE, "question": ""},
+    ],
+)
 def test_invalid_input(client, payload):
     assert client.post("/triage", json=payload, headers={"X-API-Key": KEY}).status_code == 422
 
@@ -81,12 +91,14 @@ def test_decision_rule_matches_evaluation():
     rule = load_decision_rule()
     # Scores reels d'un cas du test (outputs/triage_eval/scores.csv) : P2 le plus probable, P1 retenu par la regle de cout.
     level, proba, most_likely, review, _ = decide(
-        {"urgence_maximale": -16.7028, "urgence_moderee": -15.9518, "differee": -20.0130}, rule, 0.5)
+        {"urgence_maximale": -16.7028, "urgence_moderee": -15.9518, "differee": -20.0130}, rule, 0.5
+    )
     assert most_likely == "urgence_moderee" and level == "urgence_maximale" and review
     assert abs(sum(proba.values()) - 1) < 1e-9
 
 
 def test_decision_rule_clear_case():
-    level, _, most_likely, review, _ = decide({"urgence_maximale": -30.0, "urgence_moderee": -25.0, "differee": -2.0},
-                                             load_decision_rule(), 0.5)
+    level, _, most_likely, review, _ = decide(
+        {"urgence_maximale": -30.0, "urgence_moderee": -25.0, "differee": -2.0}, load_decision_rule(), 0.5
+    )
     assert level == most_likely == "differee" and not review

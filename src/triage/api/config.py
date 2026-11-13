@@ -3,7 +3,9 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
-LOCAL_ADAPTER = Path("outputs") / "sft_medical_triage"
+from triage.constants import BASE_MODEL, FINAL_EXPERIMENT, adapter_dir
+
+LOCAL_ADAPTER = adapter_dir(FINAL_EXPERIMENT)
 HUB_ADAPTER = "christophe-ringot/p14-triage-qwen3-1.7b-lora"
 DECISION_RULE_PATH = Path(__file__).with_name("decision_rule.json")
 
@@ -15,8 +17,9 @@ def _default_adapter() -> str:
 @dataclass(frozen=True)
 class Settings:
     """Lue dans l'environnement : rien de secret dans le code."""
+
     api_key: str = field(default_factory=lambda: os.environ.get("TRIAGE_API_KEY", ""))
-    base_model: str = field(default_factory=lambda: os.environ.get("BASE_MODEL", "Qwen/Qwen3-1.7B-Base"))
+    base_model: str = field(default_factory=lambda: os.environ.get("BASE_MODEL", BASE_MODEL))
     adapter: str = field(default_factory=lambda: os.environ.get("ADAPTER", _default_adapter()))
     model_version: str = field(default_factory=lambda: os.environ.get("MODEL_VERSION", "sft_medical_triage-ckpt1300"))
     log_path: Path = field(default_factory=lambda: Path(os.environ.get("LOG_PATH", "logs/interactions.jsonl")))

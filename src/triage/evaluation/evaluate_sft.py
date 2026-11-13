@@ -1,56 +1,37 @@
 import argparse
-import gc
-import json
 from pathlib import Path
+
 import pandas as pd
-import torch
-from peft import PeftModel
-from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from sklearn.metrics import confusion_matrix
+
+from triage.constants import (
+    ADAPTERS,
+    BASE_MODEL_EXPERIMENT,
+    BASELINE,
+    LABELS,
+    SEED,
+    SHORT,
+    adapter_dir,
+    build_prompt,
+)
+from triage.evaluation.metrics import triage_metrics
+from triage.evaluation.saved_scores import MODES, TRIAGE_EVAL_DIR, decision_scores, scores_path
 from triage.utils import hf_dataset, tracking
-from triage.training.train_sft import MODEL_NAME, SFT_EXPERIMENTS, adapter_dir
+from triage.utils.markdown import markdown_table
 
-OUTPUT_DIR = Path("outputs") / "triage_eval"
 QUICK_TEST_EXAMPLES = 30
-
-# Ordre d'urgence : P1 (le plus urgent) -> P3.
-LABELS = ["urgence_maximale", "urgence_moderee", "differee"]
-SHORT = {"urgence_maximale": "P1", "urgence_moderee": "P2", "differee": "P3"}
-PRIORITY_PREFIX = "[Niveau de priorité estimé :"
 # Meme gabarit que les prompts du test, sans cas ni question.
-NEUTRAL_PROMPT = "### Cas clinique :\n\n\n### Question :\n\n\n### Réponse :\n"
-MODES = ["calibre", "brut"]
-
-
-def load_model(adapter: Path | None):
-    has_gpu = torch.cuda.is_available()
-    # Tout sur le GPU : un manque de memoire doit lever une erreur, pas
-    # decharger silencieusement des couches sur le CPU (evaluation tres lente).
-    model = AutoModelForCausalLM.from_pretrained(
-        MODEL_NAME, dtype=torch.bfloat16 if has_gpu else torch.float32, device_map={"": 0} if has_gpu else None
-    )
-    if adapter is not None:
-        # Un adaptateur DPO s'applique sur le modele SFT fusionne (parent_adapter.json).
-        parent = Path(adapter) / "parent_adapter.json"
-        if parent.exists():
-            model = PeftModel.from_pretrained(model, json.loads(parent.read_text())["parent_adapter"]).merge_and_unload()
-        model = PeftModel.from_pretrained(model, str(adapter))
-    return model.eval()
-
-
-def label_logprobs(model, tokenizer, prompt: str) -> dict:
-    """Log-probabilite de " <niveau>]" apres le prompt et le debut du prefixe."""
-    context = tokenizer(prompt + PRIORITY_PREFIX, add_special_tokens=False)["input_ids"]
-    scores = {}
-    for label in LABELS:
-        continuation = tokenizer(f" {label}]", add_special_tokens=False)["input_ids"]
-        input_ids = torch.tensor([context + continuation], device=model.device)
-        with torch.no_grad():
-            # Seules les positions qui predisent la continuation sont utiles.
-            logits = model(input_ids=input_ids, logits_to_keep=len(continuation) + 1).logits[0, :-1].float()
-        targets = torch.tensor(continuation, device=model.device).unsqueeze(1)
-        scores[label] = logits.log_softmax(-1).gather(1, targets).sum().item()
-    return scores
+NEUTRAL_PROMPT = build_prompt("", case="")
+MAIN_COLUMNS = [
+    "accuracy",
+    "f1_macro",
+    "rappel_P1",
+    "sous_triage",
+    "sur_triage",
+    "erreurs_1_niveau",
+    "erreurs_2_niveaux",
+    "P1_predit_P3",
+]
 
 
 def score_with_model(splits: dict, adapter: Path | None) -> dict:
@@ -62,14 +43,16 @@ def score_with_model(splits: dict, adapter: Path | None) -> dict:
     entraine sur les libelles, ce prior n'est plus neutre (un cas vide evoque
     "differee") : le choix calibre / brut est donc fait sur la validation.
     """
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    from triage.utils.modeling import encode_context, free_gpu_memory, label_logprobs, load_model, load_tokenizer
+
+    tokenizer = load_tokenizer()
     model = load_model(adapter)
-    prior = label_logprobs(model, tokenizer, NEUTRAL_PROMPT)
+    prior = label_logprobs(model, tokenizer, encode_context(tokenizer, NEUTRAL_PROMPT))
     results = {}
     for name, frame in splits.items():
         raw = []
         for i, prompt in enumerate(frame["prompt"], start=1):
-            raw.append(label_logprobs(model, tokenizer, prompt))
+            raw.append(label_logprobs(model, tokenizer, encode_context(tokenizer, prompt)))
             if i % 50 == 0:
                 print(f"  {name} {i}/{len(frame)}")
         scores = pd.DataFrame(raw).rename(columns=lambda label: f"raw_{SHORT[label]}")
@@ -83,11 +66,7 @@ def score_with_model(splits: dict, adapter: Path | None) -> dict:
 
 def decide(scores: pd.DataFrame, mode: str) -> pd.Series:
     """Niveau retenu : argmax des scores bruts ou calibres (brut - prior)."""
-    values = pd.DataFrame({
-        label: scores[f"raw_{SHORT[label]}"] - (scores[f"prior_{SHORT[label]}"] if mode == "calibre" else 0)
-        for label in LABELS
-    })
-    return values.idxmax(axis=1)
+    return decision_scores(scores, mode).idxmax(axis=1)
 
 
 def choose_mode(validation: pd.DataFrame, scores: pd.DataFrame) -> tuple[str, dict]:
@@ -96,49 +75,24 @@ def choose_mode(validation: pd.DataFrame, scores: pd.DataFrame) -> tuple[str, di
     return max(f1, key=f1.get), f1
 
 
-def free_gpu_memory() -> None:
-    gc.collect()
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
-
-
-def triage_metrics(y_true: pd.Series, y_pred: pd.Series) -> dict:
-    rank = {label: i for i, label in enumerate(LABELS)}
-    gap = y_pred.map(rank) - y_true.map(rank)  # > 0 : predit moins urgent
-    precision, recall, f1, _ = precision_recall_fscore_support(y_true, y_pred, labels=LABELS, zero_division=0)
-    metrics = {
-        "accuracy": (gap == 0).mean(),
-        "f1_macro": f1.mean(),
-        "rappel_P1": recall[0],
-        "sous_triage": (gap > 0).mean(),
-        "sur_triage": (gap < 0).mean(),
-        "erreurs_1_niveau": (gap.abs() == 1).mean(),
-        "erreurs_2_niveaux": (gap.abs() == 2).mean(),
-        "P1_predit_P3": ((y_true == LABELS[0]) & (y_pred == LABELS[2])).sum() / max((y_true == LABELS[0]).sum(), 1),
-    }
-    for i, label in enumerate(LABELS):
-        metrics.update({f"precision_{SHORT[label]}": precision[i], f"rappel_{SHORT[label]}": recall[i], f"f1_{SHORT[label]}": f1[i]})
-    return metrics
-
-
-def markdown_table(frame: pd.DataFrame) -> str:
-    header = "| experience | " + " | ".join(frame.columns) + " |\n|" + "---|" * (len(frame.columns) + 1) + "\n"
-    return header + "\n".join(f"| {name} | " + " | ".join(f"{v:.1f}" for v in row) + " |" for name, row in frame.iterrows())
-
-
 def confusion_table(y_true: pd.Series, y_pred: pd.Series) -> str:
-    matrix = confusion_matrix(y_true, y_pred, labels=LABELS)
-    header = "| annote \\ predit | " + " | ".join(SHORT[label] for label in LABELS) + " |\n|---|---|---|---|\n"
-    rows = [f"| {SHORT[label]} | " + " | ".join(str(n) for n in matrix[i]) + " |" for i, label in enumerate(LABELS)]
-    return header + "\n".join(rows)
+    matrix = pd.DataFrame(
+        confusion_matrix(y_true, y_pred, labels=LABELS),
+        index=pd.Index([SHORT[label] for label in LABELS], name="annote \\ predit"),
+        columns=[SHORT[label] for label in LABELS],
+    )
+    return markdown_table(matrix)
 
 
-def write_report(test: pd.DataFrame, results: pd.DataFrame, decisions: pd.DataFrame, path: Path,
-                 validation: pd.DataFrame | None = None) -> None:
-    percent = results.astype(float) * 100
-    main_columns = ["accuracy", "f1_macro", "rappel_P1", "sous_triage", "sur_triage", "erreurs_1_niveau", "erreurs_2_niveaux", "P1_predit_P3"]
-    class_columns = [c for c in results.columns if c not in main_columns]
+def write_report(
+    test: pd.DataFrame, results: pd.DataFrame, decisions: pd.DataFrame, path: Path, validation: pd.DataFrame
+) -> None:
+    percent = results.astype(float).rename_axis("experience") * 100
+    class_columns = [c for c in results.columns if c not in MAIN_COLUMNS]
     distribution = test["priorite"].map(SHORT).value_counts().reindex(["P1", "P2", "P3"])
+    modes = decisions.rename_axis("experience").rename(columns={"mode_retenu": "mode retenu"})
+    modes = modes.rename(columns={f"f1_validation_{m}": f"F1 validation {m}" for m in MODES})
+    modes[[f"F1 validation {m}" for m in MODES]] = modes[[f"F1 validation {m}" for m in MODES]].astype(float) * 100
 
     lines = [
         f"# Comparaison du triage - {len(results)} experiences",
@@ -153,17 +107,16 @@ def write_report(test: pd.DataFrame, results: pd.DataFrame, decisions: pd.DataFr
         "Pour chaque modele, le niveau predit est l'argmax des log-probabilites, soit brutes, soit calibrees "
         "(moins le score sur prompt vide). Le mode est choisi sur la validation (F1 macro), puis applique au test.",
         "",
-        "| experience | mode retenu | " + " | ".join(f"F1 validation {m}" for m in MODES) + " |\n|---|---|"
-        + "---|" * len(MODES) + "\n"
-        + "\n".join(f"| {name} | {row['mode_retenu']} | " + " | ".join(f"{row[f'f1_validation_{m}'] * 100:.1f}" for m in MODES) + " |"
-                    for name, row in decisions.iterrows()),
+        markdown_table(modes),
         "",
         "## Metriques principales",
         "",
-        markdown_table(percent[main_columns]),
+        markdown_table(percent[MAIN_COLUMNS]),
         "",
-        *(["Meme tableau sur la validation (regle de decision choisie sur ce jeu), a citer avec le test :", "",
-           markdown_table(validation.astype(float)[main_columns] * 100), ""] if validation is not None else []),
+        "Meme tableau sur la validation (regle de decision choisie sur ce jeu), a citer avec le test :",
+        "",
+        markdown_table(validation.astype(float).rename_axis("experience")[MAIN_COLUMNS] * 100),
+        "",
         "## Precision, rappel et F1 par classe",
         "",
         markdown_table(percent[class_columns]),
@@ -187,17 +140,30 @@ def load_split(split: str, quick: bool) -> pd.DataFrame:
     frame = hf_dataset.load_sft(with_priority=True)
     frame = frame[(frame["split"] == split) & frame["priorite"].notna()].reset_index(drop=True)
     if quick:
-        frame = frame.sample(min(QUICK_TEST_EXAMPLES, len(frame)), random_state=42).reset_index(drop=True)
+        frame = frame.sample(min(QUICK_TEST_EXAMPLES, len(frame)), random_state=SEED).reset_index(drop=True)
     return frame
+
+
+def available_models(quick: bool) -> dict:
+    """Modele de base puis chaque adaptateur present sur le disque."""
+    models = {BASE_MODEL_EXPERIMENT: None}
+    for experiment in ADAPTERS:
+        adapter = adapter_dir(experiment, quick)
+        if (adapter / "adapter_config.json").exists():
+            models[experiment] = adapter
+        else:
+            print(f"{experiment} ignoree : adaptateur absent ({adapter})")
+    return models
 
 
 def log_to_mlflow(quick: bool, results: dict, decisions: pd.DataFrame, run_ids: dict, files: list) -> None:
     """Metriques dans le run d'entrainement de chaque modele, et un run d'evaluation qui regroupe tout."""
     import mlflow
 
-    suffix = "_quick" if quick else ""
-    flat = lambda split, metrics: {f"{split}_{name}": float(value) for name, value in metrics.items()}
-    for experiment, run_id in (run_ids or {}).items():
+    def flat(split: str, metrics: pd.Series) -> dict:
+        return {f"{split}_{name}": float(value) for name, value in metrics.items()}
+
+    for experiment, run_id in run_ids.items():
         if run_id is None or experiment not in results["test"].index:
             continue
         with tracking.start_run(True, run_id=run_id):
@@ -206,49 +172,38 @@ def log_to_mlflow(quick: bool, results: dict, decisions: pd.DataFrame, run_ids: 
             mlflow.log_param("mode_decision", decisions.loc[experiment, "mode_retenu"])
 
     tags = {"type": "evaluation", "mode": "quick" if quick else "complet", "git_commit": tracking.git_commit()}
-    with tracking.start_run(True, run_name=f"evaluation_triage{suffix}", tags=tags):
-        mlflow.log_params({
-            "dataset": hf_dataset.dataset_name(), "dataset_revision": hf_dataset.DATASET_REVISION,
-            "dataset_md5": hf_dataset.fingerprint(hf_dataset.load_sft()),
-            **{f"mode_{e}": m for e, m in decisions["mode_retenu"].items()},
-            **{f"run_id_{e}": r for e, r in (run_ids or {}).items() if r},
-        })
+    with tracking.start_run(True, run_name=f"evaluation_triage{'_quick' if quick else ''}", tags=tags):
+        mlflow.log_params(
+            {
+                "dataset": hf_dataset.dataset_name(),
+                "dataset_revision": hf_dataset.DATASET_REVISION,
+                "dataset_md5": hf_dataset.fingerprint(hf_dataset.load_sft()),
+                **{f"mode_{e}": m for e, m in decisions["mode_retenu"].items()},
+                **{f"run_id_{e}": r for e, r in run_ids.items() if r},
+            }
+        )
         for split, frame in results.items():
             for experiment, metrics in frame.iterrows():
-                mlflow.log_metrics({f"{experiment}.{name}": float(v) for name, v in flat(split, metrics).items()})
+                mlflow.log_metrics({f"{experiment}.{name}": v for name, v in flat(split, metrics).items()})
         for path in files:
             mlflow.log_artifact(str(path))
 
 
-# Modeles alignes apres le SFT (adaptateur complet, evalue comme les SFT).
-DPO_EXPERIMENTS = {"5_sft_triage_dpo": "dpo_triage", "6_sft_triage_dpo_qualite": "dpo_triage_qualite"}
-
-
 def run(quick: bool = False, tracked: bool = False, run_ids: dict | None = None, only: list | None = None) -> None:
     """Evalue tous les modeles, ou seulement `only` en reprenant les scores deja calcules des autres."""
-    splits = {"validation": load_split("validation", quick), "test": load_split("test", quick)}
-    test = splits["test"]
+    run_ids = run_ids or {}
     suffix = "_quick" if quick else ""
-
-    test["1_baseline_naive"] = LABELS[0]
-    splits["validation"]["1_baseline_naive"] = LABELS[0]
-    models = {"2_modele_base": None}
-    candidates = {e: adapter_dir(e, quick) for e in SFT_EXPERIMENTS}
-    candidates.update({e: Path("outputs") / (d + suffix) for e, d in DPO_EXPERIMENTS.items()})
-    for experiment, adapter in candidates.items():
-        if not (adapter / "adapter_config.json").exists():
-            print(f"{experiment} ignoree : adaptateur absent ({adapter})")
-            continue
-        models[experiment] = adapter
+    splits = {"validation": load_split("validation", quick), "test": load_split("test", quick)}
+    for frame in splits.values():
+        frame[BASELINE] = LABELS[0]
 
     if only:
-        saved_scores = {"validation": pd.read_csv(OUTPUT_DIR / f"scores_validation{suffix}.csv"),
-                        "test": pd.read_csv(OUTPUT_DIR / f"scores{suffix}.csv")}
-        saved_modes = pd.read_csv(OUTPUT_DIR / f"mode_decision{suffix}.csv", index_col=0)
+        saved_scores = {name: pd.read_csv(scores_path(name, suffix)) for name in splits}
+        saved_modes = pd.read_csv(TRIAGE_EVAL_DIR / f"mode_decision{suffix}.csv", index_col=0)
 
     all_scores = {name: [] for name in splits}
     decisions = {}
-    for experiment, adapter in models.items():
+    for experiment, adapter in available_models(quick).items():
         if only and experiment not in only and experiment in saved_modes.index:
             scores = {}
             for name in splits:
@@ -258,7 +213,7 @@ def run(quick: bool = False, tracked: bool = False, run_ids: dict | None = None,
             mode = decisions[experiment]["mode_retenu"]
             print(f"{experiment} : scores repris de l'evaluation precedente (mode {mode})")
         else:
-            print(f"Evaluation de {experiment} ({len(splits['validation'])} validation, {len(test)} test)")
+            print(f"Evaluation de {experiment} ({len(splits['validation'])} validation, {len(splits['test'])} test)")
             scores = score_with_model(splits, adapter)
             mode, f1 = choose_mode(splits["validation"], scores["validation"])
             decisions[experiment] = {"mode_retenu": mode, **{f"f1_validation_{m}": v for m, v in f1.items()}}
@@ -267,20 +222,23 @@ def run(quick: bool = False, tracked: bool = False, run_ids: dict | None = None,
             splits[name][experiment] = decide(scores[name], mode).to_numpy()
             all_scores[name].append(scores[name].assign(experience=experiment))
 
+    test = splits["test"]
     experiments = [c for c in test.columns if c[0].isdigit()]
-    results = {name: pd.DataFrame({e: triage_metrics(frame["priorite"], frame[e]) for e in experiments}).T
-               for name, frame in splits.items()}
+    results = {
+        name: pd.DataFrame({e: triage_metrics(frame["priorite"], frame[e]) for e in experiments}).T
+        for name, frame in splits.items()
+    }
     decisions = pd.DataFrame(decisions).T
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    TRIAGE_EVAL_DIR.mkdir(parents=True, exist_ok=True)
     files = {
-        "predictions": OUTPUT_DIR / f"predictions{suffix}.csv",
-        "scores": OUTPUT_DIR / f"scores{suffix}.csv",
-        "scores_validation": OUTPUT_DIR / f"scores_validation{suffix}.csv",
-        "decisions": OUTPUT_DIR / f"mode_decision{suffix}.csv",
-        "results": OUTPUT_DIR / f"comparaison_triage{suffix}.csv",
-        "results_validation": OUTPUT_DIR / f"comparaison_triage_validation{suffix}.csv",
-        "report": OUTPUT_DIR / f"comparaison_triage{suffix}.md",
+        "predictions": TRIAGE_EVAL_DIR / f"predictions{suffix}.csv",
+        "scores": scores_path("test", suffix),
+        "scores_validation": scores_path("validation", suffix),
+        "decisions": TRIAGE_EVAL_DIR / f"mode_decision{suffix}.csv",
+        "results": TRIAGE_EVAL_DIR / f"comparaison_triage{suffix}.csv",
+        "results_validation": TRIAGE_EVAL_DIR / f"comparaison_triage_validation{suffix}.csv",
+        "report": TRIAGE_EVAL_DIR / f"comparaison_triage{suffix}.md",
     }
     test[["id", "groupe", "priorite", *experiments]].to_csv(files["predictions"], index=False)
     pd.concat(all_scores["test"]).to_csv(files["scores"], index=False)
@@ -288,7 +246,7 @@ def run(quick: bool = False, tracked: bool = False, run_ids: dict | None = None,
     decisions.to_csv(files["decisions"])
     results["test"].to_csv(files["results"])
     results["validation"].to_csv(files["results_validation"])
-    write_report(test, results["test"], decisions, files["report"], validation=results["validation"])
+    write_report(test, results["test"], decisions, files["report"], results["validation"])
     if tracked:
         log_to_mlflow(quick, results, decisions, run_ids, list(files.values()))
 

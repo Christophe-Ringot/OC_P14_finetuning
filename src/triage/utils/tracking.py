@@ -9,6 +9,7 @@ Le serveur est verifie au demarrage : un entrainement de plusieurs heures ne
 doit pas tourner sans suivi parce que le serveur n'etait pas lance. Pour
 travailler sans MLflow, passer --no-mlflow aux scripts.
 """
+
 import contextlib
 import hashlib
 import os
@@ -71,6 +72,15 @@ def git_commit() -> str:
     except OSError:
         pass
     return "inconnu"
+
+
+def log_adapter(output_dir: Path) -> None:
+    """Resume d'entrainement et adaptateur final (sans les checkpoints intermediaires) en artefacts MLflow."""
+    import mlflow
+
+    mlflow.log_artifact(str(output_dir / "training_summary.json"))
+    for name in ["adapter_config.json", "adapter_model.safetensors"]:
+        mlflow.log_artifact(str(output_dir / name), artifact_path="adapter")
 
 
 def file_md5(path: Path) -> str:

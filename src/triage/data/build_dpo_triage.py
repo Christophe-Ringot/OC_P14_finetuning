@@ -17,20 +17,32 @@ longueur chosen / rejected, recouvrement de cas avec le test.
 
 Sortie : data/processed/dpo_triage.csv (+ cache des generations).
 """
+
 import argparse
-from pathlib import Path
+
 import pandas as pd
 from pandera.pandas import Check, Column, DataFrameSchema
-from triage.evaluation.evaluate_responses import LEVEL_RE, generate, rouge_l, strip_prefix, words
-from triage.evaluation.evaluate_sft import LABELS, SHORT
+
+from triage.constants import DATA_DIR, FINAL_EXPERIMENT, LABELS, LEVEL_RE, OUTPUTS_DIR, SEED, SHORT, adapter_dir
+from triage.constants import level_prefix as prefix
+from triage.evaluation.metrics import rouge_l, strip_prefix, words
 from triage.utils import hf_dataset
 
-SFT_ADAPTER = Path("outputs") / "sft_medical_triage"
-OUTPUT_PATH = Path("data") / "processed" / "dpo_triage.csv"
-GENERATIONS_PATH = Path("data") / "processed" / "dpo_generations_sft.csv"
-REPORT_DIR = Path("outputs") / "dpo"
-PREFIX = "[Niveau de priorité estimé : {}]\n\n"
-SEED = 42
+SFT_ADAPTER = adapter_dir(FINAL_EXPERIMENT)
+OUTPUT_PATH = DATA_DIR / "processed" / "dpo_triage.csv"
+GENERATIONS_PATH = DATA_DIR / "processed" / "dpo_generations_sft.csv"
+REPORT_DIR = OUTPUTS_DIR / "dpo"
+PAIR_COLUMNS = [
+    "id",
+    "case_id",
+    "split",
+    "type_paire",
+    "priorite",
+    "prompt",
+    "chosen",
+    "rejected",
+    "similarite_rouge_l",
+]
 N_QUALITY = {"train": 800, "validation": 100}
 SAFETY_SHARE = 0.35  # paires securite_triage, en proportion des paires qualite
 MAX_SIMILARITY = 0.6
@@ -65,7 +77,9 @@ def generations(rows: pd.DataFrame, refresh: bool) -> pd.DataFrame:
         cached = pd.read_csv(GENERATIONS_PATH)
         if set(rows["id"]) <= set(cached["id"]):
             return cached
-    prompts = [p + PREFIX.format(level) for p, level in zip(rows["prompt"], rows["priorite"])]
+    from triage.evaluation.evaluate_responses import generate
+
+    prompts = [p + prefix(level) for p, level in zip(rows["prompt"], rows["priorite"])]
     texts, truncated = generate(SFT_ADAPTER, prompts)
     out = rows[["id"]].assign(generated=texts, truncated=truncated)
     GENERATIONS_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -76,7 +90,7 @@ def generations(rows: pd.DataFrame, refresh: bool) -> pd.DataFrame:
 def quality_pairs(rows: pd.DataFrame, generated: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     frame = rows.merge(generated, on="id")
     frame["generated"] = frame["generated"].fillna("").str.strip()
-    frame["rejected"] = [PREFIX.format(level) + text for level, text in zip(frame["priorite"], frame["generated"])]
+    frame["rejected"] = [prefix(level) + text for level, text in zip(frame["priorite"], frame["generated"])]
     frame["similarite_rouge_l"] = [rouge_l(strip_prefix(c), t) for c, t in zip(frame["reponse"], frame["generated"])]
     drops = {
         "generation vide (< 3 mots)": frame["generated"].map(lambda t: len(words(t)) < 3),
@@ -86,8 +100,7 @@ def quality_pairs(rows: pd.DataFrame, generated: pd.DataFrame) -> tuple[pd.DataF
     stats = {name: int(mask.sum()) for name, mask in drops.items()}
     stats["generation coupee (limite de tokens)"] = int(frame["truncated"].sum())
     frame = frame[keep]
-    return frame.assign(type_paire="qualite", chosen=frame["reponse"])[
-        ["id", "case_id", "split", "type_paire", "priorite", "prompt", "chosen", "rejected", "similarite_rouge_l"]], stats
+    return frame.assign(type_paire="qualite", chosen=frame["reponse"])[PAIR_COLUMNS], stats
 
 
 def safety_pairs(n_quality: dict) -> pd.DataFrame:
@@ -98,11 +111,13 @@ def safety_pairs(n_quality: dict) -> pd.DataFrame:
     for split, n in n_quality.items():
         part = frame[frame["split"] == split].sample(round(n * SAFETY_SHARE), random_state=SEED + 1)
         lower = part["priorite"].map({LABELS[0]: LABELS[1], LABELS[1]: LABELS[2]})
-        rejected = [r.replace(PREFIX.format(p), PREFIX.format(l), 1) for r, p, l in zip(part["reponse"], part["priorite"], lower)]
-        parts.append(part.assign(type_paire="securite_triage", chosen=part["reponse"], rejected=rejected, similarite_rouge_l=1.0))
+        rejected = [r.replace(prefix(p), prefix(lo), 1) for r, p, lo in zip(part["reponse"], part["priorite"], lower)]
+        parts.append(
+            part.assign(type_paire="securite_triage", chosen=part["reponse"], rejected=rejected, similarite_rouge_l=1.0)
+        )
     out = pd.concat(parts)
     out["id"] = out["id"] + "_securite"
-    return out[["id", "case_id", "split", "type_paire", "priorite", "prompt", "chosen", "rejected", "similarite_rouge_l"]]
+    return out[PAIR_COLUMNS]
 
 
 def report(pairs: pd.DataFrame, drop_stats: dict, n_candidates: int) -> None:
@@ -116,7 +131,9 @@ def report(pairs: pd.DataFrame, drop_stats: dict, n_candidates: int) -> None:
     lines = [
         "# Qualite des paires DPO (triage)",
         "",
-        f"{len(pairs)} paires : " + ", ".join(f"{k} {v}" for k, v in pairs.groupby(['split', 'type_paire']).size().items()) + ".",
+        f"{len(pairs)} paires : "
+        + ", ".join(f"{k} {v}" for k, v in pairs.groupby(["split", "type_paire"]).size().items())
+        + ".",
         "",
         "## Repartition",
         "",
@@ -126,10 +143,11 @@ def report(pairs: pd.DataFrame, drop_stats: dict, n_candidates: int) -> None:
         "## Controles automatiques",
         "",
         f"- Candidats qualite generes : {n_candidates} ; ecartes : "
-        + "; ".join(f"{k} = {v}" for k, v in drop_stats.items() if "coupee" not in k) + ".",
+        + "; ".join(f"{k} = {v}" for k, v in drop_stats.items() if "coupee" not in k)
+        + ".",
         f"- Generations coupees a la limite de tokens (gardees, rejected legitime) : {drop_stats['generation coupee (limite de tokens)']}.",
         f"- Cas du test presents dans les paires : {leak} (attendu : 0).",
-        f"- Paires identiques ou vides : 0 (verifie par le schema pandera).",
+        "- Paires identiques ou vides : 0 (verifie par le schema pandera).",
         f"- Similarite ROUGE-L chosen / rejected (qualite) : mediane {quality['similarite_rouge_l'].median():.2f}, "
         f"max {quality['similarite_rouge_l'].max():.2f}.",
         f"- Longueur en mots, mediane : chosen {chosen_len.median():.0f}, rejected {rejected_len.median():.0f} ; "

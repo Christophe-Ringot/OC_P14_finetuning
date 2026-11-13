@@ -1,19 +1,21 @@
 import re
 from collections import Counter
-from pathlib import Path
+
 import pandas as pd
 import spacy
-from spacy.lang.fr.stop_words import STOP_WORDS as FRENCH_STOP_WORDS
 from presidio_analyzer import AnalyzerEngine
 from presidio_analyzer.nlp_engine import NlpEngineProvider
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.entities import OperatorConfig
+from spacy.lang.fr.stop_words import STOP_WORDS as FRENCH_STOP_WORDS
+
+from triage.constants import DATA_DIR, SEED
 from triage.schemas.corpus import corpus_schema
 
-INPUT_PATH = Path("data") / "interim" / "corpus_clean.csv"
-OUTPUT_PATH = Path("data") / "interim" / "corpus_anonymized.csv"
-REPORT_PATH = Path("data") / "interim" / "anonymization_report.csv"
-SAMPLE_PATH = Path("data") / "interim" / "anonymization_sample.csv"
+INPUT_PATH = DATA_DIR / "interim" / "corpus_clean.csv"
+OUTPUT_PATH = DATA_DIR / "interim" / "corpus_anonymized.csv"
+REPORT_PATH = DATA_DIR / "interim" / "anonymization_report.csv"
+SAMPLE_PATH = DATA_DIR / "interim" / "anonymization_sample.csv"
 
 TEXT_COLUMNS = ["instruction", "contexte_patient", "reponse"]
 CONTACT_ENTITIES = ["EMAIL_ADDRESS"]
@@ -43,7 +45,7 @@ def mask_civilities(text: str, counter: Counter) -> str:
         kept = second if second_word and second_word.lower() in FRENCH_STOP_WORDS else ""
         if name.rstrip(".…") == PLACEHOLDER:
             return match.group(0)
-        counter[f"CIVILITE | {match.group(0)[:len(match.group(0)) - len(kept)]}"] += 1
+        counter[f"CIVILITE | {match.group(0)[: len(match.group(0)) - len(kept)]}"] += 1
         return f"{civility} {PLACEHOLDER}.{kept}"
 
     return CIVILITY_RE.sub(replace, text)
@@ -52,7 +54,7 @@ def mask_civilities(text: str, counter: Counter) -> str:
 def mask_first_names(text: str, nlp, counter: Counter) -> str:
     names = set()
     for match in FIRST_NAME_RE.finditer(text):
-        doc = nlp(text[max(0, match.start() - 40): match.end() + 40])
+        doc = nlp(text[max(0, match.start() - 40) : match.end() + 40])
         token = next((t for t in doc if t.text == match.group(1).split("-")[0]), None)
         if token is not None and token.pos_ == "PROPN":
             names.add(match.group(1))
@@ -85,7 +87,7 @@ def anonymize_text(text, language: str, engines, counter: Counter):
         text = mask_first_names(text, nlp_fr, counter)
     results = analyzer.analyze(text=text, language=language, entities=CONTACT_ENTITIES)
     for r in results:
-        counter[f"COORDONNEES | {text[r.start:r.end]}"] += 1
+        counter[f"COORDONNEES | {text[r.start : r.end]}"] += 1
     if not results:
         return text
     operators = {"DEFAULT": OperatorConfig("replace", {"new_value": "[COORDONNEES]"})}
@@ -113,8 +115,10 @@ def main() -> None:
     validated.to_csv(OUTPUT_PATH, index=False, encoding="utf-8")
 
     report = pd.DataFrame(
-        [{"type": key.split(" | ", 1)[0], "texte_masque": key.split(" | ", 1)[1], "occurrences": n}
-         for key, n in counter.most_common()],
+        [
+            {"type": key.split(" | ", 1)[0], "texte_masque": key.split(" | ", 1)[1], "occurrences": n}
+            for key, n in counter.most_common()
+        ],
         columns=["type", "texte_masque", "occurrences"],
     )
     report.to_csv(REPORT_PATH, index=False, encoding="utf-8")
@@ -126,7 +130,7 @@ def main() -> None:
         ]
     )
     changed = changed[changed["avant"].fillna("") != changed["apres"].fillna("")].drop_duplicates(["avant"])
-    changed.sample(min(SAMPLE_SIZE, len(changed)), random_state=42).to_csv(SAMPLE_PATH, index=False, encoding="utf-8")
+    changed.sample(min(SAMPLE_SIZE, len(changed)), random_state=SEED).to_csv(SAMPLE_PATH, index=False, encoding="utf-8")
 
     rows_changed = (corpus[TEXT_COLUMNS].fillna("") != anonymized[TEXT_COLUMNS].fillna("")).any(axis=1)
     print(f"Lignes modifiees : {rows_changed.sum()} / {len(corpus)} | textes distincts modifies : {len(changed)}")

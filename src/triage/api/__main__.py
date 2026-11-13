@@ -1,5 +1,7 @@
 import argparse
+
 import uvicorn
+
 from triage.api.main import create_app
 
 # Lancement local : TRIAGE_API_KEY=... python -m triage.api [--port 8000]

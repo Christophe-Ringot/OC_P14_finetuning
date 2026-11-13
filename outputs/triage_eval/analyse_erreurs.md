@@ -6,13 +6,13 @@ Mode de decision : brut (retenu sur la validation). Jeu de test : 400 questions,
 
 109 cas, 21 mal classes (19.3 %).
 
-| index | predit P1 | predit P2 | predit P3 |
+|  | predit P1 | predit P2 | predit P3 |
 |---|---|---|---|
 | annote P1 | 49 | 4 | 0 |
 | annote P2 | 9 | 18 | 3 |
 | annote P3 | 0 | 5 | 21 |
 
-| index | cas | sens |
+|  | cas | sens |
 |---|---|---|
 | P2 -> P1 | 9 | sur-triage |
 | P3 -> P2 | 5 | sur-triage |
@@ -92,7 +92,7 @@ Probabilite moyenne attribuee a chaque niveau (softmax sur les 3 libelles, moyen
 
 AUC entre niveaux, sur l'urgence attendue sum(p x rang) par question. Une AUC elevee avec une accuracy moyenne signale un modele qui ordonne bien mais dont les frontieres sont mal placees (corrigeable par un seuil) ; une AUC proche de 0.5 signale une vraie confusion.
 
-| index | AUC | questions |
+|  | AUC | questions |
 |---|---|---|
 | P1 vs P2 | 0.861 | 287.000 |
 | P2 vs P3 | 0.918 | 237.000 |
@@ -104,7 +104,7 @@ Un biais est ajoute aux scores de P2 et P3 (grille de -6 a +6), choisi sur la va
 
 Validation (donnees d'apprentissage des biais) :
 
-| index | accuracy | f1_macro | rappel_P1 | rappel_P2 | rappel_P3 | sous_triage | sur_triage |
+|  | accuracy | f1_macro | rappel_P1 | rappel_P2 | rappel_P3 | sous_triage | sur_triage |
 |---|---|---|---|---|---|---|---|
 | sans ajustement | 62.6 | 62.9 | 72.4 | 45.1 | 70.7 | 16.2 | 21.3 |
 | F1 max | 67.4 | 68.4 | 61.9 | 76.7 | 63.4 | 16.9 | 15.6 |
@@ -112,7 +112,7 @@ Validation (donnees d'apprentissage des biais) :
 
 Test (application sans retouche) :
 
-| index | accuracy | f1_macro | rappel_P1 | rappel_P2 | rappel_P3 | sous_triage | sur_triage |
+|  | accuracy | f1_macro | rappel_P1 | rappel_P2 | rappel_P3 | sous_triage | sur_triage |
 |---|---|---|---|---|---|---|---|
 | sans ajustement | 78.8 | 78.7 | 86.5 | 64.5 | 83.2 | 7.0 | 14.2 |
 | F1 max (biais P2 +2.50, P3 +2.00) | 76.5 | 77.6 | 66.3 | 86.3 | 80.5 | 15.0 | 8.5 |

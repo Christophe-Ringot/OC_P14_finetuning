@@ -3,18 +3,23 @@ import hmac
 import json
 import time
 import uuid
+from collections.abc import Callable
 from contextlib import asynccontextmanager
-from datetime import datetime, timezone
-from typing import Callable
+from datetime import UTC, datetime
+
 from fastapi import Depends, FastAPI, HTTPException, Request, Security
 from fastapi.security import APIKeyHeader
 from pydantic import BaseModel, Field
+
 from triage.api.config import Settings
-from triage.api.model import SHORT, PromptTooLong, TriageModel
+from triage.api.model import PromptTooLong, TriageModel
+from triage.constants import SHORT
 
 DEFAULT_QUESTION = "Quel est le niveau de priorité de ce patient et pourquoi ?"
-AVERTISSEMENT = ("Aide au tri pour un POC, sans validation clinique : la decision revient au soignant. "
-                 "L'explication generee peut contenir des erreurs medicales.")
+AVERTISSEMENT = (
+    "Aide au tri pour un POC, sans validation clinique : la decision revient au soignant. "
+    "L'explication generee peut contenir des erreurs medicales."
+)
 
 
 class TriageRequest(BaseModel):
@@ -54,8 +59,12 @@ def create_app(settings: Settings | None = None, model_factory: Callable[[Settin
         app.state.model = model_factory(settings)
         yield
 
-    app = FastAPI(title="Triage CHSA (POC)", version="0.1.0", lifespan=lifespan,
-                  description="Niveau de priorite P1 / P2 / P3 d'un patient aux urgences, avec explication. " + AVERTISSEMENT)
+    app = FastAPI(
+        title="Triage CHSA (POC)",
+        version="0.1.0",
+        lifespan=lifespan,
+        description="Niveau de priorite P1 / P2 / P3 d'un patient aux urgences, avec explication. " + AVERTISSEMENT,
+    )
     api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 
     def check_key(key: str | None = Security(api_key_header)) -> None:
@@ -64,8 +73,11 @@ def create_app(settings: Settings | None = None, model_factory: Callable[[Settin
 
     @app.get("/health")
     def health(request: Request) -> dict:
-        return {"statut": "ok", "modele_charge": getattr(request.app.state, "model", None) is not None,
-                "modele_version": settings.model_version}
+        return {
+            "statut": "ok",
+            "modele_charge": getattr(request.app.state, "model", None) is not None,
+            "modele_version": settings.model_version,
+        }
 
     @app.post("/triage", response_model=TriageResponse, dependencies=[Depends(check_key)])
     def triage(body: TriageRequest, request: Request) -> TriageResponse:
@@ -73,7 +85,7 @@ def create_app(settings: Settings | None = None, model_factory: Callable[[Settin
         start = time.perf_counter()
         record = {
             "request_id": request_id,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "modele_version": settings.model_version,
             "entree_sha256": hashlib.sha256((body.cas_clinique + "\n" + body.question).encode("utf-8")).hexdigest(),
             "entree_caracteres": len(body.cas_clinique) + len(body.question),
@@ -90,14 +102,30 @@ def create_app(settings: Settings | None = None, model_factory: Callable[[Settin
             _log(settings, {**record, "statut": 500, "erreur": type(error).__name__})
             raise
         latency = int((time.perf_counter() - start) * 1000)
-        _log(settings, {**record, "statut": 200, "niveau": decision.niveau, "niveau_plus_probable": decision.niveau_plus_probable,
-                        "probabilites": {k: round(v, 4) for k, v in decision.probabilites.items()},
-                        "a_revoir": decision.a_revoir, "tokens_prompt": decision.tokens_prompt, "latence_ms": latency})
+        probabilities = {k: round(v, 4) for k, v in decision.probabilites.items()}
+        _log(
+            settings,
+            {
+                **record,
+                "statut": 200,
+                "niveau": decision.niveau,
+                "niveau_plus_probable": decision.niveau_plus_probable,
+                "probabilites": probabilities,
+                "a_revoir": decision.a_revoir,
+                "tokens_prompt": decision.tokens_prompt,
+                "latence_ms": latency,
+            },
+        )
         return TriageResponse(
-            request_id=request_id, niveau=decision.niveau, code=SHORT[decision.niveau],
-            probabilites={k: round(v, 4) for k, v in decision.probabilites.items()},
-            niveau_plus_probable=decision.niveau_plus_probable, a_revoir=decision.a_revoir,
-            motifs_revue=decision.motifs_revue, explication=explanation, modele_version=settings.model_version,
+            request_id=request_id,
+            niveau=decision.niveau,
+            code=SHORT[decision.niveau],
+            probabilites=probabilities,
+            niveau_plus_probable=decision.niveau_plus_probable,
+            a_revoir=decision.a_revoir,
+            motifs_revue=decision.motifs_revue,
+            explication=explanation,
+            modele_version=settings.model_version,
             latence_ms=latency,
         )
 

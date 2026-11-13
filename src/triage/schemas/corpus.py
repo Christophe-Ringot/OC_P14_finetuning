@@ -1,8 +1,10 @@
 from pandera.pandas import Check, Column, DataFrameSchema
 
+from triage.constants import LABELS
+
 SOURCES = ["mediqal_oeq", "frenchmedmcqa", "medquad"]
 LANGUES = ["fr", "en"]
-PRIORITES = ["urgence_maximale", "urgence_moderee", "differee"]
+NIVEAUX_CONFIANCE = ["source_originale", "pre_annotation_llm"]
 
 corpus_schema = DataFrameSchema(
     columns={
@@ -16,8 +18,8 @@ corpus_schema = DataFrameSchema(
         "reponse": Column(str, Check.str_length(min_value=1), nullable=False),
         "specialite": Column(str, nullable=True),
         "type_question": Column(str, nullable=True),
-        "priorite": Column(str, Check.isin(PRIORITES), nullable=True),
-        "niveau_confiance": Column(str, Check.isin(["source_originale", "pre_annotation_llm"])),
+        "priorite": Column(str, Check.isin(LABELS), nullable=True),
+        "niveau_confiance": Column(str, Check.isin(NIVEAUX_CONFIANCE)),
         "split": Column(str, nullable=True),
     },
     checks=[

@@ -1,45 +1,36 @@
 import json
-from pathlib import Path
+
 import pandas as pd
+
+from triage.constants import DATA_DIR, SEED
 from triage.schemas.dpo import dpo_schema
-from triage.utils.text_utils import clean_text
+from triage.utils.text import clean_text
+
+ULTRAMEDICAL_DIR = DATA_DIR / "ultramedical"
+OUTPUT_PATH = DATA_DIR / "processed" / "dpo_dataset.csv"
+LICENSE = "MIT - TsinghuaC3I/UltraMedical-Preference"
+TRAIN_SAMPLE_TARGET = 3000
 
 
 def proportional_targets(sizes: dict, total: int) -> dict:
-    """Repartit `total` entre les cles de `sizes` au prorata de leur poids,
-    en ajustant le dernier bucket pour que la somme soit exacte."""
+    """Repartit `total` au prorata de `sizes`, le dernier bucket absorbant l'arrondi."""
     grand_total = sum(sizes.values())
     targets = {k: round(v / grand_total * total) for k, v in sizes.items()}
-    drift = total - sum(targets.values())
-    last_key = list(sizes.keys())[-1]
-    targets[last_key] += drift
+    targets[list(sizes)[-1]] += total - sum(targets.values())
     return targets
 
 
-RANDOM_STATE = 42
-TRAIN_SAMPLE_TARGET = 3000
-
-DATA_DIR = Path("data") / "ultramedical"
-OUTPUT_PATH = Path("data") / "processed" / "dpo_dataset.csv"
-
-LICENSE = "MIT - TsinghuaC3I/UltraMedical-Preference"
-
-SPLIT_MAP = {"train": "train", "dev": "validation", "test": "test"}
-
-
 def load_split(filename: str) -> pd.DataFrame:
-    with open(DATA_DIR / filename, encoding="utf-8") as f:
+    with open(ULTRAMEDICAL_DIR / filename, encoding="utf-8") as f:
         data = json.load(f)
-    df = pd.DataFrame(data)
-    df["source_dataset"] = df["prompt_id"].str.split(",").str[0]
-    return df
+    frame = pd.DataFrame(data)
+    frame["source_dataset"] = frame["prompt_id"].str.split(",").str[0]
+    return frame
 
 
 def to_rows(df: pd.DataFrame, split_label: str) -> list[dict]:
     rows = []
     for _, row in df.iterrows():
-        chosen_text = clean_text(row["chosen"][-1]["content"])
-        rejected_text = clean_text(row["rejected"][-1]["content"])
         metadata = row.get("metadata") or {}
         chosen_score = (metadata.get("chosen") or {}).get("score")
         rejected_score = (metadata.get("rejected") or {}).get("score")
@@ -49,9 +40,9 @@ def to_rows(df: pd.DataFrame, split_label: str) -> list[dict]:
                 "language": "en",
                 "split": split_label,
                 "label_type": row.get("label_type"),
-                "prompt": clean_text(row["prompt"]),
-                "chosen": chosen_text,
-                "rejected": rejected_text,
+                "prompt": clean_text(row["prompt"]) or "",
+                "chosen": clean_text(row["chosen"][-1]["content"]) or "",
+                "rejected": clean_text(row["rejected"][-1]["content"]) or "",
                 "chosen_score": float(chosen_score) if chosen_score is not None else None,
                 "rejected_score": float(rejected_score) if rejected_score is not None else None,
                 "confidence_level": "medium",
@@ -72,14 +63,10 @@ def main() -> None:
     for source, group in df_train.groupby("source_dataset"):
         n = min(targets.get(source, 0), len(group))
         if n > 0:
-            sampled_parts.append(group.sample(n=n, random_state=RANDOM_STATE))
+            sampled_parts.append(group.sample(n=n, random_state=SEED))
     df_train_sampled = pd.concat(sampled_parts, ignore_index=True)
 
-    rows = (
-        to_rows(df_train_sampled, "train")
-        + to_rows(df_dev, "validation")
-        + to_rows(df_test, "test")
-    )
+    rows = to_rows(df_train_sampled, "train") + to_rows(df_dev, "validation") + to_rows(df_test, "test")
     combined = pd.DataFrame(rows)
     combined.insert(
         0,

@@ -6,7 +6,7 @@ Le modele donne une probabilite par niveau ; au lieu de prendre le plus probable
 
 Sous-triage d'un niveau = 4, P1 classe P3 = 10, sur-triage = 1 (P2 -> P1, P3 -> P2) ou 2 (P3 -> P1). Choix d'expert a valider avec les urgentistes du CHSA : c'est un parametre metier, pas un hyperparametre.
 
-| index | predit P1 | predit P2 | predit P3 |
+|  | predit P1 | predit P2 | predit P3 |
 |---|---|---|---|
 | annote P1 | 0.0 | 4.0 | 10.0 |
 | annote P2 | 1.0 | 0.0 | 4.0 |

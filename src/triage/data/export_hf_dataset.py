@@ -24,13 +24,13 @@ from pathlib import Path
 
 import pandas as pd
 
+from triage.constants import DATA_DIR, SPLITS
 from triage.schemas.sft_hf import CONSTANTES, LICENCES, sft_hf_schema
 
-SFT_PATH = Path("data") / "processed" / "sft_avec_priorite.csv"
-CORPUS_PATH = Path("data") / "interim" / "corpus_annotated.csv"
-LLM_METADATA_PATH = Path("data") / "annotation" / "metadata_cas.jsonl"
+SFT_PATH = DATA_DIR / "processed" / "sft_avec_priorite.csv"
+CORPUS_PATH = DATA_DIR / "interim" / "corpus_annotated.csv"
+LLM_METADATA_PATH = DATA_DIR / "annotation" / "metadata_cas.jsonl"
 OUTPUT_DIR = Path("hf_dataset") / "data"
-SPLITS = ["train", "validation", "test"]
 COLUMNS = list(sft_hf_schema.columns)
 
 # Specialites MediQAl ecrites de deux facons dans la source.
@@ -50,9 +50,13 @@ PATTERNS = {
         rf"\b(?-i:FR)\b{GAP}(\d{{1,3}})(?![\d,.]\d)",
         rf"\b(?:fr[ée]quence respiratoire|respiratoire|polypn[ée]e){GAP}(\d{{1,3}})\s*(?:/\s*mi?n|cycles)",
     ],
-    "spo2": [rf"\b(?:SpO2|SaO2|Sp02|Sat\s*O2|satur(?:ation)?\b(?:\s+en\s+(?:O2|oxyg[èe]ne))?)(?!\s+de\s+la\s+transf){GAP}(\d{{2,3}})\s*%"],
+    "spo2": [
+        rf"\b(?:SpO2|SaO2|Sp02|Sat\s*O2|satur(?:ation)?\b(?:\s+en\s+(?:O2|oxyg[èe]ne))?)(?!\s+de\s+la\s+transf){GAP}(\d{{2,3}})\s*%"
+    ],
     # "T" seul (pas "TGP", "Temoin", "Thrombocytes"), et pas les "30 °C SFBC" des dosages enzymatiques.
-    "temperature": [rf"(?:\b(?-i:T)(?!\w)\s*°?|temp[ée]rature|fi[èe]vre|f[ée]brile|apyr[ée]tique){GAP}(\d{{2}})\s*(?:[,.°]\s*(\d))?\s*°?\s*C?\b"],
+    "temperature": [
+        rf"(?:\b(?-i:T)(?!\w)\s*°?|temp[ée]rature|fi[èe]vre|f[ée]brile|apyr[ée]tique){GAP}(\d{{2}})\s*(?:[,.°]\s*(\d))?\s*°?\s*C?\b"
+    ],
     "glasgow": [rf"\b(?:Glasgow|GCS|GSC){GAP}(\d{{1,2}})(?!\d)"],
 }
 PATTERNS = {key: [re.compile(p, re.IGNORECASE) for p in pats] for key, pats in PATTERNS.items()}
@@ -61,17 +65,17 @@ AGE_RE = re.compile(r"(?<![\d,.])(\d{1,3})\s*(ans|mois|semaines|jours)\b", re.IG
 # "depuis 20 ans", "il y a 3 ans", "a l'age de 4 ans" : une duree, pas l'age du patient.
 NOT_AGE_RE = re.compile(
     r"(depuis|il y a|pendant|durant|l'âge de|après|avant|dans|tous les|toutes les|"
-    r"enceinte de|prématurée? de|terme de|née? à)\s*$", re.IGNORECASE)
+    r"enceinte de|prématurée? de|terme de|née? à)\s*$",
+    re.IGNORECASE,
+)
 # "23 semaines de grossesse", "32 SA" : un terme de grossesse, pas un age.
 GESTATION_RE = re.compile(r"\s*(de grossesse|d'aménorrhée|de gestation|SA\b)", re.IGNORECASE)
 NEWBORN_RE = re.compile(r"\b(nouveau[- ]n[ée]e?s?|nouveau-né)\b", re.IGNORECASE)
 # Seuls les mots qui disent le sexe : "un patient", "un nouveau-ne" ne sont que du masculin grammatical.
 MALE_RE = re.compile(r"\b(homme|monsieur|garçon|mr\b|m\. ?x\b)", re.IGNORECASE)
-FEMALE_RE = re.compile(r"\b(femme|madame|mademoiselle|mme\b|mlle\b|fille|fillette|patiente|adolescente|enceinte)\b", re.IGNORECASE)
-
-
-def _number(text: str) -> float:
-    return float(text.replace(",", "."))
+FEMALE_RE = re.compile(
+    r"\b(femme|madame|mademoiselle|mme\b|mlle\b|fille|fillette|patiente|adolescente|enceinte)\b", re.IGNORECASE
+)
 
 
 def extract_constantes(text: str) -> dict:
@@ -90,7 +94,7 @@ def extract_constantes(text: str) -> dict:
                 if key == "temperature":
                     value = float(match.group(1)) + (int(match.group(2)) / 10 if match.group(2) else 0)
                 else:
-                    value = _number(match.group(1))
+                    value = float(match.group(1).replace(",", "."))
                 lo, hi = CONSTANTES[key]
                 if lo <= value <= hi:
                     values[key] = value if key == "temperature" else int(value)
@@ -102,7 +106,7 @@ def extract_constantes(text: str) -> dict:
 
 def extract_age(text: str):
     for match in AGE_RE.finditer(text):
-        if NOT_AGE_RE.search(text[max(0, match.start() - 20): match.start()]) or GESTATION_RE.match(text, match.end()):
+        if NOT_AGE_RE.search(text[max(0, match.start() - 20) : match.start()]) or GESTATION_RE.match(text, match.end()):
             continue
         value, unit = int(match.group(1)), match.group(2).lower()
         age = {"ans": value, "mois": value / 12, "semaines": value / 52, "jours": value / 365}[unit]
@@ -131,7 +135,9 @@ def load_llm_metadata() -> dict:
 
 def build() -> pd.DataFrame:
     sft = pd.read_csv(SFT_PATH)
-    corpus = pd.read_csv(CORPUS_PATH)[["id", "case_id", "contexte_patient", "specialite", "type_question", "niveau_confiance"]]
+    corpus = pd.read_csv(CORPUS_PATH)[
+        ["id", "case_id", "contexte_patient", "specialite", "type_question", "niveau_confiance"]
+    ]
     frame = sft.merge(corpus, on="id", how="left", validate="one_to_one")
     if frame["niveau_confiance"].isna().any():
         raise ValueError("lignes SFT absentes du corpus annote")
@@ -173,9 +179,11 @@ def main() -> None:
     cases = frame.dropna(subset=["case_id"]).drop_duplicates("case_id")
     constantes = pd.DataFrame(cases["constantes"].tolist())
     print(f"\nCouverture sur {len(cases)} cas cliniques uniques :")
-    print(f"  age {cases['age_ans'].notna().mean():.0%}, sexe {cases['sexe'].notna().mean():.0%}, "
-          f"symptomes non vides {cases['symptomes'].map(len).gt(0).mean():.0%}, "
-          f"antecedents non vides {cases['antecedents'].map(len).gt(0).mean():.0%}")
+    print(
+        f"  age {cases['age_ans'].notna().mean():.0%}, sexe {cases['sexe'].notna().mean():.0%}, "
+        f"symptomes non vides {cases['symptomes'].map(len).gt(0).mean():.0%}, "
+        f"antecedents non vides {cases['antecedents'].map(len).gt(0).mean():.0%}"
+    )
     print("  constantes : " + ", ".join(f"{k} {constantes[k].notna().mean():.0%}" for k in CONSTANTES))
 
 

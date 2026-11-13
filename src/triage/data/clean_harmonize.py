@@ -1,31 +1,19 @@
 import hashlib
-import re
 import string
-from pathlib import Path
-import pandas as pd
-from triage.schemas.corpus import corpus_schema
-from triage.data.collect_sources import load_raw
 
-OUTPUT_PATH = Path("data") / "interim" / "corpus_clean.csv"
-RANDOM_STATE = 42
+import pandas as pd
+
+from triage.constants import DATA_DIR, SEED
+from triage.data.collect_sources import load_raw
+from triage.schemas.corpus import corpus_schema
+from triage.utils.text import clean_text
+
+OUTPUT_PATH = DATA_DIR / "interim" / "corpus_clean.csv"
 # MedQuAD est echantillonne pour ne pas noyer les sources francaises.
 MEDQUAD_SAMPLE_SIZE = 700
 
 ANSWER_COLS = ["answer_a", "answer_b", "answer_c", "answer_d", "answer_e"]
 LETTERS = list(string.ascii_uppercase[:5])
-
-
-def clean_text(text) -> str | None:
-    if text is None or pd.isna(text):
-        return None
-    text = str(text).replace("\r\n", "\n").replace("\r", "\n")
-    text = text.replace("’", "'").replace(" ", " ")
-    text = re.sub(r"[ \t]+", " ", text)
-    # Supprime les espaces en debut/fin de ligne sans toucher aux puces "- ".
-    text = re.sub(r" *\n *", "\n", text)
-    text = re.sub(r"\n{3,}", "\n\n", text)
-    text = text.strip()
-    return text or None
 
 
 def case_id(clinical_case: str) -> str:
@@ -102,13 +90,13 @@ def apply_rule(frame: pd.DataFrame, mask: pd.Series, rule: str, log: list) -> pd
 
 
 def main() -> None:
-    corpus = pd.concat(
-        [harmonize_mediqal_oeq(), harmonize_frenchmedmcqa(), harmonize_medquad()], ignore_index=True
-    )
+    corpus = pd.concat([harmonize_mediqal_oeq(), harmonize_frenchmedmcqa(), harmonize_medquad()], ignore_index=True)
     initial = corpus["source"].value_counts()
     log = []
 
-    corpus = apply_rule(corpus, corpus["instruction"].isna() | corpus["reponse"].isna(), "question ou reponse vide", log)
+    corpus = apply_rule(
+        corpus, corpus["instruction"].isna() | corpus["reponse"].isna(), "question ou reponse vide", log
+    )
     corpus = apply_rule(
         corpus,
         corpus.duplicated(["contexte_patient", "instruction", "reponse"], keep="first"),
@@ -124,11 +112,13 @@ def main() -> None:
 
     medquad = corpus[corpus["source"] == "medquad"]
     kept = medquad.groupby("specialite", group_keys=False).sample(
-        frac=MEDQUAD_SAMPLE_SIZE / len(medquad), random_state=RANDOM_STATE
+        frac=MEDQUAD_SAMPLE_SIZE / len(medquad), random_state=SEED
     )
     corpus = apply_rule(
-        corpus, (corpus["source"] == "medquad") & ~corpus.index.isin(kept.index),
-        f"echantillonnage MedQuAD (~{MEDQUAD_SAMPLE_SIZE}, stratifie par type)", log,
+        corpus,
+        (corpus["source"] == "medquad") & ~corpus.index.isin(kept.index),
+        f"echantillonnage MedQuAD (~{MEDQUAD_SAMPLE_SIZE}, stratifie par type)",
+        log,
     )
 
     corpus = corpus.assign(priorite=None, niveau_confiance="source_originale", split=None)

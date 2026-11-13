@@ -1,12 +1,11 @@
 import json
-from pathlib import Path
+
 import pandas as pd
 
-DATA_DIR = Path("data")
+from triage.constants import DATA_DIR
+
 MEDIQAL_OEQ_PATH = DATA_DIR / "mediqal_oeq" / "oeq.parquet"
 INVENTORY_PATH = DATA_DIR / "raw_inventory.json"
-
-
 SOURCES = {
     "mediqal_oeq": {"usage": "sft", "langue": "fr", "hf_id": "ANR-MALADES/MediQAl (config oeq)"},
     "frenchmedmcqa": {"usage": "sft", "langue": "fr", "hf_id": "qanastek/frenchmedmcqa"},

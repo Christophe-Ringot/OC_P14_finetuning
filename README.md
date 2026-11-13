@@ -147,13 +147,14 @@ flowchart LR
 ```
 .
 ├── src/triage/                 # package Python installable
+│   ├── constants.py            # niveaux P1-P3, gabarit de prompt, expériences et adaptateurs
 │   ├── data/                   # collecte, nettoyage, anonymisation, annotation,
 │   │                           # construction des datasets, audit, export Hugging Face
 │   ├── schemas/                # schémas Pandera (corpus, dataset HF, DPO)
 │   ├── training/               # fine-tuning SFT LoRA, DPO
 │   ├── evaluation/             # triage, QCM, réponses, coût, sécurité
 │   ├── api/                    # API FastAPI de triage et règle de décision
-│   └── utils/                  # chargement du dataset HF, suivi MLflow, texte
+│   └── utils/                  # dataset HF, chargement et scoring du modèle, MLflow, markdown, texte
 ├── tests/                      # tests de l'API (sans GPU)
 ├── docs/                       # protocole, résultats, journal des expériences, RGPD
 ├── outputs/                    # rapports et métriques versionnés (poids exclus)
@@ -276,6 +277,7 @@ expérience), `--no-eval`, `--no-mlflow`.
 ```bash
 pip install -e ".[api,dev]"
 pytest                                   # tests de l'API, sans GPU
+ruff check src tests && ruff format --check src tests  # lint et format
 export TRIAGE_API_KEY=une-cle-aleatoire  # PowerShell : $env:TRIAGE_API_KEY="..."
 python -m triage.api                     # http://127.0.0.1:8000/docs
 ```

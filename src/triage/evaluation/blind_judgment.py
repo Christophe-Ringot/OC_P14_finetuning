@@ -8,11 +8,17 @@ Format d'une note (une ligne JSON par item) :
 {"item": 3, "A": {"pertinence": 4, "clarte": 5, "securite": 5, "conformite": 4},
  "B": {...}, "preference": "A" | "B" | "egalite", "commentaire": "..."}
 """
+
 import argparse
 import json
 import random
+
 import pandas as pd
-from triage.evaluation.evaluate_responses import OUTPUT_DIR
+
+from triage.constants import OUTPUTS_DIR
+from triage.utils.markdown import markdown_table
+
+OUTPUT_DIR = OUTPUTS_DIR / "response_eval"
 
 MODEL_A, MODEL_B = "4_sft_medical_triage", "6_sft_triage_dpo_qualite"
 CRITERIA = ["pertinence", "clarte", "securite", "conformite"]
@@ -34,8 +40,13 @@ def prepare() -> None:
             pair = [(MODEL_A, str(row["generated"])), (MODEL_B, str(b.loc[row["id"], "generated"]))]
             rng.shuffle(pair)
             key[i] = {"id": row["id"], "A": pair[0][0], "B": pair[1][0]}
-            f.write(json.dumps({"item": i, "prompt": row["prompt"], "reference": row["reponse"],
-                                "A": pair[0][1], "B": pair[1][1]}, ensure_ascii=False) + "\n")
+            f.write(
+                json.dumps(
+                    {"item": i, "prompt": row["prompt"], "reference": row["reponse"], "A": pair[0][1], "B": pair[1][1]},
+                    ensure_ascii=False,
+                )
+                + "\n"
+            )
     KEY.write_text(json.dumps(key, indent=1), encoding="utf-8")
     print(f"{len(key)} items -> {ITEMS} (cle : {KEY})")
 
@@ -47,22 +58,28 @@ def summarize() -> None:
         note = json.loads(line)
         item = key[str(note["item"])]
         for side in ["A", "B"]:
-            rows.append({"item": note["item"], "modele": item[side], **note[side],
-                         "prefere": note["preference"] == side, "egalite": note["preference"] == "egalite"})
+            rows.append(
+                {
+                    "item": note["item"],
+                    "modele": item[side],
+                    **note[side],
+                    "prefere": note["preference"] == side,
+                    "egalite": note["preference"] == "egalite",
+                }
+            )
     frame = pd.DataFrame(rows)
     means = frame.groupby("modele")[CRITERIA].mean()
     wins = frame.groupby("modele")["prefere"].sum()
     ties = int(frame["egalite"].sum() // 2)
     n = frame["item"].nunique()
+    table = means.assign(moyenne=means.mean(axis=1), prefere=wins.astype(int)).rename_axis("modele")
     lines = [
         "# Jugement en aveugle des reponses : SFT vs SFT + DPO",
         "",
         f"{n} cas cliniques annotes de l'echantillon fixe du test, reponses presentees en ordre aleatoire "
         "(A/B) sans le nom du modele. Grille : docs/evaluation_reponses.md. Notes de 1 a 5.",
         "",
-        "| modele | " + " | ".join(CRITERIA) + " | moyenne | prefere |\n|---|" + "---|" * (len(CRITERIA) + 2),
-        *(f"| {m} | " + " | ".join(f"{v:.2f}" for v in row) + f" | {row.mean():.2f} | {int(wins[m])} |"
-          for m, row in means.iterrows()),
+        markdown_table(table, digits=2),
         "",
         f"Egalites : {ties} / {n}.",
     ]
@@ -70,7 +87,11 @@ def summarize() -> None:
     print("\n".join(lines))
 
 
-if __name__ == "__main__":
+def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("action", choices=["prepare", "summarize"])
     {"prepare": prepare, "summarize": summarize}[parser.parse_args().action]()
+
+
+if __name__ == "__main__":
+    main()

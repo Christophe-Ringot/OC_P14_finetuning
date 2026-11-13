@@ -1,15 +1,15 @@
-from pathlib import Path
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-CORPUS_PATH = Path("data") / "interim" / "corpus_annotated.csv"
-POOL_PATH = Path("data") / "annotation" / "pool_priorite.csv"
-OUTPUT_DIR = Path("data") / "processed"
+from triage.constants import DATA_DIR, SEED, build_prompt, level_prefix
+
+CORPUS_PATH = DATA_DIR / "interim" / "corpus_annotated.csv"
+POOL_PATH = DATA_DIR / "annotation" / "pool_priorite.csv"
+OUTPUT_DIR = DATA_DIR / "processed"
 WITHOUT_PATH = OUTPUT_DIR / "sft_sans_priorite.csv"
 WITH_PATH = OUTPUT_DIR / "sft_avec_priorite.csv"
 
-RANDOM_STATE = 42
 SPLIT_RATIOS = {"train": 0.8, "validation": 0.1, "test": 0.1}
 # Longueur du debut de texte commun qui rattache deux variantes d'un meme cas.
 SHARED_PREFIX_LENGTH = 100
@@ -19,12 +19,6 @@ SHARED_PREFIX_LENGTH = 100
 # des cas sans rapport, a 0.5 il s'agit surtout du meme scenario reformule.
 SIMILARITY_THRESHOLD = 0.5
 OUTPUT_COLUMNS = ["id", "split", "source", "langue", "groupe", "priorite", "prompt", "reponse"]
-
-
-def build_prompt(row) -> str:
-    if isinstance(row.contexte_patient, str):
-        return f"### Cas clinique :\n{row.contexte_patient}\n\n### Question :\n{row.instruction}\n\n### Réponse :\n"
-    return f"### Question :\n{row.instruction}\n\n### Réponse :\n"
 
 
 def similar_pairs(pool: pd.DataFrame) -> list:
@@ -48,8 +42,8 @@ def case_groups(pool: pd.DataFrame) -> dict:
         return case
 
     for key in ["famille_id", "prefixe"]:
-        for members in pool.groupby(key)["case_id"]:
-            first, *others = members[1].tolist()
+        for _, members in pool.groupby(key)["case_id"]:
+            first, *others = members.tolist()
             for other in others:
                 parent[find(other)] = find(first)
     pairs = similar_pairs(pool)
@@ -61,7 +55,7 @@ def case_groups(pool: pd.DataFrame) -> dict:
 
 def assign_splits(frame: pd.DataFrame) -> pd.Series:
     """Tire les groupes au hasard, par source, jusqu'a atteindre les ratios en lignes."""
-    rng = np.random.default_rng(RANDOM_STATE)
+    rng = np.random.default_rng(SEED)
     split = pd.Series(index=frame.index, dtype=object)
     for _, source_rows in frame.groupby("source"):
         sizes = source_rows.groupby("groupe").size()
@@ -97,14 +91,16 @@ def main() -> None:
     question_groups = "question_" + corpus.groupby(["source", "instruction"]).ngroup().astype(str)
     corpus["groupe"] = corpus["case_id"].map(groups).fillna(question_groups)
     corpus["split"] = assign_splits(corpus)
-    corpus["prompt"] = [build_prompt(row) for row in corpus.itertuples()]
+    corpus["prompt"] = [
+        build_prompt(row.instruction, row.contexte_patient if isinstance(row.contexte_patient, str) else None)
+        for row in corpus.itertuples()
+    ]
 
     without = corpus[OUTPUT_COLUMNS].copy()
     with_priority = without.copy()
     annotated = with_priority["priorite"].notna()
     with_priority.loc[annotated, "reponse"] = (
-        "[Niveau de priorité estimé : " + with_priority.loc[annotated, "priorite"] + "]\n\n"
-        + with_priority.loc[annotated, "reponse"]
+        with_priority.loc[annotated, "priorite"].map(level_prefix) + with_priority.loc[annotated, "reponse"]
     )
     check_datasets(without, with_priority)
 

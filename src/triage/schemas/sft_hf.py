@@ -9,21 +9,20 @@ age, sexe, symptomes, antecedents et constantes vitales.
 import pandas as pd
 from pandera.pandas import Check, Column, DataFrameSchema
 
-SOURCES = ["mediqal_oeq", "frenchmedmcqa", "medquad"]
+from triage.constants import LABELS
+from triage.schemas.corpus import LANGUES, NIVEAUX_CONFIANCE, SOURCES
+
 LICENCES = {"mediqal_oeq": "cc-by-4.0", "frenchmedmcqa": "apache-2.0", "medquad": "cc-by-4.0"}
-LANGUES = ["fr", "en"]
-PRIORITES = ["urgence_maximale", "urgence_moderee", "differee"]
-NIVEAUX_CONFIANCE = ["source_originale", "pre_annotation_llm"]
 SEXES = ["F", "M"]
 # Bornes de plausibilite des constantes (une valeur hors bornes est ecartee a l'extraction).
 CONSTANTES = {
-    "fc": (20, 350),            # frequence cardiaque, /min
-    "pas": (30, 300),           # pression arterielle systolique, mmHg
-    "pad": (10, 200),           # pression arterielle diastolique, mmHg
-    "fr": (4, 120),             # frequence respiratoire, /min
-    "spo2": (30, 100),          # saturation en oxygene, %
-    "temperature": (30, 43),    # degres Celsius
-    "glasgow": (3, 15),         # score de Glasgow
+    "fc": (20, 350),  # frequence cardiaque, /min
+    "pas": (30, 300),  # pression arterielle systolique, mmHg
+    "pad": (10, 200),  # pression arterielle diastolique, mmHg
+    "fr": (4, 120),  # frequence respiratoire, /min
+    "spo2": (30, 100),  # saturation en oxygene, %
+    "temperature": (30, 43),  # degres Celsius
+    "glasgow": (3, 15),  # score de Glasgow
 }
 
 
@@ -32,11 +31,12 @@ def _list_of_str_or_null(values: pd.Series) -> pd.Series:
 
 
 def _constantes_valid(values: pd.Series) -> pd.Series:
-    def ok(v):
+    def valid(v) -> bool:
         if not isinstance(v, dict) or set(v) != set(CONSTANTES):
             return False
-        return all(x is None or lo <= x <= hi for (lo, hi), x in ((CONSTANTES[k], v[k]) for k in CONSTANTES))
-    return values.map(ok)
+        return all(v[k] is None or lo <= v[k] <= hi for k, (lo, hi) in CONSTANTES.items())
+
+    return values.map(valid)
 
 
 sft_hf_schema = DataFrameSchema(
@@ -49,7 +49,7 @@ sft_hf_schema = DataFrameSchema(
         "groupe": Column(str, nullable=False),
         "specialite": Column(str, nullable=True),
         "type_question": Column(str, nullable=False),
-        "priorite": Column(str, Check.isin(PRIORITES), nullable=True),
+        "priorite": Column(str, Check.isin(LABELS), nullable=True),
         "niveau_confiance": Column(str, Check.isin(NIVEAUX_CONFIANCE)),
         "age_ans": Column(float, Check.in_range(0, 120), nullable=True),
         "sexe": Column(str, Check.isin(SEXES), nullable=True),
@@ -62,8 +62,10 @@ sft_hf_schema = DataFrameSchema(
     checks=[
         Check(lambda df: df["licence"] == df["source"].map(LICENCES), error="licence incoherente avec la source"),
         Check(lambda df: df["priorite"].isna() | df["case_id"].notna(), error="priorite sans cas clinique"),
-        Check(lambda df: df["priorite"].notna() == (df["niveau_confiance"] == "pre_annotation_llm"),
-              error="priorite incoherente avec niveau_confiance"),
+        Check(
+            lambda df: df["priorite"].notna() == (df["niveau_confiance"] == "pre_annotation_llm"),
+            error="priorite incoherente avec niveau_confiance",
+        ),
         # Symptomes et antecedents n'existent que pour un cas clinique.
         Check(lambda df: df["case_id"].notna() == df["symptomes"].notna(), error="symptomes sans cas clinique"),
         Check(lambda df: df["case_id"].notna() == df["antecedents"].notna(), error="antecedents sans cas clinique"),

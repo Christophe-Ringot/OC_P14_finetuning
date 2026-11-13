@@ -1,47 +1,39 @@
 import argparse
-import gc
 import json
-from pathlib import Path
+
 import numpy as np
 import torch
 from datasets import Dataset
 from peft import LoraConfig
 from transformers import AutoTokenizer
 from trl import SFTConfig, SFTTrainer
+
+from triage.constants import BASE_MODEL, SEED, adapter_dir
 from triage.utils import hf_dataset, tracking
+from triage.utils.modeling import free_gpu_memory
 
-MODEL_NAME = "Qwen/Qwen3-1.7B-Base"
-OUTPUT_ROOT = Path("outputs")
-SFT_EXPERIMENTS = {
-    # Donnees : dataset Hugging Face (src/triage/utils/hf_dataset.py), avec ou sans le prefixe de priorite.
-    "3_sft_medical": {"with_priority": False, "output": "sft_medical"},
-    "4_sft_medical_triage": {"with_priority": True, "output": "sft_medical_triage"},
-}
-
-RANDOM_STATE = 42
+# Experience -> donnees avec (4) ou sans (3) le prefixe de priorite dans la reponse.
+SFT_EXPERIMENTS = {"3_sft_medical": False, "4_sft_medical_triage": True}
 MAX_LENGTH = 1024
 MAX_EVAL_EXAMPLES = 150
 QUICK_TRAIN_EXAMPLES = 200
 
 
-def adapter_dir(experiment: str, quick: bool) -> Path:
-    return OUTPUT_ROOT / (SFT_EXPERIMENTS[experiment]["output"] + ("_quick" if quick else ""))
-
-
 def select_examples(tokenizer, quick: bool) -> tuple[list, list]:
-    """Choisit les id d'entrainement et de validation, communs aux deux experiences.
-    """
+    """Choisit les id d'entrainement et de validation, communs aux deux experiences."""
     frame = hf_dataset.load_sft(with_priority=True)
     frame = frame[frame["split"].isin(["train", "validation"])]
-    lengths = np.array([len(tokenizer(p + r + tokenizer.eos_token).input_ids) for p, r in zip(frame["prompt"], frame["reponse"])])
+    lengths = np.array(
+        [len(tokenizer(p + r + tokenizer.eos_token).input_ids) for p, r in zip(frame["prompt"], frame["reponse"])]
+    )
     print(f"Exemples ecartes car > {MAX_LENGTH} tokens : {(lengths > MAX_LENGTH).sum()} / {len(frame)}")
     frame = frame[lengths <= MAX_LENGTH]
 
     train = frame[frame["split"] == "train"]
     if quick:
-        train = train.sample(QUICK_TRAIN_EXAMPLES, random_state=RANDOM_STATE)
+        train = train.sample(QUICK_TRAIN_EXAMPLES, random_state=SEED)
     validation = frame[frame["split"] == "validation"]
-    validation = validation.sample(min(MAX_EVAL_EXAMPLES, len(validation)), random_state=RANDOM_STATE)
+    validation = validation.sample(min(MAX_EVAL_EXAMPLES, len(validation)), random_state=SEED)
     return train["id"].tolist(), validation["id"].tolist()
 
 
@@ -53,20 +45,22 @@ def load_examples(with_priority: bool, ids: list) -> Dataset:
 def train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked: bool) -> str | None:
     """Entraine une experience ; renvoie l'id du run MLflow (None si suivi desactive)."""
     run_name = experiment + ("_quick" if quick else "")
-    with_priority = SFT_EXPERIMENTS[experiment]["with_priority"]
+    with_priority = SFT_EXPERIMENTS[experiment]
     tags = {"experience": experiment, "mode": "quick" if quick else "complet", "git_commit": tracking.git_commit()}
     with tracking.start_run(tracked, run_name=run_name, tags=tags) as run:
         if run is not None:
             import mlflow
 
-            mlflow.log_params({
-                "dataset": hf_dataset.dataset_name(with_priority),
-                "dataset_revision": hf_dataset.DATASET_REVISION,
-                "dataset_md5": hf_dataset.fingerprint(hf_dataset.load_sft(with_priority)),
-                "n_train": len(train_ids),
-                "n_validation": len(val_ids),
-                "max_length": MAX_LENGTH,
-            })
+            mlflow.log_params(
+                {
+                    "dataset": hf_dataset.dataset_name(with_priority),
+                    "dataset_revision": hf_dataset.DATASET_REVISION,
+                    "dataset_md5": hf_dataset.fingerprint(hf_dataset.load_sft(with_priority)),
+                    "n_train": len(train_ids),
+                    "n_validation": len(val_ids),
+                    "max_length": MAX_LENGTH,
+                }
+            )
         _train(experiment, train_ids, val_ids, quick, tracked, run_name)
         return run.info.run_id if run is not None else None
 
@@ -74,7 +68,7 @@ def train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked:
 def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked: bool, run_name: str) -> None:
     has_gpu = torch.cuda.is_available()
     output_dir = adapter_dir(experiment, quick)
-    with_priority = SFT_EXPERIMENTS[experiment]["with_priority"]
+    with_priority = SFT_EXPERIMENTS[experiment]
     print(f"\n=== {experiment} : {len(train_ids)} exemples d'entrainement -> {output_dir} ===")
 
     lora_config = LoraConfig(
@@ -104,7 +98,7 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
         use_cpu=not has_gpu,
         max_length=MAX_LENGTH,
         completion_only_loss=True,
-        seed=RANDOM_STATE,
+        seed=SEED,
         # La callback MLflow de transformers journalise les hyperparametres et
         # les courbes train/eval dans le run ouvert par train().
         report_to="mlflow" if tracked else "none",
@@ -113,7 +107,7 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
     )
 
     trainer = SFTTrainer(
-        model=MODEL_NAME,
+        model=BASE_MODEL,
         args=sft_config,
         train_dataset=load_examples(with_priority, train_ids),
         eval_dataset=load_examples(with_priority, val_ids),
@@ -129,7 +123,7 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
         json.dump(
             {
                 "experiment": experiment,
-                "model_name": MODEL_NAME,
+                "model_name": BASE_MODEL,
                 "dataset": hf_dataset.dataset_name(with_priority),
                 "n_train": len(train_ids),
                 "n_validation": len(val_ids),
@@ -146,24 +140,27 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
     if tracked:
         import mlflow
 
-        mlflow.log_params({f"lora_{k}": v for k, v in {
-            "r": lora_config.r, "alpha": lora_config.lora_alpha, "dropout": lora_config.lora_dropout,
-            "target_modules": ",".join(sorted(lora_config.target_modules)),
-        }.items()})
+        mlflow.log_params(
+            {
+                f"lora_{k}": v
+                for k, v in {
+                    "r": lora_config.r,
+                    "alpha": lora_config.lora_alpha,
+                    "dropout": lora_config.lora_dropout,
+                    "target_modules": ",".join(sorted(lora_config.target_modules)),
+                }.items()
+            }
+        )
         best_checkpoint = trainer.state.best_model_checkpoint
         if best_checkpoint is not None:
-            mlflow.log_metrics({"best_eval_loss": trainer.state.best_metric,
-                                "best_step": int(best_checkpoint.rsplit("-", 1)[1])})
-        mlflow.log_artifact(str(output_dir / "training_summary.json"))
-        # Adaptateur final (meilleur checkpoint), sans les checkpoints intermediaires.
-        for name in ["adapter_config.json", "adapter_model.safetensors"]:
-            mlflow.log_artifact(str(output_dir / name), artifact_path="adapter")
+            mlflow.log_metrics(
+                {"best_eval_loss": trainer.state.best_metric, "best_step": int(best_checkpoint.rsplit("-", 1)[1])}
+            )
+        tracking.log_adapter(output_dir)
 
     # Libere le GPU avant l'entrainement ou l'evaluation suivante.
     del trainer
-    gc.collect()
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
+    free_gpu_memory()
 
 
 def main() -> None:
@@ -175,7 +172,7 @@ def main() -> None:
     args = parser.parse_args()
     tracked = tracking.setup(not args.no_mlflow)
 
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
     train_ids, val_ids = select_examples(tokenizer, args.quick)
     run_ids = {}
     for experiment in [args.only] if args.only else SFT_EXPERIMENTS:

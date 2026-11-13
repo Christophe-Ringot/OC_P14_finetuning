@@ -19,10 +19,11 @@ from functools import lru_cache
 import pandas as pd
 from datasets import load_dataset
 
+from triage.constants import LEVEL_RE, SPLITS
+
 DATASET_ID = "christophe-ringot/p14-medical-triage-sft"
 DATASET_REVISION = "c2a08bd0f372a0cb47aafc918610d801d13978e1"
-SPLITS = ["train", "validation", "test"]
-PRIORITY_PREFIX_RE = re.compile(r"^\[Niveau de priorité estimé : [a-z_]+\]\n\n")
+PRIORITY_PREFIX_RE = re.compile("^" + LEVEL_RE.pattern + r"\n\n")
 
 
 @lru_cache(maxsize=1)

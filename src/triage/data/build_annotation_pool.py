@@ -1,10 +1,11 @@
 import re
-from pathlib import Path
+
 import pandas as pd
 
-INPUT_PATH = Path("data") / "interim" / "corpus_anonymized.csv"
-POOL_PATH = Path("data") / "annotation" / "pool_priorite.csv"
+from triage.constants import DATA_DIR
 
+INPUT_PATH = DATA_DIR / "interim" / "corpus_anonymized.csv"
+POOL_PATH = DATA_DIR / "annotation" / "pool_priorite.csv"
 
 SEVERITY_RE = re.compile(
     r"(FC\s*[:=]|FR\s*[:=]|SpO2|Sp02|SaO2|PA\s*[:=]|GCS|Glasgow|"
@@ -16,8 +17,7 @@ SEVERITY_RE = re.compile(
 
 
 def find_families(pool: pd.DataFrame) -> tuple[list, list]:
-    """Relie chaque cas a la version precedente dont il prolonge le texte.
-    """
+    """Relie chaque cas a la version precedente dont il prolonge le texte, et a la racine de sa famille."""
     texts = dict(zip(pool["case_id"], pool["contexte_patient"]))
     by_length = sorted(texts, key=lambda case: len(texts[case]))
     parents = {}
