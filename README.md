@@ -88,15 +88,22 @@ regroupés par cas clinique pour éviter toute fuite entre entraînement et test
   validation) : sous-triage ramené à 4,2 % et rappel P1 à 90,2 % sur le test,
   au prix de plus de sur-triage (accuracy 70,8 %).
 - **DPO testée puis écartée** : avec des paires de sécurité, le modèle classe
-  tout en P1 ; avec des paires de qualité seules, le triage tient, mais un
-  jugement en aveugle des réponses préfère le SFT (20 contre 8, 32 égalités).
+  tout en P1 ; avec des paires de qualité seules, le triage tient (76,5 %),
+  mais un jugement en aveugle préfère le SFT, nettement sur les réponses
+  (20 contre 8) et sans écart significatif sur les explications du niveau
+  (27 contre 18).
 
 Modèle livré (adaptateur LoRA, règle de décision, fiche) :
 [christophe-ringot/p14-triage-qwen3-1.7b-lora](https://huggingface.co/christophe-ringot/p14-triage-qwen3-1.7b-lora).
 Jeu d'évaluation clinique (109 cas, 400 questions) :
 [christophe-ringot/p14-medical-triage-clinical-eval](https://huggingface.co/datasets/christophe-ringot/p14-medical-triage-clinical-eval).
 
-Protocole complet, matrices de confusion et tests de robustesse :
+![Erreurs de triage par modèle](outputs/figures/02_sous_sur_triage.png)
+
+Synthèse de la partie expérimentale SFT / DPO (graphiques comparatifs,
+sous / sur-triage, qualité des explications, interprétation, limites) :
+[`docs/resultats_sft_dpo.md`](docs/resultats_sft_dpo.md). Protocole complet,
+matrices de confusion et tests de robustesse :
 [`docs/comparaison_triage.md`](docs/comparaison_triage.md) ; choix du modèle
 final : [`docs/evaluation_criteria.md`](docs/evaluation_criteria.md).
 
@@ -267,6 +274,9 @@ python -m triage.training.train_sft           # 2 SFT puis évaluation du triage
 python -m triage.evaluation.analyze_triage    # calibration, métriques par cas, bootstrap
 python -m triage.evaluation.error_analysis    # analyse des erreurs
 python -m triage.evaluation.evaluate_mcqa     # QCM FrenchMedMCQA du test
+python -m triage.evaluation.cost_sensitive    # règle de décision au coût (sous / sur-triage)
+python -m triage.evaluation.evaluate_explanations  # explications du niveau, SFT vs DPO (GPU)
+python -m triage.evaluation.compare_models    # tableaux et graphiques comparatifs -> outputs/figures/
 ```
 
 Options utiles de `train_sft` : `--only 4_sft_medical_triage` (une seule
@@ -346,6 +356,7 @@ Les scripts vérifient que le serveur MLflow répond avant de démarrer, pour
 - [x] Dataset SFT anonymisé, annoté et publié sur Hugging Face
 - [x] SFT LoRA, suivi MLflow, évaluation comparative du triage
 - [x] Règle de décision au coût, DPO testée (deux variantes) et comparée sous le même protocole
+- [x] Partie expérimentale finalisée : graphiques comparatifs, qualité des explications après DPO, interprétation ([`docs/resultats_sft_dpo.md`](docs/resultats_sft_dpo.md))
 - [x] Modèle final et jeu d'évaluation clinique publiés sur Hugging Face
 - [ ] Relecture clinique de 50 annotations
 - [x] API FastAPI locale (clé d'API, logs de chaque décision, tests) : [`docs/api.md`](docs/api.md)
@@ -358,6 +369,7 @@ Les scripts vérifient que le serveur MLflow répond avant de démarrer, pour
 
 | Document                                                     | Contenu                           |
 | ------------------------------------------------------------ | --------------------------------- |
+| [`docs/resultats_sft_dpo.md`](docs/resultats_sft_dpo.md) | **synthèse SFT / DPO : graphiques, explications, interprétation** |
 | [`docs/comparaison_triage.md`](docs/comparaison_triage.md)   | protocole et résultats de triage  |
 | [`docs/experiments.md`](docs/experiments.md)                 | journal de toutes les expériences |
 | [`docs/triage_grid.md`](docs/triage_grid.md)                 | grille d'annotation P1/P2/P3      |

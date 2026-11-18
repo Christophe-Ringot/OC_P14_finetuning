@@ -8,7 +8,7 @@ outputs/**/README.md
 !outputs/triage_eval/**
 !outputs/sft_mcqa_eval.csv
 !outputs/sft_qualitative_examples.csv
-!outputs/safety_flags.csv
+!outputs/figures/**
 __pycache__/
 *.pyc
 /Users/
@@ -22,6 +22,7 @@ __pycache__/
 !outputs/final_eval/**
 !outputs/annotation_review/**
 !outputs/response_eval/**
+!outputs/explanation_eval/**
 /hf_model/
 /.env
 /logs/

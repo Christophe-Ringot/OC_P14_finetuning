@@ -1,0 +1,902 @@
+id,case_id,priorite,cas,symptomes,prompt,generated,truncated
+mediqal_oeq_114,case_69154b8d7d,urgence_maximale,"Une femme de 80 ans, ayant des ATCD de phlébite il y a un mois à fait une chute. Elle a un hématome frontal, est légèrement confuse et a un coude droit déformé et tuméfié. Sa pression artérielle est à 162/102, le pouls est à 80/min, le Glasgow est à 15. L'examen cardio-vasculaire et respiratoire est normal.","['chute', 'hématome frontal', 'légère confusion', 'coude droit déformé et tuméfié']","### Cas clinique :
+Une femme de 80 ans, ayant des ATCD de phlébite il y a un mois à fait une chute. Elle a un hématome frontal, est légèrement confuse et a un coude droit déformé et tuméfié. Sa pression artérielle est à 162/102, le pouls est à 80/min, le Glasgow est à 15. L'examen cardio-vasculaire et respiratoire est normal.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car l'atteinte du cerveau (hématome) peut être grave en raison d'une éventuelle hémorragie intracrânienne ou d'un traumatisme crânienco-cérébral.,False
+mediqal_oeq_4757,case_d29cff18f9,urgence_maximale,"Léonie, âgée de 69 ans, est hospitalisée en urgence pour des céphalées associées à une fièvre élevée (39,5°C) et des frissons. Elle présente, à l'admission, des troubles de la conscience et une légère raideur de la nuque. L'électro-encéphalogramme montre un tracé désorganisé avec des signes de souffrance encéphalique diffuse. Les résultats biologiques sont :
+Numération formule sanguine :
+- Sg Leucocytes : 15 G/L
+Formule :
+- Polynucléaires neutrophiles : 0,80
+- Lymphocytes : 0,17
+- Monocytes : 0,03
+
+Liquide céphalorachidien : Aspect trouble
+Biochimie :
+- Protéine : 3,3g/L
+- Glucose : 2 mmol/L (glycémie : 7mmol/L)
+Examen cytologique :
+- 30 hématies/mm3
+- 450 éléments nucléés/mm3 avec 45 % de polynucléaires neutrophiles, 49% de lymphocytes et 6% de monocytes
+
+Examen bactériologique
+A la coloration de Gram, on trouve quelques petits bacilles à Gram positif.
+Deux hémocultures seront positives le lendemain avec à l'examen direct des petits bacilles à Gram positif.","['céphalées', 'fièvre élevée', 'frissons', 'troubles de la conscience', 'légère raideur de la nuque']","### Cas clinique :
+Léonie, âgée de 69 ans, est hospitalisée en urgence pour des céphalées associées à une fièvre élevée (39,5°C) et des frissons. Elle présente, à l'admission, des troubles de la conscience et une légère raideur de la nuque. L'électro-encéphalogramme montre un tracé désorganisé avec des signes de souffrance encéphalique diffuse. Les résultats biologiques sont :
+Numération formule sanguine :
+- Sg Leucocytes : 15 G/L
+Formule :
+- Polynucléaires neutrophiles : 0,80
+- Lymphocytes : 0,17
+- Monocytes : 0,03
+
+Liquide céphalorachidien : Aspect trouble
+Biochimie :
+- Protéine : 3,3g/L
+- Glucose : 2 mmol/L (glycémie : 7mmol/L)
+Examen cytologique :
+- 30 hématies/mm3
+- 450 éléments nucléés/mm3 avec 45 % de polynucléaires neutrophiles, 49% de lymphocytes et 6% de monocytes
+
+Examen bactériologique
+A la coloration de Gram, on trouve quelques petits bacilles à Gram positif.
+Deux hémocultures seront positives le lendemain avec à l'examen direct des petits bacilles à Gram positif.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car il y a risque d'hypoglycémie par déficit du glucose cérébral,False
+mediqal_oeq_1902,case_ee8589ff82,urgence_maximale,"Le médecin est appelé en urgence pour Madame X., 35 ans, qui se plaint de violentes céphalées apparues brusquement deux heures auparavant ; Sa température est de 38.5°C, et elle vomit. L'interrogatoire de Madame X. rapporte l'existence, depuis une dizaine de jours, d'une sinusite avec écoulement nasal purulent, toux grasse, apparemment pas ou peu de fièvre. Cet épisode infectieux a été négligé par Madame X. A l'examen clinique, le médecin constate une raideur très nette de la nuque et une photophobie. Devant le tableau clinique, le médecin traitant fait hospitaliser Madame X. immédiatement.","[""céphalées violentes d'apparition brutale"", 'vomissements', 'sinusite depuis une dizaine de jours', 'écoulement nasal purulent', 'toux grasse', 'raideur de la nuque', 'photophobie']","### Cas clinique :
+Le médecin est appelé en urgence pour Madame X., 35 ans, qui se plaint de violentes céphalées apparues brusquement deux heures auparavant ; Sa température est de 38.5°C, et elle vomit. L'interrogatoire de Madame X. rapporte l'existence, depuis une dizaine de jours, d'une sinusite avec écoulement nasal purulent, toux grasse, apparemment pas ou peu de fièvre. Cet épisode infectieux a été négligé par Madame X. A l'examen clinique, le médecin constate une raideur très nette de la nuque et une photophobie. Devant le tableau clinique, le médecin traitant fait hospitaliser Madame X. immédiatement.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","Urgence maximale car il s'agit d'un cas de syndrome dépressif sévère (céphalées, vomissements) associé à un traumatisme cranio-cérébral grave (raideur du cou). Il faut donc éviter les complications neurologiques potentielles (hématome intracrânien), mais aussi éviter des complications métaboliques (hypoglycémie, hypoxémie…).",False
+mediqal_oeq_1481,case_405937a719,urgence_maximale,"Vous accueillez un nouveau-né pour une cyanose réfractaire isolée. En échographie, vous faites le diagnostic d'atrésie pulmonaire à septum intact. Le ventricule droit est décrit comme tripartite.",['cyanose réfractaire isolée'],"### Cas clinique :
+Vous accueillez un nouveau-né pour une cyanose réfractaire isolée. En échographie, vous faites le diagnostic d'atrésie pulmonaire à septum intact. Le ventricule droit est décrit comme tripartite.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car il y a insuffisance du VD qui peut être grave (fuite dans l'aérobie) ou mortelle par hypoxémie sévère,False
+mediqal_oeq_825,case_d920a6fe5a,urgence_maximale,Un nouveau-né de 24 heures est admis pour cyanose réfractaire isolée. Vous faites le diagnostic d'atrésie pulmonaire à septum intact. Il s'agit d'une atrésie valvulaire. Le ventricule droit est tripartite.,['cyanose réfractaire isolée'],"### Cas clinique :
+Un nouveau-né de 24 heures est admis pour cyanose réfractaire isolée. Vous faites le diagnostic d'atrésie pulmonaire à septum intact. Il s'agit d'une atrésie valvulaire. Le ventricule droit est tripartite.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","Urgence maximale car il y a un défaut du débit veineux systémique (déficit en volume) qui peut entraîner une insuffisance veineuse systémique, voire la mort cardiaque.",False
+mediqal_oeq_1246,case_1307b5c231,urgence_maximale,Vous examinez à sa naissance un nouveau-né pour une atrésie pulmonaire à septum intact diagnostiquée en anténatal. La SaO2 est à 85%. Le ventricule droit est tripartite. L'atrésie est valvulaire. La valve tricuspide est très modérément hypoplasique. Le canal artériel est ouvert spontanément.,[],"### Cas clinique :
+Vous examinez à sa naissance un nouveau-né pour une atrésie pulmonaire à septum intact diagnostiquée en anténatal. La SaO2 est à 85%. Le ventricule droit est tripartite. L'atrésie est valvulaire. La valve tricuspide est très modérément hypoplasique. Le canal artériel est ouvert spontanément.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car il y a insuffisance du VD qui peut être grave (perte d'O2),False
+mediqal_oeq_1213,case_4e96c12db0,urgence_maximale,"Un nouveau-né de 3 jours de vie vous est confié pour une cyanose réfractaire à l'oxygène. Il n'a pas de détresse circulatoire ou respiratoire. Vous auscultez un souffle systolique 3/6 et un B2 fort unique. L'ECG est normal. La radiographie montre une silhouette en œuf avec un médiastin étroit et des poumons normalement perfusés. L'échographie montre une D-transposition des gros vaisseaux avec CIV et sténose pulmonaire. Quelques heures plus tard, la cyanose devient profonde sans détresse respiratoire. La radiographie de thorax montre des poumons très clairs.","[""cyanose réfractaire à l'oxygène"", 'souffle systolique 3/6', 'B2 fort unique', 'cyanose profonde']","### Cas clinique :
+Un nouveau-né de 3 jours de vie vous est confié pour une cyanose réfractaire à l'oxygène. Il n'a pas de détresse circulatoire ou respiratoire. Vous auscultez un souffle systolique 3/6 et un B2 fort unique. L'ECG est normal. La radiographie montre une silhouette en œuf avec un médiastin étroit et des poumons normalement perfusés. L'échographie montre une D-transposition des gros vaisseaux avec CIV et sténose pulmonaire. Quelques heures plus tard, la cyanose devient profonde sans détresse respiratoire. La radiographie de thorax montre des poumons très clairs.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","C'est un patient d'urgence car il a une TDCO (cyanose) qui s'améliore au cours du temps mais ne peut être expliquée par les signes évidents (souffle, B2).",False
+mediqal_oeq_1502,case_f77dd92158,urgence_maximale,Votre avis est demandé pour un nouveau-né ayant une hernie de coupole diaphragmatique car il est cyanosé malgré la ventilation assistée et une oxygénothérapie à 100%.,['cyanose malgré la ventilation assistée'],"### Cas clinique :
+Votre avis est demandé pour un nouveau-né ayant une hernie de coupole diaphragmatique car il est cyanosé malgré la ventilation assistée et une oxygénothérapie à 100%.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale en raison d'une insuffisance du canal végétatif qui peut entraîner des troubles graves ou mortels.,False
+mediqal_oeq_1214,case_0e41a55bed,urgence_maximale,"Un nouveau-né de 3 jours de vie vous est confié pour une cyanose réfractaire à l'oxygène. Il n'a pas de détresse circulatoire ou respiratoire. Vous auscultez un souffle systolique 3/6 et un B2 fort unique. L'ECG est normal. La radiographie montre une silhouette en œuf avec un médiastin étroit et des poumons normalement perfusés. L'échographie montre une D-transposition des gros vaisseaux avec CIV et sténose pulmonaire. Quelques heures plus tard, la cyanose devient profonde sans détresse respiratoire. La radiographie de thorax montre des poumons très clairs. Un an plus tard, l'enfant va bien. La cyanose s'est accentuée ; il y a une discrète polyglobulie normochrome.","[""cyanose réfractaire à l'oxygène"", 'pas de détresse circulatoire ou respiratoire', 'souffle systolique 3/6', 'B2 fort unique', 'cyanose profonde', 'sans détresse respiratoire', 'cyanose accentuée']","### Cas clinique :
+Un nouveau-né de 3 jours de vie vous est confié pour une cyanose réfractaire à l'oxygène. Il n'a pas de détresse circulatoire ou respiratoire. Vous auscultez un souffle systolique 3/6 et un B2 fort unique. L'ECG est normal. La radiographie montre une silhouette en œuf avec un médiastin étroit et des poumons normalement perfusés. L'échographie montre une D-transposition des gros vaisseaux avec CIV et sténose pulmonaire. Quelques heures plus tard, la cyanose devient profonde sans détresse respiratoire. La radiographie de thorax montre des poumons très clairs. Un an plus tard, l'enfant va bien. La cyanose s'est accentuée ; il y a une discrète polyglobulie normochrome.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","Civ
+Purpura d'insuffisance cardiaque",False
+mediqal_oeq_3814,case_accf37a33c,urgence_maximale,"Yvan Y, est un jeune homme de 17 ans, admis 48 heures auparavant en service de réanimation polyvalente pour un coma profond aréactif. Ce coma est d'origine traumatique, secondaire à un accident de moto alors que le jeune homme roulant à grande vitesse sans casque, se serait encastré dans un pylône. Il est actuellement assisté par ventilation mécanique, il n'a plus de lyse et son hémodynamique est instable.","['coma profond aréactif', 'hémodynamique instable']","### Cas clinique :
+Yvan Y, est un jeune homme de 17 ans, admis 48 heures auparavant en service de réanimation polyvalente pour un coma profond aréactif. Ce coma est d'origine traumatique, secondaire à un accident de moto alors que le jeune homme roulant à grande vitesse sans casque, se serait encastré dans un pylône. Il est actuellement assisté par ventilation mécanique, il n'a plus de lyse et son hémodynamique est instable.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","Urgence maximale car :
+
+- Coma
+- Hémodynamique instable (hypo ou hyper coagulabilité)
+- Risques de complications graves (hématome intracrânien)",False
+mediqal_oeq_1918,case_44d354520f,urgence_maximale,"En janvier 2001, un homme de 28 ans est retrouvé inanimé près d'un chauffe-eau dans la salle de bains de son appartement. Il présente un tableau de coma avec conservation des réflexes photo-moteurs, réflexes cutanés faibles et abolition des réflexes ostéo-tendineux. Il existe une hypotonie des 4 membres et une respiration très irrégulière de faible amplitude. La fréquence cardiaque est à 80 et la TA à 90/60 mm Hg. Il n'y a pas d'hépatomégalie ni de splénomégalie.
+48 heures après, on note une élévation des enzymes sériques avec des CK à 10 000 UI/litre (Normales 30 à 200 UI/I) ainsi que des urines rares et foncées.
+Alcoolémie: 0,28 g ‰
+SgA-pH(à37°C) 7,27
+Sg A-pO2 : 7,29 kPa ou 55 mm Hg
+Sg A-pCO2 : 6,7 kPa ou 50 mm Hg
+Sg A-Bicarbonate: 18 mmol/L
+Sg-Hémoglobine: 9,1 mmol/L","['coma', 'réflexes photo-moteurs conservés', 'réflexes cutanés faibles', 'abolition des réflexes ostéo-tendineux', 'hypotonie des 4 membres', 'respiration très irrégulière de faible amplitude', 'urines rares et foncées']","### Cas clinique :
+En janvier 2001, un homme de 28 ans est retrouvé inanimé près d'un chauffe-eau dans la salle de bains de son appartement. Il présente un tableau de coma avec conservation des réflexes photo-moteurs, réflexes cutanés faibles et abolition des réflexes ostéo-tendineux. Il existe une hypotonie des 4 membres et une respiration très irrégulière de faible amplitude. La fréquence cardiaque est à 80 et la TA à 90/60 mm Hg. Il n'y a pas d'hépatomégalie ni de splénomégalie.
+48 heures après, on note une élévation des enzymes sériques avec des CK à 10 000 UI/litre (Normales 30 à 200 UI/I) ainsi que des urines rares et foncées.
+Alcoolémie: 0,28 g ‰
+SgA-pH(à37°C) 7,27
+Sg A-pO2 : 7,29 kPa ou 55 mm Hg
+Sg A-pCO2 : 6,7 kPa ou 50 mm Hg
+Sg A-Bicarbonate: 18 mmol/L
+Sg-Hémoglobine: 9,1 mmol/L
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Il s'agit d'une urgence maximale car il y a risque de décès en raison du contexte de l'apparition de cette crise par rapport au fait qu'il soit jeune et présentant un syndrome dépressif déjà bien évolué,False
+mediqal_oeq_699,case_269290207d,urgence_maximale,Un nouveau-né est admis pour une atrésie pulmonaire à septum interventriculaire intact. Le ventricule droit est bipartite sans chambre trabéculée mais la valve tricuspide a une taille correcte.,[],"### Cas clinique :
+Un nouveau-né est admis pour une atrésie pulmonaire à septum interventriculaire intact. Le ventricule droit est bipartite sans chambre trabéculée mais la valve tricuspide a une taille correcte.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","Urgence maximale car il y a un défaut d'apport en artère pulmonaire (AP) par l'atresie pulmonaire, donc pas de débit systémique normal dans AP",False
+mediqal_oeq_1483,case_82baaf1873,urgence_maximale,"Vous accueillez un nouveau-né pour une cyanose réfractaire isolée. En échographie, vous faites le diagnostic d'atrésie pulmonaire à septum intact. Le ventricule droit est décrit comme tripartite. La perforation-dilatation valvulaire pulmonaire a été un succès. La saturation après la procédure est à 90% alors que vous n'avez pas arrêté le traitement PGE1 qui reste efficace. L'enfant est sorti sans traitement. Vous le revoyez quelques semaines plus tard. La saturation est à 85%. Il n'y a pas d'obstacle sur la voie droite.",['cyanose réfractaire isolée'],"### Cas clinique :
+Vous accueillez un nouveau-né pour une cyanose réfractaire isolée. En échographie, vous faites le diagnostic d'atrésie pulmonaire à septum intact. Le ventricule droit est décrit comme tripartite. La perforation-dilatation valvulaire pulmonaire a été un succès. La saturation après la procédure est à 90% alors que vous n'avez pas arrêté le traitement PGE1 qui reste efficace. L'enfant est sorti sans traitement. Vous le revoyez quelques semaines plus tard. La saturation est à 85%. Il n'y a pas d'obstacle sur la voie droite.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car il y a des risques vitaux (survenue du syndrome de l'insuffisance veineuse gauche),False
+mediqal_oeq_1324,case_13d9a116b1,urgence_maximale,"Après un diagnostic anténatal d'hypoplasie du cœur gauche, vous accueillez à 10 minutes de vie un nouveau-né cyanosé à 80%, modérément polypnéique chez qui vous palpez tous les pouls. Vous confirmer le diagnostic de la cardiopathie en échographie (atrésie mitrale et aortique).","['cyanose', 'polypnée modérée', 'tous les pouls palpés']","### Cas clinique :
+Après un diagnostic anténatal d'hypoplasie du cœur gauche, vous accueillez à 10 minutes de vie un nouveau-né cyanosé à 80%, modérément polypnéique chez qui vous palpez tous les pouls. Vous confirmer le diagnostic de la cardiopathie en échographie (atrésie mitrale et aortique).
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car il y a une insuffisance cardiaque systémique avec hypoxémie sévère,False
+mediqal_oeq_701,case_b7389773e7,urgence_maximale,"Un nouveau-né est admis pour une atrésie pulmonaire à septum interventriculaire intact. Le ventricule droit est bipartite sans chambre trabéculée mais la valve tricuspide a une taille correcte. Cette condition d'absence de fistules coronaro-cardiaque est remplie et une perforation-dilatation de la valve pulmonaire est faite. Malgré tout, vous ne pouvez arrêter les PGE1. Quelques mois plus tard, la cyanose s'est majorée et vous n'enregistrez dans l'artère pulmonaire qu'un flux systolique. Il persiste un shunt droite-gauche par un foramen ovale. Le ventricule droit a grandi en proportion du ventricule gauche.",['cyanose majorée'],"### Cas clinique :
+Un nouveau-né est admis pour une atrésie pulmonaire à septum interventriculaire intact. Le ventricule droit est bipartite sans chambre trabéculée mais la valve tricuspide a une taille correcte. Cette condition d'absence de fistules coronaro-cardiaque est remplie et une perforation-dilatation de la valve pulmonaire est faite. Malgré tout, vous ne pouvez arrêter les PGE1. Quelques mois plus tard, la cyanose s'est majorée et vous n'enregistrez dans l'artère pulmonaire qu'un flux systolique. Il persiste un shunt droite-gauche par un foramen ovale. Le ventricule droit a grandi en proportion du ventricule gauche.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","ceux qui ont des troubles de la circulation cardiaque avec ou sans dysfonction valvulaire
+car il y a 2 VD (et donc 2 valves)",False
+mediqal_oeq_1482,case_1124400cac,urgence_maximale,"Vous accueillez un nouveau-né pour une cyanose réfractaire isolée. En échographie, vous faites le diagnostic d'atrésie pulmonaire à septum intact. Le ventricule droit est décrit comme tripartite. La perforation-dilatation valvulaire pulmonaire a été un succès. La saturation après la procédure est à 90% alors que vous n'avez pas arrêté le traitement PGE1 qui reste efficace.",['cyanose réfractaire isolée'],"### Cas clinique :
+Vous accueillez un nouveau-né pour une cyanose réfractaire isolée. En échographie, vous faites le diagnostic d'atrésie pulmonaire à septum intact. Le ventricule droit est décrit comme tripartite. La perforation-dilatation valvulaire pulmonaire a été un succès. La saturation après la procédure est à 90% alors que vous n'avez pas arrêté le traitement PGE1 qui reste efficace.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car il y a des risques vitaux (surcharge du VD),False
+mediqal_oeq_1737,case_c97507722f,urgence_maximale,"Paula B., 3 ans est hospitalisée en urgence dans un service de réanimation pédiatrique. Elle présente à son admission une dysphagie et une dysphonie ainsi qu'une fièvre à 39°C et un tableau d'insuffisance respiratoire aiguë. À l'interrogatoire des parents, il s'avère que l'enfant, en bonne santé jusqu'alors, a présenté 3 jours auparavant une rhinopharyngite aiguë non traitée. L'examen clinique montre une épiglotte « rouge cerise » et enflée ainsi que des adénophaties au niveau du cou. Une intubation est immédiatement réalisée sous anesthésie, ainsi que 2 hémocultures. Une antibiothérapie par l'ampicilline (75 mg/kg/jour) est entreprise par voie veineuse.
+Le bilan biologique réalisé dès l'admission donne les résultats suivants :
+Sg Erythrocytes 3,9 T/L
+Sg Hématocrite 0,37
+Sg Hémoglobine 120 g/L
+Sg Leucocytes 16 G/L
+PN neutrophiles 60%
+PN éosinophiles 2%
+PN basophiles 0%
+Lymphocytes 33%
+Monocytes 5%
+Sg Thrombocytes 150 G/L
+Bactériologie : après 24 h de culture, la coloration de Gram affectuée sur le bouillon d'hémoculture montre des petits bacilles polymorphes à Gram négatif, évoquant Haemophilus infuenzae.
+Evolution : après 48 h de traitement, l'état infectieux de l'enfant demeure préoccupant, avec persistance d'une fièvre élevée et d'hémocultures positives.","['dysphagie', 'dysphonie', 'fièvre à 39°C', 'insuffisance respiratoire aiguë', 'épiglotte rouge cerise et enflée', 'adénopathies cervicales']","### Cas clinique :
+Paula B., 3 ans est hospitalisée en urgence dans un service de réanimation pédiatrique. Elle présente à son admission une dysphagie et une dysphonie ainsi qu'une fièvre à 39°C et un tableau d'insuffisance respiratoire aiguë. À l'interrogatoire des parents, il s'avère que l'enfant, en bonne santé jusqu'alors, a présenté 3 jours auparavant une rhinopharyngite aiguë non traitée. L'examen clinique montre une épiglotte « rouge cerise » et enflée ainsi que des adénophaties au niveau du cou. Une intubation est immédiatement réalisée sous anesthésie, ainsi que 2 hémocultures. Une antibiothérapie par l'ampicilline (75 mg/kg/jour) est entreprise par voie veineuse.
+Le bilan biologique réalisé dès l'admission donne les résultats suivants :
+Sg Erythrocytes 3,9 T/L
+Sg Hématocrite 0,37
+Sg Hémoglobine 120 g/L
+Sg Leucocytes 16 G/L
+PN neutrophiles 60%
+PN éosinophiles 2%
+PN basophiles 0%
+Lymphocytes 33%
+Monocytes 5%
+Sg Thrombocytes 150 G/L
+Bactériologie : après 24 h de culture, la coloration de Gram affectuée sur le bouillon d'hémoculture montre des petits bacilles polymorphes à Gram négatif, évoquant Haemophilus infuenzae.
+Evolution : après 48 h de traitement, l'état infectieux de l'enfant demeure préoccupant, avec persistance d'une fièvre élevée et d'hémocultures positives.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car présence d'un syndrome inflammatoires sévère associé à une infection bactérienne extrahospitalière,False
+mediqal_oeq_1322,case_77885328ce,urgence_maximale,"On vous demande conseil pour une nouveau-né en maternité chez qui une cyanose néonatale immédiate est constatée sans souffle ni signe d'insuffisance cardiaque clinique. La radiographie montre une perfusion pulmonaire symétrique apparemment normale. Le médecin qui vous interroge suspecte un retour veineux pulmonaire anormal total. L'hôpital où est l'enfant se situe à 15 minutes du centre spécialisé. L'état de l'enfant est inchangé (cyanose isolée) mais le médecin transporteur préfère débuter une perfusion de prostaglandine E1 « au cas où ». A l'arrivée dans le service spécialisé, la cyanose reste identique avec une saturation à 85%. Il n'a pas de souffle ni de signe d'insuffisance cardiaque clinique. Tous les pouls sont normalement palpés de façon symétrique. A mieux analyser la radiographie de thorax, vous pensez que la crosse aortique est à droite et la pointe du cœur est sus-diaphragmatique.","['cyanose néonatale immédiate', 'pas de souffle', ""pas de signe d'insuffisance cardiaque"", 'pouls normalement palpés et symétriques']","### Cas clinique :
+On vous demande conseil pour une nouveau-né en maternité chez qui une cyanose néonatale immédiate est constatée sans souffle ni signe d'insuffisance cardiaque clinique. La radiographie montre une perfusion pulmonaire symétrique apparemment normale. Le médecin qui vous interroge suspecte un retour veineux pulmonaire anormal total. L'hôpital où est l'enfant se situe à 15 minutes du centre spécialisé. L'état de l'enfant est inchangé (cyanose isolée) mais le médecin transporteur préfère débuter une perfusion de prostaglandine E1 « au cas où ». A l'arrivée dans le service spécialisé, la cyanose reste identique avec une saturation à 85%. Il n'a pas de souffle ni de signe d'insuffisance cardiaque clinique. Tous les pouls sont normalement palpés de façon symétrique. A mieux analyser la radiographie de thorax, vous pensez que la crosse aortique est à droite et la pointe du cœur est sus-diaphragmatique.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","Urgence maximale car il y a des risques vitaux
+- Risque de rétrécissement de VD ou insuffisance valvulaire gauche
+- Risque de défaillance systémique par défaut de remplissage ventriculaire gauche
+- Risque de surcharge artérielle par éjection de VG",False
+mediqal_oeq_1326,case_db8d0b0603,urgence_maximale,"Après un diagnostic anténatal d'hypoplasie du cœur gauche, vous accueillez à 10 minutes de vie un nouveau-né cyanosé à 80%, modérément polypnéique chez qui vous palpez tous les pouls. Vous confirmer le diagnostic de la cardiopathie en échographie (atrésie mitrale et aortique). Deux heures après son arrivée, la situation clinique se dégrade avec une détresse respiratoire sévère. La radiographie montre un œdème pulmonaire bilatéral. Il n'y a pas de dysfonctionnement du ventricule droit ni de fuite tricuspide ; le canal artériel est largement ouvert et fonction de façon adéquate.","['cyanose', 'polypnée modérée', 'tous les pouls palpés', 'détresse respiratoire sévère']","### Cas clinique :
+Après un diagnostic anténatal d'hypoplasie du cœur gauche, vous accueillez à 10 minutes de vie un nouveau-né cyanosé à 80%, modérément polypnéique chez qui vous palpez tous les pouls. Vous confirmer le diagnostic de la cardiopathie en échographie (atrésie mitrale et aortique). Deux heures après son arrivée, la situation clinique se dégrade avec une détresse respiratoire sévère. La radiographie montre un œdème pulmonaire bilatéral. Il n'y a pas de dysfonctionnement du ventricule droit ni de fuite tricuspide ; le canal artériel est largement ouvert et fonction de façon adéquate.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+",Urgence maximale car il y a des signes de choc par l'œdème pulmonaire et la détresse respiratoire.,False
+mediqal_oeq_1004,case_ae6103d9fa,urgence_maximale,"Un nouveau-né vous est confié à 24 heures de vie pour une cyanose réfractaire. A l'examen, il est discrètement polypnéique, la saturation mesurée est à 88% et vous auscultez un double souffle au bord gauche du sternum.","['cyanose réfractaire', 'discrète polypnée', 'double souffle au bord gauche du sternum']","### Cas clinique :
+Un nouveau-né vous est confié à 24 heures de vie pour une cyanose réfractaire. A l'examen, il est discrètement polypnéique, la saturation mesurée est à 88% et vous auscultez un double souffle au bord gauche du sternum.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_maximale]
+
+","Urgence maximale car éventuellement mortel par hypoxémie (ou hypercapnie) ou surcharge cardiaque
+et aussi en raison d'un risque de rupture aortique",False
+mediqal_oeq_3772,case_e703071cde,urgence_moderee,"Monsieur X., 25 ans consulte aux urgences pour fièvre et céphalées. Il n'a pas d'antécédent notable. Il est étudiant à Paris. Il est venu à Nice dans sa famille avec son amie pour les vacances. Ils sont arrivés le matin par avion. En débarquant, il s'est senti fiévreux avec des céphalées qui n'ont pas cédé à la prise de paracétamol. Le médecin qu'ils ont vu en début d'après-midi a parlé de syndrome grippal et lui a remis une ordonnance de paracétamol et d'ibuprofène (Nuréflex®). Devant l'absence d'amélioration, il consulte aux urgences, à 22h50 où vous le prenez en charge. C'est votre première garde, depuis que vous avez été nommé(e) interne DES en santé publique.","['fièvre', 'céphalées non cédant au paracétamol']","### Cas clinique :
+Monsieur X., 25 ans consulte aux urgences pour fièvre et céphalées. Il n'a pas d'antécédent notable. Il est étudiant à Paris. Il est venu à Nice dans sa famille avec son amie pour les vacances. Ils sont arrivés le matin par avion. En débarquant, il s'est senti fiévreux avec des céphalées qui n'ont pas cédé à la prise de paracétamol. Le médecin qu'ils ont vu en début d'après-midi a parlé de syndrome grippal et lui a remis une ordonnance de paracétamol et d'ibuprofène (Nuréflex®). Devant l'absence d'amélioration, il consulte aux urgences, à 22h50 où vous le prenez en charge. C'est votre première garde, depuis que vous avez été nommé(e) interne DES en santé publique.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée car :
+
+- Fièvre
+- Syndrome récurrent
+- Pas d'antécédents médicaux notables
+- Patient jeune sans antécédent médical particulier
+- Aucune indication particulière de traitement spécifique du SGBS",False
+mediqal_oeq_4316,case_56342cb34f,urgence_moderee,"Un homme de 50 ans se présente aux urgences. Depuis 3 heures, il ressent une douleur lombaire gauche extrêmement violente, qui irradie vers la fosse iliaque gauche, l'aine et les bourses. Il est par ailleurs nauséeux. Il vous dit qu'il a déjà présenté un épisode de colique néphrétique du même côté il y a 2 ans, à la suite duquel il avait éliminé un calcul d'oxalate de calcium. Il est traité depuis 5 ans pour une hypertension artérielle par une association hydrochlorothiazide‐énalapril (Corenitec®). L'examen clinique trouve un patient obèse (100kg pour 1m75), en bon état général. L'abdomen est souple, les orifices herniaires sont libres, et la douleur est majorée par la percussion de la fosse lombaire. Les urines sont claires. Les constantes vitales sont normales (FR : 20/min, FC : 84/min, TA : 145/80 mmHg, T° :37,2°C). A l'évidence, il s'agit cliniquement d'une récidive de colique néphrétique.","[""douleur lombaire gauche extrêmement violente irradiant vers la fosse iliaque gauche, l'aine et les bourses"", 'nausées', 'obésité', 'abdomen souple', 'douleur majorée par la percussion de la fosse lombaire', 'urines claires']","### Cas clinique :
+Un homme de 50 ans se présente aux urgences. Depuis 3 heures, il ressent une douleur lombaire gauche extrêmement violente, qui irradie vers la fosse iliaque gauche, l'aine et les bourses. Il est par ailleurs nauséeux. Il vous dit qu'il a déjà présenté un épisode de colique néphrétique du même côté il y a 2 ans, à la suite duquel il avait éliminé un calcul d'oxalate de calcium. Il est traité depuis 5 ans pour une hypertension artérielle par une association hydrochlorothiazide‐énalapril (Corenitec®). L'examen clinique trouve un patient obèse (100kg pour 1m75), en bon état général. L'abdomen est souple, les orifices herniaires sont libres, et la douleur est majorée par la percussion de la fosse lombaire. Les urines sont claires. Les constantes vitales sont normales (FR : 20/min, FC : 84/min, TA : 145/80 mmHg, T° :37,2°C). A l'évidence, il s'agit cliniquement d'une récidive de colique néphrétique.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée car :
+
+• La douleur est intense
+• Le patient n'est pas dans un état grave
+• Pas de signe de choc ou de déshydratation
+• Pas de complication possible (hématome…)
+• Patient non hospitalisé",False
+mediqal_oeq_2410,case_a1d043b5b3,urgence_moderee,"Un homme de 65 ans est hospitalisé pour une exploration de douleurs osseuses diffuses survenant dans un contexte d'altération de l'état général depuis 6 mois. L'examen clinique est normal. Le bilan initial montre une anémie (Hb à 80g/L). Un nombre de leucocytes à 4,6 G/L avec formule normale, un nombre de thrombocytes de 150 G/L. la vitesse de sédimentation est à 100 mm à la première heure. La protidémie est à 110 g/L. Les radiographies du squelette révèlent de multiples images lacunaires crâniennes et iliaques et une déminéralisation diffuse du rachis.","['douleurs osseuses diffuses', ""altération de l'état général depuis 6 mois""]","### Cas clinique :
+Un homme de 65 ans est hospitalisé pour une exploration de douleurs osseuses diffuses survenant dans un contexte d'altération de l'état général depuis 6 mois. L'examen clinique est normal. Le bilan initial montre une anémie (Hb à 80g/L). Un nombre de leucocytes à 4,6 G/L avec formule normale, un nombre de thrombocytes de 150 G/L. la vitesse de sédimentation est à 100 mm à la première heure. La protidémie est à 110 g/L. Les radiographies du squelette révèlent de multiples images lacunaires crâniennes et iliaques et une déminéralisation diffuse du rachis.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Urgence modérée car présence d'une pathologie grave qui nécessite des traitements spécifiques en milieu hospitalier .,False
+mediqal_oeq_3225,case_7bfc7b4f31,urgence_moderee,"Melle P… consulte aux urgences pour douleurs pelviennes évoluant depuis 3 jours. Elle a déjà été opérée de l'appendicite et n'a jamais été enceinte. Elle a 20 ans et utilise une pilule estroprogestative de 2ème génération depuis plusieurs années. Elle est en début de plaquette, il n'y a a priori pas d'oubli et le test de grossesse est négatif. Mlle X. fume 20 cigarettes par jour depuis l'âge de 17 ans.",['douleurs pelviennes depuis 3 jours'],"### Cas clinique :
+Melle P… consulte aux urgences pour douleurs pelviennes évoluant depuis 3 jours. Elle a déjà été opérée de l'appendicite et n'a jamais été enceinte. Elle a 20 ans et utilise une pilule estroprogestative de 2ème génération depuis plusieurs années. Elle est en début de plaquette, il n'y a a priori pas d'oubli et le test de grossesse est négatif. Mlle X. fume 20 cigarettes par jour depuis l'âge de 17 ans.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence moderee car :
+
+- Douleur abdominale
+- Pas de signes d'infection (pas de fièvre)
+- Patient jeune , non infectieuse , sans antécédents médicaux présumés .",False
+mediqal_oeq_3751,case_2a5ba71468,urgence_moderee,"Madame X., 88 ans, est adressée aux urgences par l'infirmière de sa maison de retraite pour une ""somnolence anormale"" le 21 décembre 2006 à 10h35. Elle est habituellement relativement valide, et prend ses repas avec aide dans le réfectoire de l'établissement. Elle a des antécédents de démence type Alzheimer, d'hypertension artérielle, d'anémie normocytaire et de maladie de l'oreillette. Son traitement habituel associe donépézil (Aricept®), amlodipine (Amlor®), spironolactone, furosémide (Aldalix®), acétylsalicylate de lysine (Kardégic 75®), amiodarone (Cordarone®), et lorazépam (Témesta®). Elle a bénéficié d'un pontage aorto coronarien il y a une vingtaine d'années.",['somnolence anormale'],"### Cas clinique :
+Madame X., 88 ans, est adressée aux urgences par l'infirmière de sa maison de retraite pour une ""somnolence anormale"" le 21 décembre 2006 à 10h35. Elle est habituellement relativement valide, et prend ses repas avec aide dans le réfectoire de l'établissement. Elle a des antécédents de démence type Alzheimer, d'hypertension artérielle, d'anémie normocytaire et de maladie de l'oreillette. Son traitement habituel associe donépézil (Aricept®), amlodipine (Amlor®), spironolactone, furosémide (Aldalix®), acétylsalicylate de lysine (Kardégic 75®), amiodarone (Cordarone®), et lorazépam (Témesta®). Elle a bénéficié d'un pontage aorto coronarien il y a une vingtaine d'années.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Urgence modérée car la somnolence peut être un signe précoce du déclin cognitif en cas de surdose ou de déficit de métabolisme de l'aminoacide L-lysine. La prise en charge doit donc se faire au plus vite.,False
+mediqal_oeq_4207,case_2f761faae8,urgence_moderee,"les Une patiente de 26 ans vous est adressée pour douleurs articulaires touchant interphalangiennes proximales et distales, et les métacarpophalangiennes. Ces douleurs évoluent depuis un mois environ, sont accentuées la nuit, semblent s'amender dans la journée sans disparaître totalement. Elle présente depuis 4 jours un purpura pétéchial non infiltré des membres inférieurs remontant jusqu'au niveau des genoux, et rapporte une fébricule à 38°C, 38°5C depuis 15 jours. Cette patiente n'a pas d'antécédents particuliers hormis une appendicectomie. les poignets,","['douleurs articulaires des poignets, interphalangiennes proximales et distales et métacarpophalangiennes', 'accentuées la nuit', ""s'amendant dans la journée sans disparaître"", ""purpura pétéchial non infiltré des membres inférieurs jusqu'aux genoux"", 'fébricule à 38-38,5°C depuis 15 jours']","### Cas clinique :
+les Une patiente de 26 ans vous est adressée pour douleurs articulaires touchant interphalangiennes proximales et distales, et les métacarpophalangiennes. Ces douleurs évoluent depuis un mois environ, sont accentuées la nuit, semblent s'amender dans la journée sans disparaître totalement. Elle présente depuis 4 jours un purpura pétéchial non infiltré des membres inférieurs remontant jusqu'au niveau des genoux, et rapporte une fébricule à 38°C, 38°5C depuis 15 jours. Cette patiente n'a pas d'antécédents particuliers hormis une appendicectomie. les poignets,
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée car il y a risque de septicémie (douleur + fébricule) , mais aussi complication du traitement par l'association anticoagulant + corticoïde .",False
+mediqal_oeq_907,case_e964c9ea6a,urgence_moderee,"Vous faites le diagnostic d'une CIA ostium secundum chez un enfant de 4 ans. Cet enfant est symptomatique à l'effort et en échographie, la dilatation du ventricule droit est très importante bien que la CIA ne paraissent pas très large en échographie.","[""symptomatique à l'effort""]","### Cas clinique :
+Vous faites le diagnostic d'une CIA ostium secundum chez un enfant de 4 ans. Cet enfant est symptomatique à l'effort et en échographie, la dilatation du ventricule droit est très importante bien que la CIA ne paraissent pas très large en échographie.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Urgence modérée car il y a une sténose valvulaire qui peut être grave (dilatation VD) ou non grave mais avec des complications cardiaques graves comme les troubles de la coarctation de l'aorte par exemple.,False
+mediqal_oeq_1211,case_bcc9952643,urgence_moderee,Un nouveau-né de 3 jours de vie vous est confié pour une cyanose réfractaire à l'oxygène. Il n'a pas de détresse circulatoire ou respiratoire. Vous auscultez un souffle systolique 3/6 et un B2 fort unique. L'ECG est normal. La radiographie montre une silhouette en œuf avec un médiastin étroit et des poumons normalement perfusés. L'échographie montre une D-transposition des gros vaisseaux avec CIV et sténose pulmonaire.,"[""cyanose réfractaire à l'oxygène"", 'pas de détresse circulatoire ou respiratoire', 'souffle systolique 3/6', 'B2 fort unique']","### Cas clinique :
+Un nouveau-né de 3 jours de vie vous est confié pour une cyanose réfractaire à l'oxygène. Il n'a pas de détresse circulatoire ou respiratoire. Vous auscultez un souffle systolique 3/6 et un B2 fort unique. L'ECG est normal. La radiographie montre une silhouette en œuf avec un médiastin étroit et des poumons normalement perfusés. L'échographie montre une D-transposition des gros vaisseaux avec CIV et sténose pulmonaire.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée car il y a risque d'hypoxémie, hypotension artérielle (sténose)",False
+mediqal_oeq_4887,case_3b0b25f671,urgence_moderee,"Un homme de 55 ans est adressé aux Urgences par son médecin traitant pour des crachats hémoptoïques.
+Depuis son retour de congés en Guadeloupe il y a deux jours, le patient souffre d'une douleur localisée de la base droite et d'une dyspnée d'effort de stade III. La douleur est majorée par l'inspiration profonde. Le patient fume un paquet de cigarettes par jour depuis vingt ans et a une bronchite chronique. Ses expectorations sont blanchâtres. Il a par ailleurs une hypercholestérolémie non traitée et un diabète de type II.
+L'examen clinique retrouve une TA à 120/80, un pouls à 118/mn, une température à 38,2°C. Le poids est de 105 kg pour une taille de 1,62 m. L'état général est conservé. On ne retrouve pas de cyanose mais une fréquence respiratoire à 24/mn. On note une diminution globale de l'ampliation thoracique et une diminution du murmure vésiculaire à l'auscultation de la base droite. Il n'existe pas de râles crépitants ou sibilants. L'auscultation cardiaque ne retrouve pas de bruit anormal. Le reste de l'examen est sans particularité et on ne retrouve pas de signe de Homans.
+L'électrocardiogramme retrouve une déviation droite du QRS avec une onde p pulmonaire. Les gaz du sang en air ambiant retrouvent une PaO2 à 8,5 kPa, une PaCO2 à 4,3 kPa, une réserve alcaline à 19 mMol/L et un pH à 7,45.","['crachats hémoptoïques', ""douleur localisée de la base droite majorée à l'inspiration"", ""dyspnée d'effort stade III"", 'expectorations blanchâtres', ""diminution globale de l'ampliation thoracique"", 'diminution du murmure vésiculaire à la base droite']","### Cas clinique :
+Un homme de 55 ans est adressé aux Urgences par son médecin traitant pour des crachats hémoptoïques.
+Depuis son retour de congés en Guadeloupe il y a deux jours, le patient souffre d'une douleur localisée de la base droite et d'une dyspnée d'effort de stade III. La douleur est majorée par l'inspiration profonde. Le patient fume un paquet de cigarettes par jour depuis vingt ans et a une bronchite chronique. Ses expectorations sont blanchâtres. Il a par ailleurs une hypercholestérolémie non traitée et un diabète de type II.
+L'examen clinique retrouve une TA à 120/80, un pouls à 118/mn, une température à 38,2°C. Le poids est de 105 kg pour une taille de 1,62 m. L'état général est conservé. On ne retrouve pas de cyanose mais une fréquence respiratoire à 24/mn. On note une diminution globale de l'ampliation thoracique et une diminution du murmure vésiculaire à l'auscultation de la base droite. Il n'existe pas de râles crépitants ou sibilants. L'auscultation cardiaque ne retrouve pas de bruit anormal. Le reste de l'examen est sans particularité et on ne retrouve pas de signe de Homans.
+L'électrocardiogramme retrouve une déviation droite du QRS avec une onde p pulmonaire. Les gaz du sang en air ambiant retrouvent une PaO2 à 8,5 kPa, une PaCO2 à 4,3 kPa, une réserve alcaline à 19 mMol/L et un pH à 7,45.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée car
+- présence d'un syndrome pneumopathique (douleur + crachat)
+- insuffisance ventilatoire (stade III)",False
+mediqal_oeq_540,case_011ade3992,urgence_moderee,Un nouveau-né de 3 jours de vie est examiné à la sortie de maternité. Le pédiatre vous demande conseil car il ne sent pas les pouls fémoraux. Il n'entend pas de souffle à l'auscultation du précordium. La pression artérielle au membre supérieur droit est à 98/50 mm Hg pour 63/45 mm Hg au membre inférieur droit. Il n'y a pas d'hépatomégalie ni de détresse respiratoire. L'échocardiographie confirme le diagnostic de coarctation isthmique associée à une communication interventriculaire périmembraneuse non restrictive de 5 mm. Le ventricule gauche est modérément hypokinétique (fraction de raccourcissement de 23%) et vous voyez un petit flux de canal artériel shuntant de gauche à droite.,['pouls fémoraux non perçus'],"### Cas clinique :
+Un nouveau-né de 3 jours de vie est examiné à la sortie de maternité. Le pédiatre vous demande conseil car il ne sent pas les pouls fémoraux. Il n'entend pas de souffle à l'auscultation du précordium. La pression artérielle au membre supérieur droit est à 98/50 mm Hg pour 63/45 mm Hg au membre inférieur droit. Il n'y a pas d'hépatomégalie ni de détresse respiratoire. L'échocardiographie confirme le diagnostic de coarctation isthmique associée à une communication interventriculaire périmembraneuse non restrictive de 5 mm. Le ventricule gauche est modérément hypokinétique (fraction de raccourcissement de 23%) et vous voyez un petit flux de canal artériel shuntant de gauche à droite.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Il faut faire des interventions chirurgicales en urgence, mais surtout dans les prochains mois
+- Coarctation doit être traitée par décompression ou réparation
+- CIVP doit être traitée par fermeture",False
+mediqal_oeq_2538,case_16b1d192a9,urgence_moderee,"Une femme de 45 ans, a été opérée il y a 4 ans pour mise en place d'une prothèse mécanique valvulaire en raison d'une insuffisance mitrale sévère. Depuis cette époque, elle est traitée par des anticoagulants oraux (acénocoumarol, 1 comprimé par jour) afin de prévenir la survenue d'une thrombose artérielle à point de départ valvulaire. Après avoir consommé des coquillages, cette patiente présente pendant 2 jours une diarrhée aiguë et fébrile. Elle adopte elle-même des mesures thérapeutiques simples: diète, aspirine, antiseptiques intestinaux. Effectivement, trois jours après le début de son automédication, les symptômes digestifs ont cédé. Le lendemain cependant elle consulte, affolée, car ses urines sont rouges.","['diarrhée aiguë et fébrile pendant 2 jours', 'urines rouges']","### Cas clinique :
+Une femme de 45 ans, a été opérée il y a 4 ans pour mise en place d'une prothèse mécanique valvulaire en raison d'une insuffisance mitrale sévère. Depuis cette époque, elle est traitée par des anticoagulants oraux (acénocoumarol, 1 comprimé par jour) afin de prévenir la survenue d'une thrombose artérielle à point de départ valvulaire. Après avoir consommé des coquillages, cette patiente présente pendant 2 jours une diarrhée aiguë et fébrile. Elle adopte elle-même des mesures thérapeutiques simples: diète, aspirine, antiseptiques intestinaux. Effectivement, trois jours après le début de son automédication, les symptômes digestifs ont cédé. Le lendemain cependant elle consulte, affolée, car ses urines sont rouges.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée
+- risque grave de récidive du sang purulent dans l'urètre ou dans le rein
+- danger de septicémie avec mort possible si traitement non efficace
+- nécessite d'un examen direct de l'épithélium urothélial",False
+mediqal_oeq_4270,case_71dc0d5d8f,urgence_moderee,"Une patiente âgée de 82 ans est hospitalisée pour une fracture du col fémoral droit, survenue à l'occasion d'une chute de sa hauteur en se prenant les pieds dans son tapis. Elle a pu se relever et faire quelques pas. Elle a été ménopausée à 46 ans et n'a jamais eu de traitement hormonal substitutif. Elle a eu une fracture du poignet après une chute de sa hauteur en glissant sur son parquet ciré à l'âge de 65 ans. Elle a par ailleurs des antécédents d'hypercholestérolémie traitée par une statine et des antécédents de dépression ; elle prend un traitement par Temesta® 2,5 mg, lorazépam (1/2 cp matin et midi et 1 cp le soir), 1 gélule de Prozac® (fluoxétine) 20 mg par jour et 1/2 cp de Stilnox® (zolpidem) au coucher. Elle a également un traitement antihypertenseur, et un traitement par Modopar® 62.5 mg (1 cp matin midi et soir) pour une maladie de Parkinson diagnostiquée il y a deux ans. Elle a une cataracte non traitée. Son poids habituel est 44 kg et sa taille était récemment mesurée à 1,60m. A son arrivée aux urgences, il n'y a pas de déformation du membre inférieur. La mobilisation passive douce de la hanche est possible mais douloureuse.","['chute de sa hauteur', 'mobilisation passive de la hanche douloureuse']","### Cas clinique :
+Une patiente âgée de 82 ans est hospitalisée pour une fracture du col fémoral droit, survenue à l'occasion d'une chute de sa hauteur en se prenant les pieds dans son tapis. Elle a pu se relever et faire quelques pas. Elle a été ménopausée à 46 ans et n'a jamais eu de traitement hormonal substitutif. Elle a eu une fracture du poignet après une chute de sa hauteur en glissant sur son parquet ciré à l'âge de 65 ans. Elle a par ailleurs des antécédents d'hypercholestérolémie traitée par une statine et des antécédents de dépression ; elle prend un traitement par Temesta® 2,5 mg, lorazépam (1/2 cp matin et midi et 1 cp le soir), 1 gélule de Prozac® (fluoxétine) 20 mg par jour et 1/2 cp de Stilnox® (zolpidem) au coucher. Elle a également un traitement antihypertenseur, et un traitement par Modopar® 62.5 mg (1 cp matin midi et soir) pour une maladie de Parkinson diagnostiquée il y a deux ans. Elle a une cataracte non traitée. Son poids habituel est 44 kg et sa taille était récemment mesurée à 1,60m. A son arrivée aux urgences, il n'y a pas de déformation du membre inférieur. La mobilisation passive douce de la hanche est possible mais douloureuse.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée car :
+
+- risque de complications
+- risque de mortalité
+
+risque de complication lié à l'hospitalisation :
+- insuffisance respiratoire liée à l'incontinence urinaire ou déficit cognitif
+- insuffisance cardiaque
+- infection
+- hématome
+- hémorragie digestive
+- crise hypertensive
+- syndrome post op
+- carence nutritionnelle
+- troubles psychiatriques
+- épuisement
+- handicap permanent
+- décès
+- risque de mort soudain lié à l'insuffisance respiratoire",False
+mediqal_oeq_3252,case_216a877133,urgence_moderee,"Un homme de 55 ans est adressé aux Urgences par son médecin traitant pour des crachats hémoptoïques.Depuis son retour de congés en Guadeloupe il y a deux jours, le patient souffre d'une douleur localisée de la base droite et d'une dyspnée d'effort de stade III. La douleur est majorée par l'inspiration profonde. Le patient fume un paquet de cigarettes par jour depuis vingt ans et a une bronchite chronique. Ses expectorations sont blanchâtres. Il a par ailleurs une hypercholestérolémie non traitée et un diabète de type II.L'examen clinique retrouve une TA à 120/80, un pouls à 118/mn, une température à 38,2°C. Le poids est de 105 kg pour une taille de 1,62 m. L'état général est conservé. On ne retrouve pas de cyanose mais une fréquence respiratoire à 24/mn. On note une diminution globale de l'ampliation thoracique et une diminution du murmure vésiculaire à l'auscultation de la base droite. Il n'existe pas de râles crépitants ou sibilants. L'auscultation cardiaque ne retrouve pas de bruit anormal. Le reste de l'examen est sans particularité et on ne retrouve pas de signe de Homans.L'électrocardiogramme retrouve une déviation droite du QRS avec une onde p pulmonaire. Les gaz du sang en air ambiant retrouvent une PaO2 à 8,5 kPa, une PaCO2 à 4,3 kPa, une réserve alcaline à 19 mMol/L et un pH à 7,45.","['crachats hémoptoïques', 'douleur localisée de la base droite', ""dyspnée d'effort de stade III"", ""douleur majorée par l'inspiration profonde"", 'expectorations blanchâtres', ""diminution de l'ampliation thoracique"", 'diminution du murmure vésiculaire à la base droite']","### Cas clinique :
+Un homme de 55 ans est adressé aux Urgences par son médecin traitant pour des crachats hémoptoïques.Depuis son retour de congés en Guadeloupe il y a deux jours, le patient souffre d'une douleur localisée de la base droite et d'une dyspnée d'effort de stade III. La douleur est majorée par l'inspiration profonde. Le patient fume un paquet de cigarettes par jour depuis vingt ans et a une bronchite chronique. Ses expectorations sont blanchâtres. Il a par ailleurs une hypercholestérolémie non traitée et un diabète de type II.L'examen clinique retrouve une TA à 120/80, un pouls à 118/mn, une température à 38,2°C. Le poids est de 105 kg pour une taille de 1,62 m. L'état général est conservé. On ne retrouve pas de cyanose mais une fréquence respiratoire à 24/mn. On note une diminution globale de l'ampliation thoracique et une diminution du murmure vésiculaire à l'auscultation de la base droite. Il n'existe pas de râles crépitants ou sibilants. L'auscultation cardiaque ne retrouve pas de bruit anormal. Le reste de l'examen est sans particularité et on ne retrouve pas de signe de Homans.L'électrocardiogramme retrouve une déviation droite du QRS avec une onde p pulmonaire. Les gaz du sang en air ambiant retrouvent une PaO2 à 8,5 kPa, une PaCO2 à 4,3 kPa, une réserve alcaline à 19 mMol/L et un pH à 7,45.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée car
+- présence d'un syndrome pneumopathique (douleur + crachat) dans un contexte de fièvre , d'hypercholestérolémie , d'hypertension artérielle , d'obésité , d'asthénie , d'insuffisance ventilatoire .",False
+mediqal_oeq_3585,case_40e1171709,urgence_moderee,"Mme X., 68 ans, consulte son médecin pour asthénie et dyspnée survenue progressivement depuis 3 semaines. Son poids est stable et elle garde un bon appétit. Ses antécédents se résument à une HTA traitée par un IEC et une cholécystectomie en 1995. L'examen clinique objective un ictère conjonctival et une splénomégalie à l'inspiration profonde. L'hémogramme s'inscrit comme suit : Globules blancs à 8920/mm3 avec 7590 polynucléaires neutrophiles/mm3, 840 lymphocytes/mm3, hémoglobine à 6,5 g/dl, VGM à 100 fl, réticulocytes à 318000/mm3, et plaquettes à 359000/mm3La VS est à 120 mm à la première heure et la CRP à 21 mg/l.Le bilan hépatique montre des SGOT à 21 U/L (N = 10-35), des SGPT à 9 U/L (N = 5-40), des phosphatases alcalines à 79 U/L (N = 30-120), des ?GT à 55 U/L (N = 5-60), une bilirubine totale à 52 ?mol/l (N = 2-17) avec une bilirubine directe à 10 ?mol/l (N = 0-5) et des LDH à 753 U/L (N = 200-480).La ferritine est à 1200 ?g/l (N = 30-400 ?g/l). Le complément montre un C3 à 0,87 g/l (N = 0,80-1,60) et un C4 à 0,07 (N = 0,2-0,4)","['asthénie', 'dyspnée progressive depuis 3 semaines', 'poids stable', 'bon appétit', 'ictère conjonctival', ""splénomégalie à l'inspiration profonde""]","### Cas clinique :
+Mme X., 68 ans, consulte son médecin pour asthénie et dyspnée survenue progressivement depuis 3 semaines. Son poids est stable et elle garde un bon appétit. Ses antécédents se résument à une HTA traitée par un IEC et une cholécystectomie en 1995. L'examen clinique objective un ictère conjonctival et une splénomégalie à l'inspiration profonde. L'hémogramme s'inscrit comme suit : Globules blancs à 8920/mm3 avec 7590 polynucléaires neutrophiles/mm3, 840 lymphocytes/mm3, hémoglobine à 6,5 g/dl, VGM à 100 fl, réticulocytes à 318000/mm3, et plaquettes à 359000/mm3La VS est à 120 mm à la première heure et la CRP à 21 mg/l.Le bilan hépatique montre des SGOT à 21 U/L (N = 10-35), des SGPT à 9 U/L (N = 5-40), des phosphatases alcalines à 79 U/L (N = 30-120), des ?GT à 55 U/L (N = 5-60), une bilirubine totale à 52 ?mol/l (N = 2-17) avec une bilirubine directe à 10 ?mol/l (N = 0-5) et des LDH à 753 U/L (N = 200-480).La ferritine est à 1200 ?g/l (N = 30-400 ?g/l). Le complément montre un C3 à 0,87 g/l (N = 0,80-1,60) et un C4 à 0,07 (N = 0,2-0,4)
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Urgence modérée car il y a insuffisance hépatocellulaire sévère,False
+mediqal_oeq_1233,case_36716c7b84,urgence_moderee,"Un nouveau-né de 3 jours est hospitalisé pour une cyanose réfractaire modérée associée à un souffle systolique. La radiographie de thorax montre une aorte à droite, un cœur de volume normal et des poumons perfusés de façon symétrique. En échographie, vous faites le diagnostic de tronc artériel commun avec une valve troncale non sténosante, non fuyante, une seule CIV et des artères pulmonaires de taille normale. Vous parlez d'une opération et les parents vous assaillent de questions.","['cyanose réfractaire modérée', 'souffle systolique']","### Cas clinique :
+Un nouveau-né de 3 jours est hospitalisé pour une cyanose réfractaire modérée associée à un souffle systolique. La radiographie de thorax montre une aorte à droite, un cœur de volume normal et des poumons perfusés de façon symétrique. En échographie, vous faites le diagnostic de tronc artériel commun avec une valve troncale non sténosante, non fuyante, une seule CIV et des artères pulmonaires de taille normale. Vous parlez d'une opération et les parents vous assaillent de questions.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Urgence car il y a insuffisance du canal artériel (ou sous-pression) qui peut entraîner la mort cardiaque en cas de rupture ou de compression sur l'AP,False
+mediqal_oeq_1788,case_9f22584523,urgence_moderee,"Monsieur X., 24 ans, 80 kg, polytraumatisé est hospitalisé en urgence dans un service de réanimation. Dix jours après le début de son hospitalisation, il présente les signes d'une infection urinaire avec une fièvre à 39°C accompagnée de frissons. Un examen cytobactériologique des urines et une hémoculture sont immédiatement réalisés. Une antibiothérapie de première intention à base de tobramycine à raison de 400 mg/j par voie intra- veineuse est instaurée avant l'obtention des résultats du laboratoire.
+24 heures après, les résultats des examens biologiques sont les suivants:
+Examen cytobactériologique des urines:
+- > 105 polynucléaires neutrophiles/mL
+- 105 bactéries/mL (Bacilles Gram négatif)
+Hémoculture: présence de bacilles Gram négatif
+Après identification, il s'agit dans les deux prélèvements d'une souche pure de Pseudomonas aeruginosa. On pose le diagnostic d'infection urinaire nosocomiale à laquelle est associée une bactériémie. Après deux jours de traitement antibiotique, le patient reste fébrile et l'ECBU de contrôle continue de révéler la présence de plus de 105 Pseudomonas aeruginosa/mL.
+L'antibiothérapie initiale est alors substituée par l'association ceftazidime-amikacine. Trois semaines après l'admission de M. X. la survenue de diarrhées incite à effectuer une coproculture. Celle-ci met en évidence de très nombreuses colonies de Candida albicans.
+Un antifongique de contact est administré per os et une surveillance biologique adaptée est instaurée.","['fièvre', 'frissons', 'diarrhées']","### Cas clinique :
+Monsieur X., 24 ans, 80 kg, polytraumatisé est hospitalisé en urgence dans un service de réanimation. Dix jours après le début de son hospitalisation, il présente les signes d'une infection urinaire avec une fièvre à 39°C accompagnée de frissons. Un examen cytobactériologique des urines et une hémoculture sont immédiatement réalisés. Une antibiothérapie de première intention à base de tobramycine à raison de 400 mg/j par voie intra- veineuse est instaurée avant l'obtention des résultats du laboratoire.
+24 heures après, les résultats des examens biologiques sont les suivants:
+Examen cytobactériologique des urines:
+- > 105 polynucléaires neutrophiles/mL
+- 105 bactéries/mL (Bacilles Gram négatif)
+Hémoculture: présence de bacilles Gram négatif
+Après identification, il s'agit dans les deux prélèvements d'une souche pure de Pseudomonas aeruginosa. On pose le diagnostic d'infection urinaire nosocomiale à laquelle est associée une bactériémie. Après deux jours de traitement antibiotique, le patient reste fébrile et l'ECBU de contrôle continue de révéler la présence de plus de 105 Pseudomonas aeruginosa/mL.
+L'antibiothérapie initiale est alors substituée par l'association ceftazidime-amikacine. Trois semaines après l'admission de M. X. la survenue de diarrhées incite à effectuer une coproculture. Celle-ci met en évidence de très nombreuses colonies de Candida albicans.
+Un antifongique de contact est administré per os et une surveillance biologique adaptée est instaurée.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Le patient a été traité pour une infection urinaire nosocomiale qui se traduit par une bactériémie. Il y a donc une contamination extracellulaire importante au cours de cette infection. Le risque de complications graves est important car on ne peut pas exclure que le patient soit infecté par un germe résistant aux antimicrobiens habituels. L'existence d'un candidialement chez cet homme jeune et athlétique justifie également une attitude préventive contre les infections fongiques.,False
+mediqal_oeq_539,case_06f6d8f711,urgence_moderee,Un nouveau-né de 3 jours de vie est examiné à la sortie de maternité. Le pédiatre vous demande conseil car il ne sent pas les pouls fémoraux. Il n'entend pas de souffle à l'auscultation du précordium. La pression artérielle au membre supérieur droit est à 98/50 mm Hg pour 63/45 mm Hg au membre inférieur droit. Il n'y a pas d'hépatomégalie ni de détresse respiratoire.,"['pouls fémoraux non perçus', 'pas de souffle', ""pas d'hépatomégalie"", 'pas de détresse respiratoire']","### Cas clinique :
+Un nouveau-né de 3 jours de vie est examiné à la sortie de maternité. Le pédiatre vous demande conseil car il ne sent pas les pouls fémoraux. Il n'entend pas de souffle à l'auscultation du précordium. La pression artérielle au membre supérieur droit est à 98/50 mm Hg pour 63/45 mm Hg au membre inférieur droit. Il n'y a pas d'hépatomégalie ni de détresse respiratoire.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+","Urgence modérée, en raison des signes de défaillance cardiaque (pouls femoral absent) qui peuvent être dus à une insuffisance cardiaque gauche ou à un syndrome de coarctation avec éventuellement une cause rénale.",False
+mediqal_oeq_920,case_091799e27e,urgence_moderee,"Un enfant de 3 ans ayant une trisomie 21 consulte pour une cyanose. En échographie, vous faites le diagnostic de CIV large.",['cyanose'],"### Cas clinique :
+Un enfant de 3 ans ayant une trisomie 21 consulte pour une cyanose. En échographie, vous faites le diagnostic de CIV large.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Urgence modérée car il y a un risque d'insuffisance cardiaque droite (CIV) qui peut être grave ou mortel en cas de défaillance du cœur gauche,False
+mediqal_oeq_1855,case_cdcb103797,urgence_moderee,"Un enfant de 6 mois est hospitalisé pour diarrhée profuse accompagnée de déshydratation. La fièvre est élevée : 39°C. Une coproculture et un examen parasitologique des selles sont demandés. Le traitement instauré consiste en une réhydratation avec antibiothérapie par ceftriaxone (ROCEPHINE). 72 heures plus tard, l'enfant va mieux et le résultat de la coproculture est le suivant :
+- Salmonella : positive
+- Identification : Salmonella enterica subspecies enterica sérotype Typhimurium L'examen parasitologique des selles est négatif.","['diarrhée profuse', 'déshydratation', 'fièvre élevée']","### Cas clinique :
+Un enfant de 6 mois est hospitalisé pour diarrhée profuse accompagnée de déshydratation. La fièvre est élevée : 39°C. Une coproculture et un examen parasitologique des selles sont demandés. Le traitement instauré consiste en une réhydratation avec antibiothérapie par ceftriaxone (ROCEPHINE). 72 heures plus tard, l'enfant va mieux et le résultat de la coproculture est le suivant :
+- Salmonella : positive
+- Identification : Salmonella enterica subspecies enterica sérotype Typhimurium L'examen parasitologique des selles est négatif.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Urgence modérée car il s'agit d'une infection à salmonelle qui peut être grave chez les enfants <1 an.,False
+mediqal_oeq_1692,case_13945e7bed,urgence_moderee,"Madame X. habite la région lyonnaise et vient en consultation à la suite d'un syndrome fébrile à 38°5C et de vomissements bilieux apparus 1 semaine avant. L'examen retrouve une asthénie avec un amigrissement de 4kg. L'auscultation montre une légère hépatomégalie et un foie douloureux à la palpation. L'interrogatoire de la patiente révèle que la veille, elle a présenté une poussée urticarienne. D'autre part, on apprend qu'elle consomme de manière assez fréquente des salades de pissenlits sauvages. L'échographie hépatique est normale. L'examen coprologique des selles est négatif. Par contre, les tests sérologiques sont positifs et permettent de poser le diagnostic d'une fasciolose.","['syndrome fébrile à 38,5°C', 'vomissements bilieux', 'asthénie', 'amaigrissement de 4 kg', 'légère hépatomégalie', 'foie douloureux à la palpation', 'poussée urticarienne']","### Cas clinique :
+Madame X. habite la région lyonnaise et vient en consultation à la suite d'un syndrome fébrile à 38°5C et de vomissements bilieux apparus 1 semaine avant. L'examen retrouve une asthénie avec un amigrissement de 4kg. L'auscultation montre une légère hépatomégalie et un foie douloureux à la palpation. L'interrogatoire de la patiente révèle que la veille, elle a présenté une poussée urticarienne. D'autre part, on apprend qu'elle consomme de manière assez fréquente des salades de pissenlits sauvages. L'échographie hépatique est normale. L'examen coprologique des selles est négatif. Par contre, les tests sérologiques sont positifs et permettent de poser le diagnostic d'une fasciolose.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : urgence_moderee]
+
+",Urgence modérée car il s'agit d'un cas de maladie infectieuse grave (syndrome fébrile) qui nécessite une prise en charge rapide pour éviter l'apparition de complications graves.,False
+mediqal_oeq_4439,case_5bc646ff1d,differee,"Monsieur X. est âgé de 71 ans, pèse 69 kg et mesure 1,70 m. Il est hospitalisé pour une pneumopathie infectieuse. Ses antécédents sont les suivants :
+- épilepsie de type grand mal traitée depuis 9 ans
+- insuffisance cardiaque
+- épisodes de fibrillation auriculaire - anxiété génératrice d'insomnie.
+
+Examens biologiques à l'entrée :
+- ionogramme et bilan hépatique normaux
+Se créatinine à 71 micromol/L, clairance de la créatinine calculée = 84 mL/min
+
+NFS :
+Sg Érythrocytes : 5,2T/L
+Sg Leucocytes : 12,4G/L
+polynucléaires neutrophiles : 0,85
+polynucléaires basophiles : 0,01
+polynucléaires éosinophiles : 0,04
+lymphocytes : 0,08
+monocytes : 0,02
+
+Traitement prescrit :
+AUGMENTIN®500 mg (amoxicilline + acide clavulanique) : 1cp matin, midi et soir
+DÉPAKINE CHRONO® LP 500 mg (acide valproïque) : 1cp matin
+DIGOXIN® 0,25 mg (digoxine) : 1cp matin
+GARDÉNAL® 100 mg (phénobarbital) : 1cp matin
+SINTROM® (acénocoumarol) : 1cp matin et soir
+PEFLACINE® 400 (péfloxacine) : 1 cp matin et soir
+TÉMESTA® 1 mg (lorazépam) : 1/2 cp soir
+TÉGRÉTOL® LP 500 mg (carbamazépine) : 1cp matin et soir",[],"### Cas clinique :
+Monsieur X. est âgé de 71 ans, pèse 69 kg et mesure 1,70 m. Il est hospitalisé pour une pneumopathie infectieuse. Ses antécédents sont les suivants :
+- épilepsie de type grand mal traitée depuis 9 ans
+- insuffisance cardiaque
+- épisodes de fibrillation auriculaire - anxiété génératrice d'insomnie.
+
+Examens biologiques à l'entrée :
+- ionogramme et bilan hépatique normaux
+Se créatinine à 71 micromol/L, clairance de la créatinine calculée = 84 mL/min
+
+NFS :
+Sg Érythrocytes : 5,2T/L
+Sg Leucocytes : 12,4G/L
+polynucléaires neutrophiles : 0,85
+polynucléaires basophiles : 0,01
+polynucléaires éosinophiles : 0,04
+lymphocytes : 0,08
+monocytes : 0,02
+
+Traitement prescrit :
+AUGMENTIN®500 mg (amoxicilline + acide clavulanique) : 1cp matin, midi et soir
+DÉPAKINE CHRONO® LP 500 mg (acide valproïque) : 1cp matin
+DIGOXIN® 0,25 mg (digoxine) : 1cp matin
+GARDÉNAL® 100 mg (phénobarbital) : 1cp matin
+SINTROM® (acénocoumarol) : 1cp matin et soir
+PEFLACINE® 400 (péfloxacine) : 1 cp matin et soir
+TÉMESTA® 1 mg (lorazépam) : 1/2 cp soir
+TÉGRÉTOL® LP 500 mg (carbamazépine) : 1cp matin et soir
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+","Differee car il y a un risque élevé d'épilepsie par augmentation du dosage de digoxine en raison des médicaments qui peuvent augmenter son absorption ou sa dégradation dans le sang: amoxicilline, phénylbarbiturique, péfloxacine, carbamazépine.",False
+mediqal_oeq_2658,case_bb499d7f2f,differee,"Marianne M., 33 ans, mariée et mère de deux enfants, consulte pour brûlures mictionnelles et pollakiurie depuis 48 h, sans fièvre. Un test de dépistage, au cabinet médical, révèle la présence d'une leucocyturie (++) et de nitrites dans ses urines. L'interrogatoire ne révèle aucun antécédent d'infection urinaire. Le médecin prescrit un examen cytobactériologique des urines (ECBU), avant l'instauration d'un traitement par AUGMENTIN® (amoxicilline associée à l'acide clavulanique) 3x500mg d'amoxicilline par 24 heures per os, pendant 7 jours.
+L'ECBU fournit les résultats suivants :
+Leucocytes : 220.106 /L (N : < 10. 106 /L)
+Hématies : 1. 106 /L (N : < 1. 106 /L)
+Cylindres : absents
+Cellules épithéliales : rares
+Coloration de gram : Nombreux bacilles à gram négatif.","['brûlures mictionnelles depuis 48 h', 'pollakiurie', 'absence de fièvre']","### Cas clinique :
+Marianne M., 33 ans, mariée et mère de deux enfants, consulte pour brûlures mictionnelles et pollakiurie depuis 48 h, sans fièvre. Un test de dépistage, au cabinet médical, révèle la présence d'une leucocyturie (++) et de nitrites dans ses urines. L'interrogatoire ne révèle aucun antécédent d'infection urinaire. Le médecin prescrit un examen cytobactériologique des urines (ECBU), avant l'instauration d'un traitement par AUGMENTIN® (amoxicilline associée à l'acide clavulanique) 3x500mg d'amoxicilline par 24 heures per os, pendant 7 jours.
+L'ECBU fournit les résultats suivants :
+Leucocytes : 220.106 /L (N : < 10. 106 /L)
+Hématies : 1. 106 /L (N : < 1. 106 /L)
+Cylindres : absents
+Cellules épithéliales : rares
+Coloration de gram : Nombreux bacilles à gram négatif.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",Différente car il s'agit d'une infection uro-génitale non compliquée en raison du contexte étiologique (bactérie).,False
+mediqal_oeq_3049,case_0159c85d42,differee,"Madame X et Monsieur X. ont un premier enfant W qui présente une mucoviscidose, dont le diagnostic a été porté à 6 mois de vie sur les données positives de deux tests de la sueur réalisés devant l'association de signes respiratoires (toux chronique) et digestifs (diarrhée avec selles grasses) entraînant un retard de croissance.
+La recherche directe des principales mutations connues du gène responsable de la mucoviscidose chez l'enfant et les parents montre : une mutation F508del à l'état hétérozygote chez l'enfant, une mutation F508del à l'état hétérozygote chez le père ; pas de mutation décelable chez la mère.
+Les données génétiques, cliniques et moléculaires, ne remettent pas en cause la paternité.","['toux chronique', 'diarrhée avec selles grasses', 'retard de croissance']","### Cas clinique :
+Madame X et Monsieur X. ont un premier enfant W qui présente une mucoviscidose, dont le diagnostic a été porté à 6 mois de vie sur les données positives de deux tests de la sueur réalisés devant l'association de signes respiratoires (toux chronique) et digestifs (diarrhée avec selles grasses) entraînant un retard de croissance.
+La recherche directe des principales mutations connues du gène responsable de la mucoviscidose chez l'enfant et les parents montre : une mutation F508del à l'état hétérozygote chez l'enfant, une mutation F508del à l'état hétérozygote chez le père ; pas de mutation décelable chez la mère.
+Les données génétiques, cliniques et moléculaires, ne remettent pas en cause la paternité.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",Différée car il s'agit d'un cas familial sans risque pour la transmission au second degré.,False
+mediqal_oeq_4901,case_fb84f9da9c,differee,"Mlle X., 22 ans, nulligeste vient vous consulter pour leucorrhées à 6 semaines d'aménorrhée. Dans ses antécédents vous notez des leucorrhées récidivantes sans que l'on ait pu identifier un germe responsable. Examen clinique : Spéculum : leucorrhées louches ; aspect d'ectropion infecté, saignant au contact ; TV : aucune anomalie particulière. Vous avez fait un prélèvement bactériologique qui révèle la présence de Chlamydiae trachomatis à l'examen direct et après isolement sur milieu de culture en 48 heures. Une sérologie Chlamydiae avait été réalisée une semaine auparavant par son médecin traitant et montre un taux à 1/512.","[""leucorrhées à 6 semaines d'aménorrhée"", 'leucorrhées louches', 'ectropion infecté saignant au contact']","### Cas clinique :
+Mlle X., 22 ans, nulligeste vient vous consulter pour leucorrhées à 6 semaines d'aménorrhée. Dans ses antécédents vous notez des leucorrhées récidivantes sans que l'on ait pu identifier un germe responsable. Examen clinique : Spéculum : leucorrhées louches ; aspect d'ectropion infecté, saignant au contact ; TV : aucune anomalie particulière. Vous avez fait un prélèvement bactériologique qui révèle la présence de Chlamydiae trachomatis à l'examen direct et après isolement sur milieu de culture en 48 heures. Une sérologie Chlamydiae avait été réalisée une semaine auparavant par son médecin traitant et montre un taux à 1/512.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",Différente car il s'agit d'une femme jeune (22ans) avec un trouble du cycle menstruel associé à des leucorrhées récurrentes. Il faut donc faire évoluer cette situation dans les meilleurs délais afin de prévenir toute complication possible.,False
+mediqal_oeq_2972,case_919696c67b,differee,"Un homme de 30 ans vient vous voir après avoir été victime d'un accident de la circulation (01 août 2004) : alors qu'il était conducteur de sa moto, il dit avoir été percuté par une auto et avoir été projeté au sol avec traumatisme crânien sans perte de connaissance. Selon les documents médicaux qu'il vous présente, il a été victime d'une fracture du tiers supérieur du tibia opérée en urgence le jour même, au cours d'une hospitalisation de 6 jours. Il déclare avoir fait usage de deux béquilles durant plusieurs semaines. L'état se serait ensuite progressivement amélioré, avec, vers la mi octobre 2004, reprise d'une déambulation, sortie du domicile avec usage intermittent d'une canne et reprise de la conduite automobile. Au jour de votre consultation (15 janvier 2005) il se plaint de douleurs résiduelles importantes de la jambe, d'une boiterie persistante à la marche sans nécessité d'appareillage (que vous constatez). Il présente une cicatrice de 12 cm sur la face antérieure du tibia. Il précise enfin ne pas avoir encore repris son travail (maçon).","['douleurs résiduelles importantes de la jambe', 'boiterie persistante à la marche', 'cicatrice de 12 cm sur la face antérieure du tibia']","### Cas clinique :
+Un homme de 30 ans vient vous voir après avoir été victime d'un accident de la circulation (01 août 2004) : alors qu'il était conducteur de sa moto, il dit avoir été percuté par une auto et avoir été projeté au sol avec traumatisme crânien sans perte de connaissance. Selon les documents médicaux qu'il vous présente, il a été victime d'une fracture du tiers supérieur du tibia opérée en urgence le jour même, au cours d'une hospitalisation de 6 jours. Il déclare avoir fait usage de deux béquilles durant plusieurs semaines. L'état se serait ensuite progressivement amélioré, avec, vers la mi octobre 2004, reprise d'une déambulation, sortie du domicile avec usage intermittent d'une canne et reprise de la conduite automobile. Au jour de votre consultation (15 janvier 2005) il se plaint de douleurs résiduelles importantes de la jambe, d'une boiterie persistante à la marche sans nécessité d'appareillage (que vous constatez). Il présente une cicatrice de 12 cm sur la face antérieure du tibia. Il précise enfin ne pas avoir encore repris son travail (maçon).
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+","Differee car l'atteinte n'est pas grave , ni fonctionnelle ni handicapante .",False
+mediqal_oeq_2468,case_85b084e49a,differee,"Mr X, agé de 86 ans , est suivi pour une bronchite chronique depuis 10 ans. Il a arrêté de fumer depuis de nombreuses années et consomme un verre de vin rouge par jour. Dans les antécédents, on note il y a 22 ans un grave accident de la route ayant nécessité une transfusion sanguine. Une cirrhose avec ictère et ascite modérée a été récemment découverte associée à une hépatomégalie.
+Les résultats du bilan biologique sont les suivants :
+Sg Erythrocytes : 3,8 T/L
+Sg Hématocrite : 0,35
+Sg Hémoglobine : 7,1 mmol/L soit 115g/L
+Sg Leucocytes : 6 G/L formule leucocytaire normale
+Sg thrombocytes 80 G/L
+PlTP : 70%
+Pl Sodium : 139 mmol/L
+Pl Potassium : 4,1 mmol/L
+Pl Chlorures : 100mmol/L
+Pl CO2 total : 26 mmol/L
+Se protéines : 60g/L
+Pl urée : 4,5 mmol/L
+Pl créatinine 95 μMol/L
+Pl glucose : 4,7 mmol/L
+Se Bilirubine totale 42 μmol/L
+Se Bilirubine conjuguée 20 μmol/L
+Se ASAT 30°C SFBC 48 UI/L
+Se ALAT 30°C SFBC 59 UI/L
+Se PAL 30°C SFBC 120 UI/L
+Se GGT 30°C SFBC 40 UI/L
+Sérologie virale :
+Ag HBs : négatif
+Anticorps anti-HBs : négatif
+Anticorps anti-HBc : négatif
+Antigène HBe : négatif
+Anticorps anti-VHC positif
+Alpha-Foeto-protéine : 5ng/mL (valeur usuelle <10ng/mL)","['ictère', 'ascite modérée', 'hépatomégalie']","### Cas clinique :
+Mr X, agé de 86 ans , est suivi pour une bronchite chronique depuis 10 ans. Il a arrêté de fumer depuis de nombreuses années et consomme un verre de vin rouge par jour. Dans les antécédents, on note il y a 22 ans un grave accident de la route ayant nécessité une transfusion sanguine. Une cirrhose avec ictère et ascite modérée a été récemment découverte associée à une hépatomégalie.
+Les résultats du bilan biologique sont les suivants :
+Sg Erythrocytes : 3,8 T/L
+Sg Hématocrite : 0,35
+Sg Hémoglobine : 7,1 mmol/L soit 115g/L
+Sg Leucocytes : 6 G/L formule leucocytaire normale
+Sg thrombocytes 80 G/L
+PlTP : 70%
+Pl Sodium : 139 mmol/L
+Pl Potassium : 4,1 mmol/L
+Pl Chlorures : 100mmol/L
+Pl CO2 total : 26 mmol/L
+Se protéines : 60g/L
+Pl urée : 4,5 mmol/L
+Pl créatinine 95 μMol/L
+Pl glucose : 4,7 mmol/L
+Se Bilirubine totale 42 μmol/L
+Se Bilirubine conjuguée 20 μmol/L
+Se ASAT 30°C SFBC 48 UI/L
+Se ALAT 30°C SFBC 59 UI/L
+Se PAL 30°C SFBC 120 UI/L
+Se GGT 30°C SFBC 40 UI/L
+Sérologie virale :
+Ag HBs : négatif
+Anticorps anti-HBs : négatif
+Anticorps anti-HBc : négatif
+Antigène HBe : négatif
+Anticorps anti-VHC positif
+Alpha-Foeto-protéine : 5ng/mL (valeur usuelle <10ng/mL)
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+","Ce patient présente des signes d'insuffisance hépatocellulaire sévéreuse en raison de l'hépatomégalie, de l'ascite, de l'œdème pulmonaire, de l'hyperbilirubinémie, de l'augmentation de la protéine plasmatique, de l'urée et de la créatinine.",False
+mediqal_oeq_3991,case_9cee0b48c0,differee,"Monsieur X. 45 ans consulte pour une obstruction nasale gauche avec une rhinorrhée purulente homolatérale et des céphalées.ATCD : appendicectomie, fracture de jambe.Cette obstruction nasale existe depuis plusieurs mois, avec des épisodes de céphalées identiques.","['obstruction nasale gauche depuis plusieurs mois', 'rhinorrhée purulente homolatérale', 'céphalées']","### Cas clinique :
+Monsieur X. 45 ans consulte pour une obstruction nasale gauche avec une rhinorrhée purulente homolatérale et des céphalées.ATCD : appendicectomie, fracture de jambe.Cette obstruction nasale existe depuis plusieurs mois, avec des épisodes de céphalées identiques.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+","differee car il s'agit d'une complication post opératoire (obstruction) , mais pas grave .",False
+mediqal_oeq_1366,case_11717d29d0,differee,Un jeune homme de 18 ans a un tube valvulé de 18 mm de diamètre sténosant et fuyant après une correction d'atrésie pulmonaire avec communication interventriculaire. Les branches pulmonaires sont modérément hypoplasiques et la pression artérielle pulmonaire à 45/25 moyenne 30 mm Hg.,[],"### Cas clinique :
+Un jeune homme de 18 ans a un tube valvulé de 18 mm de diamètre sténosant et fuyant après une correction d'atrésie pulmonaire avec communication interventriculaire. Les branches pulmonaires sont modérément hypoplasiques et la pression artérielle pulmonaire à 45/25 moyenne 30 mm Hg.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",differee car il n'y a pas de défauts cardiaques compliquants,False
+mediqal_oeq_1090,case_fad028d0f3,differee,"Une petite fille de 5 ans a une CIA ostium secundum de 18 mm avec une surcharge diastolique des cavités droites sans HTAP. La maman, informée de l'indication de fermeture de cette CIA, souhaite qu'il n'y ait pas de sternotomie.",[],"### Cas clinique :
+Une petite fille de 5 ans a une CIA ostium secundum de 18 mm avec une surcharge diastolique des cavités droites sans HTAP. La maman, informée de l'indication de fermeture de cette CIA, souhaite qu'il n'y ait pas de sternotomie.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",differee car il y a un risque d'échec du traitement par stent (surcharge diastolique),False
+mediqal_oeq_2604,case_23cdf0132a,differee,"Une jeune femme de 22 ans, d'origine italienne, se présente au cabinet du médecin pour subir un bilan de santé. L ‘examen clinique ne présente qu'une légère splénomégalie. L'hémogramme donne les résultats suivants.
+Sg hémoglobine : 115g/L
+Sg hématocrite : 0.41
+Sg érythrocytes : 6.3T/L
+Sg plaquettes : 250 G/L
+Sg leucocytes : 7G/L
+Formule leucocytaire :
+PN : 65%
+PE : 1%
+Lymphocytes : 30%
+Monocytes : 4%
+Numération des réticulocytes sur lame : 3%",['légère splénomégalie'],"### Cas clinique :
+Une jeune femme de 22 ans, d'origine italienne, se présente au cabinet du médecin pour subir un bilan de santé. L ‘examen clinique ne présente qu'une légère splénomégalie. L'hémogramme donne les résultats suivants.
+Sg hémoglobine : 115g/L
+Sg hématocrite : 0.41
+Sg érythrocytes : 6.3T/L
+Sg plaquettes : 250 G/L
+Sg leucocytes : 7G/L
+Formule leucocytaire :
+PN : 65%
+PE : 1%
+Lymphocytes : 30%
+Monocytes : 4%
+Numération des réticulocytes sur lame : 3%
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+","Leur nombre de réticulocytes (et donc leur taux de production) étant très faible (< 1%), il s’agit d’un cas à traitement urgent car la maladie n’est pas encore bien avancée mais peut rapidement dégrader l’hématopoiese.",False
+mediqal_oeq_389,case_146b6a6a0c,differee,"On vous adresse un nourrisson de 8 mois pour un souffle continu précordial. En échographie, vous ne trouvez pas de canal artériel persistant.",['souffle continu précordial'],"### Cas clinique :
+On vous adresse un nourrisson de 8 mois pour un souffle continu précordial. En échographie, vous ne trouvez pas de canal artériel persistant.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",differee car il n'y a pas d'obstacle à la circulation pulmonaire (pas de CAP),False
+mediqal_oeq_4978,case_9897586b41,differee,"Mme X., 35 ans, vient vous consulter pour des douleurs pelviennes latéralisées à droite, permanentes depuis trois mois. Elle n'a aucun antécédent gynécologique, médical ou chirurgical. Ses cycles sont réguliers de 28 jours, ses règles sont d'abondance normale, durent 5 jours et sont douloureuses au 3e jour surtout. À l'examen clinique : au TV : utérus rétroversé sensible, cul-de-sac vaginal gauche : RAS, cul-de-sac vaginal droit comblé par une masse de la taille d'une orange séparée de l'utérus par un sillon. Cette masse est de consistance pâteuse avec une zone plus dense. Les mouvements imprimés au col ne sont pas transmis à la masse et inversement. Après les résultats des examens paracliniques, la patiente est opérée d'emblée : une kystectomie est pratiquée. L'anatomopathologiste vous répond : tératome pluritissulaire mature.","['douleurs pelviennes latéralisées à droite permanentes depuis 3 mois', 'règles douloureuses surtout au 3e jour', 'utérus rétroversé sensible', ""masse du cul-de-sac vaginal droit de la taille d'une orange""]","### Cas clinique :
+Mme X., 35 ans, vient vous consulter pour des douleurs pelviennes latéralisées à droite, permanentes depuis trois mois. Elle n'a aucun antécédent gynécologique, médical ou chirurgical. Ses cycles sont réguliers de 28 jours, ses règles sont d'abondance normale, durent 5 jours et sont douloureuses au 3e jour surtout. À l'examen clinique : au TV : utérus rétroversé sensible, cul-de-sac vaginal gauche : RAS, cul-de-sac vaginal droit comblé par une masse de la taille d'une orange séparée de l'utérus par un sillon. Cette masse est de consistance pâteuse avec une zone plus dense. Les mouvements imprimés au col ne sont pas transmis à la masse et inversement. Après les résultats des examens paracliniques, la patiente est opérée d'emblée : une kystectomie est pratiquée. L'anatomopathologiste vous répond : tératome pluritissulaire mature.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",Différente car il y a risque de métastases (c'est un tétra-ovaire),False
+mediqal_oeq_3433,case_ac4197df28,differee,"Monsieur X., âgé de 32 ans, marié, sans enfant, vous consulte devant la découverte lors de la toilette d'une discrète tuméfaction du testicule gauche, sensible depuis quelques jours. Son médecin traitant vous l'adresse dans l'hypothèse d'une orchite infectieuse.Ses antécédents sont marqués par la cure chirurgicale d'une cryptorchidie gauche à l'âge de 7 ans ainsi qu'une orchi-épididymite droite survenue à l'âge de 25 ans.L'examen clinique retrouve un testicule gauche tuméfié, sensible, non inflammatoire. Le testicule controlatéral est normal. Le patient est apyrétique. Les aires ganglionnaires ne sont le siège d'aucune adénopathie, la palpation abdominale est sans particularité.Il vous montre les résultats de divers prélèvements bactériologiques réalisés en ville qui sont stériles, ainsi qu'une échographie scrotale qui retrouve une masse solide, hétérogène, du testicule gauche.","['tuméfaction discrète du testicule gauche sensible depuis quelques jours', 'testicule gauche tuméfié, sensible, non inflammatoire', 'apyrétique', ""pas d'adénopathie""]","### Cas clinique :
+Monsieur X., âgé de 32 ans, marié, sans enfant, vous consulte devant la découverte lors de la toilette d'une discrète tuméfaction du testicule gauche, sensible depuis quelques jours. Son médecin traitant vous l'adresse dans l'hypothèse d'une orchite infectieuse.Ses antécédents sont marqués par la cure chirurgicale d'une cryptorchidie gauche à l'âge de 7 ans ainsi qu'une orchi-épididymite droite survenue à l'âge de 25 ans.L'examen clinique retrouve un testicule gauche tuméfié, sensible, non inflammatoire. Le testicule controlatéral est normal. Le patient est apyrétique. Les aires ganglionnaires ne sont le siège d'aucune adénopathie, la palpation abdominale est sans particularité.Il vous montre les résultats de divers prélèvements bactériologiques réalisés en ville qui sont stériles, ainsi qu'une échographie scrotale qui retrouve une masse solide, hétérogène, du testicule gauche.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",Différente car il s'agit d'un homme jeune (1),False
+mediqal_oeq_4905,case_1683f6dda9,differee,"Mlle X., 22 ans, nulligeste vient vous consulter pour leucorrhées à 6 semaines d'aménorrhée. Dans ses antécédents vous notez des leucorrhées récidivantes sans que l'on ait pu identifier un germe responsable. Examen clinique : Spéculum : leucorrhées louches ; aspect d'ectropion infecté, saignant au contact ; TV : aucune anomalie particulière. Vous avez fait un prélèvement bactériologique qui révèle la présence de Chlamydiae trachomatis à l'examen direct et après isolement sur milieu de culture en 48 heures. Une sérologie Chlamydiae avait été réalisée une semaine auparavant par son médecin traitant et montre un taux à 1/512. Vous confirmez que l'aménorrhée est en rapport avec la grossesse. La patiente est inquiète de cette infection et de son traitement pendant la grossesse et vous demande si il ne faut pas l'interrompre.","['leucorrhées', 'aménorrhée à 6 semaines', 'leucorrhées louches', 'ectropion infecté, saignant au contact']","### Cas clinique :
+Mlle X., 22 ans, nulligeste vient vous consulter pour leucorrhées à 6 semaines d'aménorrhée. Dans ses antécédents vous notez des leucorrhées récidivantes sans que l'on ait pu identifier un germe responsable. Examen clinique : Spéculum : leucorrhées louches ; aspect d'ectropion infecté, saignant au contact ; TV : aucune anomalie particulière. Vous avez fait un prélèvement bactériologique qui révèle la présence de Chlamydiae trachomatis à l'examen direct et après isolement sur milieu de culture en 48 heures. Une sérologie Chlamydiae avait été réalisée une semaine auparavant par son médecin traitant et montre un taux à 1/512. Vous confirmez que l'aménorrhée est en rapport avec la grossesse. La patiente est inquiète de cette infection et de son traitement pendant la grossesse et vous demande si il ne faut pas l'interrompre.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+","Differee car non gravement malade , mais risque élevé (infection du canal urinaire) .",False
+mediqal_oeq_559,case_20a2816769,differee,Un jeune homme de 24 ans a eu une plastie aortique pour une coarctation isthmique à l'âge de 3 ans. Il n'a aucun symptôme. Ses pouls fémoraux sont bien perçus. La pression artérielle au membre supérieur droit est à 140/75 mm Hg. Il a fait une épreuve d'effort quasi maximale au cours de laquelle la pression artérielle est montée à 290/110 mm Hg.,"['aucun symptôme', 'pouls fémoraux bien perçus']","### Cas clinique :
+Un jeune homme de 24 ans a eu une plastie aortique pour une coarctation isthmique à l'âge de 3 ans. Il n'a aucun symptôme. Ses pouls fémoraux sont bien perçus. La pression artérielle au membre supérieur droit est à 140/75 mm Hg. Il a fait une épreuve d'effort quasi maximale au cours de laquelle la pression artérielle est montée à 290/110 mm Hg.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+","differee car il ne présente pas de signes de rétrécissement du canal artériel (pas de troubles cardiaques, pas de défaillance fonctionnelle)",False
+mediqal_oeq_905,case_ec567a5766,differee,Vous faites le diagnostic d'une CIA ostium secundum chez un enfant de 4 ans.,[],"### Cas clinique :
+Vous faites le diagnostic d'une CIA ostium secundum chez un enfant de 4 ans.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",differee car il n'y a pas de signe de sténose pulmonaire ou de coarctation du cœur.,False
+mediqal_oeq_4565,case_be3099e3d4,differee,"Monsieur X. est admis aux urgences pour douleurs abdominales sévères avec rectorragies. La coloscopie permet de découvrir une tumeur rectale avec sténose colique à 50 cm. Le bilan d'extension montre une volumineuse lésion siégeant sur le sigmoïde, sans métastases hépatiques. Le patient subit une colostomie, puis une résection de la tumeur colique. Le traitement post-opératoire de la douleur a été réalisé par l'installation pour 24 heures d'une perfusion IV continue sous la forme d'une analgésie contrôlée par le patient (PCA). Parallèlement, PERFALGAN a été administré à la dose de 4g/j.","['douleurs abdominales sévères', 'rectorragies']","### Cas clinique :
+Monsieur X. est admis aux urgences pour douleurs abdominales sévères avec rectorragies. La coloscopie permet de découvrir une tumeur rectale avec sténose colique à 50 cm. Le bilan d'extension montre une volumineuse lésion siégeant sur le sigmoïde, sans métastases hépatiques. Le patient subit une colostomie, puis une résection de la tumeur colique. Le traitement post-opératoire de la douleur a été réalisé par l'installation pour 24 heures d'une perfusion IV continue sous la forme d'une analgésie contrôlée par le patient (PCA). Parallèlement, PERFALGAN a été administré à la dose de 4g/j.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",Differee car il n'y a pas de signes vitaux ou de complications graves. Il y a un risque important de complication digestive mais aussi de complication urinaire en raison du drainage percutané.,False
+mediqal_oeq_3390,case_f98e34d527,differee,"Responsable d'un service de moyen séjour vous êtes particulièrement impliqué dans la démarche d'assurance qualité de votre établissement.Vous venez de recevoir le rapport du service d'hygiène sur les infections nosocomiales recensées dans l'établissement, et vous vous apercevez que le taux d'infections urinaires nosocomiales dans votre service est particulièrement élevé par rapport aux autres services de l'hôpital. Vous décidez de réaliser un audit clinique sur la qualité de la pose des sondes urinaires.",[],"### Cas clinique :
+Responsable d'un service de moyen séjour vous êtes particulièrement impliqué dans la démarche d'assurance qualité de votre établissement.Vous venez de recevoir le rapport du service d'hygiène sur les infections nosocomiales recensées dans l'établissement, et vous vous apercevez que le taux d'infections urinaires nosocomiales dans votre service est particulièrement élevé par rapport aux autres services de l'hôpital. Vous décidez de réaliser un audit clinique sur la qualité de la pose des sondes urinaires.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+","differee car il n'y a pas de signe ou symptôme cliniques
+et qu'il s'agit d'une infection urinaire non compliquée (pas de pyélonéphrite)",False
+mediqal_oeq_2265,case_cd4b68d789,differee,"Dans une crèche, une puéricultrice remarque que plusieurs enfants dorment mal pendant la sieste et présentent des épisodes diarrhéiques. Le médecin prescrit des examens de selles. Seuls, les examens parasitologiques s'avèrent positifs et révèlent une épidémie de giardiase.","['mauvais sommeil pendant la sieste', 'épisodes diarrhéiques']","### Cas clinique :
+Dans une crèche, une puéricultrice remarque que plusieurs enfants dorment mal pendant la sieste et présentent des épisodes diarrhéiques. Le médecin prescrit des examens de selles. Seuls, les examens parasitologiques s'avèrent positifs et révèlent une épidémie de giardiase.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",differee car il n'y a pas d'atteinte grave (pas de troubles digestifs) ni de complications à prévoir,False
+mediqal_oeq_4975,case_fdc37e9809,differee,"Mme X., 35 ans, vient vous consulter pour des douleurs pelviennes latéralisées à droite, permanentes depuis trois mois. Elle n'a aucun antécédent gynécologique, médical ou chirurgical. Ses cycles sont réguliers de 28 jours, ses règles sont d'abondance normale, durent 5 jours et sont douloureuses au 3e jour surtout. À l'examen clinique : au TV : utérus rétroversé sensible, cul-de-sac vaginal gauche : RAS, cul-de-sac vaginal droit comblé par une masse de la taille d'une orange séparée de l'utérus par un sillon. Cette masse est de consistance pâteuse avec une zone plus dense. Les mouvements imprimés au col ne sont pas transmis à la masse et inversement.","['douleurs pelviennes latéralisées à droite, permanentes depuis 3 mois', 'règles douloureuses au 3e jour', 'utérus rétroversé sensible', ""cul-de-sac vaginal droit comblé par une masse de la taille d'une orange""]","### Cas clinique :
+Mme X., 35 ans, vient vous consulter pour des douleurs pelviennes latéralisées à droite, permanentes depuis trois mois. Elle n'a aucun antécédent gynécologique, médical ou chirurgical. Ses cycles sont réguliers de 28 jours, ses règles sont d'abondance normale, durent 5 jours et sont douloureuses au 3e jour surtout. À l'examen clinique : au TV : utérus rétroversé sensible, cul-de-sac vaginal gauche : RAS, cul-de-sac vaginal droit comblé par une masse de la taille d'une orange séparée de l'utérus par un sillon. Cette masse est de consistance pâteuse avec une zone plus dense. Les mouvements imprimés au col ne sont pas transmis à la masse et inversement.
+
+### Question :
+Quel est le niveau de priorité de ce patient et pourquoi ?
+
+### Réponse :
+[Niveau de priorité estimé : differee]
+
+",Différente car il y a risque de rupture du sac ovarien,False

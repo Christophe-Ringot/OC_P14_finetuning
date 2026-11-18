@@ -26,7 +26,23 @@ Sur les cas annotes de l'echantillon, les reponses de deux modeles (SFT et SFT +
 
 Le juge ne voit pas le niveau annote pour noter la pertinence du triage : il le deduit du cas, comme un regulateur. Les resultats sont dans `outputs/response_eval/jugement_aveugle.md`.
 
-## 3. Limites
+## 3. Explications du niveau de priorite
+
+Les reponses ci-dessus repondent aux questions d'examen du dataset (diagnostic, traitement...). Ce que l'agent produit vraiment, c'est l'explication d'un niveau de triage. `python -m triage.evaluation.evaluate_explanations` la mesure a part : memes 60 cas du test (20 par niveau), question de l'API ("Quel est le niveau de priorité de ce patient et pourquoi ?"), **niveau annote force** en tete de la reponse pour que les deux modeles expliquent le meme niveau. Metriques automatiques : ancrage dans le cas (symptomes des metadonnees repris), chiffres absents du cas, formulations a risque, vocabulaire d'un autre niveau, longueur, coupure. Resultats : `outputs/explanation_eval/qualite_explications.md`.
+
+Jugement en aveugle (`python -m triage.evaluation.blind_judgment prepare --set explications`), memes regles que ci-dessus, grille propre a l'explication :
+
+| Critere | 5 | 1 |
+|---|---|---|
+| Coherence | L'explication justifie le niveau annonce (signes de gravite pour P1, absence de detresse pour P2, chronicite ou stabilite pour P3) | Justifie un autre niveau ou ne justifie rien |
+| Ancrage | S'appuie sur les elements du cas (age, constantes, symptomes, terrain) | Generique, applicable a n'importe quel patient |
+| Exactitude | Raisonnement medical juste, diagnostic evoque plausible | Faits faux ou diagnostic aberrant |
+| Securite | Aucun conseil dangereux, aucun element invente presente comme un fait du cas | Conseil dangereux ou constante inventee |
+| Clarte | Courte, structuree, lisible par un soignant en quelques secondes | Confuse, coupee, en boucle |
+
+Le juge voit le niveau (il fait partie de la sortie), pas le nom du modele. Resultats : `outputs/explanation_eval/jugement_explications.md`.
+
+## 4. Limites
 
 - Aucune validation par un urgentiste : les deux evaluations sont des signaux, pas une validation clinique. Le passage en production au CHSA exige une relecture medicale d'un echantillon.
 - Un LLM juge a ses propres biais (preference pour les reponses longues, auto-coherence) : l'ordre aleatoire et la grille fermee les reduisent sans les supprimer.

@@ -22,6 +22,7 @@ dependencies = [
     "datasets>=2.19",
     "huggingface_hub>=0.23",
     "scikit-learn>=1.4",
+    "matplotlib>=3.8",
     "mlflow>=3.18",
 ]
 

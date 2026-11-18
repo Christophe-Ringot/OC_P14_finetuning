@@ -745,3 +745,29 @@ La DPO v2 n'apporte rien de mesurable : **le modele livre est le SFT + triage**,
 avec la regle de decision au cout (alpha = 0,5, temperature 2,25). Les deux
 DPO restent documentees comme experiences. Detail et seuils :
 `docs/evaluation_criteria.md`.
+
+## Finalisation de la partie experimentale (suite du mentorat) - 2026-11-19
+
+Demandes du mentorat : metriques et graphiques comparatifs SFT / DPO,
+interpretation du sous / sur-triage, qualite des explications apres DPO,
+resultats lisibles et reproductibles. Aucun reentrainement : tout part des
+adaptateurs et des scores deja produits, sauf la generation des explications.
+
+- `compare_models.py` (sans GPU) : les 6 experiences en argmax et avec la regle
+  de cout deployee (alpha 0,5, temperature ajustee par modele sur la
+  validation), IC bootstrap sur les groupes, 9 graphiques dans
+  `outputs/figures/`. Regle de cout appliquee aussi a la DPO v2 : test 73,2 %,
+  sous-triage 4,0 % (SFT : 70,8 %, 4,2 %), ecart dans le bruit.
+- `evaluate_explanations.py` : explication du niveau (question de l'API, niveau
+  annote force) pour SFT et DPO v2 sur 60 cas du test, metriques automatiques
+  puis jugement en aveugle (LLM, grille coherence / ancrage / exactitude /
+  securite / clarte). SFT prefere 27 fois, DPO v2 18 fois, 15 egalites
+  (p = 0,23). Coherence ~3 / 5, ancrage et exactitude ~2 / 5 pour les deux.
+- `blind_judgment.py` generalise (`--set reponses|explications`), avec test du
+  signe et preferences par niveau ; `explanation_examples.py` extrait 9 exemples
+  representatifs commentes.
+- Correction de lecture : sur les courbes de la DPO v1, les points apres le pas
+  75 viennent de la reprise defectueuse ; l'adaptateur evalue est celui du pas 75.
+
+Conclusion inchangee : modele livre = SFT + triage avec la regle de cout.
+Synthese : `docs/resultats_sft_dpo.md`.

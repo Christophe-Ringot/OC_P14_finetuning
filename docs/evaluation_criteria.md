@@ -39,6 +39,19 @@ Outils : `evaluate_responses.py` (metriques automatiques, 80 questions fixes du 
 
 Le jugement en aveugle prefere le SFT (test du signe sur les 28 cas departages : p = 0,036). Les deux modeles restent faibles en pertinence (1,6 a 1,7 sur 5) : un modele de 1,7 milliard de parametres ne repond pas juste aux questions d'examen specialisees. La reponse sert d'explication au niveau de priorite, pas de conseil medical.
 
+### Explications du niveau de priorite
+
+Outil : `evaluate_explanations.py` (60 cas du test, question de l'API, niveau annote force) puis `blind_judgment.py --set explications` (grille : coherence, ancrage, exactitude, securite, clarte).
+
+| Metrique | SFT + triage | SFT + DPO v2 |
+|---|---|---|
+| Ancrage dans le cas (symptomes repris) | 12,3 | 13,5 |
+| Chiffres absents du cas | 5,0 | 5,0 |
+| Jugement en aveugle : coherence / exactitude (sur 5) | 2,95 / 1,93 | 2,92 / 1,88 |
+| Jugement en aveugle : prefere (60 cas, 15 egalites) | 27 | 18 |
+
+Pas de difference significative (p = 0,23) : la DPO v2 n'ameliore pas les explications du niveau. Synthese et exemples : `docs/resultats_sft_dpo.md`.
+
 Limites du jugement : un seul juge (Claude, LLM), sans clinicien ; le juge voyait le niveau annote dans la reference.
 
 ## 3. Connaissances medicales (QCM)
@@ -70,7 +83,7 @@ Le jugement en aveugle a releve des erreurs dangereuses communes aux deux modele
 **Modele livre : SFT + triage (`4_sft_medical_triage`, checkpoint 1300) avec la regle de decision au cout.**
 
 - La DPO v1 (paires qualite + securite) a casse le triage (tout en P1, accuracy 47 %).
-- La DPO v2 (paires qualite) conserve le triage, mais le jugement en aveugle prefere les reponses du SFT et elle produit plus de chiffres non sources : rien ne justifie de l'ajouter.
+- La DPO v2 (paires qualite) conserve le triage, mais le jugement en aveugle prefere les reponses du SFT (20 contre 8), ne departage pas les explications du niveau (27 contre 18 pour le SFT, p = 0,23) et elle produit plus de chiffres non sources : rien ne justifie de l'ajouter.
 - Le sous-triage se traite par la regle de decision, reglable par le metier sans re-entrainer.
 
 ## 6. Ce qui manque avant un usage reel
