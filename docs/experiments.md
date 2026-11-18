@@ -771,3 +771,18 @@ adaptateurs et des scores deja produits, sauf la generation des explications.
 
 Conclusion inchangee : modele livre = SFT + triage avec la regle de cout.
 Synthese : `docs/resultats_sft_dpo.md`.
+
+## MLflow lisible - 2026-11-19
+
+L'experience `triage-sft` comptait 18 runs (doublons de DPO, runs quick,
+quatre evaluations), jusqu'a 192 metriques et ~180 parametres par run (callback
+MLflow de transformers et TRL). Elle est renommee `triage-sft (archive
+2026-11-19)`, rien n'est supprime, et une experience propre est reconstruite
+depuis les fichiers produits (`backfill_mlflow.py --archive`) : 6 runs de modele
+(10 a 22 metriques, 1 a 11 parametres, courbes par pas) et un run `synthese`
+(graphiques, tableau comparatif, rapports). Pour la DPO v1, seules les courbes
+jusqu'au pas 75 sont reprises (apres : reprise defectueuse). Le code ne
+journalise plus que l'essentiel : `training/callbacks.py` (courbes choisies a la
+place de `report_to="mlflow"`), `tracking.triage_summary` (5 metriques de triage
+par split), tableaux `log_table` pour les evaluations multi-modeles. Le Model
+Registry n'est pas touche : chaque run renvoie a sa version par le tag `registry`.

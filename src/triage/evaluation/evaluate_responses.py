@@ -200,8 +200,8 @@ def main() -> None:
                     "decodage": "glouton, repetition_penalty 1.1",
                 }
             )
-            for name, row in summary.iterrows():
-                mlflow.log_metrics({f"{name}.{k}": float(v) for k, v in row.items() if pd.notna(v)})
+            # Un tableau (une ligne par modele) plutot que ~15 metriques par modele.
+            mlflow.log_table(summary.rename_axis("modele").reset_index(), artifact_file="qualite_reponses.json")
             mlflow.log_artifacts(str(OUTPUT_DIR))
 
 

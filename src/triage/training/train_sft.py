@@ -9,6 +9,7 @@ from transformers import AutoTokenizer
 from trl import SFTConfig, SFTTrainer
 
 from triage.constants import BASE_MODEL, SEED, adapter_dir
+from triage.training.callbacks import SFT_CURVES, MetricsCallback
 from triage.utils import hf_dataset, tracking
 from triage.utils.modeling import free_gpu_memory
 
@@ -99,9 +100,8 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
         max_length=MAX_LENGTH,
         completion_only_loss=True,
         seed=SEED,
-        # La callback MLflow de transformers journalise les hyperparametres et
-        # les courbes train/eval dans le run ouvert par train().
-        report_to="mlflow" if tracked else "none",
+        # Pas de callback MLflow de transformers (~180 parametres) : MetricsCallback ne garde que les courbes de loss.
+        report_to="none",
         run_name=run_name,
         model_init_kwargs={"dtype": "bfloat16" if has_gpu else "float32"},
     )
@@ -112,6 +112,7 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
         train_dataset=load_examples(with_priority, train_ids),
         eval_dataset=load_examples(with_priority, val_ids),
         peft_config=lora_config,
+        callbacks=[MetricsCallback(SFT_CURVES)] if tracked else None,
     )
     trainer.train()
     trainer.save_model(str(output_dir))
@@ -149,6 +150,11 @@ def _train(experiment: str, train_ids: list, val_ids: list, quick: bool, tracked
                     "dropout": lora_config.lora_dropout,
                     "target_modules": ",".join(sorted(lora_config.target_modules)),
                 }.items()
+            }
+            | {
+                "learning_rate": sft_config.learning_rate,
+                "epochs": sft_config.num_train_epochs,
+                "batch_effectif": sft_config.per_device_train_batch_size * sft_config.gradient_accumulation_steps,
             }
         )
         best_checkpoint = trainer.state.best_model_checkpoint

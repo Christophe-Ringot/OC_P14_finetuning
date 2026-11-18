@@ -18,6 +18,13 @@ from pathlib import Path
 
 DEFAULT_TRACKING_URI = "http://localhost:5000"
 DEFAULT_EXPERIMENT = "triage-sft"
+# Seules metriques de triage journalisees dans MLflow (le detail reste dans les rapports en artefacts).
+TRIAGE_METRICS = ["accuracy", "f1_macro", "rappel_P1", "sous_triage", "sur_triage"]
+
+
+def triage_summary(metrics, prefix: str) -> dict:
+    """Metriques essentielles de triage, prefixees par le split (ex. test_accuracy)."""
+    return {f"{prefix}_{name}": float(metrics[name]) for name in TRIAGE_METRICS}
 
 
 def setup(enabled: bool) -> bool:
@@ -39,6 +46,8 @@ def setup(enabled: bool) -> bool:
             ) from error
     mlflow.set_tracking_uri(uri)
     mlflow.set_experiment(experiment)
+    # Ouvre l'experience en mode "Model training" (runs) et non "GenAI" (traces) dans l'interface.
+    mlflow.set_experiment_tag("mlflow.experimentKind", "custom_model_development")
     print(f"Suivi MLflow : {uri} (experience '{experiment}')")
     return True
 

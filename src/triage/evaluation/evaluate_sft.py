@@ -160,15 +160,12 @@ def log_to_mlflow(quick: bool, results: dict, decisions: pd.DataFrame, run_ids: 
     """Metriques dans le run d'entrainement de chaque modele, et un run d'evaluation qui regroupe tout."""
     import mlflow
 
-    def flat(split: str, metrics: pd.Series) -> dict:
-        return {f"{split}_{name}": float(value) for name, value in metrics.items()}
-
     for experiment, run_id in run_ids.items():
         if run_id is None or experiment not in results["test"].index:
             continue
         with tracking.start_run(True, run_id=run_id):
             for split, frame in results.items():
-                mlflow.log_metrics(flat(split, frame.loc[experiment]))
+                mlflow.log_metrics(tracking.triage_summary(frame.loc[experiment], split))
             mlflow.log_param("mode_decision", decisions.loc[experiment, "mode_retenu"])
 
     tags = {"type": "evaluation", "mode": "quick" if quick else "complet", "git_commit": tracking.git_commit()}
@@ -182,9 +179,11 @@ def log_to_mlflow(quick: bool, results: dict, decisions: pd.DataFrame, run_ids: 
                 **{f"run_id_{e}": r for e, r in run_ids.items() if r},
             }
         )
-        for split, frame in results.items():
-            for experiment, metrics in frame.iterrows():
-                mlflow.log_metrics({f"{experiment}.{name}": v for name, v in flat(split, metrics).items()})
+        # Une ligne par modele dans un tableau, plutot qu'une metrique par (modele, split, mesure).
+        table = pd.concat(
+            [frame[tracking.TRIAGE_METRICS].assign(split=split) for split, frame in results.items()]
+        ).rename_axis("experience")
+        mlflow.log_table(table.reset_index(), artifact_file="comparaison_triage.json")
         for path in files:
             mlflow.log_artifact(str(path))
 

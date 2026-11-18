@@ -328,14 +328,29 @@ nouvelle publication, mettre à jour `DATASET_REVISION`.
 
 ## Suivi des expériences (MLflow)
 
-Chaque exécution est enregistrée dans l'expérience `triage-sft` :
+L'expérience `triage-sft` est volontairement courte : **un run par modèle**
+(1 à 6) et un run **`synthese`**.
 
-- **run d'entraînement** : hyperparamètres, courbes de loss train/validation,
-  métriques système (CPU, GPU, mémoire), révision et empreinte du dataset,
-  commit git, adaptateur LoRA final, puis métriques de triage sur la
-  validation et le test ;
-- **run d'évaluation** : métriques des 4 expériences, règle de décision
-  retenue, rapports et prédictions en artefacts.
+- **run de modèle** : une dizaine de paramètres clés (LoRA ou DPO, données),
+  les courbes par pas (loss train / validation, marges DPO), puis au plus une
+  vingtaine de métriques : accuracy, F1 macro, rappel P1, sous et sur-triage
+  en validation et en test, test avec la règle de coût (`test_cout_*`), et
+  pour les modèles 4 et 6 le QCM et les jugements en aveugle ;
+- **run `synthese`** : les graphiques de `outputs/figures/`, le tableau
+  comparatif et les rapports ;
+- le détail (matrices, métriques par classe, balayages) reste dans les
+  rapports en artefacts ; les adaptateurs sont dans le Model Registry
+  `triage-qwen3-lora` (alias `production` sur le modèle 4).
+
+Pendant l'entraînement, `MetricsCallback` remplace le callback MLflow de
+transformers (environ 180 paramètres et des dizaines de métriques par run) et ne
+garde que les courbes utiles. Pour reconstruire l'expérience à partir des
+fichiers produits, sans réentraîner :
+
+```bash
+python -m triage.training.backfill_mlflow            # remplace les runs reconstruits
+python -m triage.training.backfill_mlflow --archive  # renomme d'abord l'expérience actuelle
+```
 
 Les scripts vérifient que le serveur MLflow répond avant de démarrer, pour
 éviter un entraînement de plusieurs heures sans suivi.

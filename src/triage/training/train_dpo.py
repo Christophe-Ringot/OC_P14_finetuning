@@ -23,6 +23,7 @@ from trl import DPOConfig, DPOTrainer
 
 from triage.constants import BASE_MODEL, FINAL_EXPERIMENT, SEED, adapter_dir
 from triage.data.build_dpo_triage import OUTPUT_PATH as PAIRS_PATH
+from triage.training.callbacks import DPO_CURVES, MetricsCallback
 from triage.utils import tracking
 from triage.utils.modeling import free_gpu_memory
 
@@ -91,7 +92,7 @@ def train(experiment: str, quick: bool, tracked: bool, hparams: dict) -> str | N
         metric_for_best_model="eval_qualite_loss",
         greater_is_better=False,
         seed=SEED,
-        report_to="mlflow" if tracked else "none",
+        report_to="none",  # courbes choisies par MetricsCallback
         run_name=experiment + ("_quick" if quick else ""),
     )
     tags = {
@@ -113,11 +114,17 @@ def train(experiment: str, quick: bool, tracked: bool, hparams: dict) -> str | N
                     "pairs": str(PAIRS_PATH),
                     "pairs_md5": tracking.file_md5(PAIRS_PATH),
                     "max_length": MAX_LENGTH,
+                    **hparams,
                     **counts,
                 }
             )
         trainer = DPOTrainer(
-            model=model, args=config, train_dataset=train_ds, eval_dataset=eval_ds, processing_class=tokenizer
+            model=model,
+            args=config,
+            train_dataset=train_ds,
+            eval_dataset=eval_ds,
+            processing_class=tokenizer,
+            callbacks=[MetricsCallback(DPO_CURVES)] if tracked else None,
         )
         # Pas de reprise sur checkpoint : avec un PeftModel passe a DPOTrainer, resume_from_checkpoint
         # restaure l'optimiseur mais pas les poids de l'adaptateur (constate le 2026-11-12).

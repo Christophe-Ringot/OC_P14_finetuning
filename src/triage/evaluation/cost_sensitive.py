@@ -117,9 +117,12 @@ def run(experiment: str, tracked: bool) -> pd.DataFrame:
             True, run_name=f"cout_sensible_{experiment}", tags={"type": "evaluation", "experience": experiment}
         ):
             mlflow.log_params({"temperature": temperature, "alpha": best_alpha, "cost_matrix": COST.tolist()})
+            # Seule la regle retenue (alpha choisi sur la validation) ; le balayage complet est dans le rapport.
             for (split, decision), row in results.iterrows():
-                key = decision.split(" ")[0] + ("_alpha" if "alpha=" in decision and "choisi" in decision else "")
-                mlflow.log_metrics({f"{split}_{key}_{k}": float(v) for k, v in row.items()})
+                if "choisi" in decision:
+                    mlflow.log_metrics(
+                        {**tracking.triage_summary(row, split), f"{split}_cout_moyen": float(row["cout_moyen"])}
+                    )
             mlflow.log_artifact(str(TRIAGE_EVAL_DIR / "cout_sensible.md"))
     print(
         (
