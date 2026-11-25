@@ -24,5 +24,6 @@ __pycache__/
 !outputs/response_eval/**
 !outputs/explanation_eval/**
 /hf_model/
+/hf_model_dpo/
 /.env
 /logs/

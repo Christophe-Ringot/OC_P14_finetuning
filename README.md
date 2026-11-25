@@ -95,6 +95,8 @@ regroupés par cas clinique pour éviter toute fuite entre entraînement et test
 
 Modèle livré (adaptateur LoRA, règle de décision, fiche) :
 [christophe-ringot/p14-triage-qwen3-1.7b-lora](https://huggingface.co/christophe-ringot/p14-triage-qwen3-1.7b-lora).
+Expérience DPO v2 (SFT + DPO, publiée pour la comparaison, non livrée) :
+[christophe-ringot/p14-triage-qwen3-1.7b-dpo-lora](https://huggingface.co/christophe-ringot/p14-triage-qwen3-1.7b-dpo-lora).
 Jeu d'évaluation clinique (109 cas, 400 questions) :
 [christophe-ringot/p14-medical-triage-clinical-eval](https://huggingface.co/datasets/christophe-ringot/p14-medical-triage-clinical-eval).
 
