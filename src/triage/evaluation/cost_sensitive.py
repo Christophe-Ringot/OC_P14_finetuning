@@ -35,7 +35,8 @@ COST = np.array(
         [2.0, 1.0, 0.0],  # P3 : sur-triage (encombrement des urgences)
     ]
 )
-ALPHAS = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 3.0]
+# Grille fine entre 0,25 et 0,5 : c'est la zone ou se joue le compromis retenu (alpha 0,35).
+ALPHAS = [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0, 3.0]
 TEMPERATURES = np.round(np.arange(0.5, 10.01, 0.25), 2)
 MAIN = ["accuracy", "f1_macro", "rappel_P1", "rappel_P2", "rappel_P3", "sous_triage", "sur_triage", "P1_predit_P3"]
 
@@ -194,9 +195,11 @@ def write_report(experiment, temperature, best_alpha, results, sweep, test_sweep
         "elle ramene le sous-triage de 7 % a 2 % et le rappel P1 a 95 %, mais le sur-triage passe de 14 % a 35 % et le "
         "cout moyen ne baisse pas : la validation (accuracy 63 %) est bien plus difficile que le test (79 %), avec "
         "~70 cas par split, donc un reglage appris sur l'une se transpose mal a l'autre.",
-        "- Point de fonctionnement raisonnable : alpha = 0.5 (test : sous-triage 4.2 %, rappel P1 90 %, accuracy 71 %). "
-        "Le choix final releve du CHSA (combien de sur-triage accepter pour un P1 rattrape) et demande un jeu de "
-        "validation plus grand, valide cliniquement.",
+        "- Point de fonctionnement retenu : alpha = 0.35 (test : sous-triage 5.5 %, sur-triage 17.8 %, rappel P1 88 %, "
+        "accuracy 77 %). alpha = 0.5 donnait 4.2 % de sous-triage mais 25 % de sur-triage ; le compromis a 0.35, valide "
+        "avec le mentor, accepte un peu plus de sous-triage pour un sur-triage proche de 17 %. C'est un choix metier, "
+        "pas une optimisation : il a ete fait en regardant le test, et la validation (plus difficile) ne le confirme pas "
+        "a elle seule. Le choix final releve du CHSA et demande un jeu de validation plus grand, valide cliniquement.",
     ]
     (TRIAGE_EVAL_DIR / "cout_sensible.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 

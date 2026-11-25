@@ -45,7 +45,7 @@ Reponse :
 
 ## Comment le niveau est decide
 
-Le niveau n'est pas lu dans le texte genere : l'API calcule la log-probabilite de chacun des trois niveaux apres le debut du prefixe `[Niveau de priorité estimé :`, exactement comme a l'evaluation, puis applique la regle de cout de `src/triage/api/decision_rule.json` (temperature 2,25, alpha 0,5). Les metriques de `docs/evaluation_criteria.md` s'appliquent donc telles quelles a l'API. L'explication est generee ensuite, avec le niveau decide force en tete.
+Le niveau n'est pas lu dans le texte genere : l'API calcule la log-probabilite de chacun des trois niveaux apres le debut du prefixe `[Niveau de priorité estimé :`, exactement comme a l'evaluation, puis applique la regle de cout de `src/triage/api/decision_rule.json` (temperature 2,25, alpha 0,35). Les metriques de `docs/evaluation_criteria.md` s'appliquent donc telles quelles a l'API. L'explication est generee ensuite, avec le niveau decide force en tete.
 
 `a_revoir` vaut vrai si la probabilite maximale est sous le seuil, ou si la regle de cout a releve le niveau par rapport au plus probable (le modele hesitait vers un niveau moins urgent). Seuil a calibrer avec le CHSA.
 

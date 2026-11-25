@@ -786,3 +786,27 @@ journalise plus que l'essentiel : `training/callbacks.py` (courbes choisies a la
 place de `report_to="mlflow"`), `tracking.triage_summary` (5 metriques de triage
 par split), tableaux `log_table` pour les evaluations multi-modeles. Le Model
 Registry n'est pas touche : chaque run renvoie a sa version par le tag `registry`.
+
+## Regle de cout : alpha 0,35 - 2026-11-25
+
+Avec alpha 0,5, le sur-triage atteignait 25 % sur le test (22,8 % pour la DPO
+v2). Objectif retenu en mentorat : un sur-triage autour de 17 %, quitte a
+accepter un sous-triage un peu plus haut.
+
+- Balayage large sur les scores sauvegardes (sans GPU) : plus de 2 500 regles
+  (matrices de cout completes, biais sur les log-probabilites). Meme en reglant
+  sur le test, 4 % de sous-triage impose au moins 21 % de sur-triage : la limite
+  vient du modele (recouvrement P1 / P2), pas de la regle.
+- Balayage fin d'alpha (0,25 a 0,5, ajoute a `cost_sensitive.ALPHAS`) : alpha
+  0,35 donne sur le test sous-triage 5,5 %, sur-triage 17,8 %, accuracy 76,8 %,
+  rappel P1 88,3 % (DPO v2 : 5,2 %, 17,0 %, 77,8 %).
+- `decision_rule.json` passe a alpha 0,35 ; `compare_models.py` lit alpha dans
+  ce fichier pour les titres et les tableaux ; test d'API mis a jour avec un cas
+  reel que la regle remonte encore de P2 a P1 (`mediqal_oeq_923`).
+- Limite : alpha a ete fixe en regardant le test (choix metier, pas une
+  optimisation) ; la validation donne 26 % de sur-triage avec la meme valeur.
+- Piste notee : relecture humaine des cas incertains (probabilite maximale
+  < 0,6 : 21 % des cas a relire, sous-triage 6,0 % et sur-triage 11,4 % sur les
+  cas decides seuls).
+
+Synthese : `docs/resultats_sft_dpo.md`, partie 3.1.

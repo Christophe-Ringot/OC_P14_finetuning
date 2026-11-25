@@ -76,7 +76,7 @@ Piste demandee en mentorat : penaliser differemment sous-triage et sur-triage **
 | P2 | 1 | 0 | 4 x alpha |
 | P3 | 2 | 1 | 0 |
 
-Quand le modele est sur de lui, la decision ne change pas ; elle ne bascule que pour les **cas limites**, ou un niveau moins urgent est a peine plus probable. alpha regle le compromis ; alpha = 0,5 est retenu sur la validation et livre dans `decision_rule.json`.
+Quand le modele est sur de lui, la decision ne change pas ; elle ne bascule que pour les **cas limites**, ou un niveau moins urgent est a peine plus probable. alpha regle le compromis ; alpha = 0,35 est retenu (compromis valide en mentorat, voir 3.1) et livre dans `decision_rule.json`.
 
 ![Compromis cout](../outputs/figures/04_compromis_cout.png)
 
@@ -85,15 +85,45 @@ Quand le modele est sur de lui, la decision ne change pas ; elle ne bascule que 
 | Test | Accuracy | Rappel P1 | Sous-triage | Sur-triage |
 |---|---|---|---|---|
 | 4 SFT, argmax | 78,8 | 86,5 | 7,0 | 14,2 |
-| 4 SFT, regle de cout | 70,8 | 90,2 | **4,2** | 25,0 |
+| 4 SFT, regle de cout (alpha 0,35) | 76,8 | 88,3 | **5,5** | 17,8 |
 | 6 DPO v2, argmax | 76,5 | 85,3 | 8,0 | 15,5 |
-| 6 DPO v2, regle de cout | 73,2 | 90,8 | **4,0** | 22,8 |
+| 6 DPO v2, regle de cout (alpha 0,35) | 77,8 | 88,3 | **5,2** | 17,0 |
 
 Lecture :
 
-- La regle **divise le sous-triage par ~1,7 sur le test et par ~3,3 sur la validation** (16,2 % -> 4,9 %), au prix d'un sur-triage plus eleve : c'est le compromis voulu en triage (un patient vu trop tot coute moins qu'une urgence ratee).
-- Elle s'applique de la meme facon a la DPO v2, avec un resultat equivalent (73,2 % contre 70,8 % d'accuracy, ecart dans le bruit).
+- La regle fait passer le sous-triage de 7,0 % a 5,5 % sur le test (16,2 % -> 9,0 % en validation) pour 3,6 points de sur-triage en plus et 2 points d'accuracy en moins : c'est le compromis voulu en triage (un patient vu trop tot coute moins qu'une urgence ratee).
+- Elle s'applique de la meme facon a la DPO v2, avec un resultat equivalent (77,8 % contre 76,8 % d'accuracy, ecart dans le bruit).
 - Le point de fonctionnement (alpha) et la matrice sont des **parametres metier** a fixer avec les urgentistes du CHSA ; un alpha plus fort (1,25, choisi au cout minimal en validation) sur-corrige sur le test (sur-triage 36 %).
+
+### 3.1 Choix d'alpha : compromis sous / sur-triage
+
+Premiere version : alpha = 0,5 (meilleurs F1 et accuracy en validation). Sur le test, sous-triage 4,2 % mais sur-triage 25,0 % : un patient sur quatre aurait ete vu plus tot que necessaire. En mentorat, l'objectif retenu est un sur-triage autour de 17 %, quitte a accepter un sous-triage un peu plus haut. alpha a ete balaye finement (`outputs/triage_eval/cout_sensible.md`) :
+
+| alpha | Sous-triage test | Sur-triage test | Accuracy test | Rappel P1 test | Sous / sur-triage validation |
+|---|---|---|---|---|---|
+| argmax | 7,0 | 14,2 | 78,8 | 86,5 | 16,2 / 21,3 |
+| 0,30 | 6,0 | 16,0 | 78,0 | 87,7 | 12,6 / 25,4 |
+| **0,35 (retenu)** | **5,5** | **17,8** | **76,8** | **88,3** | 9,0 / 26,2 |
+| 0,40 | 5,5 | 19,8 | 74,8 | 88,3 | 6,4 / 27,2 |
+| 0,50 (premiere version) | 4,2 | 25,0 | 70,8 | 90,2 | 4,9 / 28,2 |
+
+Ce que montre le balayage :
+
+- **On ne peut pas avoir 4 % de sous-triage et 17 % de sur-triage avec ce modele.** Plus de 2 500 regles ont ete essayees (matrices de cout completes, biais ajoutes aux log-probabilites, la famille la plus generale a trois classes). Meme en reglant directement sur le test, 4 % de sous-triage impose au moins 21 % de sur-triage. La limite vient du recouvrement des probabilites P1 / P2 (AUC 0,86), pas de la regle : une regle ne fait que se deplacer le long de cette courbe.
+- **alpha = 0,35 est un choix metier, pas une optimisation.** Il a ete fixe en regardant le test ; la validation, plus difficile, donne encore 26 % de sur-triage avec la meme valeur. Avec ~70 cas par split, les chiffres peuvent bouger de plusieurs points : le reglage reel se fera avec le CHSA sur un jeu plus grand.
+- Avec ce reglage, la DPO v2 est au meme niveau que le SFT sur le triage (sous-triage 5,2 % contre 5,5 %, ecart d'une ou deux questions) : le choix du modele se fait toujours sur la qualite des reponses (partie 4).
+
+### 3.2 Autre levier : faire relire les cas incertains
+
+Au lieu de forcer une decision, l'outil peut renvoyer a un soignant les cas ou le modele hesite (probabilite maximale sous un seuil) et ne decider seul que les autres. Sur le test, SFT + triage, argmax :
+
+| Seuil de confiance | Cas a relire | Sous-triage (cas decides) | Sur-triage (cas decides) | Accuracy (cas decides) |
+|---|---|---|---|---|
+| aucun | 0 % | 7,0 | 14,2 | 78,8 |
+| 0,6 | 21 % | 6,0 | 11,4 | 82,6 |
+| 0,7 | 46 % | 3,7 | 8,3 | 88,0 |
+
+Les deux erreurs baissent ensemble sur les cas decides seuls, au prix d'une relecture humaine d'une partie des cas. C'est la piste la plus prometteuse pour un deploiement : l'API leve deja le drapeau `a_revoir` sous un seuil de probabilite.
 - Dans l'API, quand la regle releve le niveau par rapport au plus probable, la decision est signalee `a_revoir` : les cas limites partent vers un humain.
 
 ## 4. Qualite des reponses et des explications apres DPO
@@ -143,15 +173,15 @@ Conclusion : la DPO v2 apprend bien ses paires (marge 0,56 -> 1,11) mais ce gain
 |---|---|---|---|
 | Triage test (argmax) | 78,8 % | 76,5 % | equivalent (IC recouvrants) |
 | Triage validation | 62,6 % | 62,8 % | equivalent |
-| Sous-triage test, regle de cout | 4,2 % | 4,0 % | equivalent |
+| Sous-triage / sur-triage test, regle de cout (alpha 0,35) | 5,5 / 17,8 % | 5,2 / 17,0 % | equivalent |
 | QCM FrenchMedMCQA | 50,0 % | 49,1 % | equivalent |
 | Reponses, jugement en aveugle | prefere 20 | prefere 8 | SFT devant (p = 0,036) |
 | Explications du niveau, jugement en aveugle | prefere 27 | prefere 18 | SFT devant, non significatif (p = 0,23) |
 | Chiffres absents de la source (reponses) | 18,8 % | 25,0 % | SFT devant |
 
-- **Modele livre : SFT + triage (checkpoint 1300) avec la regle de decision au cout** (alpha 0,5, temperature 2,25). La DPO v2 conserve le triage, ce qui est le resultat attendu, mais n'ameliore ni les reponses ni les explications : rien ne justifie une etape d'entrainement de plus.
+- **Modele livre : SFT + triage (checkpoint 1300) avec la regle de decision au cout** (alpha 0,35, temperature 2,25). La DPO v2 conserve le triage, ce qui est le resultat attendu, mais n'ameliore ni les reponses ni les explications : rien ne justifie une etape d'entrainement de plus.
 - **La DPO v1 est un contre-exemple instructif** : des preferences asymetriques sur le niveau apprennent "toujours plus urgent". Le compromis sous / sur-triage se regle mieux a la decision, de facon explicite et reglable par le metier, qu'a l'entrainement.
-- **Faisabilite demontree** pour le niveau : de 32 % (SFT generaliste) a 63-79 % d'accuracy, aucun P1 classe P3, sous-triage ramene a ~4 % par la regle de cout, cas limites signales pour revue humaine.
+- **Faisabilite demontree** pour le niveau : de 32 % (SFT generaliste) a 63-79 % d'accuracy, aucun P1 classe P3, sous-triage ramene a ~5 % par la regle de cout avec un sur-triage autour de 17 %, cas limites signales pour revue humaine.
 - **Faisabilite partielle** pour l'explication : format et coherence globale corrects, contenu medical peu fiable. L'explication doit etre presentee comme une aide a la lecture du cas, jamais comme un avis medical.
 
 ## 6. Limites
@@ -159,7 +189,7 @@ Conclusion : la DPO v2 apprend bien ses paires (marge 0,56 -> 1,11) mais ce gain
 - **Etiquettes de reference pre-annotees par LLM** selon une grille ecrite, sans validation clinique : les metriques mesurent l'accord avec ces annotations, pas une fiabilite medicale. 50 cas sont prets pour une relecture (`outputs/annotation_review/`).
 - **Petits jeux d'evaluation** (72 et 76 groupes de cas) : intervalles larges, ecart de 16 points entre validation et test.
 - **Cas d'examen**, pas de vrais dossiers d'urgence ; deux specialites dominent le corpus.
-- **Sous-triage residuel** : 4,2 % des questions du test avec la regle de cout, dont des urgences a gravite biologique et une torsion testiculaire predite P2. Un usage reel imposerait une validation humaine systematique.
+- **Sous-triage residuel** : 5,5 % des questions du test avec la regle de cout (alpha 0,35), dont des urgences a gravite biologique et une torsion testiculaire predite P2. Un usage reel imposerait une validation humaine systematique.
 - **Hallucinations** : un modele de 1,7 milliard de parametres invente des chiffres, des traitements ou des diagnostics ; le jugement en aveugle a releve des conseils dangereux (prostaglandines refusees dans une cardiopathie ducto-dependante, morphine en grammes). L'explication ne doit jamais etre lue comme une prescription : l'API l'ecrit dans chaque reponse.
 - **Juge LLM** : le jugement en aveugle est fait par un LLM (Claude), sans clinicien ; ordre aleatoire et grille fermee reduisent ses biais sans les supprimer.
 

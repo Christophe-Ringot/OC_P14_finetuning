@@ -29,6 +29,9 @@ from triage.utils.markdown import markdown_table
 
 FIGURES_DIR = OUTPUTS_DIR / "figures"
 N_BOOTSTRAP = 2000
+# alpha deploye (decision_rule.json), affiche a la francaise dans les titres : 0.35 -> "0,35".
+DEPLOYED_ALPHA = load_decision_rule()["alpha"]
+ALPHA_LABEL = f"{DEPLOYED_ALPHA:g}".replace(".", ",")
 NAMES = {
     "1_baseline_naive": "1 Baseline (P1)",
     "2_modele_base": "2 Modele de base",
@@ -162,7 +165,7 @@ def fig_errors(results: dict, cost: dict) -> None:
     ax.invert_yaxis()
     ax.set_xlim(0, 100)
     ax.set_xlabel("% des questions du test")
-    ax.set_title("Erreurs de triage : argmax puis regle de cout deployee (alpha 0,5)")
+    ax.set_title(f"Erreurs de triage : argmax puis regle de cout deployee (alpha {ALPHA_LABEL})")
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3, fontsize=9)
     save(fig, "02_sous_sur_triage.png")
 
@@ -214,13 +217,15 @@ def fig_cost_tradeoff() -> pd.DataFrame:
                 color=COLORS[experiment],
                 label=NAMES[experiment],
             )
-            # Seul le point deploye est annote, decale par modele pour rester lisible.
+            # Seul le point deploye est entoure et annote, texte decale par modele pour rester lisible.
+            deployed = (sweep.loc[DEPLOYED_ALPHA, "sur_triage"] * 100, sweep.loc[DEPLOYED_ALPHA, "sous_triage"] * 100)
+            ax.scatter(*deployed, s=160, facecolors="none", edgecolors=COLORS[experiment], linewidths=2, zorder=4)
             ax.annotate(
-                "alpha 0,5",
-                (sweep.loc[0.5, "sur_triage"] * 100, sweep.loc[0.5, "sous_triage"] * 100),
+                f"alpha {ALPHA_LABEL}",
+                deployed,
                 fontsize=8,
                 color=COLORS[experiment],
-                xytext=(6, 8) if experiment == "4_sft_medical_triage" else (-50, -14),
+                xytext=(8, 8) if experiment == "4_sft_medical_triage" else (8, -16),
                 textcoords="offset points",
             )
             argmax = cost_sensitive.metrics(y, scores.idxmax(axis=1))
@@ -236,7 +241,7 @@ def fig_cost_tradeoff() -> pd.DataFrame:
             ax.set_title(split)
             ax.set_xlabel("sur-triage (%)")
             ax.grid(alpha=0.3)
-            rows.append({"experience": experiment, "split": split, **sweep.loc[0.5].to_dict()})
+            rows.append({"experience": experiment, "split": split, **sweep.loc[DEPLOYED_ALPHA].to_dict()})
     axes[0].set_ylabel("sous-triage (%)")
     axes[0].legend(fontsize=9)
     fig.suptitle("Compromis sous / sur-triage selon le poids alpha (etoile = argmax, sans regle de cout)")
@@ -469,7 +474,7 @@ def main() -> None:
         "",
         markdown_table(shown_intervals.rename_axis("experience")),
         "",
-        "## Regle de cout a alpha 0,5 : SFT contre DPO v2",
+        f"## Regle de cout a alpha {ALPHA_LABEL} : SFT contre DPO v2",
         "",
         markdown_table(
             sweep.set_index(["experience", "split"])[["accuracy", "f1_macro", "rappel_P1", "sous_triage", "sur_triage"]]

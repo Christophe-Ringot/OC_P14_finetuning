@@ -89,9 +89,9 @@ def test_missing_api_key_refuses_to_start(tmp_path):
 
 def test_decision_rule_matches_evaluation():
     rule = load_decision_rule()
-    # Scores reels d'un cas du test (outputs/triage_eval/scores.csv) : P2 le plus probable, P1 retenu par la regle de cout.
+    # Scores reels d'un cas du test (mediqal_oeq_923) : P2 le plus probable, P1 retenu par la regle de cout (alpha 0,35).
     level, proba, most_likely, review, _ = decide(
-        {"urgence_maximale": -16.7028, "urgence_moderee": -15.9518, "differee": -20.0130}, rule, 0.5
+        {"urgence_maximale": -16.3653, "urgence_moderee": -16.1143, "differee": -19.8899}, rule, 0.5
     )
     assert most_likely == "urgence_moderee" and level == "urgence_maximale" and review
     assert abs(sum(proba.values()) - 1) < 1e-9

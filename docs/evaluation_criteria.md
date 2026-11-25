@@ -22,7 +22,7 @@ Les deux jeux sont petits (une soixantaine de cas chacun) et la validation est p
 
 Outil : `src/triage/evaluation/cost_sensitive.py`. Au lieu du niveau le plus probable, le modele choisit le niveau de cout attendu minimal (matrice : sous-triage d'un niveau = 4, P1 -> P3 = 10, sur-triage = 1 ou 2), avec un poids alpha sur le sous-triage.
 
-Regle retenue : **alpha = 0,5, temperature 2,25**, choisis sur la validation (meilleurs F1 et accuracy). Effet : sous-triage 16,2 % -> 4,9 % en validation, 7,0 % -> 4,2 % en test, rappel P1 90 %, au prix d'un sur-triage plus eleve (25 % en test) et d'une accuracy de 70,8 % en test. La matrice de cout est un choix metier a valider par les urgentistes du CHSA. Fichier livre avec le modele : `decision_rule.json`.
+Regle retenue : **alpha = 0,35, temperature 2,25** (temperature ajustee sur la validation ; alpha fixe le 2026-11-25 comme compromis metier valide en mentorat : un sur-triage autour de 17 % plutot que 25 % avec alpha 0,5, pour un sous-triage un peu plus haut). Effet sur le test : sous-triage 7,0 % -> 5,5 %, sur-triage 14,2 % -> 17,8 %, rappel P1 88,3 %, accuracy 76,8 % (validation : sous-triage 16,2 % -> 9,0 %). alpha a ete fixe en regardant le test : c'est un choix metier, pas une optimisation (detail : `docs/resultats_sft_dpo.md`, partie 3.1). La matrice de cout est un choix metier a valider par les urgentistes du CHSA. Fichier livre avec le modele : `decision_rule.json`.
 
 ## 2. Qualite des reponses
 

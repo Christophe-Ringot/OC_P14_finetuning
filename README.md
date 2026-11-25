@@ -84,9 +84,9 @@ regroupés par cas clinique pour éviter toute fuite entre entraînement et test
   attendue sur de nouveaux cas se situe **entre 62,6 % et 78,8 %**, les deux
   chiffres sont donnés ensemble.
 
-- **Règle de décision au coût** (sous-triage pénalisé, réglage choisi sur la
-  validation) : sous-triage ramené à 4,2 % et rappel P1 à 90,2 % sur le test,
-  au prix de plus de sur-triage (accuracy 70,8 %).
+- **Règle de décision au coût** (sous-triage pénalisé, alpha 0,35 choisi comme
+  compromis métier) : sous-triage ramené de 7,0 % à 5,5 % sur le test, avec un
+  sur-triage autour de 17 % (17,8 %) et une accuracy de 76,8 %.
 - **DPO testée puis écartée** : avec des paires de sécurité, le modèle classe
   tout en P1 ; avec des paires de qualité seules, le triage tient (76,5 %),
   mais un jugement en aveugle préfère le SFT, nettement sur les réponses

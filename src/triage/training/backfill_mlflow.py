@@ -34,7 +34,7 @@ DESCRIPTIONS = {
     BASE_MODEL_EXPERIMENT: "Qwen3-1.7B-Base sans fine-tuning : apport du fine-tuning.",
     "3_sft_medical": "SFT LoRA sur le corpus medical, reponses sans niveau : apport du domaine seul.",
     "4_sft_medical_triage": "Modele livre : SFT LoRA avec le niveau en tete des reponses, checkpoint 1300, "
-    "regle de decision au cout (alpha 0,5).",
+    "regle de decision au cout (alpha 0,35).",
     "5_sft_triage_dpo": "DPO v1 (paires qualite + securite) : effondrement vers P1, abandonnee. "
     "Points apres le pas 75 = reprise defectueuse ; adaptateur evalue = pas 75.",
     "6_sft_triage_dpo_qualite": "DPO v2 (paires qualite seules) : triage conserve, explications non ameliorees.",

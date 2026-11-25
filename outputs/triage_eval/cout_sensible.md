@@ -34,6 +34,10 @@ Validation :
 | alpha | accuracy | f1_macro | rappel_P1 | sous_triage | sur_triage | P1_predit_P3 | rappel_P2 | rappel_P3 | cout_moyen_x100 |
 |---|---|---|---|---|---|---|---|---|---|
 | 0.25 | 61.0 | 61.7 | 70.9 | 15.6 | 23.3 | 0.0 | 48.9 | 63.4 | 85.9 |
+| 0.3 | 62.1 | 62.7 | 74.6 | 12.6 | 25.4 | 0.0 | 53.4 | 57.7 | 75.6 |
+| 0.35 | 64.9 | 65.2 | 81.3 | 9.0 | 26.2 | 0.0 | 56.4 | 56.1 | 62.1 |
+| 0.4 | 66.4 | 66.4 | 86.6 | 6.4 | 27.2 | 0.0 | 56.4 | 55.3 | 52.8 |
+| 0.45 | 67.2 | 66.9 | 89.6 | 4.9 | 27.9 | 0.0 | 57.1 | 53.7 | 47.4 |
 | 0.5 | 66.9 | 66.6 | 89.6 | 4.9 | 28.2 | 0.0 | 57.1 | 52.8 | 47.7 |
 | 0.75 | 65.6 | 64.6 | 92.5 | 3.1 | 31.3 | 0.0 | 58.6 | 43.9 | 43.6 |
 | 1 | 61.5 | 58.5 | 97.0 | 1.0 | 37.4 | 0.0 | 55.6 | 29.3 | 41.8 |
@@ -47,6 +51,10 @@ Test (pour information, non utilise pour choisir) :
 | alpha | accuracy | f1_macro | rappel_P1 | sous_triage | sur_triage | P1_predit_P3 | rappel_P2 | rappel_P3 | cout_moyen_x100 |
 |---|---|---|---|---|---|---|---|---|---|
 | 0.25 | 78.5 | 78.6 | 85.3 | 7.2 | 14.2 | 0.0 | 66.1 | 82.3 | 43.8 |
+| 0.3 | 78.0 | 77.9 | 87.7 | 6.0 | 16.0 | 0.0 | 62.9 | 80.5 | 40.8 |
+| 0.35 | 76.8 | 76.6 | 88.3 | 5.5 | 17.8 | 0.0 | 60.5 | 77.9 | 41.0 |
+| 0.4 | 74.8 | 74.4 | 88.3 | 5.5 | 19.8 | 0.0 | 58.1 | 73.5 | 43.2 |
+| 0.45 | 72.2 | 71.7 | 89.0 | 4.8 | 23.0 | 0.0 | 54.8 | 67.3 | 43.8 |
 | 0.5 | 70.8 | 69.8 | 90.2 | 4.2 | 25.0 | 0.0 | 52.4 | 62.8 | 44.0 |
 | 0.75 | 66.0 | 63.3 | 93.9 | 2.8 | 31.2 | 0.0 | 46.0 | 47.8 | 44.5 |
 | 1 | 62.5 | 58.8 | 95.1 | 2.2 | 35.2 | 0.0 | 37.1 | 43.4 | 46.5 |
@@ -60,4 +68,4 @@ Test (pour information, non utilise pour choisir) :
 - Le compromis sous-triage / sur-triage se regle a l'inference, sans re-entrainer, et de facon explicite (une matrice lisible par un clinicien) plutot que par des biais ajustes a la main.
 - Une ponderation de la perte pendant l'entrainement (poids plus forts sur les tokens du niveau des cas P1/P2) est l'alternative ; elle demande un re-entrainement complet (~7 h) et deplace les memes frontieres. Avec un modele qui ordonne deja bien les cas (AUC P1/P2 = 0.86, P2/P3 = 0.92, voir analyse_erreurs.md), la decision au cout est le levier le moins cher.
 - Sur la validation, la decision au cout divise le cout moyen par 2 (sous-triage 16 % -> 1 %). Sur le test, elle ramene le sous-triage de 7 % a 2 % et le rappel P1 a 95 %, mais le sur-triage passe de 14 % a 35 % et le cout moyen ne baisse pas : la validation (accuracy 63 %) est bien plus difficile que le test (79 %), avec ~70 cas par split, donc un reglage appris sur l'une se transpose mal a l'autre.
-- Point de fonctionnement raisonnable : alpha = 0.5 (test : sous-triage 4.2 %, rappel P1 90 %, accuracy 71 %). Le choix final releve du CHSA (combien de sur-triage accepter pour un P1 rattrape) et demande un jeu de validation plus grand, valide cliniquement.
+- Point de fonctionnement retenu : alpha = 0.35 (test : sous-triage 5.5 %, sur-triage 17.8 %, rappel P1 88 %, accuracy 77 %). alpha = 0.5 donnait 4.2 % de sous-triage mais 25 % de sur-triage ; le compromis a 0.35, valide avec le mentor, accepte un peu plus de sous-triage pour un sur-triage proche de 17 %. C'est un choix metier, pas une optimisation : il a ete fait en regardant le test, et la validation (plus difficile) ne le confirme pas a elle seule. Le choix final releve du CHSA et demande un jeu de validation plus grand, valide cliniquement.

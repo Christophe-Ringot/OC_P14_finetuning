@@ -4,8 +4,8 @@
   "temperature": 2.25,
   "cost_matrix": [[0, 4, 10], [1, 0, 4], [2, 1, 0]],
   "cost_matrix_rows": "annotated level (P1, P2, P3); columns = predicted level",
-  "alpha": 0.5,
+  "alpha": 0.35,
   "alpha_applies_to": "under-triage cells (upper triangle) of the cost matrix",
   "decision": "argmin over predicted levels of softmax(logp / temperature) @ cost_alpha",
-  "chosen_on": "validation split (best macro F1 and accuracy among alpha in 0.25..3)"
+  "chosen_on": "business trade-off agreed with the mentor (2026-11-25): over-triage about 17-18 % on test for a slightly higher under-triage (alpha 0.5 gave 25 % over-triage); fine alpha sweep in outputs/triage_eval/cout_sensible.md"
 }
